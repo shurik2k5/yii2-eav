@@ -28,7 +28,9 @@ abstract class InitialMigration extends Migration {
 
     public function safeUp()
     {
-        $options = $this->db->driverName == 'mysql' ? 'ENGINE=InnoDB' : null;
+        $options = $this->db->driverName == 'mysql' 
+                 ? 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB' 
+                 : null;
 
         if ($this->useEntity) {
             $this->createTable($this->tables['entity'], [
