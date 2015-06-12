@@ -1,6 +1,6 @@
 <?php
 
-namespace lagman\migrations;
+namespace lagman\eav\migrations;
 use yii\db\Schema;
 use yii\db\Migration;
 
