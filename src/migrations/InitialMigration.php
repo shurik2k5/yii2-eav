@@ -74,7 +74,10 @@ abstract class InitialMigration extends Migration {
             'value' => Schema::TYPE_STRING,
         ], $options);
 
-        $this->addForeignKey('FK_Entity_categoryId', $this->tables['entity'], 'categoryId', $this->tables['category'], 'id');
+        if ($this->useEntity) {
+            $this->addForeignKey('FK_Entity_categoryId', $this->tables['entity'], 'categoryId', $this->tables['category'], 'id');
+        }
+        
         $this->addForeignKey('FK_Attribute_categoryId', $this->tables['attribute'], 'categoryId', $this->tables['category'], 'id');
         $this->addForeignKey('FK_Attribute_typeId', $this->tables['attribute'], 'typeId', $this->tables['attribute_type'], 'id');
         $this->addForeignKey('FK_Attribute_defaultOptionId', $this->tables['attribute'], 'defaultOptionId', $this->tables['option'], 'id');
