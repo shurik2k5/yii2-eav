@@ -26,7 +26,7 @@ abstract class InitialMigration extends Migration {
         ];
     }
 
-    public function up()
+    public function safeUp()
     {
         $options = $this->db->driverName == 'mysql' ? 'ENGINE=InnoDB' : null;
 
@@ -87,7 +87,7 @@ abstract class InitialMigration extends Migration {
         $this->addForeignKey('FK_Option_attributeId', $this->tables['option'], 'attributeId', $this->tables['attribute'], 'id');
     }
 
-    public function down()
+    public function safeDown()
     {
         if ($this->useEntity) {
             $this->dropForeignKey('FK_Entity_categoryId', $this->tables['entity']);
