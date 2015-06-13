@@ -3,12 +3,17 @@
 namespace lagman\eav\migrations;
 use yii\db\Schema;
 use yii\db\Migration;
+use lagman\eav\interfaces\AttributeTypeInterface;
+use lagman\eav\ValueHandler;
 
 abstract class InitialMigration extends Migration {
     
     public $tables;
     public $entityName = 'eav';
     public $useEntity = true;
+    public $useEntityCategory = true;
+    
+    public $attributeTypes = [];
     
     public function init()
     {
@@ -23,6 +28,27 @@ abstract class InitialMigration extends Migration {
             'attribute_type' => "{{%{$entityName}_attribute_type}}",
             'value' => "{{%{$entityName}_attribute_value}}",
             'option' => "{{%{$entityName}_attribute_option}}",
+        ];
+            
+        $this->attributeTypes = [
+            [
+                'id' => AttributeTypeInterface::TYPE_RAW, 
+                'name' => 'raw', 
+                'storeType' => ValueHandler::STORE_TYPE_RAW, 
+                'handlerClass' => '\lagman\eav\RawValueHandler',
+            ],
+            [
+                'id' => AttributeTypeInterface::TYPE_OPTION, 
+                'name' => 'option', 
+                'storeType' => ValueHandler::STORE_TYPE_OPTION, 
+                'handlerClass' => '\lagman\eav\OptionValueHandler',
+            ],
+            [
+                'id' => AttributeTypeInterface::TYPE_MULTIPLE_OPTIONS, 
+                'name' => 'multiple', 
+                'storeType' => ValueHandler::STORE_TYPE_MULTIPLE_OPTIONS, 
+                'handlerClass' => '\lagman\eav\MultipleOptionsValueHandler',
+            ],
         ];
     }
 
@@ -41,6 +67,7 @@ abstract class InitialMigration extends Migration {
         
         $this->createTable($this->tables['category'], [
             'id' => Schema::TYPE_PK,
+            'type' => Schema::TYPE_SMALLINT.'(1) UNSIGNED NOT NULL DEFAULT 0',
 //            'seoName' => Schema::TYPE_STRING,
             'name' => Schema::TYPE_STRING,
         ], $options);
@@ -76,10 +103,9 @@ abstract class InitialMigration extends Migration {
             'value' => Schema::TYPE_STRING,
         ], $options);
 
-        if ($this->useEntity) {
+        if ($this->useEntityCategory) {
             $this->addForeignKey('FK_Entity_categoryId', $this->tables['entity'], 'categoryId', $this->tables['category'], 'id');
         }
-        
         $this->addForeignKey('FK_Attribute_categoryId', $this->tables['attribute'], 'categoryId', $this->tables['category'], 'id');
         $this->addForeignKey('FK_Attribute_typeId', $this->tables['attribute'], 'typeId', $this->tables['attribute_type'], 'id');
         $this->addForeignKey('FK_Attribute_defaultOptionId', $this->tables['attribute'], 'defaultOptionId', $this->tables['option'], 'id');
@@ -87,11 +113,16 @@ abstract class InitialMigration extends Migration {
         $this->addForeignKey('FK_Value_attributeId', $this->tables['value'], 'attributeId', $this->tables['attribute'], 'id');
         $this->addForeignKey('FK_Value_optionId', $this->tables['value'], 'optionId', $this->tables['option'], 'id');
         $this->addForeignKey('FK_Option_attributeId', $this->tables['option'], 'attributeId', $this->tables['attribute'], 'id');
+        
+        
+        foreach ($this->attributeTypes as $columns) {
+            $this->insert($this->tables['attribute_type'], $columns);
+        }
     }
 
     public function safeDown()
     {
-        if ($this->useEntity) {
+        if ($this->useEntityCategory) {
             $this->dropForeignKey('FK_Entity_categoryId', $this->tables['entity']);
         }
         $this->dropForeignKey('FK_Attribute_categoryId', $this->tables['attribute']);
