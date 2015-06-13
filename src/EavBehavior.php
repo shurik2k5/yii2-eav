@@ -53,11 +53,11 @@ class EavBehavior extends Behavior
     }
     
     public function beforeValidate() {
-        return $this->dynamicModel->validate();
+        return $this->eav->validate();
     }
     
     public function afterSave() {
-        $this->dynamicModel->save(false);
+        $this->eav->save(false);
     }
     
 }

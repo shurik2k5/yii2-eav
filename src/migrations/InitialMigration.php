@@ -89,8 +89,8 @@ abstract class InitialMigration extends Migration {
 
         $this->createTable($this->tables['value'], [
             'id' => Schema::TYPE_PK,
-            'entityId' => Schema::TYPE_INTEGER,
-            'attributeId' => Schema::TYPE_INTEGER,
+            'entityId' => Schema::TYPE_INTEGER. '(11) UNSIGNED NOT NULL',
+            'attributeId' => Schema::TYPE_INTEGER. '(11) UNSIGNED NOT NULL',
             'value' => Schema::TYPE_STRING,
             'optionId' => Schema::TYPE_INTEGER,
         ], $options);
