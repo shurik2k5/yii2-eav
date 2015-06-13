@@ -19,6 +19,15 @@ use yii\db\ActiveRecord;
  */
 class EavBehavior extends Behavior
 {
+    public function events() {
+        return [
+            ActiveRecord::EVENT_AFTER_INSERT   => 'afterSave',
+            ActiveRecord::EVENT_AFTER_UPDATE    => 'afterSave',
+            ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
+        ];
+                
+    }
+    
     /** @var array */
     public $valueClass;
 
@@ -42,4 +51,13 @@ class EavBehavior extends Behavior
         }
         return $this->dynamicModel;
     }
+    
+    public function beforeValidate() {
+        return $this->dynamicModel->validate();
+    }
+    
+    public function afterSave() {
+        $this->dynamicModel->save(false);
+    }
+    
 }
