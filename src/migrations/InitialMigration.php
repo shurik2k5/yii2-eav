@@ -67,7 +67,6 @@ abstract class InitialMigration extends Migration {
         
         $this->createTable($this->tables['category'], [
             'id' => Schema::TYPE_PK,
-            'type' => Schema::TYPE_SMALLINT.'(1) UNSIGNED NOT NULL DEFAULT 0',
 //            'seoName' => Schema::TYPE_STRING,
             'name' => Schema::TYPE_STRING,
         ], $options);
