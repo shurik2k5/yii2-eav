@@ -34,19 +34,19 @@ abstract class InitialMigration extends Migration {
                 'id' => AttributeTypeInterface::TYPE_RAW, 
                 'name' => 'raw', 
                 'storeType' => ValueHandler::STORE_TYPE_RAW, 
-                'handlerClass' => '\lagman\eav\RawValueHandler',
+                'handlerClass' => '\lagman\eav\inputs\TextInput',
             ],
             [
                 'id' => AttributeTypeInterface::TYPE_OPTION, 
                 'name' => 'option', 
                 'storeType' => ValueHandler::STORE_TYPE_OPTION, 
-                'handlerClass' => '\lagman\eav\OptionValueHandler',
+                'handlerClass' => '\lagman\eav\inputs\DropDownList',
             ],
             [
                 'id' => AttributeTypeInterface::TYPE_MULTIPLE_OPTIONS, 
                 'name' => 'multiple', 
                 'storeType' => ValueHandler::STORE_TYPE_MULTIPLE_OPTIONS, 
-                'handlerClass' => '\lagman\eav\MultipleOptionsValueHandler',
+                'handlerClass' => '\lagman\eav\inputs\CheckBoxList',
             ],
         ];
     }
