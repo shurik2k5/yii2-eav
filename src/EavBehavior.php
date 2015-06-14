@@ -19,6 +19,8 @@ use yii\db\ActiveRecord;
  */
 class EavBehavior extends Behavior
 {
+    public $fieldPrefix = 'eav';
+
     public function events() {
         return [
             ActiveRecord::EVENT_AFTER_INSERT   => 'afterSave',
@@ -47,6 +49,7 @@ class EavBehavior extends Behavior
             $this->dynamicModel = DynamicModel::create([
                 'entityModel' => $this->owner,
                 'valueClass' => $this->valueClass,
+                'fieldPrefix' => $this->fieldPrefix,
             ]);
         }
         return $this->dynamicModel;
