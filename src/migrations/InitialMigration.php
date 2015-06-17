@@ -37,6 +37,12 @@ abstract class InitialMigration extends Migration {
                 'handlerClass' => '\lagman\eav\inputs\TextInput',
             ],
             [
+                'id' => AttributeTypeInterface::TYPE_ARRAY, 
+                'name' => 'array', 
+                'storeType' => ValueHandler::STORE_TYPE_ARRAY, 
+                'handlerClass' => '\lagman\eav\inputs\CheckBoxList',
+            ],
+            [
                 'id' => AttributeTypeInterface::TYPE_OPTION, 
                 'name' => 'option', 
                 'storeType' => ValueHandler::STORE_TYPE_OPTION, 
