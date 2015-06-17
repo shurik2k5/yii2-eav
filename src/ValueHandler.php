@@ -44,10 +44,12 @@ abstract class ValueHandler
             $valueModel = new $valueClass;
             $valueModel->entityId = $dynamicModel->entityModel->getPrimaryKey();
             $valueModel->attributeId = $this->attributeHandler->attributeModel->getPrimaryKey();
+        /*
             if (!$valueModel->save())
                 throw new \Exception("Can't save value model");
+        */
         }
-
+        
         return $valueModel;
     }
 
