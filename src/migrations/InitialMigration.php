@@ -40,7 +40,7 @@ abstract class InitialMigration extends Migration {
                 'id' => AttributeTypeInterface::TYPE_ARRAY, 
                 'name' => 'array', 
                 'storeType' => ValueHandler::STORE_TYPE_ARRAY, 
-                'handlerClass' => '\lagman\eav\inputs\CheckBoxList',
+                'handlerClass' => '\lagman\eav\inputs\EncodedTextInput',
             ],
             [
                 'id' => AttributeTypeInterface::TYPE_OPTION, 
@@ -52,7 +52,7 @@ abstract class InitialMigration extends Migration {
                 'id' => AttributeTypeInterface::TYPE_MULTIPLE_OPTIONS, 
                 'name' => 'multiple', 
                 'storeType' => ValueHandler::STORE_TYPE_MULTIPLE_OPTIONS, 
-                'handlerClass' => '\lagman\eav\inputs\CheckBoxList',
+                'handlerClass' => '\lagman\eav\inputs\EncodedTextInput',
             ],
         ];
     }
@@ -60,7 +60,7 @@ abstract class InitialMigration extends Migration {
     public function safeUp()
     {
         $options = $this->db->driverName == 'mysql' 
-                 ? 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB' 
+                 ? 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB' 
                  : null;
 
         if ($this->useEntity) {
