@@ -1,10 +1,10 @@
 <?php
 
-namespace lagman\eav\migrations;
+namespace mirocow\eav\migrations;
 use yii\db\Schema;
 use yii\db\Migration;
-use lagman\eav\interfaces\AttributeTypeInterface;
-use lagman\eav\ValueHandler;
+use mirocow\eav\interfaces\AttributeTypeInterface;
+use mirocow\eav\ValueHandler;
 
 abstract class InitialMigration extends Migration {
     
@@ -34,25 +34,25 @@ abstract class InitialMigration extends Migration {
                 'id' => AttributeTypeInterface::TYPE_RAW, 
                 'name' => 'raw', 
                 'storeType' => ValueHandler::STORE_TYPE_RAW, 
-                'handlerClass' => '\lagman\eav\inputs\TextInput',
+                'handlerClass' => '\mirocow\eav\inputs\TextInput',
             ],
             [
                 'id' => AttributeTypeInterface::TYPE_ARRAY, 
                 'name' => 'array', 
                 'storeType' => ValueHandler::STORE_TYPE_ARRAY, 
-                'handlerClass' => '\lagman\eav\inputs\EncodedTextInput',
+                'handlerClass' => '\mirocow\eav\inputs\EncodedTextInput',
             ],
             [
                 'id' => AttributeTypeInterface::TYPE_OPTION, 
                 'name' => 'option', 
                 'storeType' => ValueHandler::STORE_TYPE_OPTION, 
-                'handlerClass' => '\lagman\eav\inputs\DropDownList',
+                'handlerClass' => '\mirocow\eav\inputs\DropDownList',
             ],
             [
                 'id' => AttributeTypeInterface::TYPE_MULTIPLE_OPTIONS, 
                 'name' => 'multiple', 
                 'storeType' => ValueHandler::STORE_TYPE_MULTIPLE_OPTIONS, 
-                'handlerClass' => '\lagman\eav\inputs\EncodedTextInput',
+                'handlerClass' => '\mirocow\eav\inputs\EncodedTextInput',
             ],
         ];
     }

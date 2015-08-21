@@ -3,14 +3,14 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace lagman\eav\inputs;
+namespace mirocow\eav\inputs;
 
-use lagman\eav\AttributeHandler;
+use mirocow\eav\AttributeHandler;
 use yii\helpers\ArrayHelper;
 
 class DropDownList extends AttributeHandler
 {
-    const VALUE_HANDLER_CLASS = '\lagman\eav\OptionValueHandler';
+    const VALUE_HANDLER_CLASS = '\mirocow\eav\OptionValueHandler';
 
     public function init()
     {

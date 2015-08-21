@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace lagman\eav;
+namespace mirocow\eav;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -12,11 +12,11 @@ use yii\db\ActiveRecord;
 
 /**
  * Class AttributeHandler
- * @package lagman\eav
+ * @package mirocow\eav
  */
 class AttributeHandler extends Widget
 {
-    const VALUE_HANDLER_CLASS = '\lagman\eav\RawValueHandler';
+    const VALUE_HANDLER_CLASS = '\mirocow\eav\RawValueHandler';
     /** @var DynamicModel */
     public $owner;
     /** @var ValueHandler */

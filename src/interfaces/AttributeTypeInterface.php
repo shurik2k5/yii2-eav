@@ -1,6 +1,6 @@
 <?php
 
-namespace lagman\eav\interfaces;
+namespace mirocow\eav\interfaces;
 
 interface AttributeTypeInterface {
     const TYPE_RAW = 1;

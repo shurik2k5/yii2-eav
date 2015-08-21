@@ -3,13 +3,13 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace lagman\eav;
+namespace mirocow\eav;
 
 use yii\db\ActiveRecord;
 
 /**
  * Class MultipleOptionsValueHandler
- * @package lagman\eav
+ * @package mirocow\eav
  */
 class MultipleOptionsValueHandler extends ValueHandler
 {

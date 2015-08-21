@@ -3,11 +3,11 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace lagman\eav;
+namespace mirocow\eav;
 
 /**
  * Class RawValueHandler
- * @package lagman\eav
+ * @package mirocow\eav
  */
 class RawValueHandler extends ValueHandler
 {

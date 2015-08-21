@@ -3,9 +3,9 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace lagman\eav\inputs;
+namespace mirocow\eav\inputs;
 
-use lagman\eav\AttributeHandler;
+use mirocow\eav\AttributeHandler;
 
 class TextInput extends AttributeHandler
 {

@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace lagman\eav;
+namespace mirocow\eav;
 
 use yii\base\Behavior;
 use yii\base\InvalidConfigException;
@@ -11,7 +11,7 @@ use yii\db\ActiveRecord;
 
 /**
  * Class EavBehavior
- * @package lagman\eav
+ * @package mirocow\eav
  *
  * @mixin ActiveRecord
  * @property DynamicModel $eav;

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace lagman\eav\migrations;
+namespace mirocow\eav\migrations;
 use yii\db\Migration;
 
 abstract class InsertDataMigration extends Migration {
