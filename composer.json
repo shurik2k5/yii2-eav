@@ -1,5 +1,5 @@
 {
-    "name": "lagman/yii2-eav",
+    "name": "mirocow/yii2-eav",
     "description": "EAV for Yii2",
     "license": "MIT",
 	"keywords": ["yii2", "eav"],
@@ -9,7 +9,13 @@
             "email": "alexey.samoylov@gmail.com",
             "homepage": "http://yiiblog.ru",
             "role": "Developer"
-        }
+        },
+        {
+            "name": "Mirocow",
+            "email": "mr.mirocow@gmail.com",
+            "homepage": "http://mirocow.com",
+            "role": "Developer"
+        }        
     ],
     "minimum-stability": "dev",
     "require": {
@@ -18,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "lagman\\eav\\": "./src"
+            "mirocow\\eav\\": "./src"
         }
     }
 }
