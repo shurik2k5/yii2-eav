@@ -18,12 +18,12 @@ class MultipleOptionsValueHandler extends ValueHandler
 
     public function load()
     {
-        $dynamicModel = $this->attributeHandler->owner;
+        $EavModel = $this->attributeHandler->owner;
         /** @var ActiveRecord $valueClass */
-        $valueClass = $dynamicModel->valueClass;
+        $valueClass = $EavModel->valueClass;
 
         $models = $valueClass::findAll([
-            'entityId' => $dynamicModel->entityModel->getPrimaryKey(),
+            'entityId' => $EavModel->entityModel->getPrimaryKey(),
             'attributeId' => $this->attributeHandler->attributeModel->getPrimaryKey(),
         ]);
 
@@ -37,12 +37,12 @@ class MultipleOptionsValueHandler extends ValueHandler
 
     public function save()
     {
-        $dynamicModel = $this->attributeHandler->owner;
+        $EavModel = $this->attributeHandler->owner;
         /** @var ActiveRecord $valueClass */
-        $valueClass = $dynamicModel->valueClass;
+        $valueClass = $EavModel->valueClass;
 
         $baseQuery = $valueClass::find()->where([
-            'entityId' => $dynamicModel->entityModel->getPrimaryKey(),
+            'entityId' => $EavModel->entityModel->getPrimaryKey(),
             'attributeId' => $this->attributeHandler->attributeModel->getPrimaryKey(),
         ]);
 
@@ -57,7 +57,7 @@ class MultipleOptionsValueHandler extends ValueHandler
         ]);
 
         // then we delete unselected options
-        $selectedOptions = $dynamicModel->attributes[$this->attributeHandler->getAttributeName()];
+        $selectedOptions = $EavModel->attributes[$this->attributeHandler->getAttributeName()];
         if (!is_array($selectedOptions))
             $selectedOptions = [];
         $deleteOptions = array_diff($allOptions, $selectedOptions);
@@ -79,7 +79,7 @@ class MultipleOptionsValueHandler extends ValueHandler
             if (!$valueModel instanceof ActiveRecord) {
                 /** @var ActiveRecord $valueModel */
                 $valueModel = new $valueClass;
-                $valueModel->entityId = $dynamicModel->entityModel->getPrimaryKey();
+                $valueModel->entityId = $EavModel->entityModel->getPrimaryKey();
                 $valueModel->attributeId = $this->attributeHandler->attributeModel->getPrimaryKey();
                 $valueModel->optionId = $id;
                 if (!$valueModel->save())
@@ -90,12 +90,12 @@ class MultipleOptionsValueHandler extends ValueHandler
 
     public function getTextValue()
     {
-        $dynamicModel = $this->attributeHandler->owner;
+        $EavModel = $this->attributeHandler->owner;
         /** @var ActiveRecord $valueClass */
-        $valueClass = $dynamicModel->valueClass;
+        $valueClass = $EavModel->valueClass;
 
         $models = $valueClass::findAll([
-            'entityId' => $dynamicModel->entityModel->getPrimaryKey(),
+            'entityId' => $EavModel->entityModel->getPrimaryKey(),
             'attributeId' => $this->attributeHandler->attributeModel->getPrimaryKey(),
         ]);
 

@@ -25,10 +25,10 @@ class ArrayValueHandler extends RawValueHandler
      */
     public function save()
     {
-        $dynamicModel = $this->attributeHandler->owner;
+        $EavModel = $this->attributeHandler->owner;
         $valueModel = $this->getValueModel();
 
-        $value = $dynamicModel->attributes[$this->attributeHandler->getAttributeName()];
+        $value = $EavModel->attributes[$this->attributeHandler->getAttributeName()];
         
         
         $valueModel->value = json_encode($value);

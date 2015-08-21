@@ -25,11 +25,11 @@ class RawValueHandler extends ValueHandler
      */
     public function save()
     {
-        $dynamicModel = $this->attributeHandler->owner;
+        $EavModel = $this->attributeHandler->owner;
         $valueModel = $this->getValueModel();
 
         $valueModel->value =
-            $dynamicModel->attributes[$this->attributeHandler->getAttributeName()];
+            $EavModel->attributes[$this->attributeHandler->getAttributeName()];
         if (!$valueModel->save())
             throw new \Exception("Can't save value model");
     }

@@ -31,19 +31,19 @@ abstract class ValueHandler
      */
     public function getValueModel()
     {
-        $dynamicModel = $this->attributeHandler->owner;
+        $EavModel = $this->attributeHandler->owner;
         /** @var ActiveRecord $valueClass */
-        $valueClass = $dynamicModel->valueClass;
+        $valueClass = $EavModel->valueClass;
 
         $valueModel = $valueClass::findOne([
-            'entityId' => $dynamicModel->entityModel->getPrimaryKey(),
+            'entityId' => $EavModel->entityModel->getPrimaryKey(),
             'attributeId' => $this->attributeHandler->attributeModel->getPrimaryKey(),
         ]);
 
         if (!$valueModel instanceof ActiveRecord) {
             /** @var ActiveRecord $valueModel */
             $valueModel = new $valueClass;
-            $valueModel->entityId = $dynamicModel->entityModel->getPrimaryKey();
+            $valueModel->entityId = $EavModel->entityModel->getPrimaryKey();
             $valueModel->attributeId = $this->attributeHandler->attributeModel->getPrimaryKey();
         /*
             if (!$valueModel->save())

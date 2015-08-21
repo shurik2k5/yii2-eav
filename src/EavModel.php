@@ -6,15 +6,15 @@
 namespace mirocow\eav;
 
 use Yii;
-use yii\base\DynamicModel as BaseDynamicModel;
+use yii\base\DynamicModel as BaseEavModel;
 use yii\db\ActiveRecord;
 use yii\widgets\ActiveForm;
 
 /**
- * Class DynamicModel
+ * Class EavModel
  * @package mirocow\eav
  */
-class DynamicModel extends BaseDynamicModel
+class EavModel extends BaseEavModel
 {
     /** @var string Class to use for storing data */
     public $valueClass;

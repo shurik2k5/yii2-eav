@@ -1,13 +1,13 @@
 <?php
 
-namespace mirocow\eav\migrations;
-use yii\db\Schema;
 use yii\db\Migration;
+use yii\db\Schema;
 use mirocow\eav\interfaces\AttributeTypeInterface;
 use mirocow\eav\ValueHandler;
 
-abstract class InitialMigration extends Migration {
-    
+class m150821_133232_init extends Migration
+{
+
     public $tables;
     public $entityName = 'eav';
     public $useEntity = true;
@@ -143,4 +143,5 @@ abstract class InitialMigration extends Migration {
         $this->dropTable($this->tables['value']);
         $this->dropTable($this->tables['option']);
     }
+    
 }

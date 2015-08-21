@@ -5,6 +5,7 @@
 
 namespace mirocow\eav;
 
+use mirocow\eav\EavModel;
 use yii\base\Behavior;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
@@ -14,7 +15,7 @@ use yii\db\ActiveRecord;
  * @package mirocow\eav
  *
  * @mixin ActiveRecord
- * @property DynamicModel $eav;
+ * @property EavModel $eav;
  * @property ActiveRecord $owner
  */
 class EavBehavior extends Behavior
@@ -33,7 +34,7 @@ class EavBehavior extends Behavior
     /** @var array */
     public $valueClass;
 
-    protected $dynamicModel;
+    protected $EavModel;
 
     public function init()
     {
@@ -41,18 +42,18 @@ class EavBehavior extends Behavior
     }
 
     /**
-     * @return DynamicModel
+     * @return EavModel
      */
     public function getEav()
     {
-        if (!$this->dynamicModel instanceof DynamicModel) {
-            $this->dynamicModel = DynamicModel::create([
+        if (!$this->EavModel instanceof EavModel) {
+            $this->EavModel = EavModel::create([
                 'entityModel' => $this->owner,
                 'valueClass' => $this->valueClass,
                 'fieldPrefix' => $this->fieldPrefix,
             ]);
         }
-        return $this->dynamicModel;
+        return $this->EavModel;
     }
     
     public function beforeValidate() {

@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
 class AttributeHandler extends Widget
 {
     const VALUE_HANDLER_CLASS = '\mirocow\eav\RawValueHandler';
-    /** @var DynamicModel */
+    /** @var EavModel */
     public $owner;
     /** @var ValueHandler */
     public $valueHandler;
@@ -27,7 +27,7 @@ class AttributeHandler extends Widget
     public $nameField = 'name';
 
     /**
-     * @param DynamicModel $owner
+     * @param EavModel $owner
      * @param ActiveRecord $attributeModel
      * @return AttributeHandler
      * @throws \yii\base\InvalidConfigException
