@@ -23,6 +23,8 @@ class AttributeHandler extends Widget
     public $valueHandler;
     /** @var ActiveRecord */
     public $attributeModel;
+    
+    public $nameField = 'name';
 
     /**
      * @param DynamicModel $owner
@@ -61,7 +63,7 @@ class AttributeHandler extends Widget
      */
     public function getAttributeName()
     {
-        return $this->owner->fieldPrefix . strval($this->attributeModel->getPrimaryKey());
+        return $this->owner->fieldPrefix . strval($this->attributeModel->{$this->nameField});
     }
 
     public function getOptions()

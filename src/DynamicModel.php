@@ -57,7 +57,7 @@ class DynamicModel extends BaseDynamicModel
 
             if ($attribute->type->storeType == ValueHandler::STORE_TYPE_OPTION)
                 $model->addRule($key, 'default', ['value' => $attribute->defaultOptionId]);
-
+            
             $model->handlers[$key] = $handler;
         }
 
