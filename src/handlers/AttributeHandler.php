@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace mirocow\eav\handlers;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -16,7 +16,7 @@ use yii\db\ActiveRecord;
  */
 class AttributeHandler extends Widget
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\RawValueHandler';
+    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\RawValueHandler';
     /** @var EavModel */
     public $owner;
     /** @var ValueHandler */
@@ -34,7 +34,7 @@ class AttributeHandler extends Widget
      */
     public static function load($owner, $attributeModel)
     {
-        if (!class_exists($class = $attributeModel->type->handlerClass))
+        if (!class_exists($class = $attributeModel->eavType->handlerClass))
             throw new InvalidParamException('Unknown class: ' . $class);
 
         $handler = Yii::createObject([
@@ -63,14 +63,15 @@ class AttributeHandler extends Widget
      */
     public function getAttributeName()
     {
-        return $this->owner->fieldPrefix . strval($this->attributeModel->{$this->nameField});
+        return strval($this->attributeModel->{$this->nameField});
     }
 
     public function getOptions()
     {
         $result = [];
-        foreach ($this->attributeModel->options as $option)
+        foreach ($this->attributeModel->eavOptions as $option){
             $result[] = $option->getPrimaryKey();
+        }
         return $result;
     }
 }

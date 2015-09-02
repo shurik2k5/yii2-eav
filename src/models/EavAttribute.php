@@ -2,7 +2,7 @@
 
 namespace mirocow\eav\models;
 
-use mirocow\eav\models\EavCategory;
+use mirocow\eav\models\EavEntity;
 use mirocow\eav\models\EavAttributeValue;
 use mirocow\eav\models\EavAttributeOption;
 use mirocow\eav\models\EavAttributeType;
@@ -12,14 +12,14 @@ use Yii;
  * This is the model class for table "{{%eav_attribute}}".
  *
  * @property integer $id
- * @property integer $categoryId
+ * @property string $entityModel
  * @property integer $typeId
  * @property string $name
+ * @property string $label
  * @property string $defaultValue
  * @property integer $defaultOptionId
  * @property integer $required
  *
- * @property EavCategory $category
  * @property EavAttributeOption $defaultOption
  * @property EavAttributeType $type
  * @property EavAttributeOption[] $eavAttributeOptions
@@ -41,9 +41,7 @@ class EavAttribute extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['categoryId', 'typeId', 'defaultOptionId', 'required'], 'integer'],
-            [['name', 'defaultValue'], 'string', 'max' => 255],
-            //[['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => EavCategory::className(), 'targetAttribute' => ['categoryId' => 'id']],
+            [['name', 'defaultValue', 'entityModel', 'label'], 'string', 'max' => 255],
             //[['defaultOptionId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttributeOption::className(), 'targetAttribute' => ['defaultOptionId' => 'id']],
             //[['typeId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttributeType::className(), 'targetAttribute' => ['typeId' => 'id']],
         ];
@@ -56,21 +54,13 @@ class EavAttribute extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'categoryId' => 'Category ID',
             'typeId' => 'Type ID',
             'name' => 'Name',
+            'label' => 'Label',
             'defaultValue' => 'Default Value',
             'defaultOptionId' => 'Default Option ID',
             'required' => 'Required',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(EavCategory::className(), ['id' => 'categoryId']);
     }
 
     /**
@@ -84,7 +74,7 @@ class EavAttribute extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getType()
+    public function getEavType()
     {
         return $this->hasOne(EavAttributeType::className(), ['id' => 'typeId']);
     }
@@ -92,7 +82,15 @@ class EavAttribute extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEavAttributeOptions()
+    public function getEntity()
+    {
+        return $this->hasOne(EavEntity::className(), ['id' => 'entityId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEavOptions()
     {
         return $this->hasMany(EavAttributeOption::className(), ['attributeId' => 'id']);
     }

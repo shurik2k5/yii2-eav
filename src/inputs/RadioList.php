@@ -5,12 +5,12 @@
 
 namespace mirocow\eav\inputs;
 
-use mirocow\eav\AttributeHandler;
+use mirocow\eav\handlers\AttributeHandler;
 use yii\helpers\ArrayHelper;
 
 class RadioList extends AttributeHandler
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\OptionValueHandler';
+    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\OptionValueHandler';
 
     public function init()
     {

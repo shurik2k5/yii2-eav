@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace mirocow\eav\handlers;
 
 /**
  * Class RawValueHandler
@@ -27,11 +27,12 @@ class ArrayValueHandler extends RawValueHandler
     {
         $EavModel = $this->attributeHandler->owner;
         $valueModel = $this->getValueModel();
+        $attribute = $this->attributeHandler->getAttributeName();
 
-        $value = $EavModel->attributes[$this->attributeHandler->getAttributeName()];
-        
-        
+        $value = $EavModel->attributes[$attribute];
+         
         $valueModel->value = json_encode($value);
+        
         if (!$valueModel->save())
             throw new \Exception("Can't save value model");
     }

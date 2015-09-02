@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace mirocow\eav\handlers;
 
 use yii\db\ActiveRecord;
 
@@ -19,6 +19,7 @@ class MultipleOptionsValueHandler extends ValueHandler
     public function load()
     {
         $EavModel = $this->attributeHandler->owner;
+        
         /** @var ActiveRecord $valueClass */
         $valueClass = $EavModel->valueClass;
 
@@ -38,8 +39,12 @@ class MultipleOptionsValueHandler extends ValueHandler
     public function save()
     {
         $EavModel = $this->attributeHandler->owner;
+        
+        $attribute = $this->attributeHandler->getAttributeName();
+        
         /** @var ActiveRecord $valueClass */
         $valueClass = $EavModel->valueClass;
+        
 
         $baseQuery = $valueClass::find()->where([
             'entityId' => $EavModel->entityModel->getPrimaryKey(),
@@ -47,19 +52,21 @@ class MultipleOptionsValueHandler extends ValueHandler
         ]);
 
         $allOptions = [];
-        foreach ($this->attributeHandler->attributeModel->options as $option)
+        foreach ($this->attributeHandler->attributeModel->eavOptions as $option){
             $allOptions[] = $option->getPrimaryKey();
+        }
 
         $query = clone $baseQuery;
         $query->andWhere("optionId NOT IN (:options)");
         $valueClass::deleteAll($query->where, [
             'options' => implode(',', $allOptions),
-        ]);
-
+        ]);        
+        
         // then we delete unselected options
-        $selectedOptions = $EavModel->attributes[$this->attributeHandler->getAttributeName()];
-        if (!is_array($selectedOptions))
+        $selectedOptions = $EavModel->attributes[$attribute];
+        if (!is_array($selectedOptions)){
             $selectedOptions = [];
+        }
         $deleteOptions = array_diff($allOptions, $selectedOptions);
 
         $query = clone $baseQuery;

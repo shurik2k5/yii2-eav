@@ -5,6 +5,10 @@
 
 namespace mirocow\eav;
 
+use mirocow\eav\handlers\AttributeHandler;
+use mirocow\eav\handlers\ArrayValueHandler;
+use mirocow\eav\handlers\ValueHandler;
+
 use Yii;
 use yii\base\DynamicModel as BaseEavModel;
 use yii\db\ActiveRecord;
@@ -22,12 +26,12 @@ class EavModel extends BaseEavModel
     public $entityModel;
     /** @var AttributeHandler[] */
     public $handlers;
+    /** @var string */
+    public $attribute = '';    
     /** @var ActiveForm */
     public $activeForm;
     /** @var string[] */
     private $attributeLabels = [];
-
-    public $fieldPrefix = 'eav';
 
     /**
      * Constructor for creating form model from entity object
@@ -38,41 +42,47 @@ class EavModel extends BaseEavModel
     public static function create($params)
     {
         $params['class'] = static::className();
+        
         /** @var static $model */
         $model = Yii::createObject($params);
+        
+        $attributes = $model->entityModel->getRelation('eavAttributes')->all();
 
-        foreach ($model->entityModel->getRelation('eavAttributes')->all() as $attribute) {
+        foreach ($attributes as $attribute) {
+          
             $handler = AttributeHandler::load($model, $attribute);
-
             $key = $handler->getAttributeName();
-
-            $model->defineAttribute($key, $handler->valueHandler->load());
-            $model->defineAttributeLabel($key, $attribute->getAttribute('name'));
-
-            if ($attribute->required)
+            $value = $handler->valueHandler->load();
+            
+            //
+            // Add rules
+            //
+            
+            if ($attribute->required){
                 $model->addRule($key, 'required');
+            }
 
-            if ($attribute->type->storeType == ValueHandler::STORE_TYPE_RAW)
+            if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_RAW){
                 $model->addRule($key, 'default', ['value' => $attribute->defaultValue]);
+            }
 
-            if ($attribute->type->storeType == ValueHandler::STORE_TYPE_OPTION)
+            if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_OPTION){
                 $model->addRule($key, 'default', ['value' => $attribute->defaultOptionId]);
+            }
+            
+            if(Yii::$app->request->isPost)
+            {
+              $modelName = substr(strrchr($model->entityModel->className(), "\\"), 1);
+              $model->load(Yii::$app->request->post(), $modelName); 
+            } else {
+              $model->defineAttribute($key, $value);
+            }           
             
             $model->handlers[$key] = $handler;
+            
         }
 
         return $model;
-    }
-
-    /**
-     * Defines label for dynamic attribute
-     *
-     * @param integer $attribute
-     * @param string $label
-     */
-    public function defineAttributeLabel($attribute, $label)
-    {
-        $this->attributeLabels[$attribute] = $label;
     }
 
     /**
@@ -103,4 +113,19 @@ class EavModel extends BaseEavModel
             throw $e;
         }
     }
+    
+    public function __set($name, $value)
+    {
+      $this->defineAttribute($name, $value);      
+    }
+    
+    public function __toString()
+    {
+      if(isset($this->attributes[ $this->attribute ])){
+        return (string) $this->attributes[ $this->attribute ];
+      } else {
+        return '';
+      }
+    }
+        
 }

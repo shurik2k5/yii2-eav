@@ -6,6 +6,7 @@
 namespace mirocow\eav;
 
 use mirocow\eav\EavModel;
+use mirocow\eav\models\EavAttribute;
 use yii\base\Behavior;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
@@ -20,10 +21,10 @@ use yii\db\ActiveRecord;
  */
 class EavBehavior extends Behavior
 {
-    public $fieldPrefix = 'eav';
-
     public function events() {
         return [
+            ActiveRecord::EVENT_BEFORE_INSERT   => 'beforeSave',
+            ActiveRecord::EVENT_BEFORE_UPDATE   => 'beforeSave',
             ActiveRecord::EVENT_AFTER_INSERT   => 'afterSave',
             ActiveRecord::EVENT_AFTER_UPDATE    => 'afterSave',
             ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
@@ -44,24 +45,33 @@ class EavBehavior extends Behavior
     /**
      * @return EavModel
      */
-    public function getEav()
+    public function __get($name = '')
     {
         if (!$this->EavModel instanceof EavModel) {
             $this->EavModel = EavModel::create([
                 'entityModel' => $this->owner,
                 'valueClass' => $this->valueClass,
-                'fieldPrefix' => $this->fieldPrefix,
+                'attribute' => $name,
             ]);
         }
         return $this->EavModel;
-    }
+    }      
+    
+    public function canGetProperty($name, $checkVars = true)
+    {
+        return EavAttribute::find()->where(['name' => $name])->exists();
+    }    
     
     public function beforeValidate() {
         return $this->eav->validate();
     }
     
+    public function beforeSave(){
+      $i = 1;
+    }
+    
     public function afterSave() {
         $this->eav->save(false);
-    }
+    }       
     
 }

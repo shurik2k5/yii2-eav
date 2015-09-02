@@ -5,13 +5,14 @@
 
 namespace mirocow\eav\inputs;
 
-use mirocow\eav\AttributeHandler;
+use mirocow\eav\handlers\AttributeHandler;
 
 class TextInput extends AttributeHandler
 {
     public function init()
     {
         parent::init();
+        
         $this->owner->addRule($this->getAttributeName(), 'string', ['max' => 255]);
     }
 

@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace mirocow\eav\handlers;
 
 use yii\db\ActiveRecord;
 
@@ -32,6 +32,7 @@ abstract class ValueHandler
     public function getValueModel()
     {
         $EavModel = $this->attributeHandler->owner;
+        
         /** @var ActiveRecord $valueClass */
         $valueClass = $EavModel->valueClass;
 
@@ -45,10 +46,6 @@ abstract class ValueHandler
             $valueModel = new $valueClass;
             $valueModel->entityId = $EavModel->entityModel->getPrimaryKey();
             $valueModel->attributeId = $this->attributeHandler->attributeModel->getPrimaryKey();
-        /*
-            if (!$valueModel->save())
-                throw new \Exception("Can't save value model");
-        */
         }
         
         return $valueModel;

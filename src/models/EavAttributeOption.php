@@ -71,7 +71,7 @@ class EavAttributeOption extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEavAttributeValues()
+    public function getValues()
     {
         return $this->hasMany(EavAttributeValue::className(), ['optionId' => 'id']);
     }

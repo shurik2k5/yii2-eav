@@ -62,7 +62,7 @@ class EavAttributeValue extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAttribute($name = '')
+    public function getEavAttribute()
     {
         return $this->hasOne(EavAttribute::className(), ['id' => 'attributeId']);
     }

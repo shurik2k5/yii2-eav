@@ -5,12 +5,12 @@
 
 namespace mirocow\eav\inputs;
 
-use mirocow\eav\AttributeHandler;
+use mirocow\eav\handlers\AttributeHandler;
 use yii\helpers\ArrayHelper;
 
 class CheckBoxList extends AttributeHandler
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\MultipleOptionsValueHandler';
+    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\MultipleOptionsValueHandler';
 
     public function init()
     {
