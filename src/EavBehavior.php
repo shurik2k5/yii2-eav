@@ -3,17 +3,17 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace mazurva\eav;
 
-use mirocow\eav\EavModel;
-use mirocow\eav\models\EavAttribute;
+use mazurva\eav\EavModel;
+use mazurva\eav\models\EavAttribute;
 use yii\base\Behavior;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
 
 /**
  * Class EavBehavior
- * @package mirocow\eav
+ * @package mazurva\eav
  *
  * @mixin ActiveRecord
  * @property EavModel $eav;

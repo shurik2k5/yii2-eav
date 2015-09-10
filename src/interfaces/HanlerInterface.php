@@ -1,6 +1,6 @@
 <?php
 
-namespace mirocow\eav\interfaces;
+namespace mazurva\eav\interfaces;
   
 interface HanlerInterface {
   

@@ -3,11 +3,11 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace mazurva\eav;
 
-use mirocow\eav\handlers\AttributeHandler;
-use mirocow\eav\handlers\ArrayValueHandler;
-use mirocow\eav\handlers\ValueHandler;
+use mazurva\eav\handlers\AttributeHandler;
+use mazurva\eav\handlers\ArrayValueHandler;
+use mazurva\eav\handlers\ValueHandler;
 
 use Yii;
 use yii\base\DynamicModel as BaseEavModel;
@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * Class EavModel
- * @package mirocow\eav
+ * @package mazurva\eav
  */
 class EavModel extends BaseEavModel
 {

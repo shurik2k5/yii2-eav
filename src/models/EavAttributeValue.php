@@ -1,10 +1,10 @@
 <?php
 
-namespace mirocow\eav\models;
+namespace mazurva\eav\models;
 
-use mirocow\eav\models\Eav;
-use mirocow\eav\models\EavAttribute;
-use mirocow\eav\models\EavAttributeOption;
+use mazurva\eav\models\Eav;
+use mazurva\eav\models\EavAttribute;
+use mazurva\eav\models\EavAttributeOption;
 use Yii;
 
 /**

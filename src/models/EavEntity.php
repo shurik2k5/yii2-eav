@@ -1,6 +1,6 @@
 <?php
 
-namespace mirocow\eav\models;
+namespace mazurva\eav\models;
 
 use Yii;
 

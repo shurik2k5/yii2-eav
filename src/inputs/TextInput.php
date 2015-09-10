@@ -3,9 +3,9 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\inputs;
+namespace mazurva\eav\inputs;
 
-use mirocow\eav\handlers\AttributeHandler;
+use mazurva\eav\handlers\AttributeHandler;
 
 class TextInput extends AttributeHandler
 {

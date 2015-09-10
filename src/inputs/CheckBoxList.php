@@ -3,14 +3,14 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\inputs;
+namespace mazurva\eav\inputs;
 
-use mirocow\eav\handlers\AttributeHandler;
+use mazurva\eav\handlers\AttributeHandler;
 use yii\helpers\ArrayHelper;
 
 class CheckBoxList extends AttributeHandler
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\MultipleOptionsValueHandler';
+    const VALUE_HANDLER_CLASS = '\mazurva\eav\handlers\MultipleOptionsValueHandler';
 
     public function init()
     {

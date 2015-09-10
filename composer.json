@@ -15,7 +15,13 @@
             "email": "mr.mirocow@gmail.com",
             "homepage": "http://mirocow.com",
             "role": "Developer"
-        }        
+        },
+        {
+            "name": "Vadim Mazur",
+            "email": "mazurva@gmail.com",
+            "homepage": "http://sibds.com",
+            "role": "Developer"
+        }
     ],
     "minimum-stability": "dev",
     "require": {
@@ -24,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "mirocow\\eav\\": "./src"
+            "mazurva\\eav\\": "./src"
         }
     }
 }

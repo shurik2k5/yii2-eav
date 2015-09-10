@@ -1,11 +1,11 @@
 <?php
 
-namespace mirocow\eav;
+namespace mazurva\eav;
 
 use yii\db\Migration;
 use yii\db\Schema;
-use mirocow\eav\interfaces\AttributeTypeInterface;
-use mirocow\eav\ValueHandler;
+use mazurva\eav\interfaces\AttributeTypeInterface;
+use mazurva\eav\ValueHandler;
 
 class m150821_133232_init extends Migration
 {
@@ -36,25 +36,25 @@ class m150821_133232_init extends Migration
                 'id' => AttributeTypeInterface::TYPE_RAW, 
                 'name' => 'raw', 
                 'storeType' => ValueHandler::STORE_TYPE_RAW, 
-                'handlerClass' => '\mirocow\eav\inputs\TextInput',
+                'handlerClass' => '\mazurva\eav\inputs\TextInput',
             ],
             [
                 'id' => AttributeTypeInterface::TYPE_ARRAY, 
                 'name' => 'array', 
                 'storeType' => ValueHandler::STORE_TYPE_ARRAY, 
-                'handlerClass' => '\mirocow\eav\inputs\EncodedTextInput',
+                'handlerClass' => '\mazurva\eav\inputs\EncodedTextInput',
             ],
             [
                 'id' => AttributeTypeInterface::TYPE_OPTION, 
                 'name' => 'option', 
                 'storeType' => ValueHandler::STORE_TYPE_OPTION, 
-                'handlerClass' => '\mirocow\eav\inputs\DropDownList',
+                'handlerClass' => '\mazurva\eav\inputs\DropDownList',
             ],
             [
                 'id' => AttributeTypeInterface::TYPE_MULTIPLE_OPTIONS, 
                 'name' => 'multiple', 
                 'storeType' => ValueHandler::STORE_TYPE_MULTIPLE_OPTIONS, 
-                'handlerClass' => '\mirocow\eav\inputs\EncodedTextInput',
+                'handlerClass' => '\mazurva\eav\inputs\EncodedTextInput',
             ],
         ];
     }

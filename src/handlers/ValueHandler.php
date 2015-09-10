@@ -3,13 +3,13 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\handlers;
+namespace mazurva\eav\handlers;
 
 use yii\db\ActiveRecord;
 
 /**
  * Class ValueHandler
- * @package mirocow\eav
+ * @package mazurva\eav
  *
  * @property ActiveRecord $valueModel
  * @property string $textValue
