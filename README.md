@@ -52,5 +52,5 @@ Attach behaviour to your model
 Sample use in view:
 
 ```
-<?=$form->field($model,'eav')->dropDownList(['1' => '10', '2' => '20']); ?>
+<?=$form->field($model->getEav(),'eav2'); ?>
 ```
