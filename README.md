@@ -34,7 +34,7 @@ Attach behaviour to your model
   {
       return [
           'eav' => [
-              'class' => EavBehavior::className(),
+              'class' => mirocow\eav\EavBehavior::className(),
               'valueClass' => ObjectAttributeValue::className(), // this model for table object_attribute_value
           ]
       ];
