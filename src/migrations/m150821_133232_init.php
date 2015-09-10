@@ -1,5 +1,7 @@
 <?php
 
+namespace mirocow\eav;
+
 use yii\db\Migration;
 use yii\db\Schema;
 use mirocow\eav\interfaces\AttributeTypeInterface;
