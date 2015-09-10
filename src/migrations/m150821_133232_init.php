@@ -1,7 +1,4 @@
 <?php
-
-namespace mazurva\eav;
-
 use yii\db\Migration;
 use yii\db\Schema;
 use mazurva\eav\interfaces\AttributeTypeInterface;
