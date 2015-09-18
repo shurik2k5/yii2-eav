@@ -1,8 +1,7 @@
 <?php
 use yii\db\Migration;
 use yii\db\Schema;
-use mazurva\eav\interfaces\AttributeTypeInterface;
-use mazurva\eav\ValueHandler;
+use mazurva\eav\handlers\ValueHandler;
 
 class m150821_133232_init extends Migration
 {

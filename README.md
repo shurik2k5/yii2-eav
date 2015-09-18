@@ -23,7 +23,7 @@ or add
 to the require section of your `composer.json` file.
 
 ``` sh
-php yii migrate/up --migrationPath=@eav/migrations
+php yii migrate/up --migrationPath=@vendor/mazurva/yii2-eav/src/migrations
 ```
 
 Usage
