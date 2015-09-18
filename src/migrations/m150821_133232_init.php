@@ -101,16 +101,17 @@ class m150821_133232_init extends Migration
             'value' => Schema::TYPE_STRING,
         ], $options);
 
-        $this->addForeignKey('FK_Entity_categoryId', $this->tables['entity'], 'categoryId', $this->tables['category'], 'id', "CASCADE", "NO ACTION");
-        $this->addForeignKey('FK_Attribute_categoryId', $this->tables['attribute'], 'categoryId', $this->tables['category'], 'id', "CASCADE", "NO ACTION");
-        $this->addForeignKey('FK_Attribute_typeId', $this->tables['attribute'], 'typeId', $this->tables['attribute_type'], 'id', "CASCADE", "NO ACTION");
-        $this->addForeignKey('FK_Attribute_defaultOptionId', $this->tables['attribute'], 'defaultOptionId', $this->tables['option'], 'id', "CASCADE", "NO ACTION");
-        $this->addForeignKey('FK_Value_entityId', $this->tables['value'], 'entityId', $this->tables['entity'], 'id', "CASCADE", "NO ACTION");
-        $this->addForeignKey('FK_Value_attributeId', $this->tables['value'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
-        $this->addForeignKey('FK_Value_optionId', $this->tables['value'], 'optionId', $this->tables['option'], 'id', "CASCADE", "NO ACTION");
-        $this->addForeignKey('FK_Option_attributeId', $this->tables['option'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
-        
-        
+        if($this->db->driverName != "sqlite"){
+            $this->addForeignKey('FK_Entity_categoryId', $this->tables['entity'], 'categoryId', $this->tables['category'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey('FK_Attribute_categoryId', $this->tables['attribute'], 'categoryId', $this->tables['category'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey('FK_Attribute_typeId', $this->tables['attribute'], 'typeId', $this->tables['attribute_type'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey('FK_Attribute_defaultOptionId', $this->tables['attribute'], 'defaultOptionId', $this->tables['option'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey('FK_Value_entityId', $this->tables['value'], 'entityId', $this->tables['entity'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey('FK_Value_attributeId', $this->tables['value'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey('FK_Value_optionId', $this->tables['value'], 'optionId', $this->tables['option'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey('FK_Option_attributeId', $this->tables['option'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
+        }
+
         foreach ($this->attributeTypes as $columns) {
             $this->insert($this->tables['attribute_type'], $columns);
         }
@@ -118,14 +119,16 @@ class m150821_133232_init extends Migration
 
     public function safeDown()
     {
-        $this->dropForeignKey('FK_Entity_categoryId', $this->tables['entity']);
-        $this->dropForeignKey('FK_Attribute_categoryId', $this->tables['attribute']);
-        $this->dropForeignKey('FK_Attribute_typeId', $this->tables['attribute']);
-        $this->dropForeignKey('FK_Attribute_defaultOptionId', $this->tables['attribute']);
-        $this->dropForeignKey('FK_Value_entityId', $this->tables['value']);
-        $this->dropForeignKey('FK_Value_attributeId', $this->tables['value']);
-        $this->dropForeignKey('FK_Value_optionId', $this->tables['value']);
-        $this->dropForeignKey('FK_Option_attributeId', $this->tables['option']);
+        if($this->db->driverName != "sqlite"){
+            $this->dropForeignKey('FK_Entity_categoryId', $this->tables['entity']);
+            $this->dropForeignKey('FK_Attribute_categoryId', $this->tables['attribute']);
+            $this->dropForeignKey('FK_Attribute_typeId', $this->tables['attribute']);
+            $this->dropForeignKey('FK_Attribute_defaultOptionId', $this->tables['attribute']);
+            $this->dropForeignKey('FK_Value_entityId', $this->tables['value']);
+            $this->dropForeignKey('FK_Value_attributeId', $this->tables['value']);
+            $this->dropForeignKey('FK_Value_optionId', $this->tables['value']);
+            $this->dropForeignKey('FK_Option_attributeId', $this->tables['option']);
+        }
 
         if ($this->useEntity) {
             $this->dropTable($this->tables['entity']);
