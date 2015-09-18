@@ -30,25 +30,21 @@ class m150821_133232_init extends Migration
             
         $this->attributeTypes = [
             [
-                'id' => AttributeTypeInterface::TYPE_RAW, 
                 'name' => 'raw', 
                 'storeType' => ValueHandler::STORE_TYPE_RAW, 
                 'handlerClass' => '\mazurva\eav\inputs\TextInput',
             ],
             [
-                'id' => AttributeTypeInterface::TYPE_ARRAY, 
                 'name' => 'array', 
                 'storeType' => ValueHandler::STORE_TYPE_ARRAY, 
                 'handlerClass' => '\mazurva\eav\inputs\EncodedTextInput',
             ],
             [
-                'id' => AttributeTypeInterface::TYPE_OPTION, 
                 'name' => 'option', 
                 'storeType' => ValueHandler::STORE_TYPE_OPTION, 
                 'handlerClass' => '\mazurva\eav\inputs\DropDownList',
             ],
             [
-                'id' => AttributeTypeInterface::TYPE_MULTIPLE_OPTIONS, 
                 'name' => 'multiple', 
                 'storeType' => ValueHandler::STORE_TYPE_MULTIPLE_OPTIONS, 
                 'handlerClass' => '\mazurva\eav\inputs\EncodedTextInput',
