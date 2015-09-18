@@ -36,7 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "mazurva\\eav\\": "./src"
+            "mazurva\\eav\\": "src/"
         }
     }
 }
