@@ -1,7 +1,7 @@
 EAV Dynamic Attributes for Yii2
 ========
 
-
+[![Build Status](https://travis-ci.org/mazurva/yii2-eav.svg?branch=master)](https://travis-ci.org/mazurva/yii2-eav)
 
 Installation
 ------------
