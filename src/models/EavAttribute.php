@@ -84,6 +84,7 @@ class EavAttribute extends \yii\db\ActiveRecord
      */
     public function getEntity()
     {
+        //TODO: Change EavEntity::className() to $this->entityModel
         return $this->hasOne(EavEntity::className(), ['id' => 'entityId']);
     }
 

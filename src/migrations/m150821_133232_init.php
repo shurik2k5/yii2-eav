@@ -72,9 +72,11 @@ class m150821_133232_init extends Migration
 
         $this->createTable($this->tables['attribute'], [
             'id' => Schema::TYPE_PK,
+            'entityModel' => Schema::TYPE_STRING,
             'categoryId' => Schema::TYPE_INTEGER,
             'typeId' => Schema::TYPE_INTEGER,
             'name' => Schema::TYPE_STRING,
+            'label' => Schema::TYPE_STRING,
             'defaultValue' => Schema::TYPE_STRING,
             'defaultOptionId' => Schema::TYPE_INTEGER,
             'required' => Schema::TYPE_BOOLEAN . ' DEFAULT 1',
