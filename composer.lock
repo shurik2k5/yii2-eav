@@ -277,12 +277,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "bcc82b086d7ccca09d64e44c92f98da0054e2974"
+                "reference": "42749cbc9e36cbdd4b7659a0055f15598619decb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/bcc82b086d7ccca09d64e44c92f98da0054e2974",
-                "reference": "bcc82b086d7ccca09d64e44c92f98da0054e2974",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/42749cbc9e36cbdd4b7659a0055f15598619decb",
+                "reference": "42749cbc9e36cbdd4b7659a0055f15598619decb",
                 "shasum": ""
             },
             "require": {
@@ -358,7 +358,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-09-10 12:22:14"
+            "time": "2015-09-13 23:12:35"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -491,12 +491,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "4d1acafbfc49d0d4dcce327971fd69fdec5df7a4"
+                "reference": "56d5ed438eaf45bac2d63cdd50a5c92d9b3f3b01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/4d1acafbfc49d0d4dcce327971fd69fdec5df7a4",
-                "reference": "4d1acafbfc49d0d4dcce327971fd69fdec5df7a4",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/56d5ed438eaf45bac2d63cdd50a5c92d9b3f3b01",
+                "reference": "56d5ed438eaf45bac2d63cdd50a5c92d9b3f3b01",
                 "shasum": ""
             },
             "require": {
@@ -533,7 +533,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-09-08 07:07:45"
+            "time": "2015-09-14 12:43:51"
         },
         {
             "name": "phpspec/php-diff",
