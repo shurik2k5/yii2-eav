@@ -44,7 +44,7 @@ class EavEntity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['entityModel'], 'string', 'max' => 100],
+            //[['entityModel'], 'string', 'max' => 100],
         ];
     }
 
@@ -64,6 +64,6 @@ class EavEntity extends \yii\db\ActiveRecord
      */
     public function getEavAttributes()
     {
-        return $this->hasMany(EavAttribute::className(), ['entityId' => 'id']);
+        return $this->hasMany(EavAttribute::className(), ['categoryId' => 'categoryId']);
     }
 }

@@ -4,10 +4,10 @@ CREATE TABLE `eav` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`categoryId` integer
 );
-INSERT INTO "eav" (`categoryId`) VALUES(1);
-INSERT INTO "eav" (`categoryId`) VALUES(2);
-INSERT INTO "eav" (`categoryId`) VALUES(1);
-INSERT INTO "eav" (`categoryId`) VALUES(3);
+INSERT INTO "eav" VALUES(1, 1);
+INSERT INTO "eav" VALUES(2, 2);
+INSERT INTO "eav" VALUES(3, 1);
+INSERT INTO "eav" VALUES(4, 3);
 CREATE TABLE `eav_category` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` varchar(255)

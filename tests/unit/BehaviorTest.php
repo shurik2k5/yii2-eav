@@ -38,8 +38,8 @@ class BehaviorTest extends \yii\codeception\TestCase
             [
                 'typeId' => 1,
                 'categoryId' => 1,
-                'name' => 'Name Attr 1',
-                'label' => 'Attr 1',
+                'name' => 'AttrCategory1',
+                'label' => 'Attr1',
                 'defaultValue' => 'attr1',
                 'entityModel' => data\EavEntity::className(),
                 //'defaultOptionId' =>
@@ -48,8 +48,8 @@ class BehaviorTest extends \yii\codeception\TestCase
             [
                 'typeId' => 2,
                 'categoryId' => 2,
-                'name' => 'Name Attr 2',
-                'label' => 'Attr 2',
+                'name' => 'AttrCategory2',
+                'label' => 'Attr2',
                 'defaultValue' => 'attr2',
                 'entityModel' => data\EavEntity::className(),
                 //'defaultOptionId' =>
@@ -58,8 +58,8 @@ class BehaviorTest extends \yii\codeception\TestCase
             [
                 'typeId' => 3,
                 'categoryId' => 3,
-                'name' => 'Name Attr 3',
-                'label' => 'Attr 3',
+                'name' => 'AttrCategory3',
+                'label' => 'Attr3',
                 'defaultValue' => 'attr3',
                 'entityModel' => data\EavEntity::className(),
                 //'defaultOptionId' =>
@@ -73,10 +73,44 @@ class BehaviorTest extends \yii\codeception\TestCase
         foreach($this->dataAttr() as $values)
         {
             $attr = new EavAttribute();
-            $attr->load($values);
+            foreach($values as $key=>$value)
+                $attr->$key = $value;
             $attr->save();
         }
 
         $this->assertEquals(EavAttribute::find()->count(), 3);
+    }
+
+    /**
+     * @depends testCreateAttributes
+     */
+    public function testGetAttrFromEntity()
+    {
+        $entity = \data\EavEntity::find()->where(['id'=>1])->one();
+
+        $this->assertEquals($entity->categoryId, 1);
+
+        $this->assertEquals(1, count($entity->eavAttributes));
+    }
+
+    /**
+     * @depends testCreateAttributes
+     */
+    public function testSetAttrValue()
+    {
+        $entity = \data\EavEntity::find()->where(['id'=>1])->one();
+        $this->assertTrue($entity->getBehavior('eav')->canGetProperty('AttrCategory1'));
+
+        $entity->getBehavior('eav')->AttrCategory1 = 'myValue';
+        $entity->save();
+
+        $this->assertEquals('myValue', $entity->getBehavior('eav')->AttrCategory1);
+
+        $entity = \data\EavEntity::find()->where(['id'=>2])->one();
+        $entity->getBehavior('eav')->AttrCategory2 = 'myValueNew';
+        $entity->save();
+
+        $entity = \data\EavEntity::find()->where(['id'=>1])->one();
+        $this->assertEquals('myValue', $entity->getBehavior('eav')->AttrCategory1);
     }
 } 

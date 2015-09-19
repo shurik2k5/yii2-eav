@@ -55,7 +55,21 @@ class EavBehavior extends Behavior
             ]);
         }
         return $this->EavModel;
-    }      
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @return EavModel
+     */
+    public function __set($name, $value)
+    {
+        if($this->canGetProperty($name)){
+            $attr = $this->$name;
+            $attr->$name = $value;
+        }
+        return $this->EavModel;
+    }
     
     public function canGetProperty($name, $checkVars = true)
     {
@@ -67,7 +81,7 @@ class EavBehavior extends Behavior
     }
     
     public function beforeSave(){
-      $i = 1;
+      //$i = 1;
     }
     
     public function afterSave() {

@@ -70,7 +70,7 @@ class EavModel extends BaseEavModel
                 $model->addRule($key, 'default', ['value' => $attribute->defaultOptionId]);
             }
             
-            if(Yii::$app->request->isPost)
+            if(strpos(Yii::$app->request->className(), 'console')<=0&&Yii::$app->request->isPost)
             {
               $modelName = substr(strrchr($model->entityModel->className(), "\\"), 1);
               $model->load(Yii::$app->request->post(), $modelName); 
