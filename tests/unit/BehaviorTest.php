@@ -94,7 +94,7 @@ class BehaviorTest extends \yii\codeception\TestCase
     }
 
     /**
-     * @depends testCreateAttributes
+     * @depends testGetAttrFromEntity
      */
     public function testSetAttrValue()
     {
