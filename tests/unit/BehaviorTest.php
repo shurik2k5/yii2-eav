@@ -78,6 +78,14 @@ class BehaviorTest extends \yii\codeception\TestCase
         }
 
         $this->assertEquals(EavAttribute::find()->count(), 3);
+
+        $k = 0;
+        foreach($this->dataAttr() as $values)
+        {
+            $k++;
+            foreach($values as $key => $value)
+                $this->assertEquals(EavAttribute::findOne(['id'=>$k])->$key, $value);
+        }
     }
 
     /**
