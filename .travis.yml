@@ -7,6 +7,12 @@ php:
   - 7.0
   - hhvm
 
+env:
+  matrix:
+    - DB=mysql
+    - DB=pgsql
+    - DB=sqlite
+
 matrix:
   fast_finish: true
   allow_failures:
@@ -14,18 +20,28 @@ matrix:
     - php: hhvm
 
 install:
-  - composer self-update
-  - composer global require fxp/composer-asset-plugin:~1.0
-  - composer install
+  - travis_retry composer self-update
+  - travis_retry composer global require "fxp/composer-asset-plugin:1.0.*"
+  - travis_retry composer global require "codeception/codeception:2.0.*"
+  - travis_retry composer install --no-interaction --prefer-dist
 
 before_script:
-  - mysql -e 'create database yii2_eav_test;'
+  - if [[ $TRAVIS_PHP_VERSION =~ ^hhvm ]]; then echo 'xdebug.enable = On' >> /etc/hhvm/php.ini; fi
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS yii2_eav_test;" -uroot; fi
+  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS yii2_eav_test;" -U postgres; fi
+  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database yii2_eav_test;" -U postgres; fi
+  - cd tests
+  - php codeception/_app/yii migrate/up --interactive=0
+  - php codeception/_app/yii migrate/up --migrationPath=../src/migrations --interactive=0
+  - ~/.composer/vendor/bin/codecept build
 
 script:
-  - "wget http://codeception.com/codecept.phar"
-  - php ./codecept.phar build
-  - php ./codecept.phar run --coverage --xml
+  - ~/.composer/vendor/bin/codecept run --coverage-html --coverage-xml
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover tests/_output/report.xml
+
+after_failure:
+  - cat codeception/_app/runtime/logs/*
+  - cat codeception/_output/*
