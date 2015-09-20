@@ -52,5 +52,5 @@ Attach behaviour to your model
 Sample use in view:
 
 ```
-<?=$form->field($model->getEav(),'eav2'); ?>
+<?=$form->field($model->getBehavior('eav'),'eav2'); ?>
 ```
