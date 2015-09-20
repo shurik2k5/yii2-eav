@@ -16,6 +16,6 @@ coverage:
     blacklist:
         include:
             - src/migrations/*
-            - src/web/assets/*
+            #- src/web/assets/*
             - vendor/*
             - tests/*
