@@ -42,6 +42,8 @@ class EavAttribute extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'defaultValue', 'entityModel', 'label'], 'string', 'max' => 255],
+            [['categoryId', 'typeId', 'defaultOptionId'], 'integer'],
+            [['required'], 'boolean'],
             //[['defaultOptionId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttributeOption::className(), 'targetAttribute' => ['defaultOptionId' => 'id']],
             //[['typeId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttributeType::className(), 'targetAttribute' => ['typeId' => 'id']],
         ];

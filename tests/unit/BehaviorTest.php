@@ -73,8 +73,7 @@ class BehaviorTest extends \yii\codeception\TestCase
         foreach($this->dataAttr() as $values)
         {
             $attr = new EavAttribute();
-            foreach($values as $key=>$value)
-                $attr->$key = $value;
+            $attr->attributes = $values;
             $attr->save();
         }
 
@@ -94,7 +93,7 @@ class BehaviorTest extends \yii\codeception\TestCase
     }
 
     /**
-     * @depends testGetAttrFromEntity
+     * @depends testCreateAttributes
      */
     public function testSetAttrValue()
     {
