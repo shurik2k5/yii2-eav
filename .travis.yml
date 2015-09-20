@@ -43,5 +43,5 @@ after_script:
   - php ocular.phar code-coverage:upload --format=php-clover tests/_output/report.xml
 
 after_failure:
-  - cat tests/_app/runtime/logs/*
+  #- cat tests/_app/runtime/logs/*
   - cat tests/_output/*
