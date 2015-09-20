@@ -11,11 +11,6 @@ return [
             //'identityClass' => 'data\User',
             //'enableAutoLogin' => true,
         ],
-        'db' => [
-            'class' => '\yii\db\Connection',
-            'dsn' => 'sqlite:'.\Yii::getAlias('@tests/_output/temp.db'),
-            'username' => '',
-            'password' => '',
-        ]
+        'db' => require(\Yii::getAlias('@tests/_config/db.php')),
     ]
 ];

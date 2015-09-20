@@ -4,3 +4,11 @@
 class_name: UnitTester
 modules:
     enabled: [Asserts, Db]
+    config:
+            Yii2:
+                configFile: 'tests/_config/unit.php'
+            Db:
+                        dsn: 'sqlite:tests/_output/temp.db'
+                        user: ''
+                        password: ''
+                        dump: tests/_data/dump.sql

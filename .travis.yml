@@ -9,8 +9,8 @@ php:
 
 env:
   matrix:
-    - DB=mysql
-    - DB=pgsql
+    #- DB=mysql
+    #- DB=pgsql
     - DB=sqlite
 
 matrix:
@@ -27,9 +27,9 @@ install:
 
 before_script:
   - if [[ $TRAVIS_PHP_VERSION =~ ^hhvm ]]; then echo 'xdebug.enable = On' >> /etc/hhvm/php.ini; fi
-  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS yii2_eav_test;" -uroot; fi
-  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS yii2_eav_test;" -U postgres; fi
-  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database yii2_eav_test;" -U postgres; fi
+  #- if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS yii2_eav_test;" -uroot; fi
+  #- if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS yii2_eav_test;" -U postgres; fi
+  #- if [[ "$DB" == "pgsql" ]]; then psql -c "create database yii2_eav_test;" -U postgres; fi
   #- cd tests
   #- php codeception/_app/yii migrate/up --interactive=0
   #- php codeception/_app/yii migrate/up --migrationPath=../src/migrations --interactive=0
