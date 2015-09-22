@@ -53,6 +53,8 @@ class EavModel extends BaseEavModel
             $handler = AttributeHandler::load($model, $attribute);
             $key = $handler->getAttributeName();
             $value = $handler->valueHandler->load();
+
+            $model->setLabel($key, $handler->getAttributeLabel());
             
             //
             // Add rules
@@ -91,6 +93,11 @@ class EavModel extends BaseEavModel
     public function attributeLabels()
     {
         return $this->attributeLabels;
+    }
+
+    public function setLabel($name, $label)
+    {
+        $this->attributeLabels[$name] = $label;
     }
 
     public function save($runValidation = true, $attributes = null)

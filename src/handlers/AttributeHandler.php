@@ -25,6 +25,7 @@ class AttributeHandler extends Widget
     public $attributeModel;
     
     public $nameField = 'name';
+    public $labelField = 'label';
 
     /**
      * @param EavModel $owner
@@ -64,6 +65,11 @@ class AttributeHandler extends Widget
     public function getAttributeName()
     {
         return (string)($this->attributeModel->{$this->nameField});
+    }
+
+    public function getAttributeLabel()
+    {
+        return (string)($this->attributeModel->{$this->labelField});
     }
 
     public function getOptions()
