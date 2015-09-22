@@ -63,7 +63,7 @@ class AttributeHandler extends Widget
      */
     public function getAttributeName()
     {
-        return strval($this->attributeModel->{$this->nameField});
+        return (string)($this->attributeModel->{$this->nameField});
     }
 
     public function getOptions()
