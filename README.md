@@ -23,7 +23,7 @@ php composer.phar require --prefer-dist "mirocow/yii2-eav" "*"
 ```
 
 Configure
-=========
+========
 
 ``` sh
 php yii migrate/up --migrationPath=@eav/migrations
