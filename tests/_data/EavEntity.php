@@ -3,6 +3,7 @@
 namespace data;
 
 use mazurva\eav\EavBehavior;
+use mazurva\eav\EavTrait;
 use mazurva\eav\models\EavAttribute;
 use mazurva\eav\models\EavAttributeValue;
 use Yii;
@@ -17,6 +18,7 @@ use Yii;
  */
 class EavEntity extends \yii\db\ActiveRecord
 {
+    use EavTrait;
     /**
      * @inheritdoc
      */

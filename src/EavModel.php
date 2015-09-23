@@ -90,7 +90,7 @@ class EavModel extends BaseEavModel
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function getAttributeLabels()
     {
         return $this->attributeLabels;
     }

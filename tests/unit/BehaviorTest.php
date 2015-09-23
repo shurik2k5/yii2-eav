@@ -123,4 +123,20 @@ class BehaviorTest extends \yii\codeception\TestCase
         $entity = \data\EavEntity::find()->where(['id'=>2])->one();
         $this->assertEquals('myValueNew', $entity->getBehavior('eav')->AttrCategory2);
     }
+
+    /**
+     * @depends testCreateAttributes
+     */
+    public function testSupportAttributeLabels()
+    {
+        $entity = \data\EavEntity::find()->where(['id'=>1])->one();
+
+        $this->assertEquals('Attr1', $entity->getAttributeLabel('AttrCategory1'));
+
+
+        $entity = \data\EavEntity::find()->where(['id'=>2])->one();
+
+        $this->assertEquals('Attr2', $entity->getAttributeLabel('AttrCategory2'));
+
+    }
 } 

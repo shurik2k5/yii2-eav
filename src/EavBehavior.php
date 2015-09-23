@@ -29,12 +29,14 @@ class EavBehavior extends Behavior
             ActiveRecord::EVENT_AFTER_UPDATE    => 'afterSave',
             ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
         ];
-                
     }
     
     /** @var array */
     public $valueClass;
 
+    /**
+     * @var EavModel
+     */
     protected $EavModel;
 
     public function init()
@@ -69,6 +71,18 @@ class EavBehavior extends Behavior
             $attr->$name = $value;
         }
         return $this->EavModel;
+    }
+
+    public function getLabels()
+    {
+        if (!$this->EavModel instanceof EavModel) {
+            $this->EavModel = EavModel::create([
+                'entityModel' => $this->owner,
+                'valueClass' => $this->valueClass,
+                'attribute' => '',
+            ]);
+        }
+        return $this->EavModel->getAttributeLabels();
     }
     
     public function canGetProperty($name, $checkVars = true)

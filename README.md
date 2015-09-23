@@ -30,6 +30,8 @@ Usage
 -----
 Attach behaviour to your model
 ```
+  use EavTrait; // need for full support label of fields
+
   public function behaviors()
   {
       return [
