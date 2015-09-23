@@ -37,7 +37,7 @@ Attach to your model
       return [
           'eav' => [
               'class' => mazurva\eav\EavBehavior::className(),
-              'valueClass' => ObjectAttributeValue::className(), // this model for table object_attribute_value
+              'valueClass' => mazurva\eav\models\EavAttributeValue::className(), // this model for table object_attribute_value
           ]
       ];
   }
@@ -47,7 +47,7 @@ Attach to your model
    */
   public function getEavAttributes()
   {
-      return $this->hasMany(ObjectAttribute::className(), ['categoryId' => 'id']);
+      return $this->hasMany(mazurva\eav\models\EavAttribute::className(), ['categoryId' => 'id']);
   }
 ```
 
@@ -63,4 +63,19 @@ or
 foreach($model->eavAttributes as $attr){
     echo $form->field($model, $attr->name)->textInput();
 }
+```
+
+Add new field:
+
+```php
+$attr = new mazurva\eav\models\EavAttribute();
+$attr->attributes = [
+        'categoryId' => 1, // Category ID
+        'name' => 'AttrCategory1',  // service name field
+        'label' => 'Attr1',         // label text for form
+        'defaultValue' => 'attr1',  // default value
+        'entityModel' => SampleModel::className(), // work model
+        'required'=>false           // add rule "required field"
+    ];
+$attr->save();
 ```
