@@ -132,6 +132,7 @@ class BehaviorTest extends \yii\codeception\TestCase
         $entity = \data\EavEntity::find()->where(['id'=>1])->one();
 
         $this->assertEquals('Attr1', $entity->getAttributeLabel('AttrCategory1'));
+        $this->assertEquals('myValue', $entity->AttrCategory1);
 
 
         $entity = \data\EavEntity::find()->where(['id'=>2])->one();

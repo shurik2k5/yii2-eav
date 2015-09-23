@@ -73,16 +73,13 @@ class EavBehavior extends Behavior
         return $this->EavModel;
     }
 
-    public function getLabels()
+    public function getLabel($name)
     {
-        if (!$this->EavModel instanceof EavModel) {
-            $this->EavModel = EavModel::create([
-                'entityModel' => $this->owner,
-                'valueClass' => $this->valueClass,
-                'attribute' => '',
-            ]);
+        if($this->canGetProperty($name)){
+            if($this->$name)
+                return $this->EavModel->getAttributeLabels()[$name];
         }
-        return $this->EavModel->getAttributeLabels();
+        return false;
     }
     
     public function canGetProperty($name, $checkVars = true)
