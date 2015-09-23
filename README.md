@@ -28,8 +28,8 @@ php yii migrate/up --migrationPath=@vendor/mazurva/yii2-eav/src/migrations
 
 Usage
 -----
-Attach behaviour to your model
-```
+Attach to your model
+```php
   use EavTrait; // need for full support label of fields
 
   public function behaviors()
@@ -53,6 +53,14 @@ Attach behaviour to your model
 
 Sample use in view:
 
+```php
+<?=$form->field($model,'eav2'); ?>
 ```
-<?=$form->field($model->getBehavior('eav'),'eav2'); ?>
+
+or
+
+```php
+foreach($model->eavAttributes as $attr){
+    echo $form->field($model, $attr->name)->textInput();
+}
 ```
