@@ -36,6 +36,9 @@ php yii migrate/up --migrationPath=@eav/migrations
 Use
 ========
 
+Model
+=======
+
 ``` php
 class Product extends \yii\db\ActiveRecord
 {
@@ -71,4 +74,22 @@ class Product extends \yii\db\ActiveRecord
     }
     
 }
+```
+
+View
+=======
+
+Insert this code for create widget or load all EAV inputs fields for model
+
+``` html
+    <?//=$form->field($model,'test5', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
+```
+or
+
+``` html
+    <?php
+    foreach($model->getEavAttributes()->all() as $attr){
+        echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+    }        
+    ?>
 ```
