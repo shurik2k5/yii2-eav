@@ -5,7 +5,7 @@ EAV Dynamic Attributes for Yii2
 
 [![Latest Stable Version](https://poser.pugx.org/mirocow/yii2-eav/v/stable)](https://packagist.org/packages/mirocow/yii2-eav) [![Latest Unstable Version](https://poser.pugx.org/mirocow/yii2-eav/v/unstable)](https://packagist.org/packages/mirocow/yii2-eav) [![Total Downloads](https://poser.pugx.org/mirocow/yii2-eav/downloads)](https://packagist.org/packages/mirocow/yii2-eav) [![License](https://poser.pugx.org/mirocow/yii2-eav/license)](https://packagist.org/packages/mirocow/yii2-eav)
 
-![](https://yadi.sk/i/6CkmwnDZjsdGe)
+![](http://yadi.sk/i/6CkmwnDZjsdGe)
 
 Install
 ========
