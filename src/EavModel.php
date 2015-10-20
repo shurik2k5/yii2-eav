@@ -46,13 +46,24 @@ class EavModel extends BaseEavModel
         /** @var static $model */
         $model = Yii::createObject($params);
         
-        $attributes = $model->entityModel->getRelation('eavAttributes')->all();
-
-        foreach ($attributes as $attribute) {
+        $params = [];
+        
+        if(!empty($params['attribute'])){
+          $params = ['name' => $params['attribute']];
+        }
+        
+        $attributes = $model
+          ->entityModel
+          ->getRelation('eavAttributes')
+          ->where($params)
+          ->all();
           
+        foreach ($attributes as $attribute) {          
+        
             $handler = AttributeHandler::load($model, $attribute);
             $key = $handler->getAttributeName();
             $value = $handler->valueHandler->load();
+            $model->setLabel($key, $handler->getAttributeLabel());
             
             //
             // Add rules
@@ -72,15 +83,15 @@ class EavModel extends BaseEavModel
             
             if(Yii::$app->request->isPost)
             {
-              $modelName = substr(strrchr($model->entityModel->className(), "\\"), 1);
-              $model->load(Yii::$app->request->post(), $modelName); 
-            } else {
-              $model->defineAttribute($key, $value);
-            }           
+              $modelName = substr(strrchr(self::className(), "\\"), 1);
+              $model->load(Yii::$app->request->post(), $modelName);
+            } else {            
+              $model->defineAttribute($key, $value);           
+            }
             
             $model->handlers[$key] = $handler;
-            
-        }
+        
+        }        
 
         return $model;
     }
@@ -88,9 +99,14 @@ class EavModel extends BaseEavModel
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function getAttributeLabels()
     {
         return $this->attributeLabels;
+    }
+
+    public function setLabel($name, $label)
+    {
+        $this->attributeLabels[$name] = $label;
     }
 
     public function save($runValidation = true, $attributes = null)

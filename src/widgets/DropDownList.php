@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\inputs;
+namespace mirocow\eav\widgets;
 
 use mirocow\eav\handlers\AttributeHandler;
 use yii\helpers\ArrayHelper;
@@ -23,9 +23,10 @@ class DropDownList extends AttributeHandler
 
     public function run()
     {
-        return $this->owner->activeForm->field($this->owner, $this->getAttributeName())
+        return $this->owner->activeForm->field($this->owner, $this->getAttributeName(), 
+            ['template' => "{input}\n{hint}\n{error}"])
             ->dropDownList(
-                ArrayHelper::map($this->attributeModel->getOptions()->asArray()->all(), 'id', 'value')
+                ArrayHelper::map($this->attributeModel->getEavOptions()->asArray()->all(), 'id', 'value')
             );
     }
 }

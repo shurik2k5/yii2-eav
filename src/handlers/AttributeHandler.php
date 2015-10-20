@@ -25,6 +25,7 @@ class AttributeHandler extends Widget
     public $attributeModel;
     
     public $nameField = 'name';
+    public $labelField = 'label';
 
     /**
      * @param EavModel $owner
@@ -35,7 +36,9 @@ class AttributeHandler extends Widget
     public static function load($owner, $attributeModel)
     {
         if (!class_exists($class = $attributeModel->eavType->handlerClass))
+        {
             throw new InvalidParamException('Unknown class: ' . $class);
+        }
 
         $handler = Yii::createObject([
             'class' => $class,
@@ -63,7 +66,12 @@ class AttributeHandler extends Widget
      */
     public function getAttributeName()
     {
-        return strval($this->attributeModel->{$this->nameField});
+        return (string)($this->attributeModel->{$this->nameField});
+    }
+
+    public function getAttributeLabel()
+    {
+        return (string)($this->attributeModel->{$this->labelField});
     }
 
     public function getOptions()

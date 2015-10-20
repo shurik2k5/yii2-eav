@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\inputs;
+namespace mirocow\eav\widgets;
 
 use mirocow\eav\handlers\AttributeHandler;
 

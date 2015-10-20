@@ -28,13 +28,16 @@ class OptionValueHandler extends ValueHandler
         $EavModel = $this->attributeHandler->owner;
         $valueModel = $this->getValueModel();
         $attribute = $this->attributeHandler->getAttributeName();
-
-        $valueModel->optionId = $EavModel->attributes[$attribute];
-
-        if (!$valueModel->save())
-        {
-            throw new \Exception("Can't save value model");
-        }
+        
+        if(isset($EavModel->attributes[$attribute])){
+          
+          $valueModel->optionId = $EavModel->attributes[$attribute];
+              
+          if (!$valueModel->save())
+              throw new \Exception("Can't save value model");
+            
+        }        
+        
     }
 
     public function getTextValue()

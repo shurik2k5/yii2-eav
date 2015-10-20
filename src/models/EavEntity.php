@@ -8,7 +8,8 @@ use Yii;
  * This is the model class for table "{{%eav_entity}}".
  *
  * @property integer $id
- * @property string $entityModel
+ * @property string $entityName
+ * @property string $entityModel 
  *
  * @property EavAttribute[] $eavAttributes
  */
@@ -28,7 +29,7 @@ class EavEntity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['entityModel'], 'string', 'max' => 100],
+            [['entityModel', 'entityName'], 'string', 'max' => 100],
         ];
     }
 
@@ -39,6 +40,7 @@ class EavEntity extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'entityName' => 'Name',
             'entityModel' => 'Entity Model',
         ];
     }

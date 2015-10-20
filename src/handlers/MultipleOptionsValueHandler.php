@@ -38,14 +38,11 @@ class MultipleOptionsValueHandler extends ValueHandler
 
     public function save()
     {
-        $EavModel = $this->attributeHandler->owner;
-        
-        $attribute = $this->attributeHandler->getAttributeName();
-        
+        $EavModel = $this->attributeHandler->owner;        
+        $attribute = $this->attributeHandler->getAttributeName();    
         /** @var ActiveRecord $valueClass */
         $valueClass = $EavModel->valueClass;
         
-
         $baseQuery = $valueClass::find()->where([
             'entityId' => $EavModel->entityModel->getPrimaryKey(),
             'attributeId' => $this->attributeHandler->attributeModel->getPrimaryKey(),
@@ -98,6 +95,7 @@ class MultipleOptionsValueHandler extends ValueHandler
     public function getTextValue()
     {
         $EavModel = $this->attributeHandler->owner;
+        
         /** @var ActiveRecord $valueClass */
         $valueClass = $EavModel->valueClass;
 

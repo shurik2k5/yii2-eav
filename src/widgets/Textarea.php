@@ -3,11 +3,11 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\inputs;
+namespace mirocow\eav\widgets;
 
 use mirocow\eav\handlers\AttributeHandler;
 
-class TextInput extends AttributeHandler
+class Textarea extends AttributeHandler
 {
     public function init()
     {
@@ -18,7 +18,8 @@ class TextInput extends AttributeHandler
 
     public function run()
     {
-        return $this->owner->activeForm->field($this->owner, $this->getAttributeName())
-            ->textInput();
+        return $this->owner->activeForm
+          ->field($this->owner, $this->getAttributeName(), ['template' => "{input}\n{hint}\n{error}"])
+          ->textArea();
     }
 }

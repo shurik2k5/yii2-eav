@@ -35,7 +35,7 @@ class EavBehavior extends Behavior
     /** @var array */
     public $valueClass;
 
-    protected $EavModel;
+    protected $EavModel;       
 
     public function init()
     {
@@ -47,13 +47,16 @@ class EavBehavior extends Behavior
      */
     public function __get($name = '')
     {
-        if (!$this->EavModel instanceof EavModel) {
-            $this->EavModel = EavModel::create([
-                'entityModel' => $this->owner,
-                'valueClass' => $this->valueClass,
-                'attribute' => $name,
-            ]);
-        }
+        /*if (!$this->EavModel instanceof EavModel) {
+
+        }*/
+        
+        $this->EavModel = EavModel::create([
+            'entityModel' => $this->owner,
+            'valueClass' => $this->valueClass,
+            'attribute' => $name,
+        ]);        
+        
         return $this->EavModel;
     }      
     
@@ -62,16 +65,31 @@ class EavBehavior extends Behavior
         return EavAttribute::find()->where(['name' => $name])->exists();
     }    
     
-    public function beforeValidate() {
-        return $this->eav->validate();
+    public function beforeValidate() 
+    {
+        static $running;
+        
+        if(empty($running)){
+          $running = true;
+          return $this->owner->validate();
+        }
+        
+        $running = false;
     }
     
     public function beforeSave(){
-      $i = 1;
     }
     
-    public function afterSave() {
+    public function getLabel($attribute)
+    {
+      return EavAttribute::find()->select(['label'])->where(['name' => $attribute])->scalar();
+    }
+    
+    public function afterSave() 
+    {
+      
         $this->eav->save(false);
+        
     }       
     
 }
