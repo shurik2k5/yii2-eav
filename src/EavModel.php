@@ -81,6 +81,10 @@ class EavModel extends BaseEavModel
                 $model->addRule($key, 'default', ['value' => $attribute->defaultOptionId]);
             }
             
+            if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_ARRAY){
+                // todo 5: Add json dected or array detected
+            }
+            
             if(Yii::$app->request->isPost)
             {
               $modelName = substr(strrchr(self::className(), "\\"), 1);

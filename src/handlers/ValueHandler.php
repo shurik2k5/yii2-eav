@@ -15,11 +15,11 @@ use yii\db\ActiveRecord;
  * @property string $textValue
  */
 abstract class ValueHandler
-{
+{    
     const STORE_TYPE_RAW = 0;
     const STORE_TYPE_OPTION = 1;
     const STORE_TYPE_MULTIPLE_OPTIONS = 2;
-    const STORE_TYPE_ARRAY = 3;
+    const STORE_TYPE_ARRAY = 3; // Json encoded
 
     /** @var AttributeHandler */
     public $attributeHandler;

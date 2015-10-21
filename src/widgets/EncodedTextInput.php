@@ -15,4 +15,9 @@ class EncodedTextInput extends TextInput
     {
         AttributeHandler::init();
     }
+    
+    public function run()
+    {
+        return $this->owner->{$this->getAttributeName()};
+    }    
 }
