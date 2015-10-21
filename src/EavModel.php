@@ -56,7 +56,7 @@ class EavModel extends BaseEavModel
           ->entityModel
           ->getRelation('eavAttributes')
           ->where($params)
-          ->all();
+          ->all();                             
           
         foreach ($attributes as $attribute) {          
         
@@ -71,6 +71,8 @@ class EavModel extends BaseEavModel
             
             if ($attribute->required){
                 $model->addRule($key, 'required');
+            } else {
+                $model->addRule($key, 'safe');
             }
 
             if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_RAW){
@@ -82,20 +84,28 @@ class EavModel extends BaseEavModel
             }
             
             if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_ARRAY){
-                // todo 5: Add json dected or array detected
+                $model->addRule($key, 'string');
             }
+
+            //
+            // Add define attribute
+            //
             
-            if(Yii::$app->request->isPost)
-            {
-              $modelName = substr(strrchr(self::className(), "\\"), 1);
-              $model->load(Yii::$app->request->post(), $modelName);
-            } else {            
-              $model->defineAttribute($key, $value);           
-            }
+            $model->defineAttribute($key, $value);
+
+            //
+            // Add hanler
+            //
             
             $model->handlers[$key] = $handler;
         
-        }        
+        }
+        
+        if(Yii::$app->request->isPost && Yii::$app->request->getIsConsoleRequest() == false)
+        {
+          $modelName = substr(strrchr(self::className(), "\\"), 1);
+          $model->load(Yii::$app->request->post(), $modelName);         
+        }                
 
         return $model;
     }

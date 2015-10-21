@@ -44,4 +44,9 @@ class ArrayValueHandler extends RawValueHandler
     {
         return json_encode(parent::getTextValue());
     }
+    
+    public function getArrayValue()
+    {
+        return json_decode(parent::getTextValue());
+    }    
 }
