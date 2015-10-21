@@ -8,8 +8,6 @@ class m150821_133232_init extends Migration
 
     public $tables;
     public $entityName = 'eav';
-    public $useEntity = true;
-    
     public $attributeTypes = [];
     
     public function init()
@@ -19,7 +17,6 @@ class m150821_133232_init extends Migration
         }
         
         $this->tables = [
-            'category' => "{{%{$entityName}_category}}",
             'entity' => "{{%{$entityName}}}",
             'attribute' => "{{%{$entityName}_attribute}}",
             'attribute_type' => "{{%{$entityName}_attribute_type}}",
@@ -31,23 +28,33 @@ class m150821_133232_init extends Migration
             [
                 'name' => 'raw', 
                 'storeType' => ValueHandler::STORE_TYPE_RAW, 
-                'handlerClass' => '\mazurva\eav\inputs\TextInput',
-            ],
-            [
-                'name' => 'array', 
-                'storeType' => ValueHandler::STORE_TYPE_ARRAY, 
-                'handlerClass' => '\mazurva\eav\inputs\EncodedTextInput',
+                'handlerClass' => '\mirocow\eav\widgets\TextInput',
             ],
             [
                 'name' => 'option', 
                 'storeType' => ValueHandler::STORE_TYPE_OPTION, 
-                'handlerClass' => '\mazurva\eav\inputs\DropDownList',
+                'handlerClass' => '\mirocow\eav\widgets\DropDownList',
             ],
             [
                 'name' => 'multiple', 
                 'storeType' => ValueHandler::STORE_TYPE_MULTIPLE_OPTIONS, 
-                'handlerClass' => '\mazurva\eav\inputs\EncodedTextInput',
+                'handlerClass' => '\mirocow\eav\widgets\CheckBoxList',
             ],
+            [
+                'name' => 'array', 
+                'storeType' => ValueHandler::STORE_TYPE_ARRAY, 
+                'handlerClass' => '\mirocow\eav\widgets\EncodedTextInput',
+            ],
+            [
+                'name' => 'radio', 
+                'storeType' => ValueHandler::STORE_TYPE_OPTION, 
+                'handlerClass' => '\mirocow\eav\widgets\RadioList',
+            ],
+            [
+                'name' => 'area', 
+                'storeType' => ValueHandler::STORE_TYPE_RAW, 
+                'handlerClass' => '\mirocow\eav\widgets\Textarea',
+            ],                                                
         ];
     }
 
@@ -57,23 +64,15 @@ class m150821_133232_init extends Migration
                  ? 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB' 
                  : null;
 
-        if ($this->useEntity) {
-            $this->createTable($this->tables['entity'], [
-                'id' => Schema::TYPE_PK,
-                'categoryId' => Schema::TYPE_INTEGER,
-            ], $options);
-        }
-        
-        $this->createTable($this->tables['category'], [
+        $this->createTable($this->tables['entity'], [
             'id' => Schema::TYPE_PK,
-//            'seoName' => Schema::TYPE_STRING,
-            'name' => Schema::TYPE_STRING,
+            'entityName' => Schema::TYPE_STRING,
+            'entityModel' => Schema::TYPE_STRING,
         ], $options);
 
         $this->createTable($this->tables['attribute'], [
             'id' => Schema::TYPE_PK,
-            'entityModel' => Schema::TYPE_STRING,
-            'categoryId' => Schema::TYPE_INTEGER,
+            'entityId' => Schema::TYPE_INTEGER,
             'typeId' => Schema::TYPE_INTEGER,
             'name' => Schema::TYPE_STRING,
             'label' => Schema::TYPE_STRING,
@@ -104,14 +103,24 @@ class m150821_133232_init extends Migration
         ], $options);
 
         if($this->db->driverName != "sqlite"){
-            $this->addForeignKey('FK_Entity_categoryId', $this->tables['entity'], 'categoryId', $this->tables['category'], 'id', "CASCADE", "NO ACTION");
-            $this->addForeignKey('FK_Attribute_categoryId', $this->tables['attribute'], 'categoryId', $this->tables['category'], 'id', "CASCADE", "NO ACTION");
-            $this->addForeignKey('FK_Attribute_typeId', $this->tables['attribute'], 'typeId', $this->tables['attribute_type'], 'id', "CASCADE", "NO ACTION");
-            $this->addForeignKey('FK_Attribute_defaultOptionId', $this->tables['attribute'], 'defaultOptionId', $this->tables['option'], 'id', "CASCADE", "NO ACTION");
-            $this->addForeignKey('FK_Value_entityId', $this->tables['value'], 'entityId', $this->tables['entity'], 'id', "CASCADE", "NO ACTION");
-            $this->addForeignKey('FK_Value_attributeId', $this->tables['value'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
-            $this->addForeignKey('FK_Value_optionId', $this->tables['value'], 'optionId', $this->tables['option'], 'id', "CASCADE", "NO ACTION");
-            $this->addForeignKey('FK_Option_attributeId', $this->tables['option'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
+              
+            $this->addForeignKey('FK_Attribute_typeId', 
+              $this->tables['attribute'], 'typeId', $this->tables['attribute_type'], 'id', "CASCADE", "NO ACTION");
+              
+            $this->addForeignKey('FK_EntityId', 
+              $this->tables['attribute'], 'entityId', $this->tables['entity'], 'id', "CASCADE", "NO ACTION");
+              
+            $this->addForeignKey('FK_Value_entityId', 
+              $this->tables['value'], 'entityId', $this->tables['entity'], 'id', "CASCADE", "NO ACTION");
+              
+            $this->addForeignKey('FK_Value_attributeId', 
+              $this->tables['value'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
+              
+            $this->addForeignKey('FK_Value_optionId', 
+              $this->tables['value'], 'optionId', $this->tables['option'], 'id', "CASCADE", "NO ACTION");
+              
+            $this->addForeignKey('FK_Option_attributeId', 
+              $this->tables['option'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
         }
 
         foreach ($this->attributeTypes as $columns) {
@@ -122,25 +131,19 @@ class m150821_133232_init extends Migration
     public function safeDown()
     {
         if($this->db->driverName != "sqlite"){
-            $this->dropForeignKey('FK_Entity_categoryId', $this->tables['entity']);
-            $this->dropForeignKey('FK_Attribute_categoryId', $this->tables['attribute']);
             $this->dropForeignKey('FK_Attribute_typeId', $this->tables['attribute']);
-            $this->dropForeignKey('FK_Attribute_defaultOptionId', $this->tables['attribute']);
+            $this->dropForeignKey('FK_EntityId', $this->tables['attribute']);
             $this->dropForeignKey('FK_Value_entityId', $this->tables['value']);
             $this->dropForeignKey('FK_Value_attributeId', $this->tables['value']);
             $this->dropForeignKey('FK_Value_optionId', $this->tables['value']);
             $this->dropForeignKey('FK_Option_attributeId', $this->tables['option']);
         }
-
-        if ($this->useEntity) {
-            $this->dropTable($this->tables['entity']);
-        }
         
-        $this->dropTable($this->tables['category']);
         $this->dropTable($this->tables['attribute']);
         $this->dropTable($this->tables['attribute_type']);
         $this->dropTable($this->tables['value']);
         $this->dropTable($this->tables['option']);
+        $this->dropTable($this->tables['entity']);
     }
     
 }
