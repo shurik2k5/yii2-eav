@@ -83,6 +83,9 @@ View
 
 Insert this code for create widget or load all EAV inputs fields for model
 
+Form
+======
+
 ``` html
     <?//=$form->field($model,'test5', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
 ```
@@ -94,4 +97,28 @@ or
         echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
     }        
     ?>
+```
+
+Partial template
+======
+
+``` php
+<p>
+Encode
+
+<?php
+  foreach($model->getEavAttributes()->all() as $attr){
+    print_r($model[$attr->name]['value']);
+  }
+?>
+</p> 
+
+<p>
+String
+
+<?php
+  foreach($model->getEavAttributes()->all() as $attr){
+    echo $model[$attr->name];
+  }
+?> 
 ```

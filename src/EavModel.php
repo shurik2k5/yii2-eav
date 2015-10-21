@@ -149,10 +149,24 @@ class EavModel extends BaseEavModel
       $this->defineAttribute($name, $value);      
     }
     
+    public function getValue(){
+      
+      if(isset($this->attributes[ $this->attribute ])){
+        return $this->attributes[ $this->attribute ];
+      } else {
+        return '';
+      }
+      
+    }
+    
     public function __toString()
     {
       if(isset($this->attributes[ $this->attribute ])){
-        return (string) $this->attributes[ $this->attribute ];
+        if(is_string($this->attributes[ $this->attribute ])){
+          return (string) $this->attributes[ $this->attribute ];
+        } else {
+          return (string) json_encode($this->attributes[ $this->attribute ]);
+        }
       } else {
         return '';
       }

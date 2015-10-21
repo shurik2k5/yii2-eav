@@ -82,4 +82,8 @@ class EavAttributeValue extends \yii\db\ActiveRecord
     {
         return $this->hasOne(EavAttributeOption::className(), ['id' => 'optionId']);
     }
+    
+    public function getValue(){
+      return 'XXX';
+    }
 }
