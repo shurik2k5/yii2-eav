@@ -32,7 +32,7 @@ Configure
 ========
 
 ``` sh
-php yii migrate/up --migrationPath=@eav/migrations
+php yii migrate/up --migrationPath=@mirocow/eav/migrations
 ```
 
 Use
@@ -70,7 +70,7 @@ class Product extends \yii\db\ActiveRecord
         return \mirocow\eav\models\EavAttribute::find()
           ->joinWith('entity')
           ->where([
-            //'categoryId' => $this->category->id,
+            'categoryId' => isset()? $this->category->id: 0,
             'entityModel' => $this::className()
         ]);  
     }
