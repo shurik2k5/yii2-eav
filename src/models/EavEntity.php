@@ -30,7 +30,7 @@ class EavEntity extends \yii\db\ActiveRecord
     {
         return [
             [['entityModel', 'entityName'], 'string', 'max' => 100],
-            [['categoryId', 'integer']],
+            [['categoryId'], 'integer'],
         ];
     }
 
