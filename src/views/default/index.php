@@ -54,5 +54,15 @@ use yii\helpers\Url;
       <?= Html::a('List', ['admin/entity/index'])?>
     </td>
    </tr>
+
+   <tr>
+    <td>4</td>
+    <td>admin/value/index</td>
+    <td>Values constructor</td>
+    <td>
+      Create&nbsp;
+      <?= Html::a('List', ['admin/value/index'])?>
+    </td>
+   </tr>
    
 </table>
