@@ -2,7 +2,8 @@
     "name": "mirocow/yii2-eav",
     "description": "EAV for Yii2",
     "license": "MIT",
-	"keywords": ["yii2", "eav"],
+    "keywords": ["yii2", "eav"],
+    "type": "yii2-extension",
     "authors": [
         {
             "name": "Alexey Samoylov",
