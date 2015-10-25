@@ -35,6 +35,12 @@ Configure
 php yii migrate/up --migrationPath=@mirocow/eav/migrations
 ```
 
+or
+
+``` sh
+php yii migrate/up --migrationPath=vendor/mirocow/yii2-eav/src/migrations
+```
+
 Use
 ========
 
