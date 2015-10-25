@@ -86,10 +86,12 @@ Insert this code for create widget or load all EAV inputs fields for model
 Form
 ======
 
+fo load selected field 
+
 ``` html
-    <?//=$form->field($model,'test5', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
+    <?=$form->field($model,'test5', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
 ```
-or
+or for load all fields
 
 ``` html
     <?php
