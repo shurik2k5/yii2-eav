@@ -102,7 +102,7 @@ or
 Partial template
 ======
 
-``` php
+``` html
 <p>
 Encode
 
