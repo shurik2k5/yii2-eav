@@ -57,7 +57,8 @@ class EavAttributeOption extends \yii\db\ActiveRecord
      */
     public function getEavAttributes()
     {
-        return $this->hasMany(EavAttribute::className(), ['defaultOptionId' => 'id']);
+        return $this->hasMany(EavAttribute::className(), ['defaultOptionId' => 'id'])
+          ->orderBy(['order' => SORT_DESC]);
     }
 
     /**

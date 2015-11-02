@@ -41,6 +41,7 @@ class EavAttribute extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'defaultValue', 'entityModel', 'label'], 'string', 'max' => 255],
+            [['order'], 'integer'],
             //[['categoryId', 'typeId', 'defaultOptionId'], 'integer'],
             [['required'], 'boolean'],
             //[['defaultOptionId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttributeOption::className(), 'targetAttribute' => ['defaultOptionId' => 'id']],
@@ -61,6 +62,7 @@ class EavAttribute extends \yii\db\ActiveRecord
             'defaultValue' => 'Default Value',
             'defaultOptionId' => 'Default Option ID',
             'required' => 'Required',
+            'order' => 'Order',
         ];
     }
 
@@ -103,4 +105,16 @@ class EavAttribute extends \yii\db\ActiveRecord
     {
         return $this->hasMany(EavAttributeValue::className(), ['attributeId' => 'id']);
     }
+    
+    public function getbootstrapData()
+    {
+      return [
+        'cid' => '',
+        'label' => '',
+        'field_type' => '',
+        'required' => '',
+        'field_options' => [],      
+      ];
+    }
+        
 }

@@ -25,17 +25,19 @@ CREATE TABLE `eav_attribute` (
   `defaultValue` varchar(255) DEFAULT NULL,
   `defaultOptionId` int(11) DEFAULT NULL,
   `required` tinyint(1) DEFAULT '1',
+  `order` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_Attribute_typeId` (`typeId`),
   KEY `FK_EntityId` (`entityId`),
+  KEY `FK_Attribute_defaultOptionId` (`defaultOptionId`),
   CONSTRAINT `FK_Attribute_defaultOptionId` FOREIGN KEY (`defaultOptionId`) REFERENCES `eav_attribute_option` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_Attribute_typeId` FOREIGN KEY (`typeId`) REFERENCES `eav_attribute_type` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_EntityId` FOREIGN KEY (`entityId`) REFERENCES `eav_entity` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `eav_attribute` */
 
-insert  into `eav_attribute`(`id`,`entityId`,`typeId`,`name`,`label`,`defaultValue`,`defaultOptionId`,`required`) values (6,1,3,'test','Тест','0',0,0),(7,1,1,'test1','EAV поле','0',0,0),(8,1,2,'test2','EAV поле 2','0',0,0),(9,1,6,'test3','EAV поле 3','0',0,0),(10,1,5,'test4','EAV поле 4','0',0,0),(11,1,4,'test5','EAV поле 5','0',0,0);
+insert  into `eav_attribute`(`id`,`entityId`,`typeId`,`name`,`label`,`defaultValue`,`defaultOptionId`,`required`,`order`) values (6,1,3,'test','Тест','0',0,0,0),(7,1,1,'test1','EAV поле','0',0,0,0),(8,1,2,'test2','EAV поле 2','0',0,0,0),(9,1,6,'test3','EAV поле 3','0',0,0,0),(10,1,5,'test4','EAV поле 4','0',0,0,0),(11,1,4,'test5','EAV поле 5','0',0,0,0),(12,2,1,'field1','EAV поле для статьи','0',NULL,0,0),(13,2,2,'2','EAV поле для статьи 1','0',NULL,0,0);
 
 /*Table structure for table `eav_attribute_option` */
 
@@ -68,7 +70,7 @@ CREATE TABLE `eav_attribute_type` (
 
 /*Data for the table `eav_attribute_type` */
 
-insert  into `eav_attribute_type`(`id`,`name`,`handlerClass`,`storeType`) values (1,'raw','\\mirocow\\eav\\widgets\\TextInput',0),(2,'option','\\mirocow\\eav\\widgets\\DropDownList',1),(3,'multiple','\\mirocow\\eav\\widgets\\CheckBoxList',2),(4,'array','\\mirocow\\eav\\widgets\\EncodedTextInput',3),(5,'radio','\\mirocow\\eav\\widgets\\RadioList',1),(6,'area','\\mirocow\\eav\\widgets\\Textarea',2);
+insert  into `eav_attribute_type`(`id`,`name`,`handlerClass`,`storeType`) values (1,'text','\\mirocow\\eav\\widgets\\TextInput',0),(2,'option','\\mirocow\\eav\\widgets\\DropDownList',1),(3,'checkbox','\\mirocow\\eav\\widgets\\CheckBoxList',2),(4,'array','\\mirocow\\eav\\widgets\\EncodedTextInput',3),(5,'radio','\\mirocow\\eav\\widgets\\RadioList',1),(6,'area','\\mirocow\\eav\\widgets\\Textarea',2);
 
 /*Table structure for table `eav_attribute_value` */
 
@@ -86,11 +88,11 @@ CREATE TABLE `eav_attribute_value` (
   KEY `FK_Value_optionId` (`optionId`),
   CONSTRAINT `FK_Value_attributeId` FOREIGN KEY (`attributeId`) REFERENCES `eav_attribute` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_Value_optionId` FOREIGN KEY (`optionId`) REFERENCES `eav_attribute_option` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 /*Data for the table `eav_attribute_value` */
 
-insert  into `eav_attribute_value`(`id`,`entityId`,`attributeId`,`value`,`optionId`) values (28,16,6,NULL,3),(30,16,7,'Текстовое поле Текстовое поле 2',NULL),(31,16,8,NULL,6),(32,16,9,'Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле 2',NULL),(33,16,10,NULL,9),(40,16,6,NULL,4),(41,16,11,'\"{\\r\\n \\\"field1\\\": \\\"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435 1\\\",\\r\\n \\\"field2\\\": \\\"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435 2\\\",\\r\\n}\"',NULL);
+insert  into `eav_attribute_value`(`id`,`entityId`,`attributeId`,`value`,`optionId`) values (28,16,6,NULL,3),(30,16,7,'Текстовое поле Текстовое поле 2',NULL),(31,16,8,NULL,6),(32,16,9,'Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле Текстовое поле 2',NULL),(33,16,10,NULL,9),(41,16,11,'\"{\\r\\n \\\"field1\\\": \\\"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435 1\\\",\\r\\n \\\"field2\\\": \\\"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435 2\\\",\\r\\n}\"',NULL),(42,8,7,'',NULL),(43,8,8,NULL,5),(44,8,9,'',NULL),(45,8,10,NULL,NULL),(46,8,11,'\"\"',NULL),(48,16,6,NULL,4);
 
 /*Table structure for table `eav_entity` */
 
@@ -102,11 +104,11 @@ CREATE TABLE `eav_entity` (
   `entityModel` varchar(100) DEFAULT NULL COMMENT 'ID Модели',
   `categoryId` int(11) DEFAULT NULL COMMENT 'ID Category',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `eav_entity` */
 
-insert  into `eav_entity`(`id`,`entityName`,`entityModel`,`categoryId`) values (1,'Продукт','common\\models\\Product',15);
+insert  into `eav_entity`(`id`,`entityName`,`entityModel`,`categoryId`) values (1,'Продукт','common\\models\\Product',8),(2,'Статья','funson86\\cms\\models\\CmsShow',0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
