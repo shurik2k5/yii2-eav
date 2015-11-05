@@ -12,12 +12,14 @@ use Yii;
  * This is the model class for table "{{%eav_attribute}}".
  *
  * @property integer $id
+ * @property integer $entityId 
  * @property integer $typeId
  * @property string $name
  * @property string $label
  * @property string $defaultValue
  * @property integer $defaultOptionId
  * @property integer $required
+ * @property integer $order 
  *
  * @property EavAttributeOption $defaultOption
  * @property EavAttributeType $type
@@ -41,7 +43,7 @@ class EavAttribute extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'defaultValue', 'entityModel', 'label'], 'string', 'max' => 255],
-            [['order'], 'integer'],
+            [['entityId', 'order'], 'integer'],
             //[['categoryId', 'typeId', 'defaultOptionId'], 'integer'],
             [['required'], 'boolean'],
             //[['defaultOptionId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttributeOption::className(), 'targetAttribute' => ['defaultOptionId' => 'id']],

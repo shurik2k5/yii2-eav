@@ -5,6 +5,7 @@ namespace mirocow\eav\admin\controllers;
 use mirocow\eav\models\EavAttribute;
 use mirocow\eav\models\EavAttributeType;
 use mirocow\eav\models\EavAttributeSearch;
+use mirocow\eav\models\EavAttributeOption;
 
 use Yii;
 use yii\web\Controller;
@@ -44,11 +45,45 @@ class AjaxController extends Controller
   {
      if(Yii::$app->request->isPost){
        
-       if($payload = Yii::$app->request->post('payload')){
+       $post = Yii::$app->request->post();
+       
+       if($post['payload'] && $post['id'] && $post['entityModel']){
          
-         $payload = Json::decode($payload);
+         $payload = Json::decode($post['payload']);
          
-         $i = 1;
+         if(!isset($payload['fields'])) return;
+         
+         foreach($payload['fields'] as $order => $field){
+           
+           list($entityId, $attributeId) = explode('-', $field['cid']);
+           
+           $attribute = EavAttribute::findOne(['id' => $attributeId, 'entityId' => $entityId]);
+           if(!$attribute){
+              $attribute = new EavAttribute;
+              $lastId = (int) EavAttribute::find()->select(['id'])->orderBy(['id' => SORT_DESC])->limit(1)->scalar() + 1;
+              $attribute->name = 'field' . $lastId;
+           }
+           $attribute->entityId = $entityId;
+           $attribute->typeId = EavAttributeType::find()->select(['id'])->where(['name' => $field['field_type']])->scalar();            
+           $attribute->label = $field['label'];
+           //$attribute->defaultValue = '';
+           //$attribute->defaultOptionId = 0;
+           $attribute->required = $field['required'];
+           $attribute->order = $order;
+           $attribute->save(false);
+                      
+           if(!isset($field['field_options']['options'])) continue;
+             
+           EavAttributeOption::deleteAll(['attributeId' => $attributeId]);
+           
+           foreach($field['field_options']['options'] as $o){
+              $option = new EavAttributeOption;
+              $option->attributeId = $attribute->id;
+              $option->value = $o['label'];
+              $option->save();
+           }
+           
+         }
          
        }
        

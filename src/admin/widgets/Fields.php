@@ -30,7 +30,7 @@ class Fields extends Widget
         
         $this->urlSave = Url::to($this->urlSave);
         
-        foreach($this->model->getEavAttributes()->all() as $attr){
+        foreach($this->model->getEavAttributes()->all() as $attr) {
           
             $options = [];
             
@@ -46,7 +46,7 @@ class Fields extends Widget
               'field_type' => $attr->eavType->name,
               'required' => $attr->required,
               'field_options' => $options,
-              'cid' => 'c'.$attr->id,
+              'cid' => $attr->entityId . '-' . $attr->id,
             ];
            
         }
