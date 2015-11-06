@@ -16,7 +16,11 @@ class Fields extends Widget
     
     public $model;
     
+    public $categoryId;
+    
     public $entityModel;
+    
+    public $entityName = 'Untitled';
     
     public $options = [];
     
@@ -29,6 +33,8 @@ class Fields extends Widget
         $this->url = Url::to($this->url);
         
         $this->urlSave = Url::to($this->urlSave);
+        
+        $this->entityModel = str_replace('\\', '\\\\', $this->entityModel);
         
         foreach($this->model->getEavAttributes()->all() as $attr) {
           
@@ -46,7 +52,7 @@ class Fields extends Widget
               'field_type' => $attr->eavType->name,
               'required' => $attr->required,
               'field_options' => $options,
-              'cid' => $attr->entityId . '-' . $attr->id,
+              'cid' => $attr->name,
             ];
            
         }
@@ -61,7 +67,9 @@ class Fields extends Widget
           'urlSave' => $this->urlSave,
           'options' => $this->options,
           'id' => $this->model->id,
-          'entityModel' => $this->entityModel? $this->entityModel: $this->model->className(),
+          'categoryId' => $this->categoryId,
+          'entityModel' => $this->entityModel,
+          'entityName' => $this->entityName,
           'bootstrapData' => $this->bootstrapData,
         ]);
     }

@@ -6,6 +6,7 @@ use mirocow\eav\models\EavAttribute;
 use mirocow\eav\models\EavAttributeType;
 use mirocow\eav\models\EavAttributeSearch;
 use mirocow\eav\models\EavAttributeOption;
+use mirocow\eav\models\EavEntity;
 
 use Yii;
 use yii\web\Controller;
@@ -47,22 +48,39 @@ class AjaxController extends Controller
        
        $post = Yii::$app->request->post();
        
-       if($post['payload'] && $post['id'] && $post['entityModel']){
+       if($post['payload'] && $post['entityModel']){
          
          $payload = Json::decode($post['payload']);
          
          if(!isset($payload['fields'])) return;
          
+         $categoryId = isset($post['categoryId'])? $post['categoryId']: 0;
+         $entityId = EavEntity::find()
+          ->select(['id'])
+          ->where([
+            'entityModel' => $post['entityModel'],
+            'categoryId' => $categoryId,
+          ])->scalar();          
+         if(!$entityId){
+           $entity = new EavEntity;
+           $entity->entityName = isset($post['entityName'])? $post['entityName']: 'Untitled';
+           $entity->entityModel = $post['entityModel'];
+           $entity->categoryId = $categoryId;
+           $entity->save(false);
+           
+           $categoryId = $entity->id;
+         }
+         
          foreach($payload['fields'] as $order => $field){
            
-           list($entityId, $attributeId) = explode('-', $field['cid']);
-           
-           $attribute = EavAttribute::findOne(['id' => $attributeId, 'entityId' => $entityId]);
+           $attribute = EavAttribute::findOne(['name' => $field['cid'], 'entityId' => $entityId]);
            if(!$attribute){
               $attribute = new EavAttribute;
-              $lastId = (int) EavAttribute::find()->select(['id'])->orderBy(['id' => SORT_DESC])->limit(1)->scalar() + 1;
-              $attribute->name = 'field' . $lastId;
+              $lastId = EavAttribute::find()->select(['id'])->orderBy(['id' => SORT_DESC])->limit(1)->scalar() + 1;
+              $attribute->name = 'c'.$lastId;              
            }
+           
+           //$attribute->name = $field['cid'];
            $attribute->entityId = $entityId;
            $attribute->typeId = EavAttributeType::find()->select(['id'])->where(['name' => $field['field_type']])->scalar();            
            $attribute->label = $field['label'];
@@ -74,7 +92,7 @@ class AjaxController extends Controller
                       
            if(!isset($field['field_options']['options'])) continue;
              
-           EavAttributeOption::deleteAll(['attributeId' => $attributeId]);
+           EavAttributeOption::deleteAll(['attributeId' => $attribute->id]);
            
            foreach($field['field_options']['options'] as $o){
               $option = new EavAttributeOption;

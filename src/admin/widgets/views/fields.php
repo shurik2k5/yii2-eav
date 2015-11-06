@@ -26,7 +26,7 @@ $js_form_builder =<<<JS
       $.ajax({
         url: '$urlSave',
         type: 'post',
-        data: {id: $id, entityModel: '$entityModel', payload: payload, _csrf: yii.getCsrfToken()},        
+        data: {categoryId: $categoryId, entityModel: '$entityModel', entityName: '$entityName', payload: payload, _csrf: yii.getCsrfToken()},        
         dataType: 'json',
       }).success(function(response) {
       });

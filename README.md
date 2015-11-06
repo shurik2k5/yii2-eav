@@ -138,4 +138,18 @@ Administrate GUI
 ========
 
 ![](https://leto11e.storage.yandex.net/rdisk/ea7a2991d3fe6c8bbcd3e0dcad7465a0e27c6873d849018c4a97045c106af450/inf/I2_HSvy0rl4zZnRWw23cDzVCCdCGCscflHsesyE_019vyeFyKxP5r-9ZqUgmd7CxPrZeKYt1aF9KOBNwHDqKLw==?uid=0&filename=2015-10-23%2017-21-51%20admin.jiajiayoupin.loc%20eav%20-%20Google%20Chrome.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&rtoken=c8232271c6f3b63bd82fe2d7bfd172c5&force_default=no&ycrid=na-d57c811c7608fb4f1b727503f1204614-downloader9g)
+                  
+Form
+======
 
+Add / Edit attribute
+=====
+
+``` html
+<?= mirocow\eav\admin\widgets\Fields::widget([
+                      'model' => $model,
+                      'categoryId' => $model->id,
+                      'entityName' => 'Продукт',
+                      'entityModel' => 'common\models\Product',
+                  ])?>
+```
