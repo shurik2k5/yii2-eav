@@ -148,7 +148,7 @@ Add / Edit attribute
 =====
 
 ``` html
-<?= mirocow\eav\admin\widgets\Fields::widget([
+<?= \mirocow\eav\admin\widgets\Fields::widget([
                       'model' => $model,
                       'categoryId' => $model->id,
                       'entityName' => 'Продукт',
