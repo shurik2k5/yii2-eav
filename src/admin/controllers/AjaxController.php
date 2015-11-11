@@ -69,7 +69,7 @@ class AjaxController extends Controller
            $entity->categoryId = $categoryId;
            $entity->save(false);
            
-           $categoryId = $entity->id;
+           $entityId = $entity->id;
          }
          
          foreach($payload['fields'] as $order => $field){

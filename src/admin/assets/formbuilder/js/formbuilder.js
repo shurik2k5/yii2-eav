@@ -814,7 +814,7 @@
       }
 
       with (obj) {
-          __p += '<div class=\'fb-tab-pane\' id=\'addField\'>\n <div class=\'fb-add-field-types\'>\n<div class=\'section\'>\n';
+          __p += '<div class=\'fb-tab-pane active\' id=\'addField\'>\n <div class=\'fb-add-field-types\'>\n<div class=\'section\'>\n';
           _.each(_.sortBy(Formbuilder.inputFields, 'order'), function (f) {
 
               __p += '\n<a data-field-type="' +
