@@ -60,7 +60,8 @@ class AjaxController extends Controller
           ->where([
             'entityModel' => $post['entityModel'],
             'categoryId' => $categoryId,
-          ])->scalar();          
+          ])->scalar();
+                    
          if(!$entityId){
            $entity = new EavEntity;
            $entity->entityName = isset($post['entityName'])? $post['entityName']: 'Untitled';
@@ -81,6 +82,7 @@ class AjaxController extends Controller
            }
            
            //$attribute->name = $field['cid'];
+           $attribute->type = $field['type'];
            $attribute->entityId = $entityId;
            $attribute->typeId = EavAttributeType::find()->select(['id'])->where(['name' => $field['field_type']])->scalar();            
            $attribute->label = $field['label'];

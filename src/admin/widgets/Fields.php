@@ -48,6 +48,7 @@ class Fields extends Widget
             }
           
             $this->bootstrapData[] = [
+              'type' => $attr->type,
               'label' => $attr->label,
               'field_type' => $attr->eavType->name,
               'required' => $attr->required,
