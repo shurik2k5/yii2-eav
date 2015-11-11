@@ -21,6 +21,7 @@ use Yii;
  * @property integer $defaultOptionId
  * @property integer $required
  * @property integer $order 
+ * @property string $description 
  *
  * @property EavAttributeOption $defaultOption
  * @property EavAttributeType $type
@@ -43,7 +44,7 @@ class EavAttribute extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'defaultValue', 'entityModel', 'label'], 'string', 'max' => 255],
+            [['name', 'defaultValue', 'entityModel', 'label', 'description'], 'string', 'max' => 255],
             [['type'], 'string', 'max' => 50],
             [['entityId', 'order'], 'integer'],
             //[['categoryId', 'typeId', 'defaultOptionId'], 'integer'],
@@ -68,6 +69,7 @@ class EavAttribute extends \yii\db\ActiveRecord
             'defaultOptionId' => 'Default Option ID',
             'required' => 'Required',
             'order' => 'Order',
+            'description' => 'Description',
         ];
     }
 

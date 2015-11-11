@@ -611,8 +611,10 @@
                 attrs = {};
                 
                 attrs[Formbuilder.options.mappings.LABEL] = 'Untitled';
+                attrs[Formbuilder.options.mappings.TYPE] = 'default';
                 attrs[Formbuilder.options.mappings.FIELD_TYPE] = field_type;
                 attrs[Formbuilder.options.mappings.REQUIRED] = true;
+                
                 attrs['field_options'] = {};
                                 
                 return (typeof (_base = Formbuilder.fields[field_type])
@@ -1048,7 +1050,7 @@
           __p += 
               '<input type=\'text\' data-rv-input=\'model.' + 
               ((__t = ( Formbuilder.options.mappings.TYPE )) == null ? '' : __t) +
-              '\' placeholder=\'Add type to this field\'/ value=\'default\' >' +
+              '\' placeholder=\'Add type to this field\' />' +
               '<input type=\'text\' data-rv-input=\'model.' +
               ((__t = ( Formbuilder.options.mappings.LABEL )) == null ? '' : __t) +
               '\' />\n<textarea data-rv-input=\'model.' +

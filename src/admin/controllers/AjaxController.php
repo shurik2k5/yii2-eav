@@ -90,6 +90,7 @@ class AjaxController extends Controller
            //$attribute->defaultOptionId = 0;
            $attribute->required = $field['required'];
            $attribute->order = $order;
+           $attribute->description = isset($field['field_options']['description'])? $field['field_options']['description']: '';
            $attribute->save(false);
                       
            if(!isset($field['field_options']['options'])) continue;
@@ -100,6 +101,7 @@ class AjaxController extends Controller
               $option = new EavAttributeOption;
               $option->attributeId = $attribute->id;
               $option->value = $o['label'];
+              $option->defaultOptionId = (int) $o['checked'];
               $option->save();
            }
            

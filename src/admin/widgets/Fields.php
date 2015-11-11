@@ -38,12 +38,14 @@ class Fields extends Widget
         
         foreach($this->model->getEavAttributes()->all() as $attr) {
           
-            $options = [];
+            $options = [
+              'description' => $attr->description,
+            ];
             
             foreach($attr->eavOptions as $option){
               $options['options'][] = [
                 'label' => $option->value,
-                'checked' => false,
+                'checked' => (bool) $option->defaultOptionId,
               ];
             }
           
