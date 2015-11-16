@@ -70,13 +70,13 @@ class Product extends \yii\db\ActiveRecord
 
 Then use the following in a view to load model field:
 
-``` html
+``` php
 <?=$form->field($model,'test5', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
 ```
 
 To load all fields use the following:
 
-``` html
+``` php
 <?php
 foreach($model->getEavAttributes()->all() as $attr){
     echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
@@ -109,7 +109,7 @@ String:
 
 In order to add or edit attribute:
 
-``` html
+``` php
 <?= mirocow\eav\admin\widgets\Fields::widget([
     'model' => $model,
     'categoryId' => $model->id,
