@@ -19,6 +19,16 @@ composer require --prefer-dist "mirocow/yii2-eav"
 
 ## Configuration
 
+You need add module into config file
+
+``` php
+     'modules' => [
+          'eav' => [
+               'class' => 'mirocow\eav\Module',
+          ]
+     ]
+```
+
 You need to apply migrations before using an extension:
 
 ``` sh
