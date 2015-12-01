@@ -124,7 +124,7 @@ In order to add or edit attribute:
 #### Add / Edit attribute
 
 ``` php
-<?= mirocow\eav\admin\widgets\Fields::widget([
+<?= \mirocow\eav\admin\widgets\Fields::widget([
                       'model' => $model,
                       'categoryId' => $model->id,
                       'entityName' => 'Продукт',
