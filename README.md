@@ -33,7 +33,7 @@ First of all you need to modify your model:
 class Product extends \yii\db\ActiveRecord
 {
 
-    use EavTrait;
+     use \mirocow\eav\EavTrait;
     
     /**
      * create_time, update_time to now()
