@@ -90,12 +90,12 @@ Form
 
 fo load selected field 
 
-``` html
+``` php
     <?=$form->field($model,'test5', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
 ```
 or for load all fields
 
-``` html
+``` php
     <?php
     foreach($model->getEavAttributes()->all() as $attr){
         echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
@@ -106,7 +106,7 @@ or for load all fields
 Partial template
 =====
 
-``` html
+``` php
 <p>
 Encode
 
@@ -138,7 +138,7 @@ Form
 Add / Edit attribute
 ====
 
-``` html
+``` php
 <?= \mirocow\eav\admin\widgets\Fields::widget([
                       'model' => $model,
                       'categoryId' => $model->id,
