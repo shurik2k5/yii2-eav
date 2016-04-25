@@ -127,6 +127,21 @@ String
 ?> 
 ```
 
+Add attribute
+
+```php
+$attr = new mirocow\eav\models\EavAttribute();
+$attr->attributes = [
+        'categoryId' => 1, // Category ID
+        'name' => 'AttrCategory1',  // service name field
+        'label' => 'Attr1',         // label text for form
+        'defaultValue' => 'attr1',  // default value
+        'entityModel' => SampleModel::className(), // work model
+        'required'=>false           // add rule "required field"
+    ];
+$attr->save();
+```
+
 Administrate GUI
 =======
 
