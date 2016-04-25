@@ -132,7 +132,7 @@ Add attribute
 ```php
 $attr = new mirocow\eav\models\EavAttribute();
 $attr->attributes = [
-        'categoryId' => 1, // Category ID
+        'entityId' => 1, // Category ID
         'name' => 'AttrCategory1',  // service name field
         'label' => 'Attr1',         // label text for form
         'defaultValue' => 'attr1',  // default value
