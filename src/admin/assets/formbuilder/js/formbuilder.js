@@ -363,6 +363,7 @@
             
             this.$el.html(Formbuilder.templates['page']());
             this.$fbLeft = this.$el.find('.fb-left');
+            this.$fbTabParent = this.$fbLeft.parents('.tab-pane:first');
             this.$responseFields = this.$el.find('.fb-response-fields');
             this.bindWindowScrollEvent();
             this.hideShowNoResponseFields();
@@ -385,11 +386,11 @@
                 }
                 newMargin = Math.max(0, $(window).scrollTop() - _this.$el.offset().top);
                 maxMargin = _this.$responseFields.height();
-
-                return _this.$fbLeft.css({
-                    'margin-top': Math.min(maxMargin, newMargin)
-                });
-
+                if ( _this.$fbTabParent.hasClass('active') ) {
+                    return _this.$fbLeft.css({
+                        'margin-top': Math.min(maxMargin, newMargin)
+                    });
+                }
             });
         };
 
@@ -1053,7 +1054,7 @@
               '\' placeholder=\'Add type to this field\' />' +
               '<input type=\'text\' data-rv-input=\'model.' +
               ((__t = ( Formbuilder.options.mappings.LABEL )) == null ? '' : __t) +
-              '\' />\n<textarea data-rv-input=\'model.' +
+              '\' />\n<textarea class="form-control" data-rv-input=\'model.' +
               ((__t = ( Formbuilder.options.mappings.DESCRIPTION )) == null ? '' : __t) +
               '\'\n  placeholder=\'Add a longer description to this field\'></textarea>';
       }
