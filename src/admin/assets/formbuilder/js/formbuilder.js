@@ -214,6 +214,8 @@
         EditFieldView.prototype.events = {
             'click .js-add-option': 'addOption',
             'click .js-remove-option': 'removeOption',
+            'click .js-sort-up-option': 'sortOptionUp',
+            'click .js-sort-down-option': 'sortOptionDown',
             'click .js-default-updated': 'defaultUpdated',
             'input .option-label-input': 'forceRender'
         };
@@ -256,6 +258,37 @@
             this.model.set(Formbuilder.options.mappings.OPTIONS, options);
             this.model.trigger("change:" + Formbuilder.options.mappings.OPTIONS);
             return this.forceRender();
+        };
+
+        EditFieldView.prototype.sortOptionUp = function (e) {
+            var $el, index, options;
+            $el = $(e.currentTarget);
+            index = this.$el.find(".js-sort-up-option").index($el);
+            options = this.model.get(Formbuilder.options.mappings.OPTIONS);
+            tmp = options[index];
+            tmp2 = options[index - 1];
+            options[index] = tmp2;
+            options[index-1] = tmp;
+            this.model.set(Formbuilder.options.mappings.OPTIONS, options);
+            this.model.trigger("change:" + Formbuilder.options.mappings.OPTIONS);
+            this.forceRender();
+        };
+
+        EditFieldView.prototype.sortOptionDown = function (e) {
+            var $el, index, options;
+            $el = $(e.currentTarget);
+            index = this.$el.find(".js-sort-down-option").index($el);
+            options = this.model.get(Formbuilder.options.mappings.OPTIONS);
+            if ( index < options.length-1) {
+                // console.log($el);
+                tmp = options[index];
+                tmp2 = options[index + 1];
+                options[index] = tmp2;
+                options[index+1] = tmp;
+                this.model.set(Formbuilder.options.mappings.OPTIONS, options);
+                this.model.trigger("change:" + Formbuilder.options.mappings.OPTIONS);
+                this.forceRender();
+            }
         };
 
         EditFieldView.prototype.removeOption = function (e) {
@@ -1120,7 +1153,11 @@
                 ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) +
                 '\'>\n  <input type="checkbox" class=\'js-default-updated\' data-rv-checked="option:checked" />\n  <input type="text" data-rv-input="option:label" class=\'option-label-input\' />\n  <a class="js-add-option ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-                '" title="Add Option"><i class=\'fa fa-plus-circle\'></i></a>\n  <a class="js-remove-option ' +
+                '" title="Add Option"><i class=\'fa fa-plus-circle\'></i></a>\n '
+                + '<a class="js-sort-up-option ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+                '" title="Sort up"><i class=\'fa fa-arrow-up\'></i></a>\n<a class="js-sort-down-option ' + Formbuilder.options.BUTTON_CLASS +
+                '" title="Sort down"><i class=\'fa fa-arrow-down\'></i></a>\n ' +
+                '<a class="js-remove-option ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                 '" title="Remove Option"><i class=\'fa fa-minus-circle\'></i></a>\n</div>\n\n';
             if (typeof includeOther !== 'undefined') {
