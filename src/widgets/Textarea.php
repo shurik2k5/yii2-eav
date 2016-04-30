@@ -9,23 +9,23 @@ use mirocow\eav\handlers\AttributeHandler;
 
 class Textarea extends AttributeHandler
 {
-    static $order = 1;  
-  
+    static $order = 1;
+
     static $view = <<<TEMPLATE
-    <textarea type='text'
+    <textarea class='form-control input-sm' type='text'
     rows=<%= rf.get(Formbuilder.options.mappings.AREA_ROWS) %>
     cols=<%= rf.get(Formbuilder.options.mappings.AREA_COLS) %> />
     </textarea>    
 TEMPLATE;
-    
+
     static $edit = <<<TEMPLATE
     <%= Formbuilder.templates['edit/text_area']() %>    
 TEMPLATE;
-    
+
     static $addButton = <<<TEMPLATE
     <span class='symbol'><span class='fa fa-paragraph'></span></span> Input textarea    
 TEMPLATE;
-    
+
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
                 debugger;
@@ -33,19 +33,19 @@ TEMPLATE;
                 return attrs;
             }   
 TEMPLATE;
-    
-      
+
+
     public function init()
     {
         parent::init();
-        
+
         $this->owner->addRule($this->getAttributeName(), 'string', ['max' => 255]);
     }
 
     public function run()
     {
         return $this->owner->activeForm
-          ->field($this->owner, $this->getAttributeName(), ['template' => "{input}\n{hint}\n{error}"])
-          ->textArea();
+            ->field($this->owner, $this->getAttributeName(), ['template' => "{input}\n{hint}\n{error}"])
+            ->textArea();
     }
 }

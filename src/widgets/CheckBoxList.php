@@ -30,15 +30,15 @@ class CheckBoxList extends AttributeHandler
     </div>
     <% } %>    
 TEMPLATE;
-    
+
     static $edit = <<<TEMPLATE
     <%= Formbuilder.templates['edit/options']({ includeOther: true }) %>   
 TEMPLATE;
-    
+
     static $addButton = <<<TEMPLATE
     <span class="symbol"><span class="fa fa-square-o"></span></span> Checkboxes    
 TEMPLATE;
-    
+
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
             attrs.field_options.options = [
@@ -53,7 +53,7 @@ TEMPLATE;
             return attrs;
         }    
 TEMPLATE;
-    
+
 
     public function init()
     {
@@ -67,7 +67,7 @@ TEMPLATE;
 
     public function run()
     {
-        return $this->owner->activeForm->field($this->owner, $this->getAttributeName(), 
+        return $this->owner->activeForm->field($this->owner, $this->getAttributeName(),
             ['template' => "{input}\n{hint}\n{error}"])
             ->checkboxList(
                 ArrayHelper::map($this->attributeModel->getEavOptions()->asArray()->all(), 'id', 'value')

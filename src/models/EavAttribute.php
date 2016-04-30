@@ -102,7 +102,8 @@ class EavAttribute extends \yii\db\ActiveRecord
      */
     public function getEavOptions()
     {
-        return $this->hasMany(EavAttributeOption::className(), ['attributeId' => 'id']);
+        return $this->hasMany(EavAttributeOption::className(), ['attributeId' => 'id'])
+            ->orderBy(['order' => SORT_ASC]);
     }
 
     /**
@@ -112,16 +113,16 @@ class EavAttribute extends \yii\db\ActiveRecord
     {
         return $this->hasMany(EavAttributeValue::className(), ['attributeId' => 'id']);
     }
-    
+
     public function getbootstrapData()
     {
-      return [
-        'cid' => '',
-        'label' => '',
-        'field_type' => '',
-        'required' => '',
-        'field_options' => [],      
-      ];
+        return [
+            'cid' => '',
+            'label' => '',
+            'field_type' => '',
+            'required' => '',
+            'field_options' => [],
+        ];
     }
-        
+
 }

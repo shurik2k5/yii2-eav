@@ -12,7 +12,7 @@ class TextInput extends AttributeHandler
     static $order = 0;
   
     static $view = <<<TEMPLATE
-    <input type='text' class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />    
+    <input type='text' class='form-control input-sm rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />    
 TEMPLATE;
     
     static $edit = <<<TEMPLATE
