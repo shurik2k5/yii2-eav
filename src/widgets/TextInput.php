@@ -21,7 +21,7 @@ TEMPLATE;
 TEMPLATE;
 
     static $addButton = <<<TEMPLATE
-    <span class='symbol'><span class='fa fa-font'></span></span> Input field    
+    <span class='symbol'><span class='fa fa-font'></span></span> Input textfield    
 TEMPLATE;
 
     static $defaultAttributes = <<<TEMPLATE

@@ -696,13 +696,12 @@
             AUTOSAVE: false,
             CLEAR_FIELD_CONFIRM: false,
             mappings: {
-                SIZE: 'field_options.size',
-                UNITS: 'field_options.units',
                 TYPE: 'type',
                 LABEL: 'label',
                 FIELD_TYPE: 'field_type',
-                REQUIRED: 'required',
-                ADMIN_ONLY: 'admin_only',
+                SIZE: 'field_options.size',
+                UNITS: 'field_options.units',
+                REQUIRED: 'field_options.required',
                 OPTIONS: 'field_options.options',
                 DESCRIPTION: 'field_options.description',
                 INCLUDE_OTHER: 'field_options.include_other_option',
@@ -1172,9 +1171,10 @@
 
             __p += '<div class="fb-edit-section-header">Size</div><select data-rv-value="model.' +
                 ((__t = ( Formbuilder.options.mappings.SIZE )) == null ? '' : __t) +
-                '"><option value="small">Small</option>' +
-                '<option value="medium">Medium</option>' +
-                '<option value="large">Large</option>' +
+                '"><option value="50">Small</option>' +
+                '<option value="150">Medium</option>' +
+                '<option value="255">Large</option>' +
+                '<option value="">Unlimited</option>' +
                 '</select>';
         }
         return __p

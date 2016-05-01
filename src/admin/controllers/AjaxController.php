@@ -90,16 +90,17 @@ class AjaxController extends Controller
                     $attribute->save(false);
 
                     // Rule
-                    $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
-                    if(!$rule){
-                        $rule = new EavAttributeRule();
+                    if (isset($field['field_options'])) {
+                        $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
+                        if (!$rule) {
+                            $rule = new EavAttributeRule();
+                        }
+                        $rule->attributeId = $attribute->id;
+                        foreach ($field['field_options'] as $key => $param) {
+                            $rule->{$key} = $param;
+                        }
+                        $rule->save();
                     }
-                    $rule->attributeId = $attribute->id;
-                    foreach ($field as $key => $param){
-                        if($key == 'field_options') continue;
-                        $rule->{$key} = $param;
-                    }
-                    $rule->save();
 
                     if (isset($field['field_options']['options'])) {
 

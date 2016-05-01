@@ -28,7 +28,6 @@ TEMPLATE;
 
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
-                debugger;
                 attrs.field_options.size = 'small';
                 return attrs;
             }   

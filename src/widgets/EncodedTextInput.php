@@ -14,7 +14,7 @@ class EncodedTextInput extends TextInput
     static $order = 3;
 
     static $view = <<<TEMPLATE
-    <textarea class='form-control input-sm' type='text'
+    <textarea class='form-control input-sm' type='text' 
     rows=<%= rf.get(Formbuilder.options.mappings.AREA_ROWS) %>
     cols=<%= rf.get(Formbuilder.options.mappings.AREA_COLS) %> />
     </textarea>    
@@ -25,12 +25,11 @@ TEMPLATE;
 TEMPLATE;
 
     static $addButton = <<<TEMPLATE
-    <span class='symbol'><span class='fa fa-paragraph'></span></span> Input textarea    
+    <span class='symbol'><span class='fa fa-paragraph'></span></span> Json textarea    
 TEMPLATE;
 
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
-                debugger;
                 attrs.field_options.size = 'small';
                 return attrs;
             }   
