@@ -28,25 +28,26 @@ class ArrayValueHandler extends RawValueHandler
         $EavModel = $this->attributeHandler->owner;
         $valueModel = $this->getValueModel();
         $attribute = $this->attributeHandler->getAttributeName();
-            
-        if(isset($EavModel->attributes[$attribute])){
-          
-          $value = $EavModel->attributes[$attribute];         
-          $valueModel->value = json_encode($value);          
-          
-          if (!$valueModel->save())
-              throw new \Exception("Can't save value model");
-            
-        }            
+
+        if (isset($EavModel->attributes[$attribute])) {
+
+            $value = $EavModel->attributes[$attribute];
+            $valueModel->value = json_encode($value);
+
+            if (!$valueModel->save()) {
+                throw new \Exception("Can't save value model");
+            }
+
+        }
     }
 
     public function getTextValue()
     {
         return json_encode(parent::getTextValue());
     }
-    
+
     public function getArrayValue()
     {
         return json_decode(parent::getTextValue());
-    }    
+    }
 }

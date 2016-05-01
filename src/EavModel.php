@@ -6,9 +6,7 @@
 namespace mirocow\eav;
 
 use mirocow\eav\handlers\AttributeHandler;
-use mirocow\eav\handlers\ArrayValueHandler;
 use mirocow\eav\handlers\ValueHandler;
-
 use Yii;
 use yii\base\DynamicModel as BaseEavModel;
 use yii\db\ActiveRecord;
@@ -27,7 +25,7 @@ class EavModel extends BaseEavModel
     /** @var AttributeHandler[] */
     public $handlers;
     /** @var string */
-    public $attribute = '';    
+    public $attribute = '';
     /** @var ActiveForm */
     public $activeForm;
     /** @var string[] */
@@ -42,70 +40,69 @@ class EavModel extends BaseEavModel
     public static function create($params)
     {
         $params['class'] = static::className();
-        
+
         /** @var static $model */
         $model = Yii::createObject($params);
-        
+
         $params = [];
-        
-        if(!empty($params['attribute'])){
-          $params = ['name' => $params['attribute']];
+
+        if (!empty($params['attribute'])) {
+            $params = ['name' => $params['attribute']];
         }
-        
+
         $attributes = $model
-          ->entityModel
-          ->getRelation('eavAttributes')
-          ->where($params)
-          ->all();                             
-          
-        foreach ($attributes as $attribute) {          
-        
+            ->entityModel
+            ->getRelation('eavAttributes')
+            ->where($params)
+            ->all();
+
+        foreach ($attributes as $attribute) {
+
             $handler = AttributeHandler::load($model, $attribute);
             $key = $handler->getAttributeName();
             $value = $handler->valueHandler->load();
             $model->setLabel($key, $handler->getAttributeLabel());
-            
+
             //
             // Add rules
             //
-            
-            if ($attribute->required){
+
+            if ($attribute->required) {
                 $model->addRule($key, 'required');
             } else {
                 $model->addRule($key, 'safe');
             }
 
-            if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_RAW){
+            if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_RAW) {
                 $model->addRule($key, 'default', ['value' => $attribute->defaultValue]);
             }
 
-            if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_OPTION){
+            if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_OPTION) {
                 $model->addRule($key, 'default', ['value' => $attribute->defaultOptionId]);
             }
-            
-            if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_ARRAY){
+
+            if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_ARRAY) {
                 $model->addRule($key, 'string');
             }
 
             //
             // Add define attribute
             //
-            
+
             $model->defineAttribute($key, $value);
 
             //
             // Add hanler
             //
-            
+
             $model->handlers[$key] = $handler;
-        
+
         }
-        
-        if(Yii::$app->request->isPost && Yii::$app->request->getIsConsoleRequest() == false)
-        {
-          $modelName = substr(strrchr(self::className(), "\\"), 1);
-          $model->load(Yii::$app->request->post(), $modelName);         
-        }                
+
+        if (Yii::$app->request->isPost && Yii::$app->request->getIsConsoleRequest() == false) {
+            $modelName = substr(strrchr(self::className(), "\\"), 1);
+            $model->load(Yii::$app->request->post(), $modelName);
+        }
 
         return $model;
     }
@@ -125,11 +122,11 @@ class EavModel extends BaseEavModel
 
     public function save($runValidation = true, $attributes = null)
     {
-        if(!$this->handlers){
-          Yii::info('Dynamic model data were no attributes.', __METHOD__);
-          return false;
+        if (!$this->handlers) {
+            Yii::info('Dynamic model data were no attributes.', __METHOD__);
+            return false;
         }
-        
+
         if ($runValidation && !$this->validate($attributes)) {
             Yii::info('Dynamic model data were not save due to validation error.', __METHOD__);
             return false;
@@ -148,33 +145,34 @@ class EavModel extends BaseEavModel
             throw $e;
         }
     }
-    
+
     public function __set($name, $value)
     {
-      $this->defineAttribute($name, $value);      
+        $this->defineAttribute($name, $value);
     }
-    
-    public function getValue(){
-      
-      if(isset($this->attributes[ $this->attribute ])){
-        return $this->attributes[ $this->attribute ];
-      } else {
-        return '';
-      }
-      
+
+    public function getValue()
+    {
+
+        if (isset($this->attributes[$this->attribute])) {
+            return $this->attributes[$this->attribute];
+        } else {
+            return '';
+        }
+
     }
-    
+
     public function __toString()
     {
-      if(isset($this->attributes[ $this->attribute ])){
-        if(is_string($this->attributes[ $this->attribute ])){
-          return (string) $this->attributes[ $this->attribute ];
+        if (isset($this->attributes[$this->attribute])) {
+            if (is_string($this->attributes[$this->attribute])) {
+                return (string)$this->attributes[$this->attribute];
+            } else {
+                return (string)json_encode($this->attributes[$this->attribute]);
+            }
         } else {
-          return (string) json_encode($this->attributes[ $this->attribute ]);
+            return '';
         }
-      } else {
-        return '';
-      }
     }
-        
+
 }

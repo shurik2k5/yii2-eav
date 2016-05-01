@@ -2,29 +2,26 @@
 
 namespace mirocow\eav\models;
 
-use mirocow\eav\models\EavEntity;
-use mirocow\eav\models\EavAttributeValue;
-use mirocow\eav\models\EavAttributeOption;
-use mirocow\eav\models\EavAttributeType;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%eav_attribute}}".
  *
  * @property integer $id
- * @property integer $entityId 
+ * @property integer $entityId
  * @property integer $typeId
- * @property string $type 
+ * @property string $type
  * @property string $name
  * @property string $label
  * @property string $defaultValue
  * @property integer $defaultOptionId
  * @property integer $required
- * @property integer $order 
- * @property string $description 
+ * @property integer $order
+ * @property string $description
  *
  * @property EavAttributeOption $defaultOption
- * @property EavAttributeType $type
+ * @property EavAttributeType $eavType
  * @property EavAttributeOption[] $eavAttributeOptions
  * @property EavAttributeValue[] $eavAttributeValues
  */
@@ -44,13 +41,10 @@ class EavAttribute extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'defaultValue', 'entityModel', 'label', 'description'], 'string', 'max' => 255],
+            [['name', 'defaultValue', 'label', 'description'], 'string', 'max' => 255],
             [['type'], 'string', 'max' => 50],
-            [['entityId', 'order'], 'integer'],
-            //[['categoryId', 'typeId', 'defaultOptionId'], 'integer'],
+            [['entityId', 'typeId', 'order'], 'integer'],
             [['required'], 'boolean'],
-            //[['defaultOptionId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttributeOption::className(), 'targetAttribute' => ['defaultOptionId' => 'id']],
-            //[['typeId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttributeType::className(), 'targetAttribute' => ['typeId' => 'id']],
         ];
     }
 
@@ -65,8 +59,7 @@ class EavAttribute extends \yii\db\ActiveRecord
             'type' => 'Type',
             'name' => 'Name',
             'label' => 'Label',
-            'defaultValue' => 'Default Value',
-            'defaultOptionId' => 'Default Option ID',
+            'defaultValue' => 'Default Value', 'defaultOptionId' => 'Default Option ID',
             'required' => 'Required',
             'order' => 'Order',
             'description' => 'Description',
@@ -123,6 +116,24 @@ class EavAttribute extends \yii\db\ActiveRecord
             'required' => '',
             'field_options' => [],
         ];
+    }
+
+    public function getListTypes()
+    {
+
+        $models = EavAttributeType::find()->select(['id', 'name'])->asArray()->all();
+
+        return ArrayHelper::map($models, 'id', 'name');
+
+    }
+
+    public function getListEntities()
+    {
+
+        $models = EavEntity::find()->select(['id', 'entityName'])->asArray()->all();
+
+        return ArrayHelper::map($models, 'id', 'entityName');
+
     }
 
 }

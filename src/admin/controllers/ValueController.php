@@ -2,12 +2,12 @@
 
 namespace mirocow\eav\admin\controllers;
 
-use Yii;
 use mirocow\eav\models\EavAttributeValue;
 use mirocow\eav\models\EavAttributeValueSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ValueController implements the CRUD actions for EavAttributeValue model.

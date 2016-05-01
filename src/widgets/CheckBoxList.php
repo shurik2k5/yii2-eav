@@ -13,7 +13,7 @@ class CheckBoxList extends AttributeHandler
     const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\MultipleOptionsValueHandler';
 
     static $order = 10;
-    
+
     static $view = <<<TEMPLATE
     <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %> 
     <div>

@@ -2,10 +2,8 @@
 
 namespace mirocow\eav\models;
 
-use mirocow\eav\models\EavAttributeOption;
-use mirocow\eav\models\EavAttribute;
-use mirocow\eav\models\EavAttributeValue;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%eav_attribute_option}}".
@@ -36,7 +34,7 @@ class EavAttributeOption extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['attributeId', 'order'/*, 'defaultOptionId'*/], 'integer'],
+            [['attributeId', 'order', 'defaultOptionId'], 'integer'],
             [['value'], 'string', 'max' => 255],
             [['attributeId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttribute::className(), 'targetAttribute' => ['attributeId' => 'id']],
         ];
@@ -62,7 +60,7 @@ class EavAttributeOption extends \yii\db\ActiveRecord
     public function getEavAttributes()
     {
         return $this->hasMany(EavAttribute::className(), ['defaultOptionId' => 'id'])
-          ->orderBy(['order' => SORT_DESC]);
+            ->orderBy(['order' => SORT_DESC]);
     }
 
     /**
@@ -79,5 +77,13 @@ class EavAttributeOption extends \yii\db\ActiveRecord
     public function getValues()
     {
         return $this->hasMany(EavAttributeValue::className(), ['optionId' => 'id']);
+    }
+
+    public function getListAttributes()
+    {
+
+        $models = EavAttribute::find()->select(['id', 'label'])->asArray()->all();
+
+        return ArrayHelper::map($models, 'id', 'label');
     }
 }

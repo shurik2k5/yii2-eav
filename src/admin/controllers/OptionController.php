@@ -2,12 +2,12 @@
 
 namespace mirocow\eav\admin\controllers;
 
-use Yii;
 use mirocow\eav\models\EavAttributeOption;
 use mirocow\eav\models\EavAttributeOptionSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * OptionController implements the CRUD actions for EavAttributeOption model.

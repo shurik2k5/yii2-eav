@@ -2,12 +2,12 @@
 
 namespace mirocow\eav\admin\controllers;
 
-use Yii;
 use mirocow\eav\models\EavEntity;
 use mirocow\eav\models\EavEntitySearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * EntityController implements the CRUD actions for EavEntity model.

@@ -3,8 +3,6 @@
 namespace mirocow\eav\models;
 
 use mirocow\eav\models\Eav;
-use mirocow\eav\models\EavAttribute;
-use mirocow\eav\models\EavAttributeOption;
 use Yii;
 
 /**
@@ -39,9 +37,6 @@ class EavAttributeValue extends \yii\db\ActiveRecord
             [['entityId', 'attributeId'], 'required'],
             [['entityId', 'attributeId', 'optionId'], 'integer'],
             [['value'], 'string', 'max' => 255],
-            //[['attributeId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttribute::className(), 'targetAttribute' => ['attributeId' => 'id']],
-            //[['entityId'], 'exist', 'skipOnError' => true, 'targetClass' => Eav::className(), 'targetAttribute' => ['entityId' => 'id']],
-            //[['optionId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttributeOption::className(), 'targetAttribute' => ['optionId' => 'id']],
         ];
     }
 
@@ -82,8 +77,9 @@ class EavAttributeValue extends \yii\db\ActiveRecord
     {
         return $this->hasOne(EavAttributeOption::className(), ['id' => 'optionId']);
     }
-    
-    public function getValue(){
-      return 'XXX';
+
+    public function getValue()
+    {
+        return 'XXX';
     }
 }

@@ -16,7 +16,7 @@ use yii\web\AssetBundle;
  */
 class FbAsset extends AssetBundle
 {
-  
+
     //public $basePath = '@mirocow/eav/admin/assets/formbuilder';
     public $baseUrl = '@web';
     public $sourcePath = '@mirocow/eav/admin/assets/formbuilder';
@@ -25,14 +25,14 @@ class FbAsset extends AssetBundle
         'css/vendor.css',
         'css/formbuilder.css',
     ];
-    
+
     public $js = [
         'js/vendor.js',
         'js/formbuilder.js',
     ];
-    
+
     public $depends = [
         'yii\web\JqueryAsset',
     ];
-  
+
 }

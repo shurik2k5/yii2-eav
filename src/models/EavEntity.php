@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $entityName
- * @property string $entityModel 
+ * @property string $entityModel
  *
  * @property EavAttribute[] $eavAttributes
  */
@@ -30,6 +30,7 @@ class EavEntity extends \yii\db\ActiveRecord
     {
         return [
             [['entityModel', 'entityName'], 'string', 'max' => 100],
+            [['entityModel', 'entityName'], 'required'],
             [['categoryId'], 'integer'],
         ];
     }
@@ -53,6 +54,6 @@ class EavEntity extends \yii\db\ActiveRecord
     public function getEavAttributes()
     {
         return $this->hasMany(EavAttribute::className(), ['entityId' => 'id'])
-          ->orderBy(['order' => SORT_DESC]);
+            ->orderBy(['order' => SORT_DESC]);
     }
 }

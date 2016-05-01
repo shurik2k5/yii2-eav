@@ -5,10 +5,9 @@ EAV Dynamic Attributes for Yii2
 [![Latest Stable Version](https://poser.pugx.org/mirocow/yii2-eav/v/stable)](https://packagist.org/packages/mirocow/yii2-eav) [![Latest Unstable Version](https://poser.pugx.org/mirocow/yii2-eav/v/unstable)](https://packagist.org/packages/mirocow/yii2-eav) [![Total Downloads](https://poser.pugx.org/mirocow/yii2-eav/downloads)](https://packagist.org/packages/mirocow/yii2-eav) [![License](https://poser.pugx.org/mirocow/yii2-eav/license)](https://packagist.org/packages/mirocow/yii2-eav)
 [![Join the chat at https://gitter.im/Mirocow/yii2-eav](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Mirocow/yii2-eav?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Install
-========
+# Install
 
-### Add github repository
+## Add github repository
 
 ```json
     "repositories": [
@@ -24,8 +23,7 @@ and then
 php composer.phar require --prefer-dist "mirocow/yii2-eav" "*"
 ```
 
-Configure
-========
+## Configure
 
 ``` sh
 php yii migrate/up --migrationPath=@mirocow/eav/migrations
@@ -37,11 +35,10 @@ or
 php yii migrate/up --migrationPath=vendor/mirocow/yii2-eav/src/migrations
 ```
 
-Use
-========
+## Use
 
-Model
-======
+### Model
+
 
 ``` php
 class Product extends \yii\db\ActiveRecord
@@ -67,26 +64,24 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEavAttributes()
-    {       
+    public function getEavAttributes($entityId)
+    {
         return \mirocow\eav\models\EavAttribute::find()
           ->joinWith('entity')
           ->where([
-            'categoryId' => isset()? $this->category->id: 0,
+            'categoryId' => $entityId,
             'entityModel' => $this::className()
-        ]);  
+        ]);
     }
     
 }
 ```
 
-View
-======
+### View
 
 Insert this code for create widget or load all EAV inputs fields for model
 
-Form
-=====
+### Form edit
 
 fo load selected field 
 
@@ -103,8 +98,7 @@ or for load all fields
     ?>
 ```
 
-Partial template
-=====
+### Partial template
 
 ``` php
 <p>
@@ -127,7 +121,7 @@ String
 ?> 
 ```
 
-Add attribute
+### Add attribute
 
 ```php
 $attr = new mirocow\eav\models\EavAttribute();
@@ -142,14 +136,13 @@ $attr->attributes = [
 $attr->save();
 ```
 
-Administrate GUI
-=======
+## Administrate GUI
 
-Form
-=====
+## Form
 
-Add / Edit attribute
-====
+
+## Add / Edit attribute
+
 
 ``` php
 <?= \mirocow\eav\admin\widgets\Fields::widget([

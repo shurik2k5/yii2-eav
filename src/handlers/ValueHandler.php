@@ -15,7 +15,7 @@ use yii\db\ActiveRecord;
  * @property string $textValue
  */
 abstract class ValueHandler
-{    
+{
     const STORE_TYPE_RAW = 0;
     const STORE_TYPE_OPTION = 1;
     const STORE_TYPE_MULTIPLE_OPTIONS = 2;
@@ -32,7 +32,7 @@ abstract class ValueHandler
     public function getValueModel()
     {
         $EavModel = $this->attributeHandler->owner;
-        
+
         /** @var ActiveRecord $valueClass */
         $valueClass = $EavModel->valueClass;
 
@@ -47,7 +47,7 @@ abstract class ValueHandler
             $valueModel->entityId = $EavModel->entityModel->getPrimaryKey();
             $valueModel->attributeId = $this->attributeHandler->attributeModel->getPrimaryKey();
         }
-        
+
         return $valueModel;
     }
 

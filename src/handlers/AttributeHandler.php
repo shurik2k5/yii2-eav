@@ -23,7 +23,7 @@ class AttributeHandler extends Widget
     public $valueHandler;
     /** @var ActiveRecord */
     public $attributeModel;
-    
+
     public $nameField = 'name';
     public $labelField = 'label';
 
@@ -35,8 +35,7 @@ class AttributeHandler extends Widget
      */
     public static function load($owner, $attributeModel)
     {
-        if (!class_exists($class = $attributeModel->eavType->handlerClass))
-        {
+        if (!class_exists($class = $attributeModel->eavType->handlerClass)) {
             throw new InvalidParamException('Unknown handler class: ' . $class);
         }
 
@@ -77,7 +76,7 @@ class AttributeHandler extends Widget
     public function getOptions()
     {
         $result = [];
-        foreach ($this->attributeModel->eavOptions as $option){
+        foreach ($this->attributeModel->eavOptions as $option) {
             $result[] = $option->getPrimaryKey();
         }
         return $result;

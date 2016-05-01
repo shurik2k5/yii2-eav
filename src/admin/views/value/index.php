@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel mirocow\eav\models\EavAttributeValueSearch */
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?//= Html::a('Create Eav Attribute Value', ['create'], ['class' => 'btn btn-success']) ?>
+        <? //= Html::a('Create Eav Attribute Value', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

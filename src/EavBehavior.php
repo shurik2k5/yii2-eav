@@ -5,10 +5,8 @@
 
 namespace mirocow\eav;
 
-use mirocow\eav\EavModel;
 use mirocow\eav\models\EavAttribute;
 use yii\base\Behavior;
-use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
 
 /**
@@ -21,21 +19,22 @@ use yii\db\ActiveRecord;
  */
 class EavBehavior extends Behavior
 {
-    public function events() {
+    public function events()
+    {
         return [
-            ActiveRecord::EVENT_BEFORE_INSERT   => 'beforeSave',
-            ActiveRecord::EVENT_BEFORE_UPDATE   => 'beforeSave',
-            ActiveRecord::EVENT_AFTER_INSERT   => 'afterSave',
-            ActiveRecord::EVENT_AFTER_UPDATE    => 'afterSave',
+            ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
+            ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
+            ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
+            ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
             ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
         ];
-                
+
     }
-    
+
     /** @var array */
     public $valueClass;
 
-    protected $EavModel;       
+    protected $EavModel;
 
     public function init()
     {
@@ -50,46 +49,47 @@ class EavBehavior extends Behavior
         /*if (!$this->EavModel instanceof EavModel) {
 
         }*/
-        
+
         $this->EavModel = EavModel::create([
             'entityModel' => $this->owner,
             'valueClass' => $this->valueClass,
             'attribute' => $name,
-        ]);        
-        
+        ]);
+
         return $this->EavModel;
-    }      
-    
+    }
+
     public function canGetProperty($name, $checkVars = true)
     {
         return EavAttribute::find()->where(['name' => $name])->exists();
-    }    
-    
-    public function beforeValidate() 
+    }
+
+    public function beforeValidate()
     {
         static $running;
-        
-        if(empty($running)){
-          $running = true;
-          return $this->owner->validate();
+
+        if (empty($running)) {
+            $running = true;
+            return $this->owner->validate();
         }
-        
+
         $running = false;
     }
-    
-    public function beforeSave(){
+
+    public function beforeSave()
+    {
     }
-    
+
     public function getLabel($attribute)
     {
-      return EavAttribute::find()->select(['label'])->where(['name' => $attribute])->scalar();
+        return EavAttribute::find()->select(['label'])->where(['name' => $attribute])->scalar();
     }
-    
-    public function afterSave() 
+
+    public function afterSave()
     {
-      
+
         $this->eav->save(false);
-        
-    }       
-    
+
+    }
+
 }

@@ -9,11 +9,11 @@ use mirocow\eav\admin\assets\FbAsset;
 FbAsset::register($this);
 ?>
 
-<div class="form-builder fb-main">
-</div>
+    <div class="form-builder fb-main">
+    </div>
 
 <?php
-$js_form_builder =<<<JS
+$js_form_builder = <<<JS
   $(function(){
   
     fb = new Formbuilder({

@@ -1,7 +1,7 @@
 .fb-button {
     display: inline-block;
     margin: 0;
-    padding: .563rem .844rem;
+    /*padding: .563rem .844rem;*/
     border: 0 none;
     background: #16a085;
     color: #fff;
@@ -11,8 +11,10 @@
     line-height: 1.5;
     cursor: pointer;
     border-radius: .125rem;
-    border: thin solid #19b394;
-    border-bottom: 2px solid #16a085
+    /*border: thin solid #19b394;*/
+    border-bottom: 2px solid #16a085;
+    border: none;
+    padding: 3px 6px;
 }
 
 .fb-button[disabled] {
@@ -203,12 +205,12 @@
 
 .fb-field-wrapper .actions-wrapper a.js-duplicate, .fb-edit-field-wrapper .js-add-option {
     background-color: #2ecc71;
-    border: none
+    /*border: none*/
 }
 
 .fb-field-wrapper .actions-wrapper a.js-clear, .fb-edit-field-wrapper .js-remove-option {
     background-color: #e74c3c;
-    border: none
+    /*border: none*/
 }
 
 .fb-field-wrapper .subtemplate-wrapper {
@@ -305,9 +307,9 @@
     font-weight: 700
 }
 
-.fb-edit-field-wrapper .js-add-option, .fb-edit-field-wrapper .js-remove-option {
+/*.fb-edit-field-wrapper .js-add-option, .fb-edit-field-wrapper .js-remove-option {
     padding: 3px 6px
-}
+}*/
 
 .fb-edit-field-wrapper .fb-bottom-add {
     margin-top: 8px

@@ -8,8 +8,6 @@
 
 namespace mirocow\eav;
 
-use yii\helpers\ArrayHelper;
-
 trait EavTrait
 {
     /**
@@ -18,10 +16,11 @@ trait EavTrait
     public function getAttributeLabel($attribute)
     {
         $labels = $this->attributeLabels();
-        if(!isset($labels[$attribute])){
+        if (!isset($labels[$attribute])) {
             $label = $this->getLabel($attribute);
-            if($label)
+            if ($label) {
                 $labels[$attribute] = $label;
+            }
         }
         return isset($labels[$attribute]) ? $labels[$attribute] : $this->generateAttributeLabel($attribute);
     }

@@ -5,7 +5,6 @@ namespace mirocow\eav\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use mirocow\eav\models\EavEntity;
 
 /**
  * EavEntitySearch represents the model behind the search form about `mirocow\eav\models\EavEntity`.
@@ -63,8 +62,8 @@ class EavEntitySearch extends EavEntity
             'categoryId' => $this->categoryId,
         ]);
 
-        $query->andFilterWhere(['like', 'entityName', $this->entityName])
-            ->andFilterWhere(['like', 'entityModel', $this->entityModel]);
+        $query->andFilterWhere(['=', 'entityName', $this->entityName])
+            ->andFilterWhere(['=', 'entityModel', $this->entityModel]);
 
         return $dataProvider;
     }

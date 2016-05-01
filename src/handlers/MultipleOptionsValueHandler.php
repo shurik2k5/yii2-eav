@@ -19,7 +19,7 @@ class MultipleOptionsValueHandler extends ValueHandler
     public function load()
     {
         $EavModel = $this->attributeHandler->owner;
-        
+
         /** @var ActiveRecord $valueClass */
         $valueClass = $EavModel->valueClass;
 
@@ -38,18 +38,18 @@ class MultipleOptionsValueHandler extends ValueHandler
 
     public function save()
     {
-        $EavModel = $this->attributeHandler->owner;        
-        $attribute = $this->attributeHandler->getAttributeName();    
+        $EavModel = $this->attributeHandler->owner;
+        $attribute = $this->attributeHandler->getAttributeName();
         /** @var ActiveRecord $valueClass */
         $valueClass = $EavModel->valueClass;
-        
+
         $baseQuery = $valueClass::find()->where([
             'entityId' => $EavModel->entityModel->getPrimaryKey(),
             'attributeId' => $this->attributeHandler->attributeModel->getPrimaryKey(),
         ]);
 
         $allOptions = [];
-        foreach ($this->attributeHandler->attributeModel->eavOptions as $option){
+        foreach ($this->attributeHandler->attributeModel->eavOptions as $option) {
             $allOptions[] = $option->getPrimaryKey();
         }
 
@@ -57,11 +57,11 @@ class MultipleOptionsValueHandler extends ValueHandler
         $query->andWhere("optionId NOT IN (:options)");
         $valueClass::deleteAll($query->where, [
             'options' => implode(',', $allOptions),
-        ]);        
-        
+        ]);
+
         // then we delete unselected options
         $selectedOptions = $EavModel->attributes[$attribute];
-        if (!is_array($selectedOptions)){
+        if (!is_array($selectedOptions)) {
             $selectedOptions = [];
         }
         $deleteOptions = array_diff($allOptions, $selectedOptions);
@@ -86,8 +86,9 @@ class MultipleOptionsValueHandler extends ValueHandler
                 $valueModel->entityId = $EavModel->entityModel->getPrimaryKey();
                 $valueModel->attributeId = $this->attributeHandler->attributeModel->getPrimaryKey();
                 $valueModel->optionId = $id;
-                if (!$valueModel->save())
+                if (!$valueModel->save()) {
                     throw new \Exception("Can't save value model");
+                }
             }
         }
     }
@@ -95,7 +96,7 @@ class MultipleOptionsValueHandler extends ValueHandler
     public function getTextValue()
     {
         $EavModel = $this->attributeHandler->owner;
-        
+
         /** @var ActiveRecord $valueClass */
         $valueClass = $EavModel->valueClass;
 

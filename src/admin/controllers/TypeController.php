@@ -2,12 +2,12 @@
 
 namespace mirocow\eav\admin\controllers;
 
-use Yii;
 use mirocow\eav\models\EavAttributeType;
 use mirocow\eav\models\EavAttributeTypeSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * TypeController implements the CRUD actions for EavAttributeType model.

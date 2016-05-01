@@ -1,37 +1,43 @@
 {
-    "name": "mirocow/yii2-eav",
-    "description": "EAV for Yii2",
-    "license": "MIT",
-    "keywords": ["yii2", "eav", "attribute", "cck", "fields"],
-    "type": "yii2-extension",
-    "authors": [
-        {
-            "name": "Alexey Samoylov",
-            "email": "alexey.samoylov@gmail.com",
-            "homepage": "http://yiiblog.ru",
-            "role": "Developer"
-        },
-        {
-            "name": "Mirocow",
-            "email": "mr.mirocow@gmail.com",
-            "homepage": "http://mirocow.com",
-            "role": "Developer"
-        }        
-    ],
-    "minimum-stability": "dev",
-    "require": {
-        "php":">=5.4.0",
-	"yiisoft/yii2": ">=2.0.5"
+  "name": "mirocow/yii2-eav",
+  "description": "EAV for Yii2",
+  "license": "MIT",
+  "keywords": [
+    "yii2",
+    "eav",
+    "attribute",
+    "cck",
+    "fields"
+  ],
+  "type": "yii2-extension",
+  "authors": [
+    {
+      "name": "Alexey Samoylov",
+      "email": "alexey.samoylov@gmail.com",
+      "homepage": "http://yiiblog.ru",
+      "role": "Developer"
     },
-    "require-dev": {
-        "yiisoft/yii2-codeception": "*",
-        "yiisoft/yii2-debug": "*",
-        "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "mirocow\\eav\\": "./src"
-        }
+    {
+      "name": "Mirocow",
+      "email": "mr.mirocow@gmail.com",
+      "homepage": "http://mirocow.com",
+      "role": "Developer"
     }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2": ">=2.0.5"
+  },
+  "require-dev": {
+    "yiisoft/yii2-codeception": "*",
+    "yiisoft/yii2-debug": "*",
+    "yiisoft/yii2-gii": "*",
+    "yiisoft/yii2-faker": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "mirocow\\eav\\": "./src"
+    }
+  }
 }
