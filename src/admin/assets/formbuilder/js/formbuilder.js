@@ -258,6 +258,7 @@
 
         EditFieldView.prototype.addOption = function (e) {
             var $el, i, newOption, options;
+
             $el = $(e.currentTarget);
             i = this.$el.find('.option').index($el.closest('.option'));
             options = this.model.get(Formbuilder.options.mappings.OPTIONS) || [];
@@ -277,6 +278,7 @@
 
         EditFieldView.prototype.sortOptionUp = function (e) {
             var $el, index, options;
+
             $el = $(e.currentTarget);
             index = this.$el.find(".js-sort-up-option").index($el);
             options = this.model.get(Formbuilder.options.mappings.OPTIONS);
@@ -291,6 +293,7 @@
 
         EditFieldView.prototype.sortOptionDown = function (e) {
             var $el, index, options;
+
             $el = $(e.currentTarget);
             index = this.$el.find(".js-sort-down-option").index($el);
             options = this.model.get(Formbuilder.options.mappings.OPTIONS);
@@ -308,6 +311,7 @@
 
         EditFieldView.prototype.removeOption = function (e) {
             var $el, index, options;
+
             $el = $(e.currentTarget);
             index = this.$el.find(".js-remove-option").index($el);
             options = this.model.get(Formbuilder.options.mappings.OPTIONS);
@@ -319,8 +323,6 @@
 
         EditFieldView.prototype.defaultUpdated = function (e) {
             var $el;
-
-            debugger;
 
             $el = $(e.currentTarget);
             if (this.model.get(Formbuilder.options.mappings.FIELD_TYPE) !== 'checkboxes') {
@@ -1251,7 +1253,7 @@
         var __t, __p = '', __e = _.escape;
         with (obj) {
 
-            __p += '<div class="fb-edit-section-header">Integer only</div><label>  <input type="checkbox" data-rv-checked="model.' +
+            __p += '<div class="fb-edit-section-header">Integer only</div><label>  <input type="checkbox" data-rv-checkrv-ed="model.' +
                 ((__t = ( Formbuilder.options.mappings.INTEGER_ONLY )) == null ? '' : __t) +
                 '" />  Only accept integers</label>';
 

@@ -248,8 +248,8 @@ $.scrollWindowTo = function (pos, duration, cb) {
         // Override constructor
         // Support having nested defaults by using _.deepExtend instead of _.extend
         constructor: function (attributes, options) {
-            var defaults;
-            var attrs = attributes || {};
+            var defaults, attrs = attributes || {};
+
             this.cid = _.uniqueId('c');
             this.attributes = {};
             if (options && options.collection) this.collection = options.collection;
@@ -280,6 +280,7 @@ $.scrollWindowTo = function (pos, duration, cb) {
         // Supports nested attributes via the syntax 'obj.attr' e.g. 'author.user.name'
         set: function (key, val, options) {
             var attr, attrs, unset, changes, silent, changing, prev, current;
+
             if (key == null) return this;
 
             // Handle both `"key", value` and `{key: value}` -style arguments.
@@ -370,8 +371,8 @@ $.scrollWindowTo = function (pos, duration, cb) {
         // Clear all attributes on the model, firing `"change"` unless you choose
         // to silence it.
         clear: function (options) {
-            var attrs = {};
-            var shallowAttributes = objToPaths(this.attributes);
+            var attrs = {}, shallowAttributes = objToPaths(this.attributes);
+
             for (var key in shallowAttributes) attrs[key] = void 0;
             return this.set(attrs, _.extend({}, options, {unset: true}));
         },
@@ -426,6 +427,7 @@ $.scrollWindowTo = function (pos, duration, cb) {
             return _.deepClone(this._previousAttributes);
             //</custom code>
         }
+        
     });
 
 
