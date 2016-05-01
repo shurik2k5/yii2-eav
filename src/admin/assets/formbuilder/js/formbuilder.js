@@ -497,7 +497,7 @@
                     var rf;
                     if (ui.item.data('field-type')) {
                         rf = _this.collection.create(
-                            Formbuilder.helpers.defaultFieldAttrs(
+                            Formbuilder.helpers.defaultValueAttributes(
                                 ui.item.data('field-type')
                             ), {
                                 $replaceEl: ui.item
@@ -546,7 +546,7 @@
         BuilderView.prototype.addField = function (e) {
             var field_type;
             field_type = $(e.currentTarget).data('field-type');
-            return this.createField(Formbuilder.helpers.defaultFieldAttrs(field_type));
+            return this.createField(Formbuilder.helpers.defaultValueAttributes(field_type));
         }
 
         BuilderView.prototype.createField = function (attrs, options) {
@@ -666,15 +666,21 @@
     Formbuilder = (function () {
 
         Formbuilder.helpers = {
-            defaultFieldAttrs: function (field_type) {
-                var attrs, _base;
-                attrs = {}
 
+            defaultValueAttributes: function (field_type) {
+                var attrs, _base;
+
+                attrs = {};
                 attrs[Formbuilder.options.mappings.LABEL] = 'Untitled';
                 attrs[Formbuilder.options.mappings.TYPE] = 'default';
                 attrs[Formbuilder.options.mappings.FIELD_TYPE] = field_type;
                 attrs[Formbuilder.options.mappings.REQUIRED] = true;
-
+                attrs[Formbuilder.options.mappings.MIN] = 0;
+                attrs[Formbuilder.options.mappings.MAX] = 0;
+                attrs[Formbuilder.options.mappings.MINLENGTH] = 0;
+                attrs[Formbuilder.options.mappings.MAXLENGTH] = 0;
+                attrs[Formbuilder.options.mappings.LOCKED] = false;
+                attrs[Formbuilder.options.mappings.VISIBLE] = true;
                 attrs['field_options'] = {}
 
                 return (typeof (_base = Formbuilder.fields[field_type])
@@ -683,10 +689,8 @@
                             void 0
                     ) || attrs;
 
-            },
-            simple_format: function (x) {
-                return x != null ? x.replace(/\n/g, '<br />') : void 0;
             }
+
         }
 
         Formbuilder.options = {
@@ -702,6 +706,8 @@
                 SIZE: 'field_options.size',
                 UNITS: 'field_options.units',
                 REQUIRED: 'field_options.required',
+                LOCKED: 'field_options.locked',
+                VISIBLE: 'field_options.visible',
                 OPTIONS: 'field_options.options',
                 DESCRIPTION: 'field_options.description',
                 INCLUDE_OTHER: 'field_options.include_other_option',
@@ -947,7 +953,9 @@
         return __p
     }
 
-    // View temlates
+    /**
+     * View temlates
+     */
 
     this["Formbuilder"]["templates"]["view/base"] = function (obj) {
         obj || (obj = {});
@@ -964,16 +972,6 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["view/base_non_input"] = function (obj) {
-        obj || (obj = {});
-        var __t, __p = '', __e = _.escape;
-        with (obj) {
-            __p += '';
-
-        }
-        return __p
-    }
-
     this["Formbuilder"]["templates"]["view/description"] = function (obj) {
         obj || (obj = {});
         var __t, __p = '', __e = _.escape;
@@ -981,7 +979,7 @@
         with (obj) {
 
             __p += '<span class="help-block">  ' +
-                ((__t = ( Formbuilder.helpers.simple_format(rf.get(Formbuilder.options.mappings.DESCRIPTION)) )) == null ? '' : __t) +
+                ((__t = ( rf.get(Formbuilder.options.mappings.DESCRIPTION) )) == null ? '' : __t) +
                 '</span>';
 
         }
@@ -1015,11 +1013,12 @@
         with (obj) {
 
             __p += '<label>  <span>' +
-                ((__t = ( Formbuilder.helpers.simple_format(rf.get(Formbuilder.options.mappings.LABEL)) )) == null ? '' : __t);
+                ((__t = ( rf.get(Formbuilder.options.mappings.LABEL) )) == null ? '' : __t);
 
             if (rf.get(Formbuilder.options.mappings.REQUIRED)) {
                 __p += '    <abbr title="required">*</abbr>  ';
             }
+
             __p += '</label>';
 
         }
@@ -1044,7 +1043,7 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/base_header"] = function (obj) {
+    /*this["Formbuilder"]["templates"]["edit/base_header"] = function (obj) {
         obj || (obj = {});
         var __t, __p = '', __e = _.escape;
         with (obj) {
@@ -1057,29 +1056,24 @@
 
         }
         return __p
-    }
+    }*/
 
-    this["Formbuilder"]["templates"]["edit/base_non_input"] = function (obj) {
-        obj || (obj = {});
-        var __t, __p = '', __e = _.escape;
-        with (obj) {
-            __p +=
-                //((__t = ( Formbuilder.templates['edit/base_header']() )) == null ? '' : __t) +
-                ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].edit({rf: rf}) )) == null ? '' : __t) +
-                '';
-
-        }
-        return __p
-    }
-
-    this["Formbuilder"]["templates"]["edit/checkboxes"] = function (obj) {
+    this["Formbuilder"]["templates"]["edit/field_options"] = function (obj) {
         obj || (obj = {});
         var __t, __p = '', __e = _.escape;
         with (obj) {
 
             __p += '<label>  <input type="checkbox" data-rv-checked="model.' +
                 ((__t = ( Formbuilder.options.mappings.REQUIRED )) == null ? '' : __t) +
-                '" />  Required</label>';
+                '" />  Required</label><br>';
+
+            __p += '<label>  <input type="checkbox" data-rv-checked="model.' +
+                ((__t = ( Formbuilder.options.mappings.LOCKED )) == null ? '' : __t) +
+                '" />  Read only</label><br>';
+
+            __p += '<label>  <input type="checkbox" data-rv-checked="model.' +
+                ((__t = ( Formbuilder.options.mappings.VISIBLE )) == null ? '' : __t) +
+                '" />  Visible</label>';
 
         }
         return __p
@@ -1095,7 +1089,7 @@
                 ((__t = ( Formbuilder.templates['edit/label_description']() )) == null ? '' : __t) +
                 '</div><div class="fb-common-checkboxes">' +
 
-                ((__t = ( Formbuilder.templates['edit/checkboxes']() )) == null ? '' : __t) +
+                ((__t = ( Formbuilder.templates['edit/field_options']() )) == null ? '' : __t) +
                 '</div><div class="fb-clear"></div></div>';
 
         }

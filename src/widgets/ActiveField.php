@@ -9,7 +9,10 @@ class ActiveField extends \yii\widgets\ActiveField
     static $order = 4;
 
     static $view = <<<TEMPLATE
-    <input type='text' class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' />    
+    <input type='text' 
+      class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' 
+      <% if ( rf.get(Formbuilder.options.mappings.LOCKED) ) { %>disabled readonly<% } %> 
+    />    
 TEMPLATE;
 
     static $edit = <<<TEMPLATE

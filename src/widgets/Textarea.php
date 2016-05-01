@@ -12,9 +12,12 @@ class Textarea extends AttributeHandler
     static $order = 1;
 
     static $view = <<<TEMPLATE
-    <textarea class='form-control input-sm' type='text'
-    rows=<%= rf.get(Formbuilder.options.mappings.AREA_ROWS) %>
-    cols=<%= rf.get(Formbuilder.options.mappings.AREA_COLS) %> />
+    <textarea 
+      class='form-control input-sm' type='text'
+      rows=<%= rf.get(Formbuilder.options.mappings.AREA_ROWS) %>
+      cols=<%= rf.get(Formbuilder.options.mappings.AREA_COLS) %> 
+      <% if ( rf.get(Formbuilder.options.mappings.LOCKED) ) { %>disabled readonly<% } %> 
+    />
     </textarea>    
 TEMPLATE;
 

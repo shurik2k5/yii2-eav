@@ -18,7 +18,11 @@ class CheckBoxList extends AttributeHandler
     <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %> 
     <div>
     <label class='fb-option'>
-    <input type='checkbox' <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'checked' %> onclick=\"javascript: return false;\" />
+    <input type='checkbox' 
+      <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'checked' %> 
+      <% if ( rf.get(Formbuilder.options.mappings.LOCKED) ) { %>disabled readonly<% } %> 
+      onclick="javascript: return false;" 
+    />
     <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>
     </label>
     </div>

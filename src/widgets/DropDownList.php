@@ -16,14 +16,20 @@ class DropDownList extends AttributeHandler
 
     static $view = <<<TEMPLATE
     <select>
+    
       <% if (rf.get(Formbuilder.options.mappings.INCLUDE_BLANK)) { %> 
           <option value=''></option>  
       <% } %>
+      
       <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>
-        <option <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'selected' %>>
-            <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>
+        <option 
+          <% if ( rf.get(Formbuilder.options.mappings.LOCKED) ) { %>disabled readonly<% } %> 
+          <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'selected' %> 
+        />
+        <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>
         </option>
       <% } %>
+      
     </select>
     <%= Formbuilder.templates['edit/options']({ includeBlank: true }) %>    
 TEMPLATE;
