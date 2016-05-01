@@ -319,6 +319,9 @@
 
         EditFieldView.prototype.defaultUpdated = function (e) {
             var $el;
+
+            debugger;
+
             $el = $(e.currentTarget);
             if (this.model.get(Formbuilder.options.mappings.FIELD_TYPE) !== 'checkboxes') {
                 this.$el.find(".js-default-updated").not($el).attr('checked', true).trigger('change');
@@ -1133,18 +1136,20 @@
             }
 
             __p += '<div class="option" data-rv-each-option="model.' +
-                ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) +
-                '">  <input type="checkbox" class="js-default-updated" data-rv-checked="option:checked" />  ' +
-                '<input type="text" data-rv-input="option:label" class="option-label-input" /> '
-                + '<a class="js-sort-up-option ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-                '" title="Sort up"><i class="fa fa-arrow-up"></i></a><a class="js-sort-down-option ' + Formbuilder.options.BUTTON_CLASS +
+                ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) + '">  ' +
+                '<input type="checkbox" class="js-default-updated" data-rv-checked="option:checked" />  ' +
+                '<input type="text" data-rv-input="option:label" class="option-label-input" /> ';
+
+            __p += '<a class="js-sort-up-option ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+                '" title="Sort up"><i class="fa fa-arrow-up"></i></a>' +
+                '<a class="js-sort-down-option ' + Formbuilder.options.BUTTON_CLASS +
                 '" title="Sort down"><i class="fa fa-arrow-down"></i></a> ' +
-                '<a class="js-remove-option ' +
-                ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-                '" title="Remove Option"><i class="fa fa-minus-circle"></i></a></div>';
+                '<a class="js-remove-option ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+                '" title="Remove Option"><i class="fa fa-minus-circle"></i></a>';
+
+            __p += '</div>';
 
             if (typeof includeOther !== 'undefined') {
-
                 __p += '  <label>    <input type="checkbox" data-rv-checked="model.' +
                     ((__t = ( Formbuilder.options.mappings.INCLUDE_OTHER )) == null ? '' : __t) +
                     '" />    Include "other"  </label>';
