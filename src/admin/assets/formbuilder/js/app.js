@@ -22,9 +22,13 @@ $.scrollWindowTo = function (pos, duration, cb) {
     });
 };
 
-//# sourceMappingURL=underscore-min.map
 (function () {
-    var arrays, basicObjects, deepClone, deepExtend, deepExtendCouple, isBasicObject,
+    var arrays,
+        basicObjects,
+        deepClone,
+        deepExtend,
+        deepExtendCouple,
+        isBasicObject,
         __slice = [].slice;
 
     deepClone = function (obj) {

@@ -69,6 +69,7 @@ class EavAttributeRule extends \yii\db\ActiveRecord
             'label',
             'type',
             'field_type',
+            'description',
         ];
     }
 
