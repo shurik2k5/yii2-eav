@@ -19,6 +19,7 @@
         unbind: function (el) {
             return $(el).unbind('input.rivets');
         }
+
     }
 
     rivets.configure({
@@ -93,11 +94,11 @@
         FormbuilderModel.prototype.indexInDOM = function () {
             var $wrapper,
                 _this = this;
-            
+
             $wrapper = $(".fb-field-wrapper").filter((function (_, el) {
                 return $(el).data('cid') === _this.cid;
             }));
-            
+
             return $(".fb-field-wrapper").index($wrapper);
         }
 
@@ -383,11 +384,13 @@
             this.formSaved = true;
             this.saveFormButton = this.$el.find(".js-save-form");
             this.saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED);
-            /*if (!!Formbuilder.options.AUTOSAVE) {
-             setInterval(function () {
-             return _this.saveForm.call(_this);
-             }, 5000);
-             }*/
+
+            if (!!Formbuilder.options.AUTOSAVE) {
+                setInterval(function () {
+                    return _this.saveForm.call(_this);
+                }, 5000);
+            }
+
             $('form').submit(function (event) {
                 _this.saveForm.call(_this);
             });
@@ -620,12 +623,15 @@
             this.formSaved = true;
             this.saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED);
             this.collection.sort();
+
             payload = JSON.stringify({
                 fields: this.collection.toJSON()
             });
+
             if (Formbuilder.options.HTTP_ENDPOINT) {
                 this.doAjaxSave(payload);
             }
+
             return this.formBuilder.trigger('save', payload);
         }
 
@@ -687,7 +693,7 @@
             BUTTON_CLASS: 'fb-button',
             HTTP_ENDPOINT: '',
             HTTP_METHOD: 'POST',
-            //AUTOSAVE: false,
+            AUTOSAVE: false,
             CLEAR_FIELD_CONFIRM: false,
             mappings: {
                 SIZE: 'field_options.size',
@@ -1021,7 +1027,9 @@
         return __p
     }
 
-    // Editor templates
+    /**
+     * Editor templates
+     */
 
     this["Formbuilder"]["templates"]["edit/base"] = function (obj) {
         obj || (obj = {});
@@ -1032,6 +1040,7 @@
                 //((__t = ( Formbuilder.templates['edit/base_header']() )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.templates['edit/common']() )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].edit({rf: rf}) )) == null ? '' : __t);
+
         }
         return __p
     }
@@ -1046,6 +1055,7 @@
                 '"></span>  <code class="field-type" data-rv-text="model.' +
                 ((__t = ( Formbuilder.options.mappings.FIELD_TYPE )) == null ? '' : __t) +
                 '"></code>  <span class="fa fa-arrow-right pull-right"></span></div>';
+
         }
         return __p
     }
@@ -1070,9 +1080,7 @@
 
             __p += '<label>  <input type="checkbox" data-rv-checked="model.' +
                 ((__t = ( Formbuilder.options.mappings.REQUIRED )) == null ? '' : __t) +
-                '" />  Required</label><!-- label>  <input type="checkbox" data-rv-checked="model.' +
-                ((__t = ( Formbuilder.options.mappings.ADMIN_ONLY )) == null ? '' : __t) +
-                '" />  Admin only</label -->';
+                '" />  Required</label>';
 
         }
         return __p
@@ -1090,19 +1098,6 @@
 
                 ((__t = ( Formbuilder.templates['edit/checkboxes']() )) == null ? '' : __t) +
                 '</div><div class="fb-clear"></div></div>';
-
-        }
-        return __p
-    }
-
-    this["Formbuilder"]["templates"]["edit/integer_only"] = function (obj) {
-        obj || (obj = {});
-        var __t, __p = '', __e = _.escape;
-        with (obj) {
-
-            __p += '<div class="fb-edit-section-header">Integer only</div><label>  <input type="checkbox" data-rv-checked="model.' +
-                ((__t = ( Formbuilder.options.mappings.INTEGER_ONLY )) == null ? '' : __t) +
-                '" />  Only accept integers</label>';
 
         }
         return __p
@@ -1126,39 +1121,6 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/min_max"] = function (obj) {
-        obj || (obj = {});
-        var __t, __p = '', __e = _.escape;
-        with (obj) {
-
-            __p += '<div class="fb-edit-section-header">Minimum / Maximum</div>Above<input type="text" data-rv-input="model.' +
-                ((__t = ( Formbuilder.options.mappings.MIN )) == null ? '' : __t) +
-                '" style="width: 30px" />&nbsp;&nbsp;Below<input type="text" data-rv-input="model.' +
-                ((__t = ( Formbuilder.options.mappings.MAX )) == null ? '' : __t) +
-                '" style="width: 30px" />';
-
-        }
-        return __p
-    }
-
-    this["Formbuilder"]["templates"]["edit/min_max_length"] = function (obj) {
-        obj || (obj = {});
-        var __t, __p = '', __e = _.escape;
-        with (obj) {
-            __p += '<div class="fb-edit-section-header">Length Limit</div>Min<input type="text" data-rv-input="model.' +
-
-                ((__t = ( Formbuilder.options.mappings.MINLENGTH )) == null ? '' : __t) +
-                '" style="width: 30px" />&nbsp;&nbsp;Max<input type="text" data-rv-input="model.' +
-
-                ((__t = ( Formbuilder.options.mappings.MAXLENGTH )) == null ? '' : __t) +
-                '" style="width: 30px" />&nbsp;&nbsp;<select data-rv-value="model.' +
-
-                ((__t = ( Formbuilder.options.mappings.LENGTH_UNITS )) == null ? '' : __t) +
-                '" style="width: auto;">  <option value="characters">characters</option>  <option value="words">words</option></select>';
-        }
-        return __p
-    }
-
     this["Formbuilder"]["templates"]["edit/options"] = function (obj) {
         obj || (obj = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
@@ -1170,13 +1132,13 @@
         with (obj) {
 
             __p += '<div class="fb-edit-section-header">Options</div>';
-            
+
             if (typeof includeBlank !== 'undefined') {
                 __p += '  <label><input type="checkbox" data-rv-checked="model.' +
                     ((__t = ( Formbuilder.options.mappings.INCLUDE_BLANK )) == null ? '' : __t) +
                     '" />    Include blank</label>';
             }
-            
+
             __p += '<div class="option" data-rv-each-option="model.' +
                 ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) +
                 '">  <input type="checkbox" class="js-default-updated" data-rv-checked="option:checked" />  ' +
@@ -1187,13 +1149,14 @@
                 '<a class="js-remove-option ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                 '" title="Remove Option"><i class="fa fa-minus-circle"></i></a></div>';
+
             if (typeof includeOther !== 'undefined') {
-                
+
                 __p += '  <label>    <input type="checkbox" data-rv-checked="model.' +
                     ((__t = ( Formbuilder.options.mappings.INCLUDE_OTHER )) == null ? '' : __t) +
                     '" />    Include "other"  </label>';
             }
-            
+
             __p += '<div class="fb-bottom-add">  <a class="js-add-option ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                 '">Add option</a></div>';
@@ -1209,10 +1172,10 @@
 
             __p += '<div class="fb-edit-section-header">Size</div><select data-rv-value="model.' +
                 ((__t = ( Formbuilder.options.mappings.SIZE )) == null ? '' : __t) +
-                '"><option value="small">Small</option> \
-				  <option value="medium">Medium</option> \
-				  <option value="large">Large</option> \
-				  </select>';
+                '"><option value="small">Small</option>' +
+                '<option value="medium">Medium</option>' +
+                '<option value="large">Large</option>' +
+                '</select>';
         }
         return __p
     }
@@ -1235,12 +1198,63 @@
         var __t, __p = '', __e = _.escape;
         with (obj) {
 
-            __p += '<div class="fb-edit-section-header">Attributes</div> \
-              Rows<input type="text" data-rv-input="model.' +
+            __p += '<div class="fb-edit-section-header">Attributes</div>' +
+                'Rows<input type="text" data-rv-input="model.' +
                 ((__t = ( Formbuilder.options.mappings.AREA_ROWS )) == null ? '' : __t) +
-                '" style="width: 30px" />&nbsp;&nbsp;Cols<input type="text" data-rv-input="model.' +
+                '" style="width: 60px" />&nbsp;&nbsp;Cols<input type="text" data-rv-input="model.' +
                 ((__t = ( Formbuilder.options.mappings.AREA_COLS )) == null ? '' : __t) +
-                '" style="width: 30px" />';
+                '" style="width: 60px" />';
+
+        }
+        return __p
+    }
+
+    /**
+     * Rules
+     */
+
+    this["Formbuilder"]["templates"]["edit/min_max"] = function (obj) {
+        obj || (obj = {});
+        var __t, __p = '', __e = _.escape;
+        with (obj) {
+
+            __p += '<div class="fb-edit-section-header">Minimum / Maximum</div>Above<input type="text" data-rv-input="model.' +
+                ((__t = ( Formbuilder.options.mappings.MIN )) == null ? '' : __t) +
+                '" style="width: 60px" />&nbsp;&nbsp;Below<input type="text" data-rv-input="model.' +
+                ((__t = ( Formbuilder.options.mappings.MAX )) == null ? '' : __t) +
+                '" style="width: 60px" />';
+
+        }
+        return __p
+    }
+
+    this["Formbuilder"]["templates"]["edit/min_max_length"] = function (obj) {
+        obj || (obj = {});
+        var __t, __p = '', __e = _.escape;
+        with (obj) {
+
+            __p += '<div class="fb-edit-section-header">Length Limit</div>Min&nbsp;<input type="text" data-rv-input="model.' +
+
+                ((__t = ( Formbuilder.options.mappings.MINLENGTH )) == null ? '' : __t) +
+                '" style="width: 60px" />Max&nbsp;<input type="text" data-rv-input="model.' +
+
+                ((__t = ( Formbuilder.options.mappings.MAXLENGTH )) == null ? '' : __t) +
+                '" style="width: 60px" />&nbsp;&nbsp;<select data-rv-value="model.' +
+
+                ((__t = ( Formbuilder.options.mappings.LENGTH_UNITS )) == null ? '' : __t) +
+                '" style="width: auto;">  <option value="characters">characters</option>  <option value="words">words</option></select>';
+        }
+        return __p
+    }
+
+    this["Formbuilder"]["templates"]["edit/integer_only"] = function (obj) {
+        obj || (obj = {});
+        var __t, __p = '', __e = _.escape;
+        with (obj) {
+
+            __p += '<div class="fb-edit-section-header">Integer only</div><label>  <input type="checkbox" data-rv-checked="model.' +
+                ((__t = ( Formbuilder.options.mappings.INTEGER_ONLY )) == null ? '' : __t) +
+                '" />  Only accept integers</label>';
 
         }
         return __p

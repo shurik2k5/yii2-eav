@@ -4,6 +4,7 @@ namespace mirocow\eav\admin\controllers;
 
 use mirocow\eav\models\EavAttribute;
 use mirocow\eav\models\EavAttributeOption;
+use mirocow\eav\models\EavAttributeRule;
 use mirocow\eav\models\EavAttributeType;
 use mirocow\eav\models\EavEntity;
 use Yii;
@@ -66,12 +67,12 @@ class AjaxController extends Controller
                     $entity->entityModel = $post['entityModel'];
                     $entity->categoryId = $categoryId;
                     $entity->save(false);
-
                     $entityId = $entity->id;
                 }
 
                 foreach ($payload['fields'] as $order => $field) {
 
+                    // Attribute
                     $attribute = EavAttribute::findOne(['name' => $field['cid'], 'entityId' => $entityId]);
                     if (!$attribute) {
                         $attribute = new EavAttribute;
@@ -83,18 +84,29 @@ class AjaxController extends Controller
                     $attribute->entityId = $entityId;
                     $attribute->typeId = EavAttributeType::find()->select(['id'])->where(['name' => $field['field_type']])->scalar();
                     $attribute->label = $field['label'];
-                    //$attribute->defaultValue = '';
-                    //$attribute->defaultOptionId = 0;
                     $attribute->required = $field['required'];
                     $attribute->order = $order;
                     $attribute->description = isset($field['field_options']['description']) ? $field['field_options']['description'] : '';
                     $attribute->save(false);
+
+                    // Rule
+                    $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
+                    if(!$rule){
+                        $rule = new EavAttributeRule();
+                    }
+                    $rule->attributeId = $attribute->id;
+                    foreach ($field as $key => $param){
+                        if($key == 'field_options') continue;
+                        $rule->{$key} = $param;
+                    }
+                    $rule->save();
 
                     if (isset($field['field_options']['options'])) {
 
                         $options = [];
 
                         foreach ($field['field_options']['options'] as $k => $o) {
+
                             $option = EavAttributeOption::find()->where(['attributeId' => $attribute->id, 'value' => $o['label']])->one();
                             if (!$option) {
                                 $option = new EavAttributeOption;

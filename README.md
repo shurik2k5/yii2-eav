@@ -64,7 +64,7 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEavAttributes($entityId)
+    public function getEavAttributes($entityId = 0)
     {
         return \mirocow\eav\models\EavAttribute::find()
           ->joinWith('entity')
@@ -95,6 +95,16 @@ or for load all fields
     foreach($model->getEavAttributes()->all() as $attr){
         echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
     }        
+    ?>
+```
+
+or used category Id
+
+``` php
+    <?php
+    foreach($model->getEavAttributes(155)->all() as $attr){
+        echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+    }
     ?>
 ```
 

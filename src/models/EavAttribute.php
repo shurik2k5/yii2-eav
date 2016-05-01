@@ -24,6 +24,7 @@ use yii\helpers\ArrayHelper;
  * @property EavAttributeType $eavType
  * @property EavAttributeOption[] $eavAttributeOptions
  * @property EavAttributeValue[] $eavAttributeValues
+ * @property EavAttributeRule $eavAttributeRule
  */
 class EavAttribute extends \yii\db\ActiveRecord
 {
@@ -40,12 +41,12 @@ class EavAttribute extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
+        return ArrayHelper::merge([
             [['name', 'defaultValue', 'label', 'description'], 'string', 'max' => 255],
             [['type'], 'string', 'max' => 50],
             [['entityId', 'typeId', 'order'], 'integer'],
             [['required'], 'boolean'],
-        ];
+        ], $this->eavAttributeRule->rules);
     }
 
     /**
@@ -105,6 +106,14 @@ class EavAttribute extends \yii\db\ActiveRecord
     public function getEavAttributeValues()
     {
         return $this->hasMany(EavAttributeValue::className(), ['attributeId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEavAttributeRule()
+    {
+        return $this->hasOne(EavAttributeRule::className(), ['attributeId' => 'id']);
     }
 
     public function getbootstrapData()
