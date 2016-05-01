@@ -66,6 +66,9 @@ class EavAttributeRule extends \yii\db\ActiveRecord
     {
         return [
             'cid',
+            'label',
+            'type',
+            'field_type',
         ];
     }
 
@@ -98,6 +101,10 @@ class EavAttributeRule extends \yii\db\ActiveRecord
     {
         if (in_array($name, $this->getDefaultFields())) {
             return parent::__set($name, $value);
+        }
+
+        if (in_array($name, $this->getSkipFields())) {
+            return [];
         }
 
         $rules = Json::decode($this->rules);
