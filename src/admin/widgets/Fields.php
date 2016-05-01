@@ -34,7 +34,7 @@ class Fields extends Widget
 
         $this->entityModel = str_replace('\\', '\\\\', $this->entityModel);
 
-        foreach ($this->model->getEavAttributes()->all() as $attr) {
+        foreach ($this->model->getEavAttributes($this->categoryId)->all() as $attr) {
 
             $options = [
                 'description' => $attr->description,
@@ -68,7 +68,7 @@ class Fields extends Widget
             'url' => $this->url,
             'urlSave' => $this->urlSave,
             'options' => $this->options,
-            'id' => $this->model->id,
+            'id' => $this->model->primaryKey,
             'categoryId' => isset($this->categoryId) ? $this->categoryId : 0,
             'entityModel' => $this->entityModel,
             'entityName' => $this->entityName,
