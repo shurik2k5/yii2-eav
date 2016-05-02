@@ -5,6 +5,16 @@ EAV Dynamic Attributes for Yii2
 [![Latest Stable Version](https://poser.pugx.org/mirocow/yii2-eav/v/stable)](https://packagist.org/packages/mirocow/yii2-eav) [![Latest Unstable Version](https://poser.pugx.org/mirocow/yii2-eav/v/unstable)](https://packagist.org/packages/mirocow/yii2-eav) [![Total Downloads](https://poser.pugx.org/mirocow/yii2-eav/downloads)](https://packagist.org/packages/mirocow/yii2-eav) [![License](https://poser.pugx.org/mirocow/yii2-eav/license)](https://packagist.org/packages/mirocow/yii2-eav)
 [![Join the chat at https://gitter.im/Mirocow/yii2-eav](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Mirocow/yii2-eav?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+# Screenshots
+
+## Edit attributes
+
+![](http://images.mirocow.com/2016-05-02-23-29-39-3hcha.png)
+
+## Edit form
+
+![](http://images.mirocow.com/2016-05-02-23-32-34-m98o1.png)
+
 # Install
 
 ## Add github repository
