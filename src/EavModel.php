@@ -83,6 +83,7 @@ class EavModel extends BaseEavModel
                 $model->addRule($attribute_name, 'safe');
             }
 
+            // TODO 5: Add eav attribute rules
             /*$rules = $attribute->eavAttributeRule->getAttributeRules($attribute_name);
             foreach ($rules as $rule){
                 $model->addRule($rule['field'], $rule['validator'], (isset($rule['params'])? $rule['params']: []));
