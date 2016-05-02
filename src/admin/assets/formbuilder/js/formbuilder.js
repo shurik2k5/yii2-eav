@@ -790,7 +790,7 @@
         }
 
         /**
-         *
+         * Get remote field types
          */
         function getFieldTypes(opts, callBack) {
 
