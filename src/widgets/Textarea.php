@@ -47,8 +47,10 @@ TEMPLATE;
 
     public function run()
     {
-        return $this->owner->activeForm
-            ->field($this->owner, $this->getAttributeName(), ['template' => "{input}\n{hint}\n{error}"])
+        return $this->owner->activeForm->field(
+            $this->owner, 
+            $this->getAttributeName(), 
+            ['template' => "{input}\n{hint}\n{error}"])
             ->textArea();
     }
 }

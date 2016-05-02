@@ -694,6 +694,7 @@
                 attrs[Formbuilder.options.mappings.MAXLENGTH] = 0;
                 attrs[Formbuilder.options.mappings.LOCKED] = false;
                 attrs[Formbuilder.options.mappings.VISIBLE] = true;
+                attrs[Formbuilder.options.mappings.SIZE] = 'large';
                 attrs['field_options'] = {}
 
                 return (typeof (_base = Formbuilder.fields[field_type])
@@ -1139,13 +1140,12 @@
         var __t, __p = '', __e = _.escape;
         with (obj) {
 
-            __p += '<div class="fb-edit-section-header">Size</div><select data-rv-value="model.' +
-                ((__t = ( Formbuilder.options.mappings.SIZE )) == null ? '' : __t) +
-
-                '"><option value="50">Small</option>' +
-                '<option value="150">Medium</option>' +
-                '<option value="255">Large</option>' +
-                '<option value="">Unlimited</option>' +
+            __p += '<div class="fb-edit-section-header">Size</div>' +
+                '<select data-rv-value="model.' +
+                ((__t = ( Formbuilder.options.mappings.SIZE )) == null ? '' : __t) + '">' +
+                '<option value="small">Small</option>' +
+                '<option value="medium">Medium</option>' +
+                '<option value="large">Large</option>' +
                 '</select>';
         }
         return __p

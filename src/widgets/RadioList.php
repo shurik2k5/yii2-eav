@@ -73,7 +73,9 @@ TEMPLATE;
 
     public function run()
     {
-        return $this->owner->activeForm->field($this->owner, $this->getAttributeName(),
+        return $this->owner->activeForm->field(
+            $this->owner, 
+            $this->getAttributeName(),
             ['template' => "{input}\n{hint}\n{error}"])
             ->radioList(
                 ArrayHelper::map($this->attributeModel->getEavOptions()->asArray()->all(), 'id', 'value')
