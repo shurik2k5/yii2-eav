@@ -9,7 +9,13 @@ EAV Dynamic Attributes for Yii2
 
 ## Edit attributes
 
+### List of attributes
+
 ![](http://images.mirocow.com/2016-05-02-23-29-39-3hcha.png)
+
+### Edit attribute
+
+![](http://images.mirocow.com/2016-05-02-23-39-41-5ih6u.png)
 
 ## Edit form
 
