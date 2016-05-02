@@ -427,7 +427,7 @@ $.scrollWindowTo = function (pos, duration, cb) {
             return _.deepClone(this._previousAttributes);
             //</custom code>
         }
-        
+
     });
 
 

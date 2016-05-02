@@ -11,19 +11,20 @@ class TextInput extends AttributeHandler
 {
     static $order = 0;
 
-    static $view = <<<TEMPLATE
+    static $fieldView = <<<TEMPLATE
     <input type='text' 
       class='form-control input-sm rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' 
       <% if ( rf.get(Formbuilder.options.mappings.LOCKED) ) { %>disabled readonly<% } %> 
     />    
 TEMPLATE;
 
-    static $edit = <<<TEMPLATE
+    static $fieldSettings = <<<TEMPLATE
+    <%= Formbuilder.templates['edit/field_options']() %>
     <%= Formbuilder.templates['edit/size']() %>
     <%= Formbuilder.templates['edit/min_max_length']() %>
 TEMPLATE;
 
-    static $addButton = <<<TEMPLATE
+    static $fieldButton = <<<TEMPLATE
     <span class='symbol'><span class='fa fa-font'></span></span> Input textfield    
 TEMPLATE;
 
@@ -39,7 +40,7 @@ TEMPLATE;
     {
         parent::init();
 
-        $this->owner->addRule($this->getAttributeName(), 'string', ['max' => 255]);
+        //$this->owner->addRule($this->getAttributeName(), 'string', ['max' => 255]);
     }
 
     public function run()

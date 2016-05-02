@@ -43,8 +43,6 @@ php ./yii migrate/up -p=@vendor/mirocow/yii2-eav/src/migrations
 ``` php
 class Product extends \yii\db\ActiveRecord
 {
-
-    use EavTrait;
     
     /**
      * create_time, update_time to now()
@@ -64,12 +62,12 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEavAttributes($entityId = 0)
+    public function getEavAttributes()
     {
         return \mirocow\eav\models\EavAttribute::find()
           ->joinWith('entity')
           ->where([
-            'categoryId' => $entityId,
+            'categoryId' => $this->categories[0]->id,
             'entityModel' => $this::className()
         ]);
     }
@@ -95,16 +93,6 @@ or for load all fields
     foreach($model->getEavAttributes()->all() as $attr){
         echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
     }        
-    ?>
-```
-
-or used category Id
-
-``` php
-    <?php
-    foreach($model->getEavAttributes(155)->all() as $attr){
-        echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
-    }
     ?>
 ```
 

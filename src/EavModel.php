@@ -20,14 +20,19 @@ class EavModel extends BaseEavModel
 {
     /** @var string Class to use for storing data */
     public $valueClass;
+
     /** @var ActiveRecord */
     public $entityModel;
+
     /** @var AttributeHandler[] */
     public $handlers;
+
     /** @var string */
     public $attribute = '';
+
     /** @var ActiveForm */
     public $activeForm;
+
     /** @var string[] */
     private $attributeLabels = [];
 
@@ -47,55 +52,54 @@ class EavModel extends BaseEavModel
         $params = [];
 
         if (!empty($params['attribute'])) {
-            $params = ['name' => $params['attribute']];
+            $params['name'] = $params['attribute'];
         }
 
-        $attributes = $model
-            ->entityModel
-            ->getRelation('eavAttributes')
-            ->where($params)
-            ->all();
-
-        foreach ($attributes as $attribute) {
+        foreach ($model->entityModel->getEavAttributes()->andWhere($params)->all() as $attribute) {
 
             $handler = AttributeHandler::load($model, $attribute);
-            $key = $handler->getAttributeName();
-            $value = $handler->valueHandler->load();
-            $model->setLabel($key, $handler->getAttributeLabel());
+            $attribute_name = $handler->getAttributeName();
+            //$model->setLabel($key, $handler->getAttributeLabel());
 
             //
             // Add rules
             //
 
-            if ($attribute->required) {
-                $model->addRule($key, 'required');
-            } else {
-                $model->addRule($key, 'safe');
-            }
-
             if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_RAW) {
-                $model->addRule($key, 'default', ['value' => $attribute->defaultValue]);
+                $model->addRule($attribute_name, 'default', ['value' => $attribute->defaultValue]);
             }
 
             if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_OPTION) {
-                $model->addRule($key, 'default', ['value' => $attribute->defaultOptionId]);
+                $model->addRule($attribute_name, 'default', ['value' => $attribute->defaultOptionId]);
             }
 
             if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_ARRAY) {
-                $model->addRule($key, 'string');
+                $model->addRule($attribute_name, 'string');
             }
 
+            if ($attribute->required){
+                $model->addRule($attribute_name, 'required');
+            } else {
+                $model->addRule($attribute_name, 'safe');
+            }
+
+            /*$rules = $attribute->eavAttributeRule->getAttributeRules($attribute_name);
+            foreach ($rules as $rule){
+                $model->addRule($rule['field'], $rule['validator'], (isset($rule['params'])? $rule['params']: []));
+            }*/
+
             //
-            // Add define attribute
+            // Set attribute value
             //
 
-            $model->defineAttribute($key, $value);
+            $value = $handler->valueHandler->load();
+            $model->defineAttribute($attribute_name, $value);
 
             //
-            // Add hanler
+            // Add handler
             //
 
-            $model->handlers[$key] = $handler;
+            $model->handlers[$attribute_name] = $handler;
 
         }
 

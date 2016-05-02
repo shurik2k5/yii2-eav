@@ -41,12 +41,12 @@ class EavAttribute extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return ArrayHelper::merge([
+        return [
             [['name', 'defaultValue', 'label', 'description'], 'string', 'max' => 255],
             [['type'], 'string', 'max' => 50],
             [['entityId', 'typeId', 'order'], 'integer'],
             [['required'], 'boolean'],
-        ], $this->eavAttributeRule->rules);
+        ];
     }
 
     /**
@@ -114,6 +114,11 @@ class EavAttribute extends \yii\db\ActiveRecord
     public function getEavAttributeRule()
     {
         return $this->hasOne(EavAttributeRule::className(), ['attributeId' => 'id']);
+    }
+
+    public function getRequired()
+    {
+        return $this->eavAttributeRule->required;
     }
 
     public function getbootstrapData()

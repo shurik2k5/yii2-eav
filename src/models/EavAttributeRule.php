@@ -19,7 +19,7 @@ class EavAttributeRule extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'eav_attribute_rules';
+        return '{{%eav_attribute_rules}}';
     }
 
     /**
@@ -29,6 +29,7 @@ class EavAttributeRule extends \yii\db\ActiveRecord
     {
         return [
             [['attributeId'], 'integer'],
+            [['required', 'visible', 'locked'], 'integer', 'max' => 1],
             [['rules'], 'string'],
         ];
     }
@@ -42,13 +43,16 @@ class EavAttributeRule extends \yii\db\ActiveRecord
             'id' => 'ID',
             'attributeId' => 'Attribute ID',
             'rules' => 'Rules',
+            'required' => 'Required',
+            'locked' => 'Locked',
+            'visible' => 'Visible',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAttribute($name = '')
+    public function getEavAttribute()
     {
         return $this->hasOne(EavAttribute::className(), ['id' => 'attributeId']);
     }
@@ -58,7 +62,11 @@ class EavAttributeRule extends \yii\db\ActiveRecord
         return [
             'id',
             'attributeId',
-            'rules'
+            'rules',
+            'required',
+            'locked',
+            'visible',
+            'eavAttribute'
         ];
     }
 
@@ -73,9 +81,23 @@ class EavAttributeRule extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getRules()
+    public function getAttributeRules($field_name)
     {
-        return [];
+        $validators = [];
+
+        $rules = Json::decode($this->rules);
+
+        foreach ($rules as $rule) {
+
+            $validators[] = [
+                'field' => $field_name,
+                'validator' => 'safe',
+                'params' => [],
+            ];
+
+        }
+
+        return $validators;
     }
 
     public function __get($name)

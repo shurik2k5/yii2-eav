@@ -14,7 +14,7 @@ class RadioList extends AttributeHandler
 
     static $order = 15;
 
-    static $view = <<<TEMPLATE
+    static $fieldView = <<<TEMPLATE
     <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>
     <div>
     <label class='fb-option'>
@@ -37,11 +37,12 @@ class RadioList extends AttributeHandler
     <% } %>    
 TEMPLATE;
 
-    static $edit = <<<TEMPLATE
+    static $fieldSettings = <<<TEMPLATE
+    <%= Formbuilder.templates['edit/field_options']() %>
     <%= Formbuilder.templates['edit/options']({ includeOther: true }) %>    
 TEMPLATE;
 
-    static $addButton = <<<TEMPLATE
+    static $fieldButton = <<<TEMPLATE
     <span class="symbol"><span class="fa fa-circle-o"></span></span> Radio    
 TEMPLATE;
 
@@ -65,9 +66,9 @@ TEMPLATE;
     {
         parent::init();
 
-        $this->owner->addRule($this->getAttributeName(), 'in', [
+        /*$this->owner->addRule($this->getAttributeName(), 'in', [
             'range' => $this->getOptions(),
-        ]);
+        ]);*/
     }
 
     public function run()

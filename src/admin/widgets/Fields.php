@@ -24,6 +24,8 @@ class Fields extends Widget
 
     private $bootstrapData = [];
 
+    private $rules = [];
+
     public function init()
     {
         parent::init();
@@ -34,13 +36,14 @@ class Fields extends Widget
 
         $this->entityModel = str_replace('\\', '\\\\', $this->entityModel);
 
-        foreach ($this->model->getEavAttributes($this->categoryId)->all() as $attr) {
+        foreach ($this->model->getEavAttributes()->all() as $attribute) {
 
             $options = [
-                'description' => $attr->description,
+                'description' => $attribute->description,
+                'required' => $attribute->required,
             ];
 
-            foreach ($attr->eavOptions as $option) {
+            foreach ($attribute->eavOptions as $option) {
                 $options['options'][] = [
                     'label' => $option->value,
                     'id' => $option->id,
@@ -49,12 +52,11 @@ class Fields extends Widget
             }
 
             $this->bootstrapData[] = [
-                'type' => $attr->type,
-                'label' => $attr->label,
-                'field_type' => $attr->eavType->name,
-                'required' => $attr->required,
+                'group_name' => $attribute->type,
+                'label' => $attribute->label,
+                'field_type' => $attribute->eavType->name,
                 'field_options' => $options,
-                'cid' => $attr->name,
+                'cid' => $attribute->name,
             ];
 
         }
@@ -67,7 +69,6 @@ class Fields extends Widget
         return $this->render('fields', [
             'url' => $this->url,
             'urlSave' => $this->urlSave,
-            'options' => $this->options,
             'id' => $this->model->primaryKey,
             'categoryId' => isset($this->categoryId) ? $this->categoryId : 0,
             'entityModel' => $this->entityModel,

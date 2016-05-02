@@ -14,7 +14,7 @@ class CheckBoxList extends AttributeHandler
 
     static $order = 10;
 
-    static $view = <<<TEMPLATE
+    static $fieldView = <<<TEMPLATE
     <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %> 
     <div>
     <label class='fb-option'>
@@ -35,11 +35,12 @@ class CheckBoxList extends AttributeHandler
     <% } %>    
 TEMPLATE;
 
-    static $edit = <<<TEMPLATE
+    static $fieldSettings = <<<TEMPLATE
+    <%= Formbuilder.templates['edit/field_options']() %>
     <%= Formbuilder.templates['edit/options']({ includeOther: true }) %>   
 TEMPLATE;
 
-    static $addButton = <<<TEMPLATE
+    static $fieldButton = <<<TEMPLATE
     <span class="symbol"><span class="fa fa-square-o"></span></span> Checkboxes    
 TEMPLATE;
 
@@ -63,10 +64,10 @@ TEMPLATE;
     {
         parent::init();
 
-        $this->owner->addRule($this->getAttributeName(), 'in', [
+        /*$this->owner->addRule($this->getAttributeName(), 'in', [
             'range' => $this->getOptions(),
             'allowArray' => true,
-        ]);
+        ]);*/
     }
 
     public function run()

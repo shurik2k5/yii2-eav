@@ -5,6 +5,7 @@
 
 namespace mirocow\eav\handlers;
 
+use mirocow\eav\EavModel;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\base\Widget;
@@ -17,10 +18,13 @@ use yii\db\ActiveRecord;
 class AttributeHandler extends Widget
 {
     const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\RawValueHandler';
+    
     /** @var EavModel */
     public $owner;
+    
     /** @var ValueHandler */
     public $valueHandler;
+    
     /** @var ActiveRecord */
     public $attributeModel;
 

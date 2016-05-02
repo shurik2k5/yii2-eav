@@ -46,10 +46,6 @@ class EavBehavior extends Behavior
      */
     public function __get($name = '')
     {
-        /*if (!$this->EavModel instanceof EavModel) {
-
-        }*/
-
         $this->EavModel = EavModel::create([
             'entityModel' => $this->owner,
             'valueClass' => $this->valueClass,
@@ -87,8 +83,9 @@ class EavBehavior extends Behavior
 
     public function afterSave()
     {
-
-        $this->eav->save(false);
+        if(\Yii::$app->request->isPost){
+            $this->eav->save(false);
+        }
 
     }
 

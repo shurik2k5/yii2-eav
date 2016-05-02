@@ -27,10 +27,12 @@ $js_form_builder = <<<JS
         url: '$urlSave',
         type: 'post',
         data: {
+          id: $id,        
           categoryId: $categoryId, 
           entityModel: '$entityModel', 
           entityName: '$entityName', 
-          payload: payload, _csrf: yii.getCsrfToken()},        
+          payload: payload, _csrf: yii.getCsrfToken()
+        },        
         dataType: 'json',
       }).success(function(response) {
       });

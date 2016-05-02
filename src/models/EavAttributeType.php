@@ -63,10 +63,10 @@ class EavAttributeType extends \yii\db\ActiveRecord
 
         return [
             'order' => isset($class::$order) ? $class::$order : 0,
-            'view' => isset($class::$view) ? $class::$view : 'Template view',
-            'edit' => isset($class::$edit) ? $class::$edit : 'Template edit',
-            'addButton' => isset($class::$addButton) ? $class::$addButton : 'Template button',
-            'defaultAttributes' => isset($class::$defaultAttributes) ? $class::$defaultAttributes : '',
+            'view' => isset($class::$fieldView) ? $class::$fieldView : 'Template view',
+            'edit' => isset($class::$fieldSettings) ? $class::$fieldSettings : 'Template settings',
+            'addButton' => isset($class::$fieldButton) ? $class::$fieldButton : 'Template field button',
+            'defaultAttributes' => isset($class::$defaultAttributes) ? $class::$defaultAttributes : 'Template default attributes',
         ];
 
     }

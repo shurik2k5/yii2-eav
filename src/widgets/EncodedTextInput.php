@@ -13,7 +13,7 @@ class EncodedTextInput extends TextInput
 
     static $order = 3;
 
-    static $view = <<<TEMPLATE
+    static $fieldView = <<<TEMPLATE
     <textarea 
       class='form-control input-sm' type='text' 
       rows=<%= rf.get(Formbuilder.options.mappings.AREA_ROWS) %>
@@ -23,11 +23,12 @@ class EncodedTextInput extends TextInput
     </textarea>    
 TEMPLATE;
 
-    static $edit = <<<TEMPLATE
+    static $fieldSettings = <<<TEMPLATE
+    <%= Formbuilder.templates['edit/field_options']() %>
     <%= Formbuilder.templates['edit/text_area']() %>    
 TEMPLATE;
 
-    static $addButton = <<<TEMPLATE
+    static $fieldButton = <<<TEMPLATE
     <span class='symbol'><span class='fa fa-paragraph'></span></span> Json textarea    
 TEMPLATE;
 
@@ -41,7 +42,7 @@ TEMPLATE;
 
     public function init()
     {
-        AttributeHandler::init();
+        parent::init();
     }
 
     public function run()
