@@ -110,12 +110,14 @@
 }
 
 .fb-add-field-types a {
+    /*
     font-size: 13px;
     display: inline-block;
     width: 48.5%;
     background-color: #1abc9c;
     margin-bottom: 9px;
     box-sizing: border-box
+    */
 }
 
 .fb-add-field-types a:nth-child(odd) {
@@ -123,8 +125,10 @@
 }
 
 .fb-add-field-types a .symbol {
+    /*
     opacity: .6;
     margin: 0 .25em 0 -1em
+    */
 }
 
 .fb-response-fields {
@@ -178,12 +182,13 @@
     right: 5px;
     z-index: 3
 }
-
+/*
 .fb-field-wrapper .actions-wrapper a {
     display: inline-block;
     background-color: #ccc;
     padding: 2px 8px
 }
+*/
 
 .edit-response-field input, .edit-response-field textarea, .edit-response-field select {
     border: thin solid #ddd;
@@ -204,13 +209,13 @@
 }
 
 .fb-field-wrapper .actions-wrapper a.js-duplicate, .fb-edit-field-wrapper .js-add-option {
-    background-color: #2ecc71;
-    /*border: none*/
+    /*background-color: #2ecc71;
+    border: none*/
 }
 
 .fb-field-wrapper .actions-wrapper a.js-clear, .fb-edit-field-wrapper .js-remove-option {
-    background-color: #e74c3c;
-    /*border: none*/
+    /*background-color: #e74c3c;
+    border: none*/
 }
 
 .fb-field-wrapper .subtemplate-wrapper {
