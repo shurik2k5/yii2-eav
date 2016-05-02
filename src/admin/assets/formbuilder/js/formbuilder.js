@@ -322,11 +322,16 @@
         }
 
         EditFieldView.prototype.defaultUpdated = function (e) {
-            var $el;
+            var $el, index, options;
 
             $el = $(e.currentTarget);
-            if (this.model.get(Formbuilder.options.mappings.FIELD_TYPE) !== 'checkboxes') {
-                this.$el.find(".js-default-updated").not($el).attr('checked', true).trigger('change');
+            options = this.model.get(Formbuilder.options.mappings.OPTIONS);
+            index = this.$el.find(".js-default-updated").index($el);
+            if ( options[index].checked ) {
+                options[index].checked = false;
+            } else {
+                options[index].checked = true;
+                this.$el.find(".js-default-updated").attr('checked', true);//.trigger('change');
             }
             return this.forceRender();
         }
@@ -1139,7 +1144,7 @@
 
             __p += '<div class="option" data-rv-each-option="model.' +
                 ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) + '">  ' +
-                '<input type="checkbox" class="js-default-updated" data-rv-checked="option:checked" />  ' +
+                '<input type="checkbox" class="js-default-updated" readonly="readonly" data-rv-checked="option:checked" />  ' +
                 '<input type="text" data-rv-input="option:label" class="option-label-input" /> ';
 
             __p += '<a class="js-sort-up-option ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
