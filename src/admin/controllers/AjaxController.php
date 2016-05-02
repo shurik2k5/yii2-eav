@@ -6,6 +6,7 @@ use mirocow\eav\models\EavAttribute;
 use mirocow\eav\models\EavAttributeOption;
 use mirocow\eav\models\EavAttributeRule;
 use mirocow\eav\models\EavAttributeType;
+use mirocow\eav\models\EavAttributeValue;
 use mirocow\eav\models\EavEntity;
 use Yii;
 use yii\helpers\Json;
@@ -53,88 +54,109 @@ class AjaxController extends Controller
                     return;
                 }
 
-                $categoryId = isset($post['categoryId']) ? $post['categoryId'] : 0;
+                $transaction = \Yii::$app->db->beginTransaction();
 
-                $entityId = EavEntity::find()
-                    ->select(['id'])
-                    ->where([
-                        'entityModel' => $post['entityModel'],
-                        'categoryId' => $categoryId,
-                    ])->scalar();
+                try {
 
-                if (!$entityId) {
-                    $entity = new EavEntity;
-                    $entity->entityName = isset($post['entityName']) ? $post['entityName'] : 'Untitled';
-                    $entity->entityModel = $post['entityModel'];
-                    $entity->categoryId = $categoryId;
-                    $entity->save(false);
-                    $entityId = $entity->id;
-                }
+                    $categoryId = isset($post['categoryId']) ? $post['categoryId'] : 0;
 
-                foreach ($payload['fields'] as $order => $field) {
+                    $entityId = EavEntity::find()
+                        ->select(['id'])
+                        ->where([
+                            'entityModel' => $post['entityModel'],
+                            'categoryId' => $categoryId,
+                        ])->scalar();
 
-                    // Attribute
-                    $attribute = EavAttribute::findOne(['name' => $field['cid'], 'entityId' => $entityId]);
-                    if (!$attribute) {
-                        $attribute = new EavAttribute;
-                        $lastId = EavAttribute::find()->select(['id'])->orderBy(['id' => SORT_DESC])->limit(1)->scalar() + 1;
-                        $attribute->name = 'c' . $lastId;
+                    if (!$entityId) {
+                        $entity = new EavEntity;
+                        $entity->entityName = isset($post['entityName']) ? $post['entityName'] : 'Untitled';
+                        $entity->entityModel = $post['entityModel'];
+                        $entity->categoryId = $categoryId;
+                        $entity->save(false);
+                        $entityId = $entity->id;
                     }
 
-                    $attribute->type = $field['group_name'];
-                    $attribute->entityId = $entityId;
-                    $attribute->typeId = EavAttributeType::find()->select(['id'])->where(['name' => $field['field_type']])->scalar();
-                    $attribute->label = $field['label'];
-                    $attribute->order = $order;
-                    $attribute->description = isset($field['field_options']['description']) ? $field['field_options']['description'] : '';
-                    $attribute->save(false);
+                    $attributes = [];
 
-                    // Rule
-                    if (isset($field['field_options'])) {
-                        $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
-                        if (!$rule) {
-                            $rule = new EavAttributeRule();
+                    foreach ($payload['fields'] as $order => $field) {
+
+                        // Attribute
+                        $attribute = EavAttribute::findOne(['name' => $field['cid'], 'entityId' => $entityId]);
+                        if (!$attribute) {
+                            $attribute = new EavAttribute;
+                            $lastId = EavAttribute::find()->select(['id'])->orderBy(['id' => SORT_DESC])->limit(1)->scalar() + 1;
+                            $attribute->name = 'c' . $lastId;
                         }
-                        $rule->required = (int) $field['required'];
-                        $rule->visible = (int) $field['visible'];
-                        $rule->locked = (int) $field['locked'];
-                        $rule->attributeId = $attribute->id;
-                        foreach ($field['field_options'] as $key => $param) {
-                            $rule->{$key} = $param;
-                        }
-                        $rule->save();
-                    }
 
-                    if (isset($field['field_options']['options'])) {
+                        $attribute->type = $field['group_name'];
+                        $attribute->entityId = $entityId;
+                        $attribute->typeId = EavAttributeType::find()->select(['id'])->where(['name' => $field['field_type']])->scalar();
+                        $attribute->label = $field['label'];
+                        $attribute->order = $order;
+                        $attribute->description = isset($field['field_options']['description']) ? $field['field_options']['description'] : '';
+                        $attribute->save(false);
 
-                        $options = [];
+                        $attributes[] = $attribute->id;
 
-                        foreach ($field['field_options']['options'] as $k => $o) {
-
-                            $option = EavAttributeOption::find()->where(['attributeId' => $attribute->id, 'value' => $o['label']])->one();
-                            if (!$option) {
-                                $option = new EavAttributeOption;
+                        // Rule
+                        if (isset($field['field_options'])) {
+                            $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
+                            if (!$rule) {
+                                $rule = new EavAttributeRule();
                             }
-                            $option->attributeId = $attribute->id;
-                            $option->value = $o['label'];
-                            $option->defaultOptionId = (int)$o['checked'];
-                            $option->order = $k;
-                            $option->save();
-
-                            $options[] = $option->value;
+                            $rule->required = (int)$field['required'];
+                            $rule->visible = (int)$field['visible'];
+                            $rule->locked = (int)$field['locked'];
+                            $rule->attributeId = $attribute->id;
+                            foreach ($field['field_options'] as $key => $param) {
+                                $rule->{$key} = $param;
+                            }
+                            $rule->save();
                         }
 
-                        EavAttributeOption::deleteAll([
-                            'and',
-                            ['attributeId' => $attribute->id],
-                            ['NOT', ['IN', 'value', $options]]
-                        ]);
+                        if (isset($field['field_options']['options'])) {
+
+                            $options = [];
+
+                            foreach ($field['field_options']['options'] as $k => $o) {
+
+                                $option = EavAttributeOption::find()->where(['attributeId' => $attribute->id, 'value' => $o['label']])->one();
+                                if (!$option) {
+                                    $option = new EavAttributeOption;
+                                }
+                                $option->attributeId = $attribute->id;
+                                $option->value = $o['label'];
+                                $option->defaultOptionId = (int)$o['checked'];
+                                $option->order = $k;
+                                $option->save();
+
+                                $options[] = $option->value;
+                            }
+
+                            EavAttributeOption::deleteAll([
+                                'and',
+                                ['attributeId' => $attribute->id],
+                                ['NOT', ['IN', 'value', $options]]
+                            ]);
+
+                        }
 
                     }
 
+                    EavAttribute::deleteAll(['NOT', ['IN', 'id', $attributes]]);
+                    EavAttributeValue::deleteAll(['NOT', ['IN', 'attributeId', $attributes]]);
+                    EavAttributeOption::deleteAll(['NOT', ['IN', 'attributeId', $attributes]]);
+                    EavAttributeRule::deleteAll(['NOT', ['IN', 'attributeId', $attributes]]);
+
+                    $transaction->commit();
+
+                } catch (\Exception $e) {
+                    $transaction->rollBack();
+                    throw $e;
                 }
 
             }
+
 
         }
     }

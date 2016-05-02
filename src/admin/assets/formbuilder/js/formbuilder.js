@@ -335,6 +335,7 @@
                 options[index].checked = false;
             } else {
                 options[index].checked = true;
+                //this.$el.find(".js-default-updated").attr('checked', true);//.trigger('change');
             }
             return this.forceRender();
         }
@@ -707,7 +708,7 @@
         }
 
         Formbuilder.options = {
-            BUTTON_CLASS: 'fb-button',
+            BUTTON_CLASS: 'btn',
             HTTP_ENDPOINT: '',
             HTTP_METHOD: 'POST',
             AUTOSAVE: false,
@@ -790,7 +791,7 @@
         }
 
         /**
-         *
+         * Get remote field types
          */
         function getFieldTypes(opts, callBack) {
 
@@ -859,7 +860,7 @@
         var __t, __p = '', __e = _.escape;
         with (obj) {
 
-            __p += '<div class="fb-save-wrapper">  <button class="js-save-form ' +
+            __p += '<div class="fb-save-wrapper">  <button class="js-save-form btn-success ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                 '"></button></div>';
 
@@ -896,7 +897,7 @@
 
                 __p += '<a data-field-type="' +
                     ((__t = ( f.field_type )) == null ? '' : __t) +
-                    '" class="' +
+                    '" style="text-align: left;" class="btn-default btn-block ' +
                     ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                     '">          ' +
                     ((__t = ( f.addButton )) == null ? '' : __t) +
@@ -932,6 +933,34 @@
         return __p
     }
 
+    this["Formbuilder"]["templates"]["partials/edit_groups"] = function (obj) {
+        obj || (obj = {});
+        var __t, __p = '', __e = _.escape;
+
+        with (obj) {
+            eye = '<a class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-eye"></i></a>';
+            eye += '<a style="margin-right: 4px;" class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-edit"></i></a>';
+            sorter = '<a style="position: relative; left: -4px; padding-left: 10px; padding-right: 10px; margin-right: 4px;" class="btn btn-default btn-xs"><i class="fa fa-arrows-v"></i></a>';
+            editable =  '<input type="text" style="width: 156px; padding-top: 3px; padding-bottom: 3px; height: 24px; display: inline-block;" class="form-control input-sm" value="Tested contend in edit...">';
+            saver = '<a class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-eye"></i></a>';
+            saver += '<a style="margin-right: 4px;" class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-save"></i></a>';
+            __p +=
+                '<div class="fb-tab-pane" id="editGroups">' +
+                '<div class="fb-edit-group-wrapper">' +
+                '<ul class="list-group">' +
+                '<li class="list-group-item">' + sorter + 'Cras justo odio' + eye + '</li>' +
+                '<li class="list-group-item">' + sorter + 'Dapibus ac facilisis in' + eye + '</li>' +
+                '<li class="list-group-item">' + sorter + editable + saver + '</li>' +
+                '<li class="list-group-item">' + sorter + 'Porta ac consectetur ac' + eye + '</li>' +
+                '<li class="list-group-item">' + sorter + 'Vestibulum at eros' + eye + '</li>' +
+                '</ul>' +
+                '</div>' +
+                '</div>';
+
+        }
+        return __p
+    }
+
     this["Formbuilder"]["templates"]["partials/left_side"] = function (obj) {
         obj || (obj = {});
         var __t, __p = '', __e = _.escape;
@@ -942,10 +971,12 @@
                 //'<li class="active"><a data-target="#settingsFields">Settings</a></li>' +
                 '<li class="active"><a data-target="#addField">Add new field</a></li>' +
                 '<li><a data-target="#editField">Edit field</a></li>' +
+                '<li><a data-target="#editGroups">Groups</a></li>' +
                 '</ul><div class="fb-tab-content">' +
                 //((__t = ( Formbuilder.templates['partials/settings']() )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.templates['partials/add_field']() )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.templates['partials/edit_field']() )) == null ? '' : __t) +
+                ((__t = ( Formbuilder.templates['partials/edit_groups']() )) == null ? '' : __t) +
                 '  </div></div>';
         }
 
@@ -1004,9 +1035,9 @@
 
             __p += '<div class="actions-wrapper">  <a class="js-duplicate ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-                '" title="Duplicate Field"><i class="fa fa-plus-circle"></i></a>  <a class="js-clear ' +
+                ' btn-xs btn-success" title="Duplicate Field"><i class="fa fa-plus-circle"></i></a>  <a class="js-clear ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-                '" title="Remove Field"><i class="fa fa-minus-circle"></i></a></div>';
+                ' btn-xs btn-danger" title="Remove Field"><i class="fa fa-minus-circle"></i></a></div>';
 
         }
         return __p
@@ -1109,13 +1140,13 @@
                 '<input type="checkbox" class="js-default-updated" readonly="readonly" data-rv-checked="option:checked" />  ' +
                 '<input type="text" data-rv-input="option:label" class="option-label-input" /> ';
 
-            __p += '<a class="js-sort-up-option ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-                '" title="Sort up"><i class="fa fa-arrow-up"></i></a>' +
+            __p += '<a class="js-sort-up-option btn-xs btn-success ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+                '" title="Sort up"><i class="fa fa-arrow-up"></i></a> ' +
 
-                '<a class="js-sort-down-option ' + Formbuilder.options.BUTTON_CLASS +
+                '<a class="js-sort-down-option btn-xs btn-success ' + Formbuilder.options.BUTTON_CLASS +
                 '" title="Sort down"><i class="fa fa-arrow-down"></i></a> ' +
 
-                '<a class="js-remove-option ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+                '<a class="js-remove-option btn-xs btn-danger ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                 '" title="Remove Option"><i class="fa fa-minus-circle"></i></a>';
 
             __p += '</div>';
