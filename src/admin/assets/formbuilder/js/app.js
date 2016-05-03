@@ -1,10 +1,13 @@
-var Node = Node || {
+/*var Node = Node || {
         ELEMENT_NODE: 1,
         ATTRIBUTE_NODE: 2,
         TEXT_NODE: 3
-    };
+    };*/
 
-$.scrollWindowTo = function (pos, duration, cb) {
+/**
+ * Scroll window support
+ */
+/*$.scrollWindowTo = function (pos, duration, cb) {
     if (duration == null) {
         duration = 0;
     }
@@ -20,8 +23,11 @@ $.scrollWindowTo = function (pos, duration, cb) {
     }, duration, function () {
         return typeof cb === "function" ? cb() : void 0;
     });
-};
+};*/
 
+/**
+ * Deep objects support
+ */
 (function () {
     var arrays,
         basicObjects,
@@ -130,7 +136,7 @@ $.scrollWindowTo = function (pos, duration, cb) {
 }).call(this);
 
 /**
- * Main source
+ * Nested models support
  */
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
