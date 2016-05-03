@@ -71,7 +71,7 @@ class Fields extends Widget
         return $this->render('fields', [
             'url' => $this->url,
             'urlSave' => $this->urlSave,
-            'id' => $this->model->primaryKey,
+            //'id' => $this->model->primaryKey,
             'categoryId' => isset($this->categoryId) ? $this->categoryId : 0,
             'entityModel' => $this->entityModel,
             'entityName' => $this->entityName,
