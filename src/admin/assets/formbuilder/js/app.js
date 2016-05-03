@@ -5,9 +5,9 @@
     };*/
 
 /**
- * Scroll window support
+ * Scroll left panel support
  */
-/*$.scrollWindowTo = function (pos, duration, cb) {
+$.scrollWindowTo = function (pos, duration, cb) {
     if (duration == null) {
         duration = 0;
     }
@@ -23,7 +23,7 @@
     }, duration, function () {
         return typeof cb === "function" ? cb() : void 0;
     });
-};*/
+};
 
 /**
  * Deep objects support
