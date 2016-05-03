@@ -32,8 +32,8 @@ class FbAsset extends AssetBundle
         'js/backbone.js',
         'js/app.js',
         'js/sightglass.js',
-        'js/rivets.js',
-        'js/formbuilder.js',
+        'js/rivets_old.js',
+        'js/formbuilder_old.js',
     ];
 
     public $depends = [

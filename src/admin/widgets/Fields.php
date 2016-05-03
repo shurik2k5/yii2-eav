@@ -2,6 +2,7 @@
 
 namespace mirocow\eav\admin\widgets;
 
+use mirocow\eav\models\EavAttribute;
 use yii\base\Widget;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -36,6 +37,7 @@ class Fields extends Widget
 
         $this->entityModel = str_replace('\\', '\\\\', $this->entityModel);
 
+        /** @var EavAttribute $attribute */
         foreach ($this->model->getEavAttributes()->all() as $attribute) {
 
             $options = [

@@ -18,44 +18,44 @@
 
         unbind: function (el) {
             return $(el).unbind('input.rivets');
-        },
-
-        routine: function(el, value) {
-            $(el)[value ? 'addClass' : 'removeClass']('enabled')
         }
+
     }
 
     /**
      * Adapter
      */
-    rivets.adapters['.'] = {
-        observe: function (obj, keypath, callback) {
-            obj.model.on('change:' + keypath, callback)
-        },
+    rivets.configure({
+        prefix: "rv",
+        adapter: {
 
-        unobserve: function (obj, keypath, callback) {
-            obj.model.off('change:' + keypath, callback)
-        },
+            subscribe: function (obj, keypath, callback) {
+                callback.wrapped = function (m, v) {
+                    return callback(v);
+                }
+                return obj.on('change:' + keypath, callback.wrapped);
+            },
 
-        get: function (obj, keypath) {
-            if (keypath === "cid") {
-                return obj.model.cid;
-            }
-            return obj.model.get(keypath)
-        },
+            unsubscribe: function (obj, keypath, callback) {
+                return obj.off('change:' + keypath, callback.wrapped);
+            },
 
-        set: function (obj, keypath, value) {
-            obj.model.set(keypath, value)
-        },
+            read: function (obj, keypath) {
+                if (keypath === "cid") {
+                    return obj.cid;
+                }
+                return obj.get(keypath);
+            },
 
-        publish: function (obj, keypath, value) {
-            if (obj.model.cid) {
-                return obj.model.set(keypath, value);
-            } else {
-                return obj.model[keypath] = value;
+            publish: function (obj, keypath, value) {
+                if (obj.cid) {
+                    return obj.set(keypath, value);
+                } else {
+                    return obj[keypath] = value;
+                }
             }
         }
-    }
+    });
 
 }).call(this);
 
@@ -257,7 +257,7 @@
 
         EditFieldView.prototype.remove = function () {
             this.parentView.editView = void 0;
-            this.parentView.$el.find('[data-target="#addField"]').click();
+            this.parentView.$el.find("[data-target=\"#addField\"]").click();
             return EditFieldView.__super__.remove.apply(this, arguments);
         }
 
@@ -332,10 +332,11 @@
             $el = $(e.currentTarget);
             options = this.model.get(Formbuilder.options.mappings.OPTIONS);
             index = this.$el.find(".js-default-updated").index($el);
-            if (options[index].checked) {
+            if ( options[index].checked ) {
                 options[index].checked = false;
             } else {
                 options[index].checked = true;
+                //this.$el.find(".js-default-updated").attr('checked', true);//.trigger('change');
             }
             return this.forceRender();
         }
@@ -763,10 +764,10 @@
             Formbuilder.fields[name] = opts;
 
             /*if (opts.type === 'non_input') {
-             return Formbuilder.nonInputFields[name] = opts;
-             } else {
-             return Formbuilder.inputFields[name] = opts;
-             }*/
+                return Formbuilder.nonInputFields[name] = opts;
+            } else {
+                return Formbuilder.inputFields[name] = opts;
+            }*/
 
             return Formbuilder.inputFields[name] = opts;
         }
@@ -873,9 +874,9 @@
         obj || (obj = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
-        function print() {
+        /*function print() {
             __p += __j.call(arguments, '')
-        }
+        }*/
 
         with (obj) {
             __p += '<div class="fb-tab-pane active" id="settingsFields"></div>';
@@ -888,9 +889,9 @@
         obj || (obj = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
-        function print() {
+        /*function print() {
             __p += __j.call(arguments, '')
-        }
+        }*/
 
         with (obj) {
             __p += '<div class="fb-tab-pane active" id="addField"> <div class="fb-add-field-types"><div class="section">';
@@ -942,7 +943,7 @@
             eye = '<a class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-eye"></i></a>';
             eye += '<a style="margin-right: 4px;" class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-edit"></i></a>';
             sorter = '<a style="position: relative; left: -4px; padding-left: 10px; padding-right: 10px; margin-right: 4px;" class="btn btn-default btn-xs"><i class="fa fa-arrows-v"></i></a>';
-            editable = '<input type="text" style="width: 156px; padding-top: 3px; padding-bottom: 3px; height: 24px; display: inline-block;" class="form-control input-sm" value="Tested contend in edit...">';
+            editable =  '<input type="text" style="width: 156px; padding-top: 3px; padding-bottom: 3px; height: 24px; display: inline-block;" class="form-control input-sm" value="Tested contend in edit...">';
             saver = '<a class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-eye"></i></a>';
             saver += '<a style="margin-right: 4px;" class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-save"></i></a>';
             __p +=
@@ -1048,9 +1049,9 @@
         obj || (obj = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
-        function print() {
+        /*function print() {
             __p += __j.call(arguments, '')
-        }
+        }*/
 
         with (obj) {
 
@@ -1077,7 +1078,7 @@
         with (obj) {
 
             __p +=
-                ((__t = ( Formbuilder.templates['edit/common']() )) == null ? '' : __t) +
+                ((__t = ( Formbuilder.templates['edit/common']({rf: rf}) )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].edit({rf: rf}) )) == null ? '' : __t);
 
         }
@@ -1089,7 +1090,9 @@
         var __t, __p = '', __e = _.escape;
         with (obj) {
 
-            __p += '<div class="fb-edit-section-header">Field</div><div class="fb-common-wrapper">  <div class="fb-label-description">' +
+            __p += '<div class="fb-edit-section-header">Field type: ' +
+                ((__t = ( rf.get(Formbuilder.options.mappings.FIELD_TYPE) )) == null ? '' : __t) +
+                '</div><div class="fb-common-wrapper"><div class="fb-label-description">' +
 
                 ((__t = ( Formbuilder.templates['edit/label_description']() )) == null ? '' : __t) +
                 '</div><div class="fb-common-checkboxes">';
@@ -1103,15 +1106,15 @@
         with (obj) {
 
             __p +=
-                '<input type="text" rv-input="model.' +
+                '<input type="text" data-rv-input="model.' +
                 ((__t = ( Formbuilder.options.mappings.GROUP_NAME )) == null ? '' : __t) +
                 '" placeholder="Group name" />' +
 
-                '<input type="text" rv-input="model.' +
+                '<input type="text" data-rv-input="model.' +
                 ((__t = ( Formbuilder.options.mappings.LABEL )) == null ? '' : __t) +
                 '" placeholder="Field label" />' +
 
-                '<textarea class="form-control" rv-input="model.' +
+                '<textarea class="form-control" data-rv-input="model.' +
                 ((__t = ( Formbuilder.options.mappings.DESCRIPTION )) == null ? '' : __t) +
                 '"  placeholder="Add a longer description to this field"></textarea>';
         }
@@ -1122,27 +1125,26 @@
         obj || (obj = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
-        function print() {
+        /*function print() {
             __p += __j.call(arguments, '')
-        }
+        }*/
 
         with (obj) {
 
             __p += '<div class="fb-edit-section-header">Options</div>';
 
             if (typeof includeBlank !== 'undefined') {
-                __p += '  <label><input type="checkbox" rv-checked="model.' +
+                __p += '  <label><input type="checkbox" data-rv-checked="model.' +
                     ((__t = ( Formbuilder.options.mappings.INCLUDE_BLANK )) == null ? '' : __t) +
                     '" />    Include blank</label>';
             }
 
-            __p += '<div class="option" rv-each-option="model.' +
+            __p += '<div class="option" data-rv-each-option="model.' +
                 ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) + '">  ' +
+                '<input type="checkbox" class="js-default-updated" readonly="readonly" data-rv-checked="option:checked" />  ' +
+                '<input type="text" data-rv-input="option:label" class="option-label-input" /> ';
 
-                '<input type="checkbox" class="js-default-updated" readonly="readonly" rv-checked="option:checked" />  ' +
-                '<input type="text" rv-input="option:label" class="option-label-input" /> ' +
-
-                '<a class="js-sort-up-option btn-xs btn-success ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+            __p += '<a class="js-sort-up-option btn-xs btn-success ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                 '" title="Sort up"><i class="fa fa-arrow-up"></i></a> ' +
 
                 '<a class="js-sort-down-option btn-xs btn-success ' + Formbuilder.options.BUTTON_CLASS +
@@ -1154,7 +1156,7 @@
             __p += '</div>';
 
             if (typeof includeOther !== 'undefined') {
-                __p += '  <label>    <input type="checkbox" rv-checked="model.' +
+                __p += '  <label>    <input type="checkbox" data-rv-checked="model.' +
                     ((__t = ( Formbuilder.options.mappings.INCLUDE_OTHER )) == null ? '' : __t) +
                     '" />    Include "other"  </label>';
             }
@@ -1173,30 +1175,28 @@
         with (obj) {
 
             __p += '<div class="fb-edit-section-header">Size</div>' +
-                '<select rv-value="model.' +
+                '<select data-rv-value="model.' +
                 ((__t = ( Formbuilder.options.mappings.SIZE )) == null ? '' : __t) + '">' +
-
                 '<option value="small">Small</option>' +
                 '<option value="medium">Medium</option>' +
                 '<option value="large">Large</option>' +
-
                 '</select>';
         }
         return __p
     }
 
     /*this["Formbuilder"]["templates"]["edit/units"] = function (obj) {
-     obj || (obj = {});
-     var __t, __p = '', __e = _.escape;
-     with (obj) {
+        obj || (obj = {});
+        var __t, __p = '', __e = _.escape;
+        with (obj) {
 
-     __p += '<div class="fb-edit-section-header">Units</div><input type="text" rv-input="model.' +
-     ((__t = ( Formbuilder.options.mappings.UNITS )) == null ? '' : __t) +
-     '" />';
+            __p += '<div class="fb-edit-section-header">Units</div><input type="text" data-rv-input="model.' +
+                ((__t = ( Formbuilder.options.mappings.UNITS )) == null ? '' : __t) +
+                '" />';
 
-     }
-     return __p
-     }*/
+        }
+        return __p
+    }*/
 
     this["Formbuilder"]["templates"]["edit/text_area"] = function (obj) {
         obj || (obj = {});
@@ -1204,10 +1204,10 @@
         with (obj) {
 
             __p += '<div class="fb-edit-section-header">Attributes</div>Rows' +
-                '<input type="text" rv-input="model.' +
+                '<input type="text" data-rv-input="model.' +
 
                 ((__t = ( Formbuilder.options.mappings.AREA_ROWS )) == null ? '' : __t) +
-                '" style="width: 60px" />&nbsp;&nbsp;Cols<input type="text" rv-input="model.' +
+                '" style="width: 60px" />&nbsp;&nbsp;Cols<input type="text" data-rv-input="model.' +
 
                 ((__t = ( Formbuilder.options.mappings.AREA_COLS )) == null ? '' : __t) +
                 '" style="width: 60px" />';
@@ -1225,17 +1225,15 @@
         var __t, __p = '', __e = _.escape;
         with (obj) {
 
-            debugger;
-
-            __p += '<label>  <input type="checkbox" rv-checked="model.' +
+            __p += '<label>  <input type="checkbox" data-rv-checked="model.' +
                 ((__t = ( Formbuilder.options.mappings.REQUIRED )) == null ? '' : __t) +
                 '" />  Required</label><br>';
 
-            __p += '<label>  <input type="checkbox" rv-checked="model.' +
+            __p += '<label>  <input type="checkbox" data-rv-checked="model.' +
                 ((__t = ( Formbuilder.options.mappings.LOCKED )) == null ? '' : __t) +
                 '" />  Read only</label><br>';
 
-            __p += '<label>  <input type="checkbox" rv-checked="model.' +
+            __p += '<label>  <input type="checkbox" data-rv-checked="model.' +
                 ((__t = ( Formbuilder.options.mappings.VISIBLE )) == null ? '' : __t) +
                 '" />  Visible</label>';
 
@@ -1249,10 +1247,10 @@
         with (obj) {
 
             __p += '<div class="fb-edit-section-header">Minimum / Maximum</div>Above' +
-                '<input type="text" rv-input="model.' +
+                '<input type="text" data-rv-input="model.' +
 
                 ((__t = ( Formbuilder.options.mappings.MIN )) == null ? '' : __t) +
-                '" style="width: 60px" />&nbsp;&nbsp;Below<input type="text" rv-input="model.' +
+                '" style="width: 60px" />&nbsp;&nbsp;Below<input type="text" data-rv-input="model.' +
 
                 ((__t = ( Formbuilder.options.mappings.MAX )) == null ? '' : __t) +
                 '" style="width: 60px" />';
@@ -1267,13 +1265,13 @@
         with (obj) {
 
             __p += '<div class="fb-edit-section-header">Length Limit</div>Min&nbsp;' +
-                '<input type="text" rv-input="model.' +
+                '<input type="text" data-rv-input="model.' +
 
                 ((__t = ( Formbuilder.options.mappings.MINLENGTH )) == null ? '' : __t) +
-                '" style="width: 60px" />Max&nbsp;<input type="text" rv-input="model.' +
+                '" style="width: 60px" />Max&nbsp;<input type="text" data-rv-input="model.' +
 
                 ((__t = ( Formbuilder.options.mappings.MAXLENGTH )) == null ? '' : __t) +
-                '" style="width: 60px" />&nbsp;&nbsp;<select rv-value="model.' +
+                '" style="width: 60px" />&nbsp;&nbsp;<select data-rv-value="model.' +
 
                 ((__t = ( Formbuilder.options.mappings.LENGTH_UNITS )) == null ? '' : __t) +
                 '" style="width: auto;">  <option value="characters">characters</option>  ' +
@@ -1288,7 +1286,7 @@
         with (obj) {
 
             __p += '<div class="fb-edit-section-header">Integer only</div><label>  ' +
-                '<input type="checkbox" rv-checked="model.' +
+                '<input type="checkbox" data-rv-checked="model.' +
 
                 ((__t = ( Formbuilder.options.mappings.INTEGER_ONLY )) == null ? '' : __t) +
                 '" />  Only accept integers</label>';
