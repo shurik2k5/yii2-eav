@@ -67,8 +67,8 @@ class m150821_133232_init extends Migration
 
         $this->createTable($this->tables['attribute'], [
             'id' => $this->primaryKey(11),
-            'entityId' => $this->integer(11)->defaultValue('NULL'),
-            'typeId' => $this->integer(11)->defaultValue('NULL'),
+            'entityId' => $this->integer(11)->defaultValue(NULL),
+            'typeId' => $this->integer(11)->defaultValue(NULL),
             'type' => $this->string(50)->defaultValue(''),
             'name' => $this->string(255)->defaultValue('NULL'),
             'label' => $this->string(255)->defaultValue('NULL'),
