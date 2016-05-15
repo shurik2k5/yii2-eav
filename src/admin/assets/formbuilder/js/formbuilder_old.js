@@ -840,6 +840,16 @@
 
     // Base templates
 
+    this["Formbuilder"]["templates"]["view/base_non_input"] = function (obj) {
+        obj || (obj = {});
+        var __t, __p = '', __e = _.escape;
+        with (obj) {
+            __p += '';
+    
+        }
+        return __p
+    }
+
     this["Formbuilder"]["templates"]["page"] = function (obj) {
         obj || (obj = {});
         var __t, __p = '', __e = _.escape;
