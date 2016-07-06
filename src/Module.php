@@ -13,6 +13,7 @@ class Module extends \yii\base\Module
         parent::init();
 
         $this->setModule('admin', 'mirocow\eav\admin\Module');
+        $this->registerTranslations();
     }
 
     public function createController($route)
@@ -25,4 +26,14 @@ class Module extends \yii\base\Module
         }
 
     }
+    
+    public function registerTranslations()
+        {
+            Yii::$app->i18n->translations['eav'] = 
+            [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => "@alien/eav/messages",
+                'forceTranslation' => true
+            ];
+        }
 }

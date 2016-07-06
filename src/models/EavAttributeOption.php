@@ -47,10 +47,10 @@ class EavAttributeOption extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order' => 'Sort order',
-            'attributeId' => 'Attribute ID',
-            'value' => 'Value',
-            'defaultOptionId' => 'Default option Id',
+            'order' => Yii::t('eav', 'Sort order'),
+            'attributeId' => Yii::t('eav', 'Attribute ID'),
+            'value' => Yii::t('eav', 'Value'),
+            'defaultOptionId' => Yii::t('eav', 'Default option Id'),
         ];
     }
 

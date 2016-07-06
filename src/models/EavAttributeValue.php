@@ -47,10 +47,10 @@ class EavAttributeValue extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'entityId' => 'Entity ID',
-            'attributeId' => 'Attribute ID',
-            'value' => 'Value',
-            'optionId' => 'Option ID',
+            'entityId' => Yii::t('eav', 'Entity ID'),
+            'attributeId' => Yii::t('eav', 'Attribute ID'),
+            'value' => Yii::t('eav', 'Value'),
+            'optionId' => Yii::t('eav', 'Option ID'),
         ];
     }
 

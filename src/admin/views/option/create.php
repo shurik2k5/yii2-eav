@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model mirocow\eav\models\EavAttributeOption */
 
-$this->title = 'Create Eav Attribute Option';
-$this->params['breadcrumbs'][] = ['label' => 'EAV', 'url' => ['/eav']];
-$this->params['breadcrumbs'][] = ['label' => 'Eav Attribute Options', 'url' => ['index']];
+$this->title = Yii::t('eav','Create Eav Attribute Option');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('eav','EAV'), 'url' => ['/eav']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('eav','Eav Attribute Options'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="eav-attribute-option-create">
