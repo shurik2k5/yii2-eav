@@ -34,6 +34,7 @@ return [
     'Rules' => 'Правила',
     'Locked' => 'Заблокирован',
     'Visible' => 'Видимый',
+    'Attribute name' => 'Название атрибута',
     
     'Handler Class' => 'Класс обработчик',
     'Store Type' => 'Тип хранилища',

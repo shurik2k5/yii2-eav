@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'attributeId')->dropDownList($model->listAttributes, [])->hint('')->label('Attribute name') ?>
+    <?= $form->field($model, 'attributeId')->dropDownList($model->listAttributes, [])->hint('')->label(Yii::t('eav','Attribute name')) ?>
 
     <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
 

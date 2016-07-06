@@ -1,6 +1,7 @@
 <?php
 
 namespace mirocow\eav;
+use Yii;
 
 class Module extends \yii\base\Module
 {
@@ -32,7 +33,7 @@ class Module extends \yii\base\Module
             Yii::$app->i18n->translations['eav'] = 
             [
                 'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => "@alien/eav/messages",
+                'basePath' => "@mirocow/eav/messages",
                 'forceTranslation' => true
             ];
         }
