@@ -7,8 +7,8 @@ use yii\helpers\Html;
 /* @var $searchModel mirocow\eav\models\EavEntitySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Eav Entities';
-$this->params['breadcrumbs'][] = ['label' => 'EAV', 'url' => ['/eav']];
+$this->title = Yii::t('eav','Eav Entities');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('eav','EAV'), 'url' => ['/eav']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="eav-entity-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Eav Entity', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('eav','Create Eav Entity'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

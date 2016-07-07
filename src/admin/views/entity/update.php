@@ -5,11 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model mirocow\eav\models\EavEntity */
 
-$this->title = 'Update Eav Entity: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'EAV', 'url' => ['/eav']];
-$this->params['breadcrumbs'][] = ['label' => 'Eav Entities', 'url' => ['index']];
+$this->title = Yii::t('eav','Update Eav Entity').': ' . ' ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('eav','EAV'), 'url' => ['/eav']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('eav','Eav Entities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('eav','Update');
 ?>
 <div class="eav-entity-update">
 

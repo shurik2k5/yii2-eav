@@ -41,11 +41,11 @@ class EavAttributeRule extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'attributeId' => 'Attribute ID',
-            'rules' => 'Rules',
-            'required' => 'Required',
-            'locked' => 'Locked',
-            'visible' => 'Visible',
+            'attributeId' => Yii::t('eav', 'Attribute ID'),
+            'rules' => Yii::t('eav', 'Rules'),
+            'required' => Yii::t('eav', 'Required'),
+            'locked' => Yii::t('eav', 'Locked'),
+            'visible' => Yii::t('eav', 'Visible'),
         ];
     }
 

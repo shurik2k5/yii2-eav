@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model mirocow\eav\models\EavEntity */
 
-$this->title = 'Create Eav Entity';
-$this->params['breadcrumbs'][] = ['label' => 'EAV', 'url' => ['/eav']];
-$this->params['breadcrumbs'][] = ['label' => 'Eav Entities', 'url' => ['index']];
+$this->title = Yii::t('eav','Create Eav Entity');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('eav','EAV'), 'url' => ['/eav']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('eav','Eav Entities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="eav-entity-create">

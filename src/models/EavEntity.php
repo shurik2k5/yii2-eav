@@ -42,10 +42,10 @@ class EavEntity extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'entityName' => 'Name',
-            'entityModel' => 'Entity Model',
-            'categoryId' => 'ID Category',
-            'modelId' => 'ID Model',
+            'entityName' => Yii::t('eav', 'Name'),
+            'entityModel' => Yii::t('eav', 'Entity Model'),
+            'categoryId' => Yii::t('eav', 'ID Category'),
+            'modelId' => Yii::t('eav', 'ID Model'),
         ];
     }
 

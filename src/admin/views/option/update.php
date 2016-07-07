@@ -5,11 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model mirocow\eav\models\EavAttributeOption */
 
-$this->title = 'Update Eav Attribute Option: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'EAV', 'url' => ['/eav']];
-$this->params['breadcrumbs'][] = ['label' => 'Eav Attribute Options', 'url' => ['index']];
+$this->title = Yii::t('eav','Update Eav Attribute Option').': ' . ' ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('eav','EAV'), 'url' => ['/eav']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('eav','Eav Attribute Options'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('eav','Update');
 ?>
 <div class="eav-attribute-option-update">
 

@@ -42,9 +42,9 @@ class EavAttributeType extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'handlerClass' => 'Handler Class',
-            'storeType' => 'Store Type',
+            'name' => Yii::t('eav', 'Name'),
+            'handlerClass' => Yii::t('eav', 'Handler Class'),
+            'storeType' => Yii::t('eav', 'Store Type'),
         ];
     }
 
