@@ -51,7 +51,7 @@ return [
     'Dynamic model data were not save due to validation error.' => 'EAV атрибуты не были сохранены из-за ошибки валидации.',
    
     'The name of field' => 'Название поля',
-    'The label of field' => 'Метк поля',
+    'The label of field' => 'Метка поля',
     'Entity name' => 'Имя сущности',
     'The default value of field' => 'Значение поля поумолчанию',
     
@@ -62,6 +62,7 @@ return [
     'Fields' => 'Поля',
     'Create Eav Attribute' => 'Создание EAV атрибута',
     'Update Eav Attribute' => 'Редактирование EAV атрибута',
+    'The type of entity' => 'Тип сущности',
     
     
     'Are you sure you want to delete this item?' => 'Вы уверены, что хотите удалить этот элемент?',

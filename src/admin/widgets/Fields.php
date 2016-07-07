@@ -9,9 +9,9 @@ use yii\helpers\Url;
 
 class Fields extends Widget
 {
-    public $url = ['eav/admin/ajax/index'];
+    public $url = ['/eav/admin/ajax/index'];
 
-    public $urlSave = ['eav/admin/ajax/save'];
+    public $urlSave = ['/eav/admin/ajax/save'];
 
     public $model;
 
@@ -31,9 +31,9 @@ class Fields extends Widget
     {
         parent::init();
 
-        $this->url = Url::to($this->url);
+        $this->url = Url::toRoute($this->url);
 
-        $this->urlSave = Url::to($this->urlSave);
+        $this->urlSave = Url::toRoute($this->urlSave);
 
         $this->entityModel = str_replace('\\', '\\\\', $this->entityModel);
 

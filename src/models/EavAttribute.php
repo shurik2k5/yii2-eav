@@ -45,7 +45,7 @@ class EavAttribute extends \yii\db\ActiveRecord
             [['name', 'defaultValue', 'label', 'description'], 'string', 'max' => 255],
             [['type'], 'string', 'max' => 50],
             [['entityId', 'typeId', 'order'], 'integer'],
-            [['required'], 'boolean'],
+           // [['required'], 'boolean'],
         ];
     }
 
