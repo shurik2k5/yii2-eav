@@ -52,7 +52,7 @@ return [
    
     'The name of field' => 'Название поля',
     'The label of field' => 'Метка поля',
-    'Entity name' => 'Имя сущности',
+    'Entity name' => 'Название сущности',
     'The default value of field' => 'Значение поля поумолчанию',
     
     'Search' => 'Поиск',
@@ -62,7 +62,7 @@ return [
     'Fields' => 'Поля',
     'Create Eav Attribute' => 'Создание EAV атрибута',
     'Update Eav Attribute' => 'Редактирование EAV атрибута',
-    'The type of entity' => 'Тип сущности',
+    'The type of entity' => 'Тип аттрибута',
     
     
     'Are you sure you want to delete this item?' => 'Вы уверены, что хотите удалить этот элемент?',
@@ -70,8 +70,8 @@ return [
     'The name of entity' => 'Имя сущности',
     'This is the ActiveRecord class associated with the table that EavEntity will be built upon.
                 You should provide a fully qualified class name, e.g., <code>app\models\Post</code>.' => 
-    'Это активный класс Record, связанный с таблицей, что EavEntity будет построен на. Вы должны предоставить полное имя класса, например, <code>app\models\Post</code>.',
-    'This category id to bind to the directory. The default is not used and may be 0.' => 'Эта категория идентификатор привязки к каталогу. По умолчанию не используется и может быть 0.',
+    'Это класс ActiveRecord, связанный с таблицей, для которого создается сущность. Вы должны указать полное имя класса, например, <code>app\models\Post</code>.',
+    'This category id to bind to the directory. The default is not used and may be 0.' => 'Это идентификатор категории для объединения сущностей. По умолчанию не используется и может быть 0.',
     
     'Create Eav Entity' => 'Создание EAV сущности',
     'Eav Entities' => 'EAV сущности',

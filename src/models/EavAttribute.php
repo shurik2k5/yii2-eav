@@ -45,7 +45,6 @@ class EavAttribute extends \yii\db\ActiveRecord
             [['name', 'defaultValue', 'label', 'description'], 'string', 'max' => 255],
             [['type'], 'string', 'max' => 50],
             [['entityId', 'typeId', 'order'], 'integer'],
-           // [['required'], 'boolean'],
         ];
     }
 
@@ -62,7 +61,6 @@ class EavAttribute extends \yii\db\ActiveRecord
             'label' => Yii::t('eav', 'Label'),
             'defaultValue' => Yii::t('eav', 'Default Value'), 
             'defaultOptionId' => Yii::t('eav', 'Default Option ID'),
-            'required' => Yii::t('eav', 'Required'),
             'order' => Yii::t('eav', 'Order'),
             'description' => Yii::t('eav', 'Description'),
         ];
