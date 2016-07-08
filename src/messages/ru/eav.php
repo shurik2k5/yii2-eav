@@ -1,11 +1,11 @@
 <?php
 return [
-    'EAV Fields constructor' => 'Конструктор EAV полей',
+    'EAV Fields constructor' => 'Конструктор EAV атрибутов',
     'Descriptions' => 'Описания',
     'Route' => 'Маршрут',
     'Description' => 'Описание',
     'Operations' => 'Дествия',
-    'Fields constructor' => 'Конструктор полей',
+    'Fields constructor' => 'Конструктор атрибутов',
     'Options constructor' => 'Конструктор параметров',
     'Types constructor' => 'Конструктор типов',
     'Entities constructor' => 'Конструктор сущностей',
@@ -50,16 +50,16 @@ return [
     'Dynamic model data were no attributes.' => 'В модели нет EAV атрибутов',
     'Dynamic model data were not save due to validation error.' => 'EAV атрибуты не были сохранены из-за ошибки валидации.',
    
-    'The name of field' => 'Название поля',
-    'The label of field' => 'Метка поля',
+    'The name of field' => 'Название атрибута',
+    'The label of field' => 'Метка атрибута',
     'Entity name' => 'Название сущности',
-    'The default value of field' => 'Значение поля поумолчанию',
+    'The default value of field' => 'Значение атрибута поумолчанию',
     
     'Search' => 'Поиск',
     'Reset' => 'Очистить',
     
     'EAV' => 'EAV',
-    'Fields' => 'Поля',
+    'Fields' => 'Атрибуты',
     'Create Eav Attribute' => 'Создание EAV атрибута',
     'Update Eav Attribute' => 'Редактирование EAV атрибута',
     'The type of entity' => 'Тип аттрибута',
