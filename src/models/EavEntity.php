@@ -31,7 +31,7 @@ class EavEntity extends \yii\db\ActiveRecord
         return [
             [['entityModel', 'entityName'], 'string', 'max' => 100],
             [['entityModel', 'entityName'], 'required'],
-            [['categoryId', 'modelId'], 'integer'],
+            [['categoryId'], 'integer'],
         ];
     }
 

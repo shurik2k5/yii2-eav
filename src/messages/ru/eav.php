@@ -89,4 +89,7 @@ return [
     'Create Eav Attribute Value' => 'Создание значения EAV атрибута',
     'Eav Attribute Values' => 'Значения EAV атрибутов',
     'Update Eav Attribute Value' => 'Режатирование значения EAV атрибута',
+    
+    'Attribute name must contain latin word characters only.' => 'Имя атрибута должно содержать только латинские буквы.',
+    'Type name must contain latin word characters only.' => 'Имя атрибута должно содержать только латинские буквы.',
 ];

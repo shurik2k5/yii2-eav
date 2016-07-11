@@ -32,6 +32,7 @@ class EavAttributeType extends \yii\db\ActiveRecord
         return [
             [['storeType'], 'integer'],
             [['name', 'handlerClass'], 'string', 'max' => 255],
+            ['name', 'match', 'pattern' => '/(^|.*\])([\w\.]+)(\[.*|$)/', 'message' => Yii::t('eav','Type name must contain latin word characters only.')],
         ];
     }
 
