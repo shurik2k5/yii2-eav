@@ -49,6 +49,7 @@ return [
     
     'Dynamic model data were no attributes.' => 'В модели нет EAV атрибутов',
     'Dynamic model data were not save due to validation error.' => 'EAV атрибуты не были сохранены из-за ошибки валидации.',
+    'The description of field' => 'Описание атрибута',
    
     'The name of field' => 'Название атрибута',
     'The label of field' => 'Метка атрибута',

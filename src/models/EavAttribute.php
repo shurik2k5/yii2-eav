@@ -56,6 +56,7 @@ class EavAttribute extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'typeId' => Yii::t('eav', 'Type ID'),
+            'entityId' => Yii::t('eav', 'Entity ID'),
             'type' => Yii::t('eav', 'Type'),
             'name' => Yii::t('eav', 'Name'),
             'label' => Yii::t('eav', 'Label'),

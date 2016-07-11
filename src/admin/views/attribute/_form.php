@@ -15,6 +15,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true])->hint(Yii::t('eav','The name of field')) ?>
 
     <?= $form->field($model, 'label')->textInput(['maxlength' => true])->hint(Yii::t('eav','The label of field')) ?>
+    
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true])->hint(Yii::t('eav','The description of field')) ?>
 
     <?= $form->field($model, 'entityId')->dropDownList($model->listEntities, [])->hint('')->label(Yii::t('eav','Entity name')) ?>
 
