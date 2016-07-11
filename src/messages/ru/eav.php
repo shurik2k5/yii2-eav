@@ -20,7 +20,7 @@ return [
     'Name' => 'Имя',
     'Label' => 'Метка',
     'Default Value' => 'Значение по умолчанию', 
-    'Default Option ID' => 'Идентификатор настройки поумолчанию',
+    'Default Option ID' => 'Идентификатор параметра поумолчанию',
     'Required' => 'Обязатльный',
     'Order' => 'Порядок',
     'Description' => 'Описание',
@@ -28,7 +28,7 @@ return [
     'Sort order' => 'Порядок сортировки',
     'Attribute ID' => 'Идентификатор атрибута',
     'Value' => 'Значение',
-    'Default option Id' => 'Идентификатор настройки поумолчанию',
+    'Default option Id' => 'Идентификатор параметра поумолчанию',
     
     'Attribute ID' => 'Идентификатор атрибута',
     'Rules' => 'Правила',
@@ -41,7 +41,7 @@ return [
     
     'Entity ID' => 'Идентификатор сущности',
     'Attribute ID' => 'Идентификатор атрибута',
-    'Option ID' => 'Идентификатор настройки',
+    'Option ID' => 'Идентификатор параметра',
     
     'Entity Model' => 'Модель сущности',
     'ID Category' => 'Идентификатор категории',
@@ -77,9 +77,9 @@ return [
     'Eav Entities' => 'EAV сущности',
     'Update Eav Entity' => 'Редактирование EAV сущности',
     
-    'Create Eav Attribute Option' => 'Создание настройки EAV атрибута',
-    'Eav Attribute Options' => 'Настройки EAV атрибута',
-    'Update Eav Attribute Option' => 'Редактирование настройки EAV атрибута',
+    'Create Eav Attribute Option' => 'Создание параметра EAV атрибута',
+    'Eav Attribute Options' => 'Параметры EAV атрибута',
+    'Update Eav Attribute Option' => 'Редактирование параметра EAV атрибута',
     
     'Create Eav Attribute Type' => 'Создание типа EAV атрибута',
     'Eav Attribute Types' => 'Типы EAV атрибутов',
