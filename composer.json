@@ -27,7 +27,8 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.4.0",
-    "yiisoft/yii2": ">=2.0.8"
+    "yiisoft/yii2": ">=2.0.8",
+    "apollo/yii2-i18next": "*"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",
