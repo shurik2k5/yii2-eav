@@ -69,10 +69,6 @@ class Fields extends Widget
 
     public function run()
     {
-        /*$view = $this->getView();
-        GridViewAsset::register($view);
-        $language = Yii::$app->language;
-        $this->registerJs("i18n.init({ lng: '$language', resGetPath: '/locales/__lng__/__ns__.json', fallbackLng: 'en' });");*/
         return $this->render('fields', [
             'url' => $this->url,
             'urlSave' => $this->urlSave,

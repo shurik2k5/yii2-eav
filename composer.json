@@ -28,7 +28,7 @@
   "require": {
     "php": ">=5.4.0",
     "yiisoft/yii2": ">=2.0.8",
-    "apollo/yii2-i18next": "*"
+    "bower-asset/i18next": "@stable"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",
