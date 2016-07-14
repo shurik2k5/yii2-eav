@@ -10,6 +10,12 @@
     "fields"
   ],
   "type": "yii2-extension",
+  "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/alien-art/yii2-jquery-i18next"
+        }
+    ],
   "authors": [
     {
       "name": "Alexey Samoylov",
@@ -28,7 +34,7 @@
   "require": {
     "php": ">=5.4.0",
     "yiisoft/yii2": ">=2.0.8",
-    "bower-asset/i18next": "@stable"
+    "alien/yii2-jquery-i18next": "*"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",

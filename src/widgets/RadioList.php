@@ -5,6 +5,7 @@
 
 namespace mirocow\eav\widgets;
 
+use Yii;
 use mirocow\eav\handlers\AttributeHandler;
 use yii\helpers\ArrayHelper;
 
@@ -42,9 +43,13 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/options']({ includeOther: true }) %>    
 TEMPLATE;
 
-    static $fieldButton = <<<TEMPLATE
+    /*static $fieldButton = <<<TEMPLATE
     <span class="symbol"><span class="fa fa-circle-o"></span></span> Radio    
-TEMPLATE;
+TEMPLATE;*/
+    
+    public static function fieldButton()
+    {return '<span class="symbol"><span class="fa fa-circle-o"></span></span> '.Yii::t('eav','Radio');
+    }
 
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {

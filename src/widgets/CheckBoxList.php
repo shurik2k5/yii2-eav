@@ -5,6 +5,7 @@
 
 namespace mirocow\eav\widgets;
 
+use Yii;
 use mirocow\eav\handlers\AttributeHandler;
 use yii\helpers\ArrayHelper;
 
@@ -40,10 +41,10 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/options']({ includeOther: true }) %>   
 TEMPLATE;
 
-    static $fieldButton = <<<TEMPLATE
-    <span class="symbol"><span class="fa fa-square-o"></span></span> Checkboxes    
-TEMPLATE;
-
+    public static function fieldButton()
+    {return '<span class="symbol"><span class="fa fa-square-o"></span></span> '.Yii::t('eav','Checkboxes');
+    }
+    
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
             attrs.field_options.options = [
@@ -63,7 +64,6 @@ TEMPLATE;
     public function init()
     {
         parent::init();
-
         /*$this->owner->addRule($this->getAttributeName(), 'in', [
             'range' => $this->getOptions(),
             'allowArray' => true,

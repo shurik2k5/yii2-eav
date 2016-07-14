@@ -92,4 +92,13 @@ return [
     
     'Attribute name must contain latin word characters only.' => 'Имя атрибута должно содержать только латинские буквы.',
     'Type name must contain latin word characters only.' => 'Имя атрибута должно содержать только латинские буквы.',
+    
+    'Checkboxes' => 'Чекбоксы',
+    'Dropdown' => 'Выпадающий список',
+    'Json textarea' => 'JSON Текстовое поле',
+    'Input numericfield' => 'Цифровое поле',
+    'Radio' => 'Список с выбором',
+    'Input textfield' => 'Текстовая строка',
+    'Input textarea' => 'Текствое поле',  
+
 ];

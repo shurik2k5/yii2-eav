@@ -774,7 +774,7 @@
 
         function Formbuilder(opts) {
             var args;
-
+            
             if (opts == null) {
                 opts = {}
             }
@@ -976,14 +976,13 @@
     this["Formbuilder"]["templates"]["partials/left_side"] = function (obj) {
         obj || (obj = {});
         var __t, __p = '', __e = _.escape;
-
         with (obj) {
 
             __p += '<div class="fb-left">  <ul class="fb-tabs">' +
                 //'<li class="active"><a data-target="#settingsFields">Settings</a></li>' +
-                '<li class="active"><a data-target="#addField">Add new field</a></li>' +
-                '<li><a data-target="#editField">Edit field</a></li>' +
-                '<li><a data-target="#editGroups">Groups</a></li>' +
+                '<li class="active"><a data-target="#addField">'+lang('Add new field')+'</a></li>' +
+                '<li><a data-target="#editField">'+lang('Edit field')+'</a></li>' +
+                '<li><a data-target="#editGroups">'+lang('Groups')+'</a></li>' +
                 '</ul><div class="fb-tab-content">' +
                 //((__t = ( Formbuilder.templates['partials/settings']() )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.templates['partials/add_field']() )) == null ? '' : __t) +
@@ -1304,5 +1303,15 @@
         }
         return __p
     }
-
+    
+   function lang (key)
+        {
+            if (typeof formbuilder_lang[key] !== "undefined") 
+            {
+                // formbuilder_lang не undefined
+                return formbuilder_lang[key];
+            }
+            return key;
+        }
 }).call(this);
+

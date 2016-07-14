@@ -12,7 +12,6 @@ class ActiveField extends \yii\widgets\ActiveField
     public function init()
     {
         parent::init();
-
         /*$this->owner->addRule($this->getAttributeName(), 'in', [
             'range' => $this->getOptions(),
             'allowArray' => true,
@@ -50,5 +49,4 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
 
     }
-
 }
