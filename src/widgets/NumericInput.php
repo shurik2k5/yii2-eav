@@ -30,7 +30,7 @@ TEMPLATE;
 TEMPLATE;*/
     
     public static function fieldButton()
-    {return '<span class=\'symbol\'><span class=\'fa fa-font\'></span></span> '.Yii::t('eav_widgets','Input numericfield');
+    {return '<span class=\'symbol\'><span class=\'fa fa-font\'></span></span> '.Yii::t('eav','Input numericfield');
     }
 
     static $defaultAttributes = <<<TEMPLATE
