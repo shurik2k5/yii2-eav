@@ -9,6 +9,12 @@
     "cck",
     "fields"
   ],
+  "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/alien-art/yii2-jquery-formbuilder"
+        }
+    ],
   "type": "yii2-extension",
   "authors": [
     {
