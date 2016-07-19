@@ -9,6 +9,12 @@
     "cck",
     "fields"
   ],
+  "repositories": [
+        {
+            "type": "vcs",
+            "url": "d:/work/YII2-EXT/yii2-jquery-formbuilder"
+        }
+    ],
   "type": "yii2-extension",
   "authors": [
     {
@@ -32,7 +38,8 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=5.4.0",
-    "yiisoft/yii2": "*"
+    "yiisoft/yii2": "*",
+	"alien/yii2-jquery-formbuilder": "*"
   },
   "autoload": {
     "psr-4": {
