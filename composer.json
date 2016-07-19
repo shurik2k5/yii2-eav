@@ -18,6 +18,11 @@
   "type": "yii2-extension",
   "authors": [
     {
+        "name": "Alien-art",
+        "email": "alien@alien-art.ru",
+		"role": "Developer"
+    },
+    {
       "name": "Alexey Samoylov",
       "email": "alexey.samoylov@gmail.com",
       "homepage": "http://yiiblog.ru",
