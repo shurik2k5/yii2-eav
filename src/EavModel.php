@@ -56,7 +56,6 @@ class EavModel extends BaseEavModel
         }
 
         foreach ($model->entityModel->getEavAttributes()->andWhere($params)->all() as $attribute) {
-
             $handler = AttributeHandler::load($model, $attribute);
             $attribute_name = $handler->getAttributeName();
             //$model->setLabel($key, $handler->getAttributeLabel());

@@ -5,6 +5,7 @@
 
 namespace mirocow\eav\widgets;
 
+use Yii;
 use mirocow\eav\handlers\AttributeHandler;
 
 class Textarea extends AttributeHandler
@@ -26,10 +27,14 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/text_area']() %>    
 TEMPLATE;
 
-    static $fieldButton = <<<TEMPLATE
+    /*static $fieldButton = <<<TEMPLATE
     <span class='symbol'><span class='fa fa-paragraph'></span></span> Input textarea    
-TEMPLATE;
+TEMPLATE;*/
 
+    public static function fieldButton()
+    {return '<span class=\'symbol\'><span class=\'fa fa-paragraph\'></span></span> '.Yii::t('eav','Input textarea');
+    }
+    
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
                 attrs.field_options.size = 'small';

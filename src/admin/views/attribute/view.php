@@ -34,9 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'typeId',
             'name',
             'label',
+            'description',
             'defaultValue',
             'defaultOptionId',
-            'required',
         ],
     ]) ?>
 

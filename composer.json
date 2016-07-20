@@ -1,5 +1,5 @@
 {
-  "name": "mirocow/yii2-eav",
+  "name": "alien/yii2-eav",
   "description": "EAV for Yii2",
   "license": "MIT",
   "keywords": [
@@ -9,8 +9,19 @@
     "cck",
     "fields"
   ],
+  "repositories": [
+		{
+            "type": "git",
+            "url": "https://github.com/alien-art/yii2-jquery-formbuilder"
+        }
+    ],
   "type": "yii2-extension",
   "authors": [
+    {
+        "name": "Alien-art",
+        "email": "alien@alien-art.ru",
+		"role": "Developer"
+    },
     {
       "name": "Alexey Samoylov",
       "email": "alexey.samoylov@gmail.com",
@@ -26,14 +37,9 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "php": ">=5.4.0",
-    "yiisoft/yii2": ">=2.0.8"
-  },
-  "require-dev": {
-    "yiisoft/yii2-codeception": "*",
-    "yiisoft/yii2-debug": "*",
-    "yiisoft/yii2-gii": "*",
-    "yiisoft/yii2-faker": "*"
+    "php": ">=5.5.0",
+    "yiisoft/yii2": "*",
+	"alien/yii2-jquery-formbuilder": "*"
   },
   "autoload": {
     "psr-4": {

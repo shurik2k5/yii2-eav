@@ -43,9 +43,9 @@ class EavAttribute extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'defaultValue', 'label', 'description'], 'string', 'max' => 255],
+             ['name', 'match', 'pattern' => '/(^|.*\])([\w\.]+)(\[.*|$)/', 'message' => Yii::t('eav','Attribute name must contain latin word characters only.')],
             [['type'], 'string', 'max' => 50],
             [['entityId', 'typeId', 'order'], 'integer'],
-            [['required'], 'boolean'],
         ];
     }
 
@@ -57,12 +57,12 @@ class EavAttribute extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'typeId' => Yii::t('eav', 'Type ID'),
+            'entityId' => Yii::t('eav', 'Entity ID'),
             'type' => Yii::t('eav', 'Type'),
             'name' => Yii::t('eav', 'Name'),
             'label' => Yii::t('eav', 'Label'),
             'defaultValue' => Yii::t('eav', 'Default Value'), 
             'defaultOptionId' => Yii::t('eav', 'Default Option ID'),
-            'required' => Yii::t('eav', 'Required'),
             'order' => Yii::t('eav', 'Order'),
             'description' => Yii::t('eav', 'Description'),
         ];

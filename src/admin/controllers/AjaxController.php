@@ -71,7 +71,7 @@ class AjaxController extends Controller
                         $entity = new EavEntity;
                         $entity->entityName = isset($post['entityName']) ? $post['entityName'] : 'Untitled';
                         $entity->entityModel = $post['entityModel'];
-                        $entity->categoryId = $categoryId;
+                        //$entity->categoryId = $categoryId;
                         $entity->save(false);
                         $entityId = $entity->id;
                     }

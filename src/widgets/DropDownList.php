@@ -5,6 +5,7 @@
 
 namespace mirocow\eav\widgets;
 
+use Yii;
 use mirocow\eav\handlers\AttributeHandler;
 use yii\helpers\ArrayHelper;
 
@@ -39,9 +40,13 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/options']({ includeBlank: true }) %>    
 TEMPLATE;
 
-    static $fieldButton = <<<TEMPLATE
+    /*static $fieldButton = <<<TEMPLATE
     <span class="symbol"><span class="fa fa-caret-down"></span></span> Dropdown    
-TEMPLATE;
+TEMPLATE;*/
+    
+    public static function fieldButton()
+    {return '<span class="symbol"><span class="fa fa-caret-down"></span></span> '.Yii::t('eav','Dropdown');
+    }
 
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {

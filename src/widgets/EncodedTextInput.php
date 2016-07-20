@@ -5,6 +5,8 @@
 
 namespace mirocow\eav\widgets;
 
+use Yii;
+
 class EncodedTextInput extends TextInput
 {
     const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\ArrayValueHandler';
@@ -26,9 +28,13 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/text_area']() %>    
 TEMPLATE;
 
-    static $fieldButton = <<<TEMPLATE
+    /*static $fieldButton = <<<TEMPLATE
     <span class='symbol'><span class='fa fa-paragraph'></span></span> Json textarea    
-TEMPLATE;
+TEMPLATE;*/
+    
+    public static function fieldButton()
+    {return '<span class=\'symbol\'><span class=\'fa fa-paragraph\'></span></span> '.Yii::t('eav','Json textarea');
+    }
 
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
@@ -41,14 +47,5 @@ TEMPLATE;
     public function init()
     {
         parent::init();
-    }
-
-    public function run()
-    {
-        return $this->owner->activeForm->field(
-            $this->owner, 
-            $this->getAttributeName(),
-            ['template' => "{input}\n{hint}\n{error}"])
-            ->textArea();
     }
 }

@@ -17,7 +17,7 @@ class EavAttributeSearch extends EavAttribute
     public function rules()
     {
         return [
-            [['id', 'entityId', 'typeId', 'defaultOptionId', 'required'], 'integer'],
+            [['id', 'entityId', 'typeId', 'defaultOptionId'], 'integer'],
             [['name', 'label', 'defaultValue'], 'safe'],
         ];
     }
@@ -62,7 +62,6 @@ class EavAttributeSearch extends EavAttribute
             'entityId' => $this->entityId,
             'typeId' => $this->typeId,
             'defaultOptionId' => $this->defaultOptionId,
-            'required' => $this->required,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

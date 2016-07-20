@@ -5,6 +5,7 @@
 
 namespace mirocow\eav\widgets;
 
+use Yii;
 use mirocow\eav\handlers\AttributeHandler;
 
 class TextInput extends AttributeHandler
@@ -24,9 +25,13 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/min_max_length']() %>
 TEMPLATE;
 
-    static $fieldButton = <<<TEMPLATE
+   /* static $fieldButton = <<<TEMPLATE
     <span class='symbol'><span class='fa fa-font'></span></span> Input textfield    
-TEMPLATE;
+TEMPLATE;*/
+    
+    public static function fieldButton()
+    {return '<span class=\'symbol\'><span class=\'fa fa-font\'></span></span> '.Yii::t('eav','Input textfield');
+    }
 
     static $defaultAttributes = <<<TEMPLATE
 function (attrs) {

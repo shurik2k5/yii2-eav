@@ -20,7 +20,6 @@ class FbAsset extends AssetBundle
     //public $basePath = '@mirocow/eav/admin/assets/formbuilder';
     public $baseUrl = '@web';
     public $sourcePath = '@mirocow/eav/admin/assets/formbuilder';
-
     public $css = [
         'css/vendor.css',
         'css/formbuilder.css',
