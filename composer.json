@@ -10,7 +10,7 @@
     "fields"
   ],
   "repositories": [
-        {
+		{
             "type": "vcs",
             "url": "d:/work/YII2-EXT/yii2-jquery-formbuilder"
         }
@@ -35,11 +35,11 @@
       "role": "Developer"
     }
   ],
-  "minimum-stability": "alpha",
+  "minimum-stability": "dev",
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=5.5.0",
     "yiisoft/yii2": "*",
-	"alien/yii2-jquery-formbuilder": "dev-master"
+	"alien/yii2-jquery-formbuilder": "*"
   },
   "autoload": {
     "psr-4": {
