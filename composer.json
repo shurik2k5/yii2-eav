@@ -35,11 +35,11 @@
       "role": "Developer"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "alpha",
   "require": {
     "php": ">=5.4.0",
     "yiisoft/yii2": "*",
-	"alien/yii2-jquery-formbuilder": "*"
+	"alien/yii2-jquery-formbuilder": "dev-master"
   },
   "autoload": {
     "psr-4": {
