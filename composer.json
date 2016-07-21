@@ -9,16 +9,6 @@
     "cck",
     "fields"
   ],
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/alien-art/yii2-jquery-formbuilder.git"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/alien-art/yii2-jquery-i18next.git"
-    }
-  ],
   "type": "yii2-extension",
   "authors": [
     {
@@ -42,9 +32,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.5.0",
-    "yiisoft/yii2": "dev-master",
-    "alien/yii2-jquery-formbuilder": "dev-master",
-    "alien/yii2-jquery-i18next": "dev-master"
+    "yiisoft/yii2": "dev-master"
   },
   "autoload": {
     "psr-4": {
