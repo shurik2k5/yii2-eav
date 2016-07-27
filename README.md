@@ -152,6 +152,17 @@ $attr->save();
 
 ## Administrate GUI
 
+## Config module EAV for managment of fields
+In main config file:
+```php
+$modules = [
+    ...,
+    'eav' => [
+        'class' => 'mirocow\eav\Module',
+    ],
+];
+```
+
 ## Form
 
 
