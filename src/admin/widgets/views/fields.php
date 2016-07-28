@@ -18,7 +18,7 @@ $js_form_builder = <<<JS
     fb = new Formbuilder({
       uri: '$url',
       selector: '.fb-main',
-      bootstrapData: '$bootstrapData',
+      bootstrapData: $bootstrapData,
     });
     fb.on('save', function(payload){
       $.ajax({
