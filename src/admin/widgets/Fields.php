@@ -5,6 +5,7 @@ namespace mirocow\eav\admin\widgets;
 use mirocow\eav\models\EavAttribute;
 use Yii;
 use yii\base\Widget;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
@@ -41,10 +42,10 @@ class Fields extends Widget
         /** @var EavAttribute $attribute */
         foreach ($this->model->getEavAttributes()->all() as $attribute) {
 
-            $options = [
+            $options = ArrayHelper::merge([
                 'description' => $attribute->description,
-                'required' => $attribute->required,
-            ];
+                'required' => (bool)$attribute->required,
+            ], is_null($attribute->eavAttributeRule->rules)?[]:json_decode($attribute->eavAttributeRule->rules));
 
             foreach ($attribute->eavOptions as $option) {
                 $options['options'][] = [
