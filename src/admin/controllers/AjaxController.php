@@ -71,7 +71,7 @@ class AjaxController extends Controller
                         $entity = new EavEntity;
                         $entity->entityName = isset($post['entityName']) ? $post['entityName'] : 'Untitled';
                         $entity->entityModel = $post['entityModel'];
-                        //$entity->categoryId = $categoryId;
+                        $entity->categoryId = $categoryId;
                         $entity->save(false);
                         $entityId = $entity->id;
                     }
@@ -80,6 +80,7 @@ class AjaxController extends Controller
 
                     foreach ($payload['fields'] as $order => $field) {
 
+                        if(!isset($field['cid'])) continue;
                         // Attribute
                         $attribute = EavAttribute::findOne(['name' => $field['cid'], 'entityId' => $entityId]);
                         if (!$attribute) {
@@ -93,26 +94,19 @@ class AjaxController extends Controller
                         $attribute->typeId = EavAttributeType::find()->select(['id'])->where(['name' => $field['field_type']])->scalar();
                         $attribute->label = $field['label'];
                         $attribute->order = $order;
-                        $attribute->description = isset($field['field_options']['description']) ? $field['field_options']['description'] : '';
+
+                        if(isset($field['field_options']['description'])){
+                            $attribute->description = $field['field_options']['description'];
+                            unset($field['field_options']['description']);
+                        }else{
+                            $attribute->description = '';
+                        }
+
                         $attribute->save(false);
 
-                        $attributes[] = $attribute->id;
 
-                        // Rule
-                        if (isset($field['field_options'])) {
-                            $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
-                            if (!$rule) {
-                                $rule = new EavAttributeRule();
-                            }
-                            $rule->required = (int)$field['required'];
-                            $rule->visible = (int)$field['visible'];
-                            $rule->locked = (int)$field['locked'];
-                            $rule->attributeId = $attribute->id;
-                            foreach ($field['field_options'] as $key => $param) {
-                                $rule->{$key} = $param;
-                            }
-                            $rule->save();
-                        }
+
+                        $attributes[] = $attribute->id;
 
                         if (isset($field['field_options']['options'])) {
 
@@ -139,6 +133,23 @@ class AjaxController extends Controller
                                 ['NOT', ['IN', 'value', $options]]
                             ]);
 
+                            unset($field['field_options']['options']);
+                        }
+
+                        // Rule
+                        if (isset($field['field_options'])) {
+                            $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
+                            if (!$rule) {
+                                $rule = new EavAttributeRule();
+                            }
+                            $rule->required = isset($field['required'])?(int)$field['required']:0;
+                            $rule->visible = isset($field['visible'])?(int)$field['visible']:0;
+                            $rule->locked = isset($field['locked'])?(int)$field['locked']:0;
+                            $rule->attributeId = $attribute->id;
+                            foreach ($field['field_options'] as $key => $param) {
+                                $rule->{$key} = $param;
+                            }
+                            $rule->save();
                         }
 
                     }
