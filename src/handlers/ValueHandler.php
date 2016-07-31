@@ -43,7 +43,7 @@ abstract class ValueHandler
 
         if (!$valueModel instanceof ActiveRecord) {
             /** @var ActiveRecord $valueModel */
-           $valueModel = new $valueClass;
+            $valueModel = new $valueClass;
             $valueModel->entityId = $EavModel->entityModel->getPrimaryKey();
             $valueModel->attributeId = $this->attributeHandler->attributeModel->getPrimaryKey();
         }
