@@ -45,7 +45,7 @@ class Fields extends Widget
             $options = ArrayHelper::merge([
                 'description' => $attribute->description,
                 'required' => (bool)$attribute->required,
-            ], is_null($attribute->eavAttributeRule->rules)?[]:json_decode($attribute->eavAttributeRule->rules));
+            ], is_null($attribute->eavAttributeRule->rules)? []: json_decode($attribute->eavAttributeRule->rules));
 
             foreach ($attribute->eavOptions as $option) {
                 $options['options'][] = [
@@ -71,9 +71,9 @@ class Fields extends Widget
     public function run()
     {
         return $this->render('fields', [
+            //'id' => $this->model->primaryKey,
             'url' => $this->url,
             'urlSave' => $this->urlSave,
-            //'id' => $this->model->primaryKey,
             'categoryId' => isset($this->categoryId) ? $this->categoryId : 0,
             'entityModel' => $this->entityModel,
             'entityName' => $this->entityName,

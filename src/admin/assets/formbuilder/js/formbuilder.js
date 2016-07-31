@@ -689,6 +689,9 @@
 
         Formbuilder.helpers = {
 
+            /**
+             * Default attributes setting
+             */
             defaultValueAttributes: function (field_type) {
                 var attrs, _base;
 
@@ -704,13 +707,10 @@
                 attrs[Formbuilder.options.mappings.LOCKED] = false;
                 attrs[Formbuilder.options.mappings.VISIBLE] = true;
                 attrs[Formbuilder.options.mappings.SIZE] = 'large';
-                attrs['field_options'] = {}
+                attrs['field_options'] = {};
+                _base = eval('('+Formbuilder.fields[field_type].defaultAttributes+')');
 
-                return (typeof (_base = Formbuilder.fields[field_type])
-                            .defaultAttributes === "function" ?
-                            _base.defaultAttributes(attrs) :
-                            void 0
-                    ) || attrs;
+                return (typeof _base === "function"? _base(attrs) : void 0) || attrs;
 
             }
 
@@ -769,12 +769,6 @@
 
             opts.field_type = name;
             Formbuilder.fields[name] = opts;
-
-            /*if (opts.type === 'non_input') {
-             return Formbuilder.nonInputFields[name] = opts;
-             } else {
-             return Formbuilder.inputFields[name] = opts;
-             }*/
 
             return Formbuilder.inputFields[name] = opts;
         }
@@ -891,10 +885,6 @@
         obj || (obj = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
-        /*function print() {
-         __p += __j.call(arguments, '')
-         }*/
-
         with (obj) {
             __p += '<div class="fb-tab-pane active" id="settingsFields"></div>';
 
@@ -905,10 +895,6 @@
     this["Formbuilder"]["templates"]["partials/add_field"] = function (obj) {
         obj || (obj = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-
-        /*function print() {
-         __p += __j.call(arguments, '')
-         }*/
 
         with (obj) {
             __p += '<div class="fb-tab-pane active" id="addField"> <div class="fb-add-field-types"><div class="section">';
@@ -952,49 +938,17 @@
         return __p
     }
 
-    /*this["Formbuilder"]["templates"]["partials/edit_groups"] = function (obj) {
-     obj || (obj = {});
-     var __t, __p = '', __e = _.escape;
-
-     with (obj) {
-     eye = '<a class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-eye"></i></a>';
-     eye += '<a style="margin-right: 4px;" class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-edit"></i></a>';
-     sorter = '<a style="position: relative; left: -4px; padding-left: 10px; padding-right: 10px; margin-right: 4px;" class="btn btn-default btn-xs"><i class="fa fa-arrows-v"></i></a>';
-     editable =  '<input type="text" style="width: 156px; padding-top: 3px; padding-bottom: 3px; height: 24px; display: inline-block;" class="form-control input-sm" value="Tested contend in edit...">';
-     saver = '<a class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-eye"></i></a>';
-     saver += '<a style="margin-right: 4px;" class="pull-right btn btn-info btn-xs" href="#"><i class="fa fa-save"></i></a>';
-     __p +=
-     '<div class="fb-tab-pane" id="editGroups">' +
-     '<div class="fb-edit-group-wrapper">' +
-     '<ul class="list-group">' +
-     '<li class="list-group-item">' + sorter + 'Cras justo odio' + eye + '</li>' +
-     '<li class="list-group-item">' + sorter + 'Dapibus ac facilisis in' + eye + '</li>' +
-     '<li class="list-group-item">' + sorter + editable + saver + '</li>' +
-     '<li class="list-group-item">' + sorter + 'Porta ac consectetur ac' + eye + '</li>' +
-     '<li class="list-group-item">' + sorter + 'Vestibulum at eros' + eye + '</li>' +
-     '</ul>' +
-     '</div>' +
-     '</div>';
-
-     }
-     return __p
-     }*/
-
     this["Formbuilder"]["templates"]["partials/left_side"] = function (obj) {
         obj || (obj = {});
         var __t, __p = '', __e = _.escape;
         with (obj) {
 
             __p += '<div class="fb-left">  <ul class="fb-tabs">' +
-                //'<li class="active"><a data-target="#settingsFields">Settings</a></li>' +
                 '<li class="active"><a data-target="#addField">' + Formbuilder.lang('Add new field') + '</a></li>' +
                 '<li><a data-target="#editField">' + Formbuilder.lang('Edit field') + '</a></li>' +
-                //'<li><a data-target="#editGroups">'+Formbuilder.lang('Groups')+'</a></li>' +
                 '</ul><div class="fb-tab-content">' +
-                //((__t = ( Formbuilder.templates['partials/settings']() )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.templates['partials/add_field']() )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.templates['partials/edit_field']() )) == null ? '' : __t) +
-                // ((__t = ( Formbuilder.templates['partials/edit_groups']() )) == null ? '' : __t) +
                 '  </div></div>';
         }
 
@@ -1006,7 +960,7 @@
         var __t, __p = '', __e = _.escape;
         with (obj) {
 
-            __p += '<div class="fb-right">  <div class="fb-no-response-fields">No response fields</div>  <div class="fb-response-fields"></div></div>';
+            __p += '<div class="fb-right">  <div class="fb-no-response-fields">'+Formbuilder.lang('No response fields')+'</div>  <div class="fb-response-fields"></div></div>';
 
         }
         return __p
@@ -1141,10 +1095,6 @@
         obj || (obj = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
-        /*function print() {
-         __p += __j.call(arguments, '')
-         }*/
-
         with (obj) {
 
             __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Options') + '</div>';
@@ -1191,8 +1141,7 @@
         with (obj) {
 
             __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Size') + '</div>' +
-                '<select data-rv-value="model.' +
-                ((__t = ( Formbuilder.options.mappings.SIZE )) == null ? '' : __t) + '">' +
+                '<select data-rv-value="model.' + ((__t = ( Formbuilder.options.mappings.SIZE )) == null ? '' : __t)+ '">' +
                 '<option value="small">' + Formbuilder.lang('Small') + '</option>' +
                 '<option value="medium">' + Formbuilder.lang('Medium') + '</option>' +
                 '<option value="large">' + Formbuilder.lang('Large') + '</option>' +
@@ -1200,19 +1149,6 @@
         }
         return __p
     }
-
-    /*this["Formbuilder"]["templates"]["edit/units"] = function (obj) {
-     obj || (obj = {});
-     var __t, __p = '', __e = _.escape;
-     with (obj) {
-
-     __p += '<div class="fb-edit-section-header">Units</div><input type="text" data-rv-input="model.' +
-     ((__t = ( Formbuilder.options.mappings.UNITS )) == null ? '' : __t) +
-     '" />';
-
-     }
-     return __p
-     }*/
 
     this["Formbuilder"]["templates"]["edit/text_area"] = function (obj) {
         obj || (obj = {});

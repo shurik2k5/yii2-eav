@@ -6,6 +6,7 @@
 
 var formbuilder_lang = {};
 
+formbuilder_lang['No response fields'] = "Данные для отображения полей не получены";
 formbuilder_lang['Add new field'] = "Добавление поля";
 formbuilder_lang['Edit field'] = "Редактирование поля";
 formbuilder_lang['Groups'] = "Группы";

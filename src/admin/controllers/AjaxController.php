@@ -58,14 +58,14 @@ class AjaxController extends Controller
 
                 try {
 
-                    $categoryId = isset($post['categoryId']) ? $post['categoryId'] : 0;
+                    $categoryId = isset($post['categoryId'])? $post['categoryId']: 0;
 
                     $entityId = EavEntity::find()->select(['id'])->where(['entityModel' => $post['entityModel'],
                                                                           'categoryId'  => $categoryId,])->scalar();
 
                     if (!$entityId) {
                         $entity = new EavEntity;
-                        $entity->entityName = isset($post['entityName']) ? $post['entityName'] : 'Untitled';
+                        $entity->entityName = isset($post['entityName'])? $post['entityName']: 'Untitled';
                         $entity->entityModel = $post['entityModel'];
                         $entity->categoryId = $categoryId;
                         $entity->save(false);
@@ -76,8 +76,9 @@ class AjaxController extends Controller
 
                     foreach ($payload['fields'] as $order => $field) {
 
-                        if (!isset($field['cid']))
+                        if (!isset($field['cid'])) {
                             continue;
+                        }
 
                         // Attribute
                         if (isset($field['cid'])) {
@@ -114,8 +115,12 @@ class AjaxController extends Controller
 
                             foreach ($field['field_options']['options'] as $k => $o) {
 
-                                $option = EavAttributeOption::find()->where(['attributeId' => $attribute->id,
-                                                                             'value'       => $o['label']])->one();
+                                $option = EavAttributeOption::find()
+                                    ->where([
+                                    'attributeId' => $attribute->id,
+                                    'value'       => $o['label']])
+                                    ->one();
+
                                 if (!$option) {
                                     $option = new EavAttributeOption;
                                 }
@@ -128,8 +133,10 @@ class AjaxController extends Controller
                                 $options[] = $option->value;
                             }
 
-                            EavAttributeOption::deleteAll(['and', ['attributeId' => $attribute->id],
-                                ['NOT', ['IN', 'value', $options]]]);
+                            EavAttributeOption::deleteAll(['and',
+                                ['attributeId' => $attribute->id],
+                                ['NOT', ['IN', 'value', $options]]
+                            ]);
 
                             unset($field['field_options']['options']);
                         }
@@ -145,9 +152,9 @@ class AjaxController extends Controller
                                 $rule->{$key} = $param;
                             }
                         }
-                        $rule->required = isset($field['required']) ? (int)$field['required'] : 0;
-                        $rule->visible = isset($field['visible']) ? (int)$field['visible'] : 0;
-                        $rule->locked = isset($field['locked']) ? (int)$field['locked'] : 0;
+                        $rule->required = isset($field['required'])? (int)$field['required']: 0;
+                        $rule->visible = isset($field['visible'])? (int)$field['visible']: 0;
+                        $rule->locked = isset($field['locked'])? (int)$field['locked']: 0;
                         $rule->save();
 
                     }

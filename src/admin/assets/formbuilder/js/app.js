@@ -256,7 +256,11 @@ $.scrollWindowTo = function (pos, duration, cb) {
         constructor: function (attributes, options) {
             var defaults, attrs = attributes || {};
 
-            this.cid = _.uniqueId('c');
+            if(!attrs.cid){
+                this.cid = _.uniqueId('c');
+            } else {
+                this.cid = attrs.cid;
+            }
             this.attributes = {};
             if (options && options.collection) this.collection = options.collection;
             if (options && options.parse) attrs = this.parse(attrs, options) || {};
