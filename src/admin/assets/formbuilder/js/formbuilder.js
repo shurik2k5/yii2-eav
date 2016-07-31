@@ -755,7 +755,7 @@
 
         Formbuilder.inputFields = {}
 
-        Formbuilder.nonInputFields = {}
+        //Formbuilder.nonInputFields = {}
 
         Formbuilder.registerField = function (name, opts) {
             var x, _i, _len, _ref5;
@@ -841,22 +841,22 @@
 
     // Base templates
 
-    this["Formbuilder"]["templates"]["view/base_non_input"] = function (obj) {
-        obj || (obj = {});
+    /*this["Formbuilder"]["templates"]["view/base_non_input"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
             __p += '';
 
         }
         return __p
-    }
+    }*/
 
-    this["Formbuilder"]["templates"]["page"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["page"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
 
 
-        with (obj) {
+        with (fied_settings) {
 
             __p +=
                 ((__t = ( Formbuilder.templates['partials/save_button']() )) == null ? '' : __t) +
@@ -868,10 +868,10 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["partials/save_button"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["partials/save_button"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<div class="fb-save-wrapper">  <button class="js-save-form btn-success ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
@@ -881,22 +881,23 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["partials/settings"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["partials/settings"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
-        with (obj) {
+        with (fied_settings) {
             __p += '<div class="fb-tab-pane active" id="settingsFields"></div>';
 
         }
         return __p
     }
 
-    this["Formbuilder"]["templates"]["partials/add_field"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["partials/fied_base_settings"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
-        with (obj) {
+        with (fied_settings) {
+
             __p += '<div class="fb-tab-pane active" id="addField"> <div class="fb-add-field-types"><div class="section">';
             _.each(_.sortBy(Formbuilder.inputFields, 'order'), function (f) {
 
@@ -909,7 +910,7 @@
                     '        </a>      ';
             });
 
-            __p += '</div><div class="section">';
+            /*__p += '</div><div class="section">';
             _.each(_.sortBy(Formbuilder.nonInputFields, 'order'), function (f) {
 
                 __p += '<a data-field-type="' +
@@ -919,7 +920,7 @@
                     '">          ' +
                     ((__t = ( f.addButton )) == null ? '' : __t) +
                     '</a>';
-            });
+            });*/
 
             __p += '</div></div></div>';
 
@@ -927,40 +928,41 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["partials/edit_field"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["partials/fied_settings"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
 
-        with (obj) {
+        with (fied_settings) {
             __p += '<div class="fb-tab-pane" id="editField">  <div class="fb-edit-field-wrapper"></div></div>';
 
         }
         return __p
     }
 
-    this["Formbuilder"]["templates"]["partials/left_side"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["partials/left_side"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<div class="fb-left">  <ul class="fb-tabs">' +
                 '<li class="active"><a data-target="#addField">' + Formbuilder.lang('Add new field') + '</a></li>' +
                 '<li><a data-target="#editField">' + Formbuilder.lang('Edit field') + '</a></li>' +
                 '</ul><div class="fb-tab-content">' +
-                ((__t = ( Formbuilder.templates['partials/add_field']() )) == null ? '' : __t) +
-                ((__t = ( Formbuilder.templates['partials/edit_field']() )) == null ? '' : __t) +
+                ((__t = ( Formbuilder.templates['partials/fied_base_settings']() )) == null ? '' : __t) +
+                ((__t = ( Formbuilder.templates['partials/fied_settings']() )) == null ? '' : __t) +
                 '  </div></div>';
         }
 
         return __p
     }
 
-    this["Formbuilder"]["templates"]["partials/right_side"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["partials/right_side"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
-            __p += '<div class="fb-right">  <div class="fb-no-response-fields">'+Formbuilder.lang('No response fields')+'</div>  <div class="fb-response-fields"></div></div>';
+            __p += '<div class="fb-right">  <div class="fb-no-response-fields">'+Formbuilder.lang('No response fields') +
+                '</div>  <div class="fb-response-fields"></div></div>';
 
         }
         return __p
@@ -970,10 +972,10 @@
      * View temlates
      */
 
-    this["Formbuilder"]["templates"]["view/base"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["view/base"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
             __p += '<div class="subtemplate-wrapper">  <div class="cover"></div>  ' +
                 ((__t = ( Formbuilder.templates['view/label']({rf: rf}) )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) )) == null ? '' : __t) +
@@ -985,11 +987,11 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["view/description"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["view/description"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
 
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<span class="help-block">  ' +
                 ((__t = ( rf.get(Formbuilder.options.mappings.DESCRIPTION) )) == null ? '' : __t) +
@@ -999,11 +1001,11 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["view/duplicate_remove"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["view/duplicate_remove"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
 
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<div class="actions-wrapper">  <a class="js-duplicate ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
@@ -1015,15 +1017,15 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["view/label"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["view/label"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
         /*function print() {
          __p += __j.call(arguments, '')
          }*/
 
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<label>  <span>' +
                 ((__t = ( rf.get(Formbuilder.options.mappings.LABEL) )) == null ? '' : __t);
@@ -1042,10 +1044,10 @@
      * Editor templates
      */
 
-    this["Formbuilder"]["templates"]["edit/base"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/base"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p +=
                 ((__t = ( Formbuilder.templates['edit/common']({rf: rf}) )) == null ? '' : __t) +
@@ -1055,10 +1057,10 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/common"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/common"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Field type:') + ' ' +
                 ((__t = ( rf.get(Formbuilder.options.mappings.FIELD_TYPE) )) == null ? '' : Formbuilder.lang(__t)) +
@@ -1070,10 +1072,10 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/label_description"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/label_description"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p +=
                 '<input type="text" data-rv-input="model.' +
@@ -1091,11 +1093,11 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/options"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/options"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Options') + '</div>';
 
@@ -1106,11 +1108,15 @@
             }
 
             __p += '<div class="option" data-rv-each-option="model.' +
-                ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) + '">  ' +
-                '<input type="checkbox" class="js-default-updated" readonly="readonly" data-rv-checked="option:checked" />  ' +
-                '<input type="text" data-rv-input="option:label" class="option-label-input" /> ';
+                ((__t = ( Formbuilder.options.mappings.OPTIONS )) == null ? '' : __t) + '">  ';
 
-            __p += '<a class="js-sort-up-option btn-xs btn-success ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+            if(typeof hideCheckBox === 'undefined'){
+                __p += '<input type="checkbox" class="js-default-updated" readonly="readonly" data-rv-checked="option:checked" />  ';
+            }
+
+            __p += '<input type="text" data-rv-input="option:label" class="option-label-input" /> ' +
+
+                '<a class="js-sort-up-option btn-xs btn-success ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                 '" title="' + Formbuilder.lang('Sort up') + '"><i class="fa fa-arrow-up"></i></a> ' +
 
                 '<a class="js-sort-down-option btn-xs btn-success ' + Formbuilder.options.BUTTON_CLASS +
@@ -1135,10 +1141,10 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/size"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/size"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Size') + '</div>' +
                 '<select data-rv-value="model.' + ((__t = ( Formbuilder.options.mappings.SIZE )) == null ? '' : __t)+ '">' +
@@ -1150,12 +1156,14 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/text_area"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/text_area"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
-            __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Attributes') + '</div>' + Formbuilder.lang('Rows') +
+            if(typeof hideSizeOptions === 'undefined'){
+
+                __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Attributes') + '</div>' + Formbuilder.lang('Rows') +
                 '<input type="text" data-rv-input="model.' +
 
                 ((__t = ( Formbuilder.options.mappings.AREA_ROWS )) == null ? '' : __t) +
@@ -1163,6 +1171,8 @@
 
                 ((__t = ( Formbuilder.options.mappings.AREA_COLS )) == null ? '' : __t) +
                 '" style="width: 60px" />';
+
+            }
 
         }
         return __p
@@ -1172,10 +1182,10 @@
      * Settings template
      */
 
-    this["Formbuilder"]["templates"]["edit/field_options"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/field_options"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<label>  <input type="checkbox" data-rv-checked="model.' +
                 ((__t = ( Formbuilder.options.mappings.REQUIRED )) == null ? '' : __t) +
@@ -1193,10 +1203,10 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/min_max"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/min_max"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Minimum / Maximum') + '</div>' + Formbuilder.lang('Above') +
                 '<input type="text" data-rv-input="model.' +
@@ -1211,10 +1221,10 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/min_max_length"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/min_max_length"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Length Limit') + '</div>' + Formbuilder.lang('Min') + '&nbsp;' +
                 '<input type="text" data-rv-input="model.' +
@@ -1232,10 +1242,10 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["edit/integer_only"] = function (obj) {
-        obj || (obj = {});
+    this["Formbuilder"]["templates"]["edit/integer_only"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
-        with (obj) {
+        with (fied_settings) {
 
             __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Integer only') + '</div><label>  ' +
                 '<input type="checkbox" data-rv-checked="model.' +
