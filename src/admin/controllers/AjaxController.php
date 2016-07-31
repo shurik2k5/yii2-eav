@@ -30,8 +30,8 @@ class AjaxController extends Controller
 
         if ($types) {
             foreach ($types as $type) {
-                $attribuites[$type->name] = $type->attributes;
-                $attribuites[$type->name]['formBuilder'] = $type->formBuilder;
+                $attribuites[ $type->name ] = $type->attributes;
+                $attribuites[ $type->name ]['formBuilder'] = $type->formBuilder;
             }
 
             $status = 'success';
@@ -60,12 +60,8 @@ class AjaxController extends Controller
 
                     $categoryId = isset($post['categoryId']) ? $post['categoryId'] : 0;
 
-                    $entityId = EavEntity::find()
-                        ->select(['id'])
-                        ->where([
-                            'entityModel' => $post['entityModel'],
-                            'categoryId' => $categoryId,
-                        ])->scalar();
+                    $entityId = EavEntity::find()->select(['id'])->where(['entityModel' => $post['entityModel'],
+                                                                          'categoryId'  => $categoryId,])->scalar();
 
                     if (!$entityId) {
                         $entity = new EavEntity;
@@ -80,10 +76,15 @@ class AjaxController extends Controller
 
                     foreach ($payload['fields'] as $order => $field) {
 
-                        if(!isset($field['cid'])) continue;
+                        if (!isset($field['cid']))
+                            continue;
+
                         // Attribute
-                        $attribute = EavAttribute::findOne(['name' => $field['cid'], 'entityId' => $entityId]);
-                        if (!$attribute) {
+                        if (isset($field['cid'])) {
+                            $attribute = EavAttribute::findOne(['name' => $field['cid'], 'entityId' => $entityId]);
+                        }
+
+                        if (empty($attribute)) {
                             $attribute = new EavAttribute;
                             $lastId = EavAttribute::find()->select(['id'])->orderBy(['id' => SORT_DESC])->limit(1)->scalar() + 1;
                             $attribute->name = 'c' . $lastId;
@@ -95,15 +96,14 @@ class AjaxController extends Controller
                         $attribute->label = $field['label'];
                         $attribute->order = $order;
 
-                        if(isset($field['field_options']['description'])){
+                        if (isset($field['field_options']['description'])) {
                             $attribute->description = $field['field_options']['description'];
                             unset($field['field_options']['description']);
-                        }else{
+                        } else {
                             $attribute->description = '';
                         }
 
                         $attribute->save(false);
-
 
 
                         $attributes[] = $attribute->id;
@@ -114,7 +114,8 @@ class AjaxController extends Controller
 
                             foreach ($field['field_options']['options'] as $k => $o) {
 
-                                $option = EavAttributeOption::find()->where(['attributeId' => $attribute->id, 'value' => $o['label']])->one();
+                                $option = EavAttributeOption::find()->where(['attributeId' => $attribute->id,
+                                                                             'value'       => $o['label']])->one();
                                 if (!$option) {
                                     $option = new EavAttributeOption;
                                 }
@@ -127,30 +128,27 @@ class AjaxController extends Controller
                                 $options[] = $option->value;
                             }
 
-                            EavAttributeOption::deleteAll([
-                                'and',
-                                ['attributeId' => $attribute->id],
-                                ['NOT', ['IN', 'value', $options]]
-                            ]);
+                            EavAttributeOption::deleteAll(['and', ['attributeId' => $attribute->id],
+                                ['NOT', ['IN', 'value', $options]]]);
 
                             unset($field['field_options']['options']);
                         }
 
                         // Rule
-                        if (isset($field['field_options'])) {
-                            $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
-                            if (!$rule) {
-                                $rule = new EavAttributeRule();
-                            }
-                            $rule->required = isset($field['required'])?(int)$field['required']:0;
-                            $rule->visible = isset($field['visible'])?(int)$field['visible']:0;
-                            $rule->locked = isset($field['locked'])?(int)$field['locked']:0;
-                            $rule->attributeId = $attribute->id;
+                        $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
+                        if (!$rule) {
+                            $rule = new EavAttributeRule();
+                        }
+                        $rule->attributeId = $attribute->id;
+                        if (!empty($field['field_options'])) {
                             foreach ($field['field_options'] as $key => $param) {
                                 $rule->{$key} = $param;
                             }
-                            $rule->save();
                         }
+                        $rule->required = isset($field['required']) ? (int)$field['required'] : 0;
+                        $rule->visible = isset($field['visible']) ? (int)$field['visible'] : 0;
+                        $rule->locked = isset($field['locked']) ? (int)$field['locked'] : 0;
+                        $rule->save();
 
                     }
 
@@ -161,7 +159,8 @@ class AjaxController extends Controller
 
                     $transaction->commit();
 
-                } catch (\Exception $e) {
+                }
+                catch (\Exception $e) {
                     $transaction->rollBack();
                     throw $e;
                 }
