@@ -1098,6 +1098,32 @@
         return __p
     }
 
+    this["Formbuilder"]["templates"]["edit/text_area"] = function (fied_settings) {
+        fied_settings || (fied_settings = {});
+        var __t, __p = '', __e = _.escape;
+        with (fied_settings) {
+
+            if(typeof hideSizeOptions === 'undefined'){
+
+                __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Attributes') + '</div>' + Formbuilder.lang('Rows') +
+                '<input type="text" data-rv-input="model.' +
+
+                ((__t = ( Formbuilder.options.mappings.AREA_ROWS )) == null ? '' : __t) +
+                '" style="width: 60px" />&nbsp;&nbsp;' + Formbuilder.lang('Cols') + '<input type="text" data-rv-input="model.' +
+
+                ((__t = ( Formbuilder.options.mappings.AREA_COLS )) == null ? '' : __t) +
+                '" style="width: 60px" />';
+
+            }
+
+        }
+        return __p
+    }
+
+    /**
+     * Field settings template
+     */
+
     this["Formbuilder"]["templates"]["edit/options"] = function (fied_settings) {
         fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
@@ -1160,32 +1186,6 @@
         }
         return __p
     }
-
-    this["Formbuilder"]["templates"]["edit/text_area"] = function (fied_settings) {
-        fied_settings || (fied_settings = {});
-        var __t, __p = '', __e = _.escape;
-        with (fied_settings) {
-
-            if(typeof hideSizeOptions === 'undefined'){
-
-                __p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Attributes') + '</div>' + Formbuilder.lang('Rows') +
-                '<input type="text" data-rv-input="model.' +
-
-                ((__t = ( Formbuilder.options.mappings.AREA_ROWS )) == null ? '' : __t) +
-                '" style="width: 60px" />&nbsp;&nbsp;' + Formbuilder.lang('Cols') + '<input type="text" data-rv-input="model.' +
-
-                ((__t = ( Formbuilder.options.mappings.AREA_COLS )) == null ? '' : __t) +
-                '" style="width: 60px" />';
-
-            }
-
-        }
-        return __p
-    }
-
-    /**
-     * Settings template
-     */
 
     this["Formbuilder"]["templates"]["edit/field_options"] = function (fied_settings) {
         fied_settings || (fied_settings = {});

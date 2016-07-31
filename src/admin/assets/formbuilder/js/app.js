@@ -239,6 +239,10 @@ $.scrollWindowTo = function (pos, duration, cb) {
         }
     }
 
+    /**
+     * @param {Object} obj                Object to fetch attribute from
+     * @param {String} path               Object path e.g. 'user.name'
+     */
     function deleteNested(obj, path) {
         setNested(obj, path, null, {unset: true});
     }
@@ -434,7 +438,6 @@ $.scrollWindowTo = function (pos, duration, cb) {
         }
 
     });
-
 
     //Config; override in your app to customise
     DeepModel.keyPathSeparator = '.';
