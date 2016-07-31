@@ -5,8 +5,8 @@
 
 namespace mirocow\eav\widgets;
 
-use Yii;
 use mirocow\eav\handlers\AttributeHandler;
+use Yii;
 
 class TextInput extends AttributeHandler
 {
@@ -25,13 +25,9 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/min_max_length']() %>
 TEMPLATE;
 
-   /* static $fieldButton = <<<TEMPLATE
-    <span class='symbol'><span class='fa fa-font'></span></span> Input textfield    
-TEMPLATE;*/
-    
-    public static function fieldButton()
-    {return '<span class=\'symbol\'><span class=\'fa fa-font\'></span></span> '.Yii::t('eav','Input textfield');
-    }
+    static $fieldButton = <<<TEMPLATE
+    <span class='symbol'><span class='fa fa-font'></span></span> <%= Formbuilder.lang('Input textfield') %>
+TEMPLATE;
 
     static $defaultAttributes = <<<TEMPLATE
 function (attrs) {
@@ -51,9 +47,9 @@ TEMPLATE;
     public function run()
     {
         return $this->owner->activeForm->field(
-            $this->owner, 
+            $this->owner,
             $this->getAttributeName(),
             ['template' => "{input}\n{hint}\n{error}"])
-            ->textInput();
+            ->textInput($this->options);
     }
 }

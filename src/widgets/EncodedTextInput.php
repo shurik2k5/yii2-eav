@@ -18,27 +18,23 @@ class EncodedTextInput extends TextInput
       class='form-control input-sm' type='text' 
       rows=<%= rf.get(Formbuilder.options.mappings.AREA_ROWS) %>
       cols=<%= rf.get(Formbuilder.options.mappings.AREA_COLS) %> 
-      <% if ( rf.get(Formbuilder.options.mappings.LOCKED) ) { %>disabled readonly<% } %> 
+      <% if ( rf.get(Formbuilder.options.mappings.LOCKED) ) { %><%= Formbuilder.lang('disabled readonly') %><% } %> 
     />
     </textarea>    
 TEMPLATE;
 
     static $fieldSettings = <<<TEMPLATE
     <%= Formbuilder.templates['edit/field_options']() %>
-    <%= Formbuilder.templates['edit/text_area']() %>    
+    <%= Formbuilder.templates['edit/text_area']({ hideSizeOptions: true }) %>    
 TEMPLATE;
 
-    /*static $fieldButton = <<<TEMPLATE
-    <span class='symbol'><span class='fa fa-paragraph'></span></span> Json textarea    
-TEMPLATE;*/
-    
-    public static function fieldButton()
-    {return '<span class=\'symbol\'><span class=\'fa fa-paragraph\'></span></span> '.Yii::t('eav','Json textarea');
-    }
+    static $fieldButton = <<<TEMPLATE
+    <span class='symbol'><span class='fa fa-paragraph'></span></span> <%= Formbuilder.lang('Json textarea') %>    
+TEMPLATE;
 
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
-                attrs.field_options.size = 'small';
+                attrs.field_options.size = 'large';
                 return attrs;
             }   
 TEMPLATE;

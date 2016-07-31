@@ -41,6 +41,22 @@ class OptionValueHandler extends ValueHandler
 
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function defaultValue()
+    {
+        $defaultOptions = [];
+
+        foreach($this->attributeHandler->attributeModel->eavOptions as $option){
+            if($option->defaultOptionId === 1){
+                $defaultOptions[] = $option->id;
+            }
+        }
+
+        return $defaultOptions;
+    }
+
     public function getTextValue()
     {
         return $this->getValueModel()->option->value;

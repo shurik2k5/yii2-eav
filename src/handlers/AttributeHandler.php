@@ -30,6 +30,7 @@ class AttributeHandler extends Widget
 
     public $nameField = 'name';
     public $labelField = 'label';
+    public $options = [];
 
     /**
      * @param EavModel $owner

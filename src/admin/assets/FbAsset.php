@@ -26,11 +26,10 @@ class FbAsset extends AssetBundle
     ];
 
     public $js = [
-        'js/jquery.ui.js',
         'js/underscorejs.js',
         'js/backbone.js',
+        'js/jquery.ui.js',
         'js/app.js',
-        'js/sightglass.js',
         'js/rivets.js',
         'js/formbuilder.js',
     ];

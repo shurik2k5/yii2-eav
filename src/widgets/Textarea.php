@@ -5,8 +5,8 @@
 
 namespace mirocow\eav\widgets;
 
-use Yii;
 use mirocow\eav\handlers\AttributeHandler;
+use Yii;
 
 class Textarea extends AttributeHandler
 {
@@ -27,17 +27,13 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/text_area']() %>    
 TEMPLATE;
 
-    /*static $fieldButton = <<<TEMPLATE
-    <span class='symbol'><span class='fa fa-paragraph'></span></span> Input textarea    
-TEMPLATE;*/
-
-    public static function fieldButton()
-    {return '<span class=\'symbol\'><span class=\'fa fa-paragraph\'></span></span> '.Yii::t('eav','Input textarea');
-    }
+    static $fieldButton = <<<TEMPLATE
+    <span class='symbol'><span class='fa fa-font'></span></span> <%= Formbuilder.lang('Input textarea') %>    
+TEMPLATE;
     
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
-                attrs.field_options.size = 'small';
+                attrs.field_options.size = 'large';
                 return attrs;
             }   
 TEMPLATE;
@@ -56,6 +52,6 @@ TEMPLATE;
             $this->owner, 
             $this->getAttributeName(), 
             ['template' => "{input}\n{hint}\n{error}"])
-            ->textArea();
+            ->textArea($this->options);
     }
 }

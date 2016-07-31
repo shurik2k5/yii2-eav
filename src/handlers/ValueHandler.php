@@ -51,6 +51,8 @@ abstract class ValueHandler
         return $valueModel;
     }
 
+    abstract public function defaultValue();
+
     abstract public function load();
 
     abstract public function save();

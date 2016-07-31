@@ -71,7 +71,6 @@ class Fields extends Widget
     public function run()
     {
         return $this->render('fields', [
-            //'id' => $this->model->primaryKey,
             'url' => $this->url,
             'urlSave' => $this->urlSave,
             'categoryId' => isset($this->categoryId) ? $this->categoryId : 0,

@@ -31,6 +31,8 @@ class ActiveField extends \yii\widgets\ActiveField
         $eavModel = EavModel::create(['entityModel' => $model , 'attribute'=>$attribute, 'valueClass'=>\mirocow\eav\models\EavAttributeValue::className()]);
         $handler = $eavModel->handlers[$attribute];
         $handler->owner->activeForm = $options['form'];
+        unset($options['form']);
+        $handler->options = $options;
 
         /** @var EavAttribute $attributeModel */
         $attributeModel = $handler->attributeModel;

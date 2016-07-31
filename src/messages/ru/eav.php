@@ -99,6 +99,6 @@ return [
     'Input numericfield' => 'Цифровое поле',
     'Radio' => 'Список с выбором',
     'Input textfield' => 'Текстовая строка',
-    'Input textarea' => 'Текствое поле',  
+    'Input textarea' => 'Текствое поле',
 
 ];

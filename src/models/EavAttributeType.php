@@ -61,14 +61,12 @@ class EavAttributeType extends \yii\db\ActiveRecord
     public function getFormBuilder()
     {
         $class = $this->handlerClass;
-        //var_dump($class::fieldButton());
         return [
             'order' => isset($class::$order) ? $class::$order : 0,
-            'view' => isset($class::$fieldView) ? $class::$fieldView : 'Template view',
-            'edit' => isset($class::$fieldSettings) ? $class::$fieldSettings : 'Template settings',
-            //'addButton' => isset($class::$fieldButton) ? $class::fieldButton() : 'Template field button',
-            'addButton' => method_exists($class,'fieldButton') ? $class::fieldButton() : 'Template field button',
-            'defaultAttributes' => isset($class::$defaultAttributes) ? $class::$defaultAttributes : 'Template default attributes',
+            'view' => isset($class::$fieldView) ? $class::$fieldView : Yii::t('eav', 'Template view'),
+            'edit' => isset($class::$fieldSettings) ? $class::$fieldSettings : Yii::t('eav', 'Template settings'),
+            'addButton' => isset($class::$fieldButton) ? $class::$fieldButton : Yii::t('eav', 'Template field button'),
+            'defaultAttributes' => isset($class::$defaultAttributes) ? $class::$defaultAttributes : Yii::t('eav', 'Template default attributes'),
         ];
 
     }

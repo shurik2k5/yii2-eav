@@ -36,6 +36,22 @@ class MultipleOptionsValueHandler extends ValueHandler
         return $values;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function defaultValue()
+    {
+        $defaultOptions = [];
+
+        foreach($this->attributeHandler->attributeModel->eavOptions as $option){
+            if($option->defaultOptionId === 1){
+                $defaultOptions[] = $option->id;
+            }
+        }
+
+        return $defaultOptions;
+    }
+
     public function save()
     {
         $EavModel = $this->attributeHandler->owner;

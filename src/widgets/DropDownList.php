@@ -5,8 +5,8 @@
 
 namespace mirocow\eav\widgets;
 
-use Yii;
 use mirocow\eav\handlers\AttributeHandler;
+use Yii;
 use yii\helpers\ArrayHelper;
 
 class DropDownList extends AttributeHandler
@@ -24,7 +24,7 @@ class DropDownList extends AttributeHandler
       
       <% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>
         <option 
-          <% if ( rf.get(Formbuilder.options.mappings.LOCKED) ) { %>disabled readonly<% } %> 
+          <% if ( rf.get(Formbuilder.options.mappings.LOCKED) ) { %><%= Formbuilder.lang('disabled readonly') %><% } %> 
           <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'selected' %> 
         />
         <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>
@@ -37,16 +37,15 @@ TEMPLATE;
 
     static $fieldSettings = <<<TEMPLATE
     <%= Formbuilder.templates['edit/field_options']() %>
-    <%= Formbuilder.templates['edit/options']({ includeBlank: true }) %>    
+    <%= Formbuilder.templates['edit/options']({ 
+        includeBlank: true, 
+        hideCheckBox: true 
+    }) %>    
 TEMPLATE;
 
-    /*static $fieldButton = <<<TEMPLATE
-    <span class="symbol"><span class="fa fa-caret-down"></span></span> Dropdown    
-TEMPLATE;*/
-    
-    public static function fieldButton()
-    {return '<span class="symbol"><span class="fa fa-caret-down"></span></span> '.Yii::t('eav','Dropdown');
-    }
+    static $fieldButton = <<<TEMPLATE
+    <span class="symbol"><span class="fa fa-caret-down"></span></span> <%= Formbuilder.lang('Dropdown') %>    
+TEMPLATE;
 
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
@@ -76,12 +75,14 @@ TEMPLATE;
 
     public function run()
     {
+        $options = $this->attributeModel->getEavOptions()->asArray()->all();
+
         return $this->owner->activeForm->field(
             $this->owner, 
             $this->getAttributeName(),
             ['template' => "{input}\n{hint}\n{error}"])
             ->dropDownList(
-                ArrayHelper::map($this->attributeModel->getEavOptions()->asArray()->all(), 'id', 'value')
+                ArrayHelper::map($options, 'id', 'value')
             );
     }
 }

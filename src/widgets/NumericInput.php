@@ -5,8 +5,8 @@
 
 namespace mirocow\eav\widgets;
 
-use Yii;
 use mirocow\eav\handlers\AttributeHandler;
+use Yii;
 
 class NumericInput extends AttributeHandler
 {
@@ -25,13 +25,12 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/min_max']() %>
 TEMPLATE;
 
-    /*static $fieldButton = <<<TEMPLATE
-    <span class='symbol'><span class='fa fa-font'></span></span> Input numericfield    
-TEMPLATE;*/
-    
-    public static function fieldButton()
-    {return '<span class=\'symbol\'><span class=\'fa fa-font\'></span></span> '.Yii::t('eav','Input numericfield');
-    }
+    static $fieldButton = <<<TEMPLATE
+    <span class="fa-stack fa-1x">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-inverse fa-stack-1x">9</i>      
+    </span> <%= Formbuilder.lang('Input numericfield') %>    
+TEMPLATE;
 
     static $defaultAttributes = <<<TEMPLATE
 function (attrs) {
@@ -54,6 +53,6 @@ TEMPLATE;
             $this->owner, 
             $this->getAttributeName(), 
             ['template' => "{input}\n{hint}\n{error}"])
-            ->textInput();
+            ->textInput($this->options);
     }
 }

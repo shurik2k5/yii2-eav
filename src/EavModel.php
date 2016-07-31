@@ -10,7 +10,6 @@ use mirocow\eav\handlers\ValueHandler;
 use Yii;
 use yii\base\DynamicModel as BaseEavModel;
 use yii\db\ActiveRecord;
-use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
@@ -83,14 +82,22 @@ class EavModel extends BaseEavModel
             }
 
             //
-            // Set default attribute value
+            // Load attribute value
             //
 
             $value = $handler->valueHandler->load();
+            if (!$value) {
+
+                //
+                // Set default attribute
+                //
+                $value = $handler->valueHandler->defaultValue();
+            }
+
             $model->defineAttribute($attribute_name, $value);
 
             //
-            // Add handler
+            // Add widget handler
             //
 
             $model->handlers[$attribute_name] = $handler;

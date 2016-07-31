@@ -23,6 +23,14 @@ class ArrayValueHandler extends RawValueHandler
     /**
      * @inheritdoc
      */
+    public function defaultValue()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function save()
     {
         $EavModel = $this->attributeHandler->owner;

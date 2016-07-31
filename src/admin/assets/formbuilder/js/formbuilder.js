@@ -253,6 +253,7 @@
             rivets.bind(this.$el, {
                 model: this.model
             });
+
             return this;
         }
 
@@ -482,7 +483,6 @@
 
         BuilderView.prototype.addOne = function (responseField, _, options) {
             var $replacePosition, view;
-
             view = new ViewFieldView({
                 model: responseField,
                 parentView: this
@@ -506,6 +506,7 @@
             if (this.$responseFields.hasClass('ui-sortable')) {
                 this.$responseFields.sortable('destroy');
             }
+
             this.$responseFields.sortable({
                 forcePlaceholderSize: true,
                 placeholder: 'sortable-placeholder',
@@ -513,11 +514,11 @@
                     var rf;
                     if (ui.item.data('field-type')) {
                         rf = _this.collection.create(
-                            Formbuilder.helpers.defaultValueAttributes(
-                                ui.item.data('field-type')
-                            ), {
+                            Formbuilder.helpers.defaultValueAttributes(ui.item.data('field-type')),
+                            {
                                 $replaceEl: ui.item
-                            });
+                            }
+                        );
                         _this.createAndShowEditView(rf);
                     }
                     _this.handleFormUpdate();
@@ -529,6 +530,7 @@
                     }
                 }
             });
+
             return this.setDraggable();
         }
 
@@ -592,7 +594,7 @@
             });
             $newEditEl = this.editView.render().$el;
             this.$el.find(".fb-edit-field-wrapper").html($newEditEl);
-            this.$el.find(".fb-tabs a[data-target=\"#editField\"]").click();
+            this.$el.find(".fb-tabs a[data-target='#editField']").click();
             this.scrollLeftWrapper($responseFieldEl);
             return this;
         }
@@ -694,9 +696,8 @@
              * Default attributes setting
              */
             defaultValueAttributes: function (field_type) {
-                var attrs, _base;
+                var attrs = {};
 
-                attrs = {};
                 attrs[Formbuilder.options.mappings.LABEL] = Formbuilder.lang('Untitled');
                 attrs[Formbuilder.options.mappings.GROUP_NAME] = Formbuilder.lang('default');
                 attrs[Formbuilder.options.mappings.FIELD_TYPE] = field_type;
@@ -709,9 +710,9 @@
                 attrs[Formbuilder.options.mappings.VISIBLE] = true;
                 attrs[Formbuilder.options.mappings.SIZE] = 'large';
                 attrs['field_options'] = {};
-                _base = eval('('+Formbuilder.fields[field_type].defaultAttributes+')');
+                var _defaultAttributes = eval('(' + Formbuilder.fields[field_type].defaultAttributes + ')');
 
-                return (typeof _base === "function"? _base(attrs) : void 0) || attrs;
+                return (typeof _defaultAttributes === "function"? _defaultAttributes(attrs) : void 0) || attrs;
 
             }
 
@@ -723,6 +724,7 @@
             HTTP_METHOD: 'POST',
             AUTOSAVE: false,
             CLEAR_FIELD_CONFIRM: false,
+
             mappings: {
                 GROUP_NAME: 'group_name',
                 LABEL: 'label',
@@ -745,6 +747,7 @@
                 AREA_ROWS: 'field_options.area_size.rows',
                 AREA_COLS: 'field_options.area_size.cols'
             },
+
             dict: {
                 ALL_CHANGES_SAVED: Formbuilder.lang('All changes saved'),
                 SAVE_FORM: Formbuilder.lang('Save form'),
@@ -856,7 +859,6 @@
         fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape;
 
-
         with (fied_settings) {
 
             __p +=
@@ -876,7 +878,7 @@
 
             __p += '<div class="fb-save-wrapper">  <button class="js-save-form btn-success ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-                '"></button></div>';
+                '">'+Formbuilder.lang('Save')+'</button></div>';
 
         }
         return __p
@@ -893,7 +895,7 @@
         return __p
     }
 
-    this["Formbuilder"]["templates"]["partials/fied_base_settings"] = function (fied_settings) {
+    this["Formbuilder"]["templates"]["partials/field_base_settings"] = function (fied_settings) {
         fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 
@@ -907,8 +909,8 @@
                     '" style="text-align: left;" class="btn-default btn-block ' +
                     ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                     '">          ' +
-                    ((__t = ( f.addButton )) == null ? '' : __t) +
-                    '        </a>      ';
+                    ((__t = ( _.template(f.addButton)() )) == null ? '' : __t) +
+                    '</a>';
             });
 
             /*__p += '</div><div class="section">';
@@ -949,7 +951,7 @@
                 '<li class="active"><a data-target="#addField">' + Formbuilder.lang('Add new field') + '</a></li>' +
                 '<li><a data-target="#editField">' + Formbuilder.lang('Edit field') + '</a></li>' +
                 '</ul><div class="fb-tab-content">' +
-                ((__t = ( Formbuilder.templates['partials/fied_base_settings']() )) == null ? '' : __t) +
+                ((__t = ( Formbuilder.templates['partials/field_base_settings']() )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.templates['partials/fied_settings']() )) == null ? '' : __t) +
                 '  </div></div>';
         }
@@ -979,7 +981,9 @@
         with (fied_settings) {
             __p += '<div class="subtemplate-wrapper">  <div class="cover"></div>  ' +
                 ((__t = ( Formbuilder.templates['view/label']({rf: rf}) )) == null ? '' : __t) +
-                ((__t = ( Formbuilder.fields[rf.get(Formbuilder.options.mappings.FIELD_TYPE)].view({rf: rf}) )) == null ? '' : __t) +
+                ((__t = ( Formbuilder.fields[
+                        rf.get(Formbuilder.options.mappings.FIELD_TYPE)
+                    ].view({rf: rf}) )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.templates['view/description']({rf: rf}) )) == null ? '' : __t) +
                 ((__t = ( Formbuilder.templates['view/duplicate_remove']({rf: rf}) )) == null ? '' : __t) +
                 '</div>';
@@ -1012,7 +1016,7 @@
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                 ' btn-xs btn-success" title="' + Formbuilder.lang('Duplicate Field') + '"><i class="fa fa-plus-circle"></i></a>';
 
-            __p += '<a class="js-clear ' +
+            __p += ' <a class="js-clear ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
                 ' btn-xs btn-danger" title="' + Formbuilder.lang('Remove Field') + '"><i class="fa fa-minus-circle"></i></a>';
 
@@ -1025,10 +1029,6 @@
     this["Formbuilder"]["templates"]["view/label"] = function (fied_settings) {
         fied_settings || (fied_settings = {});
         var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-
-        /*function print() {
-         __p += __j.call(arguments, '')
-         }*/
 
         with (fied_settings) {
 

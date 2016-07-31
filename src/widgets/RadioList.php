@@ -5,8 +5,8 @@
 
 namespace mirocow\eav\widgets;
 
-use Yii;
 use mirocow\eav\handlers\AttributeHandler;
+use Yii;
 use yii\helpers\ArrayHelper;
 
 class RadioList extends AttributeHandler
@@ -31,8 +31,7 @@ class RadioList extends AttributeHandler
     <% if (rf.get(Formbuilder.options.mappings.INCLUDE_OTHER)) { %>
     <div class='other-option'>
     <label class='fb-option'>
-    <input type='radio' />
-    Other</label>
+    <input type='radio' /> <%= Formbuilder.lang('Other') %></label>
     <input type='text' />
     </div>
     <% } %>    
@@ -43,13 +42,9 @@ TEMPLATE;
     <%= Formbuilder.templates['edit/options']({ includeOther: true }) %>    
 TEMPLATE;
 
-    /*static $fieldButton = <<<TEMPLATE
-    <span class="symbol"><span class="fa fa-circle-o"></span></span> Radio    
-TEMPLATE;*/
-    
-    public static function fieldButton()
-    {return '<span class="symbol"><span class="fa fa-circle-o"></span></span> '.Yii::t('eav','Radio');
-    }
+    static $fieldButton = <<<TEMPLATE
+    <span class="symbol"><span class="fa fa-circle-o"></span></span> <%= Formbuilder.lang('Radio') %>    
+TEMPLATE;
 
     static $defaultAttributes = <<<TEMPLATE
     function (attrs) {
@@ -78,12 +73,14 @@ TEMPLATE;
 
     public function run()
     {
+        $options = $this->attributeModel->getEavOptions()->asArray()->all();
+
         return $this->owner->activeForm->field(
             $this->owner, 
             $this->getAttributeName(),
             ['template' => "{input}\n{hint}\n{error}"])
             ->radioList(
-                ArrayHelper::map($this->attributeModel->getEavOptions()->asArray()->all(), 'id', 'value')
+                ArrayHelper::map($options, 'id', 'value')
             );
     }
 }
