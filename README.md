@@ -63,6 +63,19 @@ php ./yii migrate/up -p=@vendor/mirocow/yii2-eav/src/migrations
 ``` php
 class Product extends \yii\db\ActiveRecord
 {
+
+    /**
+     *
+     *
+     */
+    public function rules()
+    {
+        return [
+            [['name'], 'string', 'max' => 255], // Product field
+            [['c1'], 'required'], // Attribute field
+            [['c1'], 'string', 'max' => 255], // Attribute field
+        ];
+    }
     
     /**
      * create_time, update_time to now()

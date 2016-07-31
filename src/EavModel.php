@@ -173,9 +173,9 @@ class EavModel extends BaseEavModel
         }
     }
 
-    public function formName()
+    /*public function formName()
     {
         $reflector = new \ReflectionClass(($this->entityModel)::className());
         return $reflector->getShortName();
-    }
+    }*/
 }
