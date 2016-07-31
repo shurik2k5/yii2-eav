@@ -83,7 +83,7 @@ class EavModel extends BaseEavModel
             }
 
             //
-            // Set attribute value
+            // Set default attribute value
             //
 
             $value = $handler->valueHandler->load();
@@ -97,9 +97,14 @@ class EavModel extends BaseEavModel
 
         }
 
+        //
+        // Set POST data
+        //
+
         if (Yii::$app->request->isPost && Yii::$app->request->getIsConsoleRequest() == false) {
-            $modelName = substr(strrchr(self::className(), "\\"), 1);
-            $model->load(Yii::$app->request->post(), $modelName);
+            $modelName = self::getModelShortName($model->entityModel);
+            $post = Yii::$app->request->post($modelName);
+            $model->load($post, 'EavModel');
         }
 
         return $model;
@@ -173,9 +178,14 @@ class EavModel extends BaseEavModel
         }
     }
 
-    /*public function formName()
+    public function formName()
     {
-        $reflector = new \ReflectionClass(($this->entityModel)::className());
+        return self::getModelShortName($this->entityModel) . '[EavModel]';
+    }
+
+    protected static function getModelShortName($model)
+    {
+        $reflector = new \ReflectionClass($model::className());
         return $reflector->getShortName();
-    }*/
+    }
 }
