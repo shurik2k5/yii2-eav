@@ -211,7 +211,8 @@
             delete attrs['id'];
             attrs['label'] += ' Copy';
             return this.parentView.createField(attrs, {
-                position: this.model.indexInDOM() + 1
+                position: this.model.indexInDOM() + 1,
+                duplicate: true
             });
         }
 
@@ -1009,9 +1010,13 @@
 
             __p += '<div class="actions-wrapper">  <a class="js-duplicate ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-                ' btn-xs btn-success" title="' + Formbuilder.lang('Duplicate Field') + '"><i class="fa fa-plus-circle"></i></a>  <a class="js-clear ' +
+                ' btn-xs btn-success" title="' + Formbuilder.lang('Duplicate Field') + '"><i class="fa fa-plus-circle"></i></a>';
+
+            __p += '<a class="js-clear ' +
                 ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
-                ' btn-xs btn-danger" title="' + Formbuilder.lang('Remove Field') + '"><i class="fa fa-minus-circle"></i></a></div>';
+                ' btn-xs btn-danger" title="' + Formbuilder.lang('Remove Field') + '"><i class="fa fa-minus-circle"></i></a>';
+
+            __p += '</div>';
 
         }
         return __p
