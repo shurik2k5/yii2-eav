@@ -21,6 +21,10 @@ EAV Dynamic Attributes for Yii2
 
 ![](http://images.mirocow.com/2016-05-02-23-32-34-m98o1.png)
 
+## Active field rules
+
+![](https://3.downloader.disk.yandex.ru/disk/10a3a56403c2e68fb7015558a5726e77f55997e297a5bb10a049c2310e958adb/579e3f2e/7Uq-nT7n8J_UvagtYjGAdVJy-672zFbMtuTz_nljHO3WGxqO97gRtqBPi2MhYlZNqPVxmnju-Ql7kYbAYo_30w%3D%3D?uid=0&filename=2016-07-31_17-09-39.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&fsize=44963&hid=fa2fbf41997fff40765a1776174712e8&media_type=image&tknv=v2&etag=d0e3447225f0d4757107744f9774ba28)
+
 # Install
 
 ## Add github repository
