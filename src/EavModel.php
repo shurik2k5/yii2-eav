@@ -10,6 +10,7 @@ use mirocow\eav\handlers\ValueHandler;
 use Yii;
 use yii\base\DynamicModel as BaseEavModel;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
@@ -58,7 +59,6 @@ class EavModel extends BaseEavModel
         foreach ($model->entityModel->getEavAttributes()->andWhere($params)->all() as $attribute) {
             $handler = AttributeHandler::load($model, $attribute);
             $attribute_name = $handler->getAttributeName();
-            //$model->setLabel($key, $handler->getAttributeLabel());
 
             //
             // Add rules
@@ -81,12 +81,6 @@ class EavModel extends BaseEavModel
             } else {
                 $model->addRule($attribute_name, 'safe');
             }
-
-            // TODO 5: Add eav attribute rules
-            /*$rules = $attribute->eavAttributeRule->getAttributeRules($attribute_name);
-            foreach ($rules as $rule){
-                $model->addRule($rule['field'], $rule['validator'], (isset($rule['params'])? $rule['params']: []));
-            }*/
 
             //
             // Set attribute value
@@ -179,4 +173,9 @@ class EavModel extends BaseEavModel
         }
     }
 
+    public function formName()
+    {
+        $reflector = new \ReflectionClass(($this->entityModel)::className());
+        return $reflector->getShortName();
+    }
 }

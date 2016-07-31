@@ -46,13 +46,12 @@ class EavBehavior extends Behavior
      */
     public function __get($name = '')
     {
-        $this->EavModel = EavModel::create([
+        return $this->EavModel = EavModel::create([
             'entityModel' => $this->owner,
             'valueClass' => $this->valueClass,
             'attribute' => $name,
         ]);
 
-        return $this->EavModel;
     }
 
     public function canGetProperty($name, $checkVars = true)
