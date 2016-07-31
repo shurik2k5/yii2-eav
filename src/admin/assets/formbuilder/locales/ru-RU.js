@@ -61,6 +61,8 @@ formbuilder_lang['Attributes'] = "Атрибуты";
 formbuilder_lang['Rows'] = "Строки";
 formbuilder_lang['Cols'] = "Столбцы";
 
-formbuilder_lang['array'] = "Массив";
+formbuilder_lang['array'] = "Json";
 formbuilder_lang['radio'] = "Список";
 formbuilder_lang['option'] = "Выпадающий список";
+
+formbuilder_lang['Other'] = "Прочее";
