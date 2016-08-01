@@ -59,6 +59,7 @@ php ./yii migrate/up -p=@vendor/mirocow/yii2-eav/src/migrations
 
 ### Model
 
+#### Simple
 
 ``` php
 class Product extends \yii\db\ActiveRecord
@@ -108,6 +109,55 @@ class Product extends \yii\db\ActiveRecord
 }
 ```
 
+#### Advanced
+
+``` php
+class Product extends \yii\db\ActiveRecord
+{
+
+    /**
+     *
+     *
+     */
+    public function rules()
+    {
+        return [
+            [['name'], 'string', 'max' => 255], // Product field
+            [['c1'], 'required'], // Attribute field
+            [['c1'], 'string', 'max' => 255], // Attribute field
+        ];
+    }
+
+    /**
+     * create_time, update_time to now()
+     * crate_user_id, update_user_id to current login user id
+     */
+    public function behaviors()
+    {
+        return [
+            'eav' => [
+                'class' => \mirocow\eav\EavBehavior::className(),
+                // это модель для таблицы object_attribute_value
+                'valueClass' => \mirocow\eav\models\EavAttributeValue::className(),
+            ]
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEavAttributes($attributes = [])
+    {
+        return \mirocow\eav\models\EavAttribute::find()
+          ->joinWith('entity')
+          ->where([
+            //'categoryId' => $entityId,
+            'entityModel' => $this::className()
+        ])->andWhere($attributes);
+    }
+
+}
+
 ### View
 
 Insert this code for create widget or load all EAV inputs fields for model
@@ -121,11 +171,23 @@ fo load selected field
 ```
 or for load all fields
 
+#### Simple
+
 ``` php
     <?php
     foreach($model->getEavAttributes()->all() as $attr){
         echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
     }        
+    ?>
+```
+
+### Advanced
+
+``` php
+    <?php
+    foreach($model->getEavAttributes(['entityId' => 8, 'typeId' => 3])->all() as $attr){
+        echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+    }
     ?>
 ```
 
