@@ -181,6 +181,17 @@ or for load all fields
     ?>
 ```
 
+or add sorted
+
+
+``` php
+    <?php
+    foreach($model->getEavAttributes()->orderBy(['order' => SORT_ASC])->all() as $attr){
+        echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+    }
+    ?>
+```
+
 ### Advanced
 
 ``` php

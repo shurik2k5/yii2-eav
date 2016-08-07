@@ -43,7 +43,7 @@ class EavAttribute extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'defaultValue', 'label', 'description'], 'string', 'max' => 255],
-             ['name', 'match', 'pattern' => '/(^|.*\])([\w\.]+)(\[.*|$)/', 'message' => Yii::t('eav','Attribute name must contain latin word characters only.')],
+            [['name'], 'match', 'pattern' => '/(^|.*\])([\w\.]+)(\[.*|$)/', 'message' => Yii::t('eav','Attribute name must contain latin word characters only.')],
             [['type'], 'string', 'max' => 50],
             [['entityId', 'typeId', 'order'], 'integer'],
         ];
