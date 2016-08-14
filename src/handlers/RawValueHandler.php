@@ -25,7 +25,7 @@ class RawValueHandler extends ValueHandler
      */
     public function defaultValue()
     {
-        return '';
+        return false;
     }
 
     /**

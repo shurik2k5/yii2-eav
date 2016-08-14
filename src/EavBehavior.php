@@ -7,6 +7,7 @@ namespace mirocow\eav;
 
 use mirocow\eav\models\EavAttribute;
 use yii\base\Behavior;
+use yii\base\Exception;
 use yii\db\ActiveRecord;
 
 /**
@@ -65,6 +66,17 @@ class EavBehavior extends Behavior
 
         if (empty($running)) {
             $running = true;
+
+            $attributeNames = $this->owner->activeAttributes();
+
+            foreach ($attributeNames as $attributeName){
+                if(preg_match('~c\d+~', $attributeName)){
+                    if(!EavAttribute::find()->where(['name' => $attributeName])->exists()){
+                        throw new Exception(\Yii::t('eav', 'Attribute {name} not found', ['name' => $attributeName]));
+                    }
+                }
+            }
+
             return $this->owner->validate();
         }
 

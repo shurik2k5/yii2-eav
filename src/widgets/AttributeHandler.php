@@ -3,9 +3,10 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\handlers;
+namespace mirocow\eav\widgets;
 
 use mirocow\eav\EavModel;
+use mirocow\eav\handlers\ValueHandler;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\base\Widget;

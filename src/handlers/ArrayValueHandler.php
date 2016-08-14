@@ -4,6 +4,7 @@
  */
 
 namespace mirocow\eav\handlers;
+use yii\helpers\Json;
 
 /**
  * Class RawValueHandler
@@ -25,7 +26,9 @@ class ArrayValueHandler extends RawValueHandler
      */
     public function defaultValue()
     {
-        return [];
+        $type = $this->attributeHandler->attributeModel->eavType;
+
+        return false;
     }
 
     /**

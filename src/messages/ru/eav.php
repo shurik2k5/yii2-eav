@@ -95,10 +95,12 @@ return [
     
     'Checkboxes' => 'Чекбоксы',
     'Dropdown' => 'Выпадающий список',
-    'Json textarea' => 'JSON Текстовое поле',
+    'Json textarea' => 'JSON Текствое поле',
     'Input numericfield' => 'Цифровое поле',
     'Radio' => 'Список с выбором',
     'Input textfield' => 'Текстовая строка',
     'Input textarea' => 'Текствое поле',
+
+    'Attribute {name} not found' => 'Attribute {name} not found',
 
 ];

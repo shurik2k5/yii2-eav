@@ -5,7 +5,7 @@
 
 namespace mirocow\eav\widgets;
 
-use mirocow\eav\handlers\AttributeHandler;
+use mirocow\eav\widgets\AttributeHandler;
 use Yii;
 
 class NumericInput extends AttributeHandler

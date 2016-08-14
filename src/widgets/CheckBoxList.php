@@ -5,7 +5,7 @@
 
 namespace mirocow\eav\widgets;
 
-use mirocow\eav\handlers\AttributeHandler;
+use mirocow\eav\widgets\AttributeHandler;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -42,7 +42,7 @@ TEMPLATE;
 TEMPLATE;
 
     static $fieldButton = <<<TEMPLATE
-    <span class="symbol"><span class="fa fa-square-o"></span></span> <%= Formbuilder.lang('Dropdown') %>    
+    <span class="symbol"><span class="fa fa-square-o"></span></span> <%= Formbuilder.lang('Checkboxes') %>    
 TEMPLATE;
 
     static $defaultAttributes = <<<TEMPLATE

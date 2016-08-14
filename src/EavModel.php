@@ -5,7 +5,7 @@
 
 namespace mirocow\eav;
 
-use mirocow\eav\handlers\AttributeHandler;
+use mirocow\eav\widgets\AttributeHandler;
 use mirocow\eav\handlers\ValueHandler;
 use Yii;
 use yii\base\DynamicModel as BaseEavModel;
@@ -88,9 +88,7 @@ class EavModel extends BaseEavModel
             $value = $handler->valueHandler->load();
             if (!$value) {
 
-                //
                 // Set default attribute
-                //
                 $value = $handler->valueHandler->defaultValue();
             }
 

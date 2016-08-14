@@ -5,6 +5,7 @@
 
 namespace mirocow\eav\handlers;
 
+use mirocow\eav\widgets\AttributeHandler;
 use yii\db\ActiveRecord;
 
 /**
