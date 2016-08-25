@@ -159,10 +159,19 @@ class AjaxController extends Controller
 
                     }
 
-                    EavAttribute::deleteAll(['NOT', ['IN', 'id', $attributes]]);
-                    EavAttributeValue::deleteAll(['NOT', ['IN', 'attributeId', $attributes]]);
-                    EavAttributeOption::deleteAll(['NOT', ['IN', 'attributeId', $attributes]]);
-                    EavAttributeRule::deleteAll(['NOT', ['IN', 'attributeId', $attributes]]);
+                    $attrArray = EavAttribute::find()
+                        ->select('id')
+                        ->where(['AND', ['NOT IN', 'id', $attributes], ['IN', 'entityId', $entityId]])
+                        ->asArray()
+                        ->all();
+
+                    if(!is_null($attrArray)){
+                        EavAttribute::deleteAll(['IN', 'id', $attrArray]);
+                        EavAttributeValue::deleteAll(['IN', 'attributeId', $attrArray]);
+                        EavAttributeOption::deleteAll(['IN', 'attributeId', $attrArray]);
+                        EavAttributeRule::deleteAll(['IN', 'attributeId', $attrArray]);
+                    }
+
 
                     $transaction->commit();
 
