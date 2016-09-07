@@ -94,11 +94,10 @@ class EavBehavior extends Behavior
 
     public function afterSave()
     {
-        if (\Yii::$app instanceof \yii\console\Application){
-            $this->eav->save(false);
-        }
-        if(\Yii::$app->request->isPost){
-            $this->eav->save(false);
+        if (\Yii::$app instanceof \yii\web\Application){
+            if(\Yii::$app->request->isPost){
+                $this->eav->save(false);
+            }
         }
 
     }
