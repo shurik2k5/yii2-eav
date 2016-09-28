@@ -1,6 +1,6 @@
 <?php
 
-use mirocow\eav\admin\assets\FbAsset;
+use blacksesion\eav\admin\assets\FbAsset;
 use yii\web\View;
 
 /**
@@ -38,7 +38,7 @@ $js_form_builder = <<<JS
 JS;
 
 $this->registerJs($js_form_builder, View::POS_READY, 'js_form_builder');
-if(file_exists(Yii::getAlias('@mirocow/eav').'/admin/assets/formbuilder/locales/'.Yii::$app->language.'.js')){
+if(file_exists(Yii::getAlias('@blacksesion/eav').'/admin/assets/formbuilder/locales/'.Yii::$app->language.'.js')){
     $this->registerJsFile($path->baseUrl.'/locales/'.Yii::$app->language.'.js', [View::POS_READY]);
 }
 ?>

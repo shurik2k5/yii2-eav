@@ -1,9 +1,9 @@
 <?php
 
-namespace mirocow\eav\admin\controllers;
+namespace blacksesion\eav\admin\controllers;
 
-use mirocow\eav\models\EavAttribute;
-use mirocow\eav\models\EavAttributeSearch;
+use blacksesion\eav\models\EavAttribute;
+use blacksesion\eav\models\EavAttributeSearch;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

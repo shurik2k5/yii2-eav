@@ -1,6 +1,6 @@
 <?php
 
-namespace mirocow\eav\models;
+namespace blacksesion\eav\models;
 
 use Yii;
 

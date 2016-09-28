@@ -3,10 +3,10 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace blacksesion\eav;
 
-use mirocow\eav\widgets\AttributeHandler;
-use mirocow\eav\handlers\ValueHandler;
+use blacksesion\eav\widgets\AttributeHandler;
+use blacksesion\eav\handlers\ValueHandler;
 use Yii;
 use yii\base\DynamicModel as BaseEavModel;
 use yii\db\ActiveRecord;
@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * Class EavModel
- * @package mirocow\eav
+ * @package blacksesion\eav
  */
 class EavModel extends BaseEavModel
 {

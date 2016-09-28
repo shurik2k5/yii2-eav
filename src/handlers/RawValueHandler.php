@@ -3,11 +3,11 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\handlers;
+namespace blacksesion\eav\handlers;
 
 /**
  * Class RawValueHandler
- * @package mirocow\eav
+ * @package blacksesion\eav
  */
 class RawValueHandler extends ValueHandler
 {

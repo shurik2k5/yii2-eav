@@ -1,13 +1,13 @@
 <?php
 
-namespace mirocow\eav\admin\controllers;
+namespace blacksesion\eav\admin\controllers;
 
-use mirocow\eav\models\EavAttribute;
-use mirocow\eav\models\EavAttributeOption;
-use mirocow\eav\models\EavAttributeRule;
-use mirocow\eav\models\EavAttributeType;
-use mirocow\eav\models\EavAttributeValue;
-use mirocow\eav\models\EavEntity;
+use blacksesion\eav\models\EavAttribute;
+use blacksesion\eav\models\EavAttributeOption;
+use blacksesion\eav\models\EavAttributeRule;
+use blacksesion\eav\models\EavAttributeType;
+use blacksesion\eav\models\EavAttributeValue;
+use blacksesion\eav\models\EavEntity;
 use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;

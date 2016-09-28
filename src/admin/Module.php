@@ -1,10 +1,10 @@
 <?php
 
-namespace mirocow\eav\admin;
+namespace blacksesion\eav\admin;
 
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'mirocow\eav\admin\controllers';
+    public $controllerNamespace = 'blacksesion\eav\admin\controllers';
 
     public function init()
     {

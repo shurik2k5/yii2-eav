@@ -1,6 +1,6 @@
 /**
  * Forked https://github.com/dobtco/formbuilder
- * by Mirocow (mirocow.com)
+ * by blacksesion
  */
 
 /**

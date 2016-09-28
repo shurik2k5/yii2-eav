@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace mirocow\eav\admin\assets;
+namespace blacksesion\eav\admin\assets;
 
 use Yii;
 use yii\web\AssetBundle;
@@ -17,9 +17,9 @@ use yii\web\AssetBundle;
 class FbAsset extends AssetBundle
 {
 
-    //public $basePath = '@mirocow/eav/admin/assets/formbuilder';
+    //public $basePath = '@blacksesion/eav/admin/assets/formbuilder';
     public $baseUrl = '@web';
-    public $sourcePath = '@mirocow/eav/admin/assets/formbuilder';
+    public $sourcePath = '@blacksesion/eav/admin/assets/formbuilder';
     public $css = [
         'css/vendor.css',
         'css/formbuilder.css',

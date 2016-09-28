@@ -3,10 +3,10 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\widgets;
+namespace blacksesion\eav\widgets;
 
-use mirocow\eav\EavModel;
-use mirocow\eav\handlers\ValueHandler;
+use blacksesion\eav\EavModel;
+use blacksesion\eav\handlers\ValueHandler;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\base\Widget;
@@ -14,11 +14,11 @@ use yii\db\ActiveRecord;
 
 /**
  * Class AttributeHandler
- * @package mirocow\eav
+ * @package blacksesion\eav
  */
 class AttributeHandler extends Widget
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\RawValueHandler';
+    const VALUE_HANDLER_CLASS = '\blacksesion\eav\handlers\RawValueHandler';
     
     /** @var EavModel */
     public $owner;

@@ -3,15 +3,15 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\widgets;
+namespace blacksesion\eav\widgets;
 
-use mirocow\eav\widgets\AttributeHandler;
+use blacksesion\eav\widgets\AttributeHandler;
 use Yii;
 use yii\helpers\ArrayHelper;
 
 class CheckBoxList extends AttributeHandler
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\MultipleOptionsValueHandler';
+    const VALUE_HANDLER_CLASS = '\blacksesion\eav\handlers\MultipleOptionsValueHandler';
 
     static $order = 10;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace mirocow\eav\interfaces;
+namespace blacksesion\eav\interfaces;
 
 interface HanlerInterface
 {

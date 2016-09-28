@@ -1,13 +1,13 @@
 <?php
 
-namespace mirocow\eav\models;
+namespace blacksesion\eav\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * EavAttributeSearch represents the model behind the search form about `mirocow\eav\models\EavAttribute`.
+ * EavAttributeSearch represents the model behind the search form about `blacksesion\eav\models\EavAttribute`.
  */
 class EavAttributeSearch extends EavAttribute
 {

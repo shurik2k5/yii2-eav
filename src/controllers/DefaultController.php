@@ -1,6 +1,6 @@
 <?php
 
-namespace mirocow\eav\controllers;
+namespace blacksesion\eav\controllers;
 
 use Yii;
 use yii\web\Controller;

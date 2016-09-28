@@ -1,6 +1,6 @@
 {
-  "name": "mirocow/yii2-eav",
-  "description": "EAV for Yii2",
+  "name": "blacksesion/yii2-eav",
+  "description": "EAV para Yii2",
   "license": "MIT",
   "keywords": [
     "yii2",
@@ -12,21 +12,8 @@
   "type": "yii2-extension",
   "authors": [
     {
-      "name": "Alien-art",
-      "email": "alien@alien-art.ru",
-      "role": "Developer"
-    },
-    {
-      "name": "Alexey Samoylov",
-      "email": "alexey.samoylov@gmail.com",
-      "homepage": "http://yiiblog.ru",
-      "role": "Developer"
-    },
-    {
-      "name": "Mirocow",
-      "email": "mr.mirocow@gmail.com",
-      "homepage": "http://mirocow.com",
-      "role": "Developer"
+      "name": "blacksesion",
+      "email": "blacksesion@gmail.com"
     }
   ],
   "minimum-stability": "dev",
@@ -36,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "mirocow\\eav\\": "./src"
+      "blacksesion\\eav\\": "./src"
     }
   }
 }

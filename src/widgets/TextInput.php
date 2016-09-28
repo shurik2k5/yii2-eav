@@ -3,9 +3,9 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\widgets;
+namespace blacksesion\eav\widgets;
 
-use mirocow\eav\widgets\AttributeHandler;
+use blacksesion\eav\widgets\AttributeHandler;
 use Yii;
 
 class TextInput extends AttributeHandler
