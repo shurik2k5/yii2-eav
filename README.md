@@ -1,9 +1,7 @@
-EAV Dynamic Attributes for Yii2
+EAV Atributos Dinamicos para Yii2
 ========
-Архитектура баз данных EAV(Enity-Attribute-Value)
-
-[![Latest Stable Version](https://poser.pugx.org/mirocow/yii2-eav/v/stable)](https://packagist.org/packages/mirocow/yii2-eav) [![Latest Unstable Version](https://poser.pugx.org/mirocow/yii2-eav/v/unstable)](https://packagist.org/packages/mirocow/yii2-eav) [![Total Downloads](https://poser.pugx.org/mirocow/yii2-eav/downloads)](https://packagist.org/packages/mirocow/yii2-eav) [![License](https://poser.pugx.org/mirocow/yii2-eav/license)](https://packagist.org/packages/mirocow/yii2-eav)
-[![Join the chat at https://gitter.im/Mirocow/yii2-eav](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Mirocow/yii2-eav?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+EAV(Enity-Attribute-Value)
+Tomado del trabajo de mirocow
 
 # Screenshots
 
@@ -33,26 +31,26 @@ EAV Dynamic Attributes for Yii2
     "repositories": [
         {
             "type": "git",
-            "url": "https://github.com/mirocow/yii2-eav.git"
+            "url": "https://github.com/blacksesion/yii2-eav.git"
         }
     ]
 ```
 and then
 
 ```
-php composer.phar require --prefer-dist "mirocow/yii2-eav" "*"
+php composer.phar require --prefer-dist "blacksesion/yii2-eav" "*"
 ```
 
 ## Configure
 
 ``` sh
-php ./yii migrate/up -p=@mirocow/eav/migrations
+php ./yii migrate/up -p=@blacksesion/eav/migrations
 ```
 
 or
 
 ``` sh
-php ./yii migrate/up -p=@vendor/mirocow/yii2-eav/src/migrations
+php ./yii migrate/up -p=@vendor/blacksesion/yii2-eav/src/migrations
 ```
 
 ## Use
@@ -86,9 +84,8 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'eav' => [
-                'class' => \mirocow\eav\EavBehavior::className(),
-                // это модель для таблицы object_attribute_value
-                'valueClass' => \mirocow\eav\models\EavAttributeValue::className(),
+                'class' => \blacksesion\eav\EavBehavior::className(),
+                'valueClass' => \blacksesion\eav\models\EavAttributeValue::className(),
             ]           
         ];
     }    
@@ -98,7 +95,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getEavAttributes()
     {
-        return \mirocow\eav\models\EavAttribute::find()
+        return \blacksesion\eav\models\EavAttribute::find()
           ->joinWith('entity')
           ->where([
             'categoryId' => $this->categories[0]->id,
@@ -136,9 +133,8 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'eav' => [
-                'class' => \mirocow\eav\EavBehavior::className(),
-                // это модель для таблицы object_attribute_value
-                'valueClass' => \mirocow\eav\models\EavAttributeValue::className(),
+                'class' => \blacksesion\eav\EavBehavior::className(),
+                'valueClass' => \blacksesion\eav\models\EavAttributeValue::className(),
             ]
         ];
     }
@@ -148,7 +144,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getEavAttributes($attributes = [])
     {
-        return \mirocow\eav\models\EavAttribute::find()
+        return \blacksesion\eav\models\EavAttribute::find()
           ->joinWith('entity')
           ->where([
             //'categoryId' => $entityId,
@@ -167,7 +163,7 @@ Insert this code for create widget or load all EAV inputs fields for model
 fo load selected field 
 
 ``` php
-    <?=$form->field($model,'test5', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
+    <?=$form->field($model,'test5', ['class' => '\blacksesion\eav\widgets\ActiveField'])->eavInput(); ?>
 ```
 or for load all fields
 
@@ -176,7 +172,7 @@ or for load all fields
 ``` php
     <?php
     foreach($model->getEavAttributes()->all() as $attr){
-        echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+        echo $form->field($model, $attr->name, ['class' => '\blacksesion\eav\widgets\ActiveField'])->eavInput();
     }        
     ?>
 ```
@@ -187,7 +183,7 @@ or add sorted
 ``` php
     <?php
     foreach($model->getEavAttributes()->orderBy(['order' => SORT_ASC])->all() as $attr){
-        echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+        echo $form->field($model, $attr->name, ['class' => '\blacksesion\eav\widgets\ActiveField'])->eavInput();
     }
     ?>
 ```
@@ -197,7 +193,7 @@ or add sorted
 ``` php
     <?php
     foreach($model->getEavAttributes(['entityId' => 8, 'typeId' => 3])->all() as $attr){
-        echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+        echo $form->field($model, $attr->name, ['class' => '\blacksesion\eav\widgets\ActiveField'])->eavInput();
     }
     ?>
 ```
@@ -228,7 +224,7 @@ String
 ### Add attribute
 
 ```php
-$attr = new mirocow\eav\models\EavAttribute();
+$attr = new blacksesion\eav\models\EavAttribute();
 $attr->attributes = [
         'entityId' => 1, // Category ID
         'name' => 'AttrCategory1',  // service name field
@@ -248,7 +244,7 @@ In main config file:
 $modules = [
     ...,
     'eav' => [
-        'class' => 'mirocow\eav\Module',
+        'class' => 'blacksesion\eav\Module',
     ],
 ];
 ```
@@ -260,10 +256,10 @@ $modules = [
 
 
 ``` php
-<?= \mirocow\eav\admin\widgets\Fields::widget([
+<?= \blacksesion\eav\admin\widgets\Fields::widget([
                       'model' => $model,
                       'categoryId' => $model->id,
-                      'entityName' => 'Продукт',
+                      'entityName' => 'Entidad',
                       'entityModel' => 'common\models\Product',
                   ])?>
 ```
