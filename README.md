@@ -54,23 +54,23 @@ php ./yii migrate/up -p=@vendor/mirocow/yii2-eav/src/migrations
 and then add messages settings
 
 ``` php
-    'i18n' => [
-        'translations' => [
-            'app*' => [
-                'class' => 'yii\i18n\PhpMessageSource',
-                //'basePath' => '@app/messages',
-                //'sourceLanguage' => 'en-US',
-                'fileMap' => [
-                    'app'       => 'app.php',
-                    'app/error' => 'error.php',
-                ],
+		'i18n' => [
+				'translations' => [
+						'app*' => [
+								'class' => 'yii\i18n\PhpMessageSource',
+								//'basePath' => '@app/messages',
+								//'sourceLanguage' => 'en-US',
+								'fileMap' => [
+										'app'       => 'app.php',
+										'app/error' => 'error.php',
+								],
 						],
 						'eav' => [
 								'class' => 'yii\i18n\PhpMessageSource',
-								'basePath' => '@mirocow/messages',
-						],						
-        ],
-    ]
+								'basePath' => '@mirocow/eav/messages',
+						],
+				],
+		]
 ```
 
 ## Use
