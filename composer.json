@@ -1,42 +1,42 @@
 {
-  "name": "mirocow/yii2-eav",
-  "description": "EAV for Yii2",
-  "license": "MIT",
-  "keywords": [
-    "yii2",
-    "eav",
-    "attribute",
-    "cck",
-    "fields"
-  ],
-  "type": "yii2-extension",
-  "authors": [
-    {
-      "name": "Alien-art",
-      "email": "alien@alien-art.ru",
-      "role": "Developer"
-    },
-    {
-      "name": "Alexey Samoylov",
-      "email": "alexey.samoylov@gmail.com",
-      "homepage": "http://yiiblog.ru",
-      "role": "Developer"
-    },
-    {
-      "name": "Mirocow",
-      "email": "mr.mirocow@gmail.com",
-      "homepage": "http://mirocow.com",
-      "role": "Developer"
-    }
-  ],
-  "minimum-stability": "dev",
-  "require": {
-    "php": ">=5.5.0",
-    "yiisoft/yii2": "dev-master"
-  },
-  "autoload": {
-    "psr-4": {
-      "mirocow\\eav\\": "./src"
-    }
-  }
+	"name": "mirocow/yii2-eav",
+	"description": "EAV for Yii2",
+	"license": "MIT",
+	"keywords": [
+		"yii2",
+		"eav",
+		"attribute",
+		"cck",
+		"fields"
+	],
+	"type": "yii2-extension",
+	"authors": [
+		{
+			"name": "Alien-art",
+			"email": "alien@alien-art.ru",
+			"role": "Developer"
+		},
+		{
+			"name": "Alexey Samoylov",
+			"email": "alexey.samoylov@gmail.com",
+			"homepage": "http://yiiblog.ru",
+			"role": "Developer"
+		},
+		{
+			"name": "Mirocow",
+			"email": "mr.mirocow@gmail.com",
+			"homepage": "http://mirocow.com",
+			"role": "Developer"
+		}
+	],
+	"minimum-stability": "dev",
+	"require": {
+		"php": ">=5.5.0",
+		"yiisoft/yii2": ">=2.0.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"mirocow\\eav\\": "./src"
+		}
+	}
 }
