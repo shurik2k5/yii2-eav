@@ -60,8 +60,10 @@ class AjaxController extends Controller
 
 										$categoryId = isset($post['categoryId'])? $post['categoryId']: 0;
 
-										$entityId = EavEntity::find()->select(['id'])->where(['entityModel' => $post['entityModel'],
-																																					'categoryId'  => $categoryId,])->scalar();
+										$entityId = EavEntity::find()->select(['id'])->where([
+											'entityModel' => $post['entityModel'],
+											'categoryId'  => $categoryId,
+										])->scalar();
 
 										if (!$entityId) {
 												$entity = new EavEntity;
@@ -85,6 +87,7 @@ class AjaxController extends Controller
 														$attribute = EavAttribute::findOne(['name' => $field['cid'], 'entityId' => $entityId]);
 												}
 
+												// Create new attribute
 												if (empty($attribute)) {
 														$attribute = new EavAttribute;
 														$lastId = EavAttribute::find()->select(['id'])->orderBy(['id' => SORT_DESC])->limit(1)->scalar() + 1;
@@ -152,9 +155,13 @@ class AjaxController extends Controller
 																$rule->{$key} = $param;
 														}
 												}
-												$rule->required = isset($field['field_options']['required'])? (int)$field['field_options']['required']: 0;
-												$rule->visible = isset($field['field_options']['visible'])? (int)$field['field_options']['visible']: 0;
-												$rule->locked = isset($field['field_options']['locked'])? (int)$field['field_options']['locked']: 0;
+												$rule->required = isset($field['field_options']['required'])?
+													(int)$field['field_options']['required']: 0;
+												$rule->visible = isset($field['field_options']['visible'])?
+													(int)$field['field_options']['visible']: 0;
+												$rule->locked = isset($field['field_options']['locked'])?
+													(int)$field['field_options']['locked']: 0;
+
 												$rule->save();
 
 										}
@@ -165,17 +172,19 @@ class AjaxController extends Controller
 												->asArray()
 												->column();
 
-										if(!is_null($attrArray)){
-												$emtitiesArray = EavAttribute::find()
-														->select('entityId')
-														->where(['id' => $attrArray])
-														->asArray()
-														->column();
+										if($attrArray){
 												EavAttributeValue::deleteAll(['IN', 'attributeId', $attrArray]);
 												EavAttributeOption::deleteAll(['IN', 'attributeId', $attrArray]);
 												EavAttributeRule::deleteAll(['IN', 'attributeId', $attrArray]);
-												EavEntity::deleteAll(['IN', 'id', $emtitiesArray]);
 												EavAttribute::deleteAll(['IN', 'id', $attrArray]);
+
+												// Delete entity if there are no attributes
+												if(!EavAttribute::find()
+												->select('id')
+												->where(['IN', 'entityId', $entityId])
+												->exists()){
+													EavEntity::deleteAll(['IN', 'id', $entityId]);
+												}
 										}
 
 

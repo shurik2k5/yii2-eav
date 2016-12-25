@@ -169,9 +169,10 @@ class Product extends \yii\db\ActiveRecord
 				return \mirocow\eav\models\EavAttribute::find()
 					->joinWith('entity')
 					->where([
-						//'categoryId' => $entityId,
+						//'categoryId' => $this->categories[0]->id,
 						'entityModel' => $this::className()
-				])->andWhere($attributes);
+				])
+				->orderBy(['order' => SORT_ASC]);
 		}
 
 }

@@ -25,7 +25,7 @@ class RawValueHandler extends ValueHandler
 		 */
 		public function defaultValue()
 		{
-				return '';
+				return null;
 		}
 
 		/**
@@ -50,5 +50,18 @@ class RawValueHandler extends ValueHandler
 		public function getTextValue()
 		{
 				return $this->getValueModel()->value;
+		}
+
+		public function addRules()
+		{
+
+				$model = &$this->attributeHandler->owner;
+				$attribute = &$this->attributeHandler->attributeModel;
+				$attribute_name = $this->attributeHandler->getAttributeName();
+
+				if ($attribute->eavType->storeType == ValueHandler::STORE_TYPE_RAW) {
+						$model->addRule($attribute_name, 'default', ['value' => $attribute->defaultValue]);
+				}
+
 		}
 }
