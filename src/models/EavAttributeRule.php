@@ -14,131 +14,112 @@ use yii\helpers\Json;
  */
 class EavAttributeRule extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return '{{%eav_attribute_rules}}';
-    }
+		/**
+		 * @inheritdoc
+		 */
+		public static function tableName()
+		{
+				return '{{%eav_attribute_rules}}';
+		}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['attributeId'], 'integer'],
-            [['required', 'visible', 'locked'], 'integer', 'max' => 1],
-            [['rules'], 'string'],
-        ];
-    }
+		/**
+		 * @inheritdoc
+		 */
+		public function rules()
+		{
+				return [
+						[['attributeId'], 'integer'],
+						[['required', 'visible', 'locked'], 'integer', 'max' => 1],
+						[['rules'], 'string'],
+				];
+		}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'attributeId' => Yii::t('eav', 'Attribute ID'),
-            'rules' => Yii::t('eav', 'Rules'),
-            'required' => Yii::t('eav', 'Required'),
-            'locked' => Yii::t('eav', 'Locked'),
-            'visible' => Yii::t('eav', 'Visible'),
-        ];
-    }
+		/**
+		 * @inheritdoc
+		 */
+		public function attributeLabels()
+		{
+				return [
+						'id' => 'ID',
+						'attributeId' => Yii::t('eav', 'Attribute ID'),
+						'rules' => Yii::t('eav', 'Rules'),
+						'required' => Yii::t('eav', 'Required'),
+						'locked' => Yii::t('eav', 'Locked'),
+						'visible' => Yii::t('eav', 'Visible'),
+				];
+		}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEavAttribute()
-    {
-        return $this->hasOne(EavAttribute::className(), ['id' => 'attributeId']);
-    }
+		/**
+		 * @return \yii\db\ActiveQuery
+		 */
+		public function getEavAttribute()
+		{
+				return $this->hasOne(EavAttribute::className(), ['id' => 'attributeId']);
+		}
 
-    private function getDefaultFields()
-    {
-        return [
-            'id',
-            'attributeId',
-            'rules',
-            'required',
-            'locked',
-            'visible',
-            'eavAttribute'
-        ];
-    }
+		private function getDefaultFields()
+		{
+				return [
+						'id',
+						'attributeId',
+						'rules',
+						'required',
+						'locked',
+						'visible',
+						'eavAttribute'
+				];
+		}
 
-    private function getSkipFields()
-    {
-        return [
-            'cid',
-            'label',
-            'type',
-            'field_type',
-            'description',
-        ];
-    }
+		private function getSkipFields()
+		{
+				return [
+						'cid',
+						'label',
+						'type',
+						'field_type',
+						'description',
+				];
+		}
 
-    public function getAttributeRules($field_name)
-    {
-        $validators = [];
+		public function __get($name)
+		{
+				if (in_array($name, $this->getDefaultFields())) {
+						return parent::__get($name);
+				}
 
-        $rules = Json::decode($this->rules);
+				if (in_array($name, $this->getSkipFields())) {
 
-        foreach ($rules as $rule) {
+						$rules = Json::decode($this->rules);
 
-            $validators[] = [
-                'field' => $field_name,
-                'validator' => 'safe',
-                'params' => [],
-            ];
+						if (isset($rules[$name])) {
+								return $rules[$name];
+						}
 
-        }
+				}
 
-        return $validators;
-    }
+				return [];
 
-    public function __get($name)
-    {
-        if (in_array($name, $this->getDefaultFields())) {
-            return parent::__get($name);
-        }
+		}
 
-        if (in_array($name, $this->getSkipFields())) {
+		public function __set($name, $value)
+		{
+				if (in_array($name, $this->getDefaultFields())) {
+						return parent::__set($name, $value);
+				}
 
-            $rules = Json::decode($this->rules);
+				if (in_array($name, $this->getSkipFields())) {
+						return [];
+				}
 
-            if (isset($rules[$name])) {
-                return $rules[$name];
-            }
+				$rules = Json::decode($this->rules);
 
-        }
+				if (!$rules) {
+						$rules = [];
+				}
 
-        return [];
+				$rules[$name] = $value;
 
-    }
+				$this->rules = Json::encode($rules);
 
-    public function __set($name, $value)
-    {
-        if (in_array($name, $this->getDefaultFields())) {
-            return parent::__set($name, $value);
-        }
-
-        if (in_array($name, $this->getSkipFields())) {
-            return [];
-        }
-
-        $rules = Json::decode($this->rules);
-
-        if (!$rules) {
-            $rules = [];
-        }
-
-        $rules[$name] = $value;
-
-        $this->rules = Json::encode($rules);
-
-    }
+		}
 }

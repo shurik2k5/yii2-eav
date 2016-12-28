@@ -19,7 +19,6 @@
 				unbind: function (el) {
 						return $(el).unbind('input.rivets');
 				}
-
 		}
 
 		/**
@@ -108,7 +107,7 @@
 
 				FormbuilderModel.prototype.is_input = function () {
 						return Formbuilder.inputFields[
-										this.get(Formbuilder.options.FIELD_TYPE)
+										this.get(Formbuilder.names.FIELD_TYPE)
 										] != null;
 				}
 
@@ -168,7 +167,7 @@
 				ViewFieldView.prototype.render = function () {
 						this.$el.addClass('response-field-' +
 									this.model.get(
-										Formbuilder.options.FIELD_TYPE
+										Formbuilder.names.FIELD_TYPE
 									)
 								)
 								.data('cid', this.model.cid)
@@ -270,7 +269,7 @@
 
 						$el = $(e.currentTarget);
 						i = this.$el.find('.option').index($el.closest('.option'));
-						options = this.model.get(Formbuilder.options.OPTIONS) || [];
+						options = this.model.get(Formbuilder.names.OPTIONS) || [];
 						newOption = {
 								label: "",
 								checked: false
@@ -280,8 +279,8 @@
 						} else {
 								options.push(newOption);
 						}
-						this.model.set(Formbuilder.options.OPTIONS, options);
-						this.model.trigger("change:" + Formbuilder.options.OPTIONS);
+						this.model.set(Formbuilder.names.OPTIONS, options);
+						this.model.trigger("change:" + Formbuilder.names.OPTIONS);
 						return this.forceRender();
 				}
 
@@ -290,13 +289,13 @@
 
 						$el = $(e.currentTarget);
 						index = this.$el.find(".js-sort-up-option").index($el);
-						options = this.model.get(Formbuilder.options.OPTIONS);
+						options = this.model.get(Formbuilder.names.OPTIONS);
 						tmp = options[index];
 						tmp2 = options[index - 1];
 						options[index] = tmp2;
 						options[index - 1] = tmp;
-						this.model.set(Formbuilder.options.OPTIONS, options);
-						this.model.trigger("change:" + Formbuilder.options.OPTIONS);
+						this.model.set(Formbuilder.names.OPTIONS, options);
+						this.model.trigger("change:" + Formbuilder.names.OPTIONS);
 						this.forceRender();
 				}
 
@@ -305,15 +304,15 @@
 
 						$el = $(e.currentTarget);
 						index = this.$el.find(".js-sort-down-option").index($el);
-						options = this.model.get(Formbuilder.options.OPTIONS);
+						options = this.model.get(Formbuilder.names.OPTIONS);
 						if (index < options.length - 1) {
 								// console.log($el);
 								tmp = options[index];
 								tmp2 = options[index + 1];
 								options[index] = tmp2;
 								options[index + 1] = tmp;
-								this.model.set(Formbuilder.options.OPTIONS, options);
-								this.model.trigger("change:" + Formbuilder.options.OPTIONS);
+								this.model.set(Formbuilder.names.OPTIONS, options);
+								this.model.trigger("change:" + Formbuilder.names.OPTIONS);
 								this.forceRender();
 						}
 				}
@@ -323,10 +322,10 @@
 
 						$el = $(e.currentTarget);
 						index = this.$el.find(".js-remove-option").index($el);
-						options = this.model.get(Formbuilder.options.OPTIONS);
+						options = this.model.get(Formbuilder.names.OPTIONS);
 						options.splice(index, 1);
-						this.model.set(Formbuilder.options.OPTIONS, options);
-						this.model.trigger("change:" + Formbuilder.options.OPTIONS);
+						this.model.set(Formbuilder.names.OPTIONS, options);
+						this.model.trigger("change:" + Formbuilder.names.OPTIONS);
 						return this.forceRender();
 				}
 
@@ -334,7 +333,7 @@
 						var $el, index, options;
 
 						$el = $(e.currentTarget);
-						options = this.model.get(Formbuilder.options.OPTIONS);
+						options = this.model.get(Formbuilder.names.OPTIONS);
 						index = this.$el.find(".js-default-updated").index($el);
 						if (options[index].checked) {
 								options[index].checked = false;
@@ -402,7 +401,7 @@
 						var _this = this;
 						this.formSaved = true;
 						this.saveFormButton = this.$el.find(".js-save-form");
-						this.saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED);
+						this.saveFormButton.attr('disabled', true).text(Formbuilder.dict.ALL_CHANGES_SAVED);
 
 						if (!!Formbuilder.options.AUTOSAVE) {
 								setInterval(function () {
@@ -417,7 +416,7 @@
 								if (_this.formSaved) {
 										return void 0;
 								} else {
-										return Formbuilder.options.dict.UNSAVED_CHANGES;
+										return Formbuilder.dict.UNSAVED_CHANGES;
 								}
 						});
 				}
@@ -632,7 +631,7 @@
 								return;
 						}
 						this.formSaved = false;
-						return this.saveFormButton.removeAttr('disabled').text(Formbuilder.options.dict.SAVE_FORM);
+						return this.saveFormButton.removeAttr('disabled').text(Formbuilder.dict.SAVE_FORM);
 				}
 
 				BuilderView.prototype.saveForm = function (e) {
@@ -641,7 +640,7 @@
 								return;
 						}
 						this.formSaved = true;
-						this.saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED);
+						this.saveFormButton.attr('disabled', true).text(Formbuilder.dict.ALL_CHANGES_SAVED);
 						this.collection.sort();
 
 						payload = JSON.stringify({
@@ -700,17 +699,17 @@
 						defaultValueAttributes: function (field_type) {
 								var attrs = {};
 
-								attrs[Formbuilder.options.LABEL] = Formbuilder.lang('Untitled');
-								attrs[Formbuilder.options.GROUP_NAME] = Formbuilder.lang('default');
-								attrs[Formbuilder.options.FIELD_TYPE] = field_type;
-								attrs[Formbuilder.options.REQUIRED] = true;
-								attrs[Formbuilder.options.MIN] = 0;
-								attrs[Formbuilder.options.MAX] = 0;
-								attrs[Formbuilder.options.MINLENGTH] = 0;
-								attrs[Formbuilder.options.MAXLENGTH] = 0;
-								attrs[Formbuilder.options.LOCKED] = false;
-								attrs[Formbuilder.options.VISIBLE] = true;
-								attrs[Formbuilder.options.SIZE] = 'large';
+								attrs[Formbuilder.names.GROUP_NAME] = Formbuilder.dict.GROUP_NAME;
+								attrs[Formbuilder.names.LABEL] = Formbuilder.dict.LABEL;
+								attrs[Formbuilder.names.FIELD_TYPE] = field_type;
+								attrs[Formbuilder.names.REQUIRED] = true;
+								attrs[Formbuilder.names.MIN] = 0;
+								attrs[Formbuilder.names.MAX] = 0;
+								attrs[Formbuilder.names.MINLENGTH] = 0;
+								attrs[Formbuilder.names.MAXLENGTH] = 0;
+								attrs[Formbuilder.names.LOCKED] = false;
+								attrs[Formbuilder.names.VISIBLE] = true;
+								attrs[Formbuilder.names.SIZE] = 'large';
 								attrs['field_options'] = {};
 
 								/**
@@ -725,11 +724,14 @@
 				}
 
 				Formbuilder.options = {
-						BUTTON_CLASS: 'btn',
 						HTTP_ENDPOINT: '',
 						HTTP_METHOD: 'POST',
 						AUTOSAVE: false,
 						CLEAR_FIELD_CONFIRM: false,
+				}
+
+				Formbuilder.names = {
+						BUTTON_CLASS: 'btn',
 						GROUP_NAME: 'group_name',
 						LABEL: 'label',
 						FIELD_TYPE: 'field_type',
@@ -750,18 +752,20 @@
 						LENGTH_UNITS: 'field_options.min_max_length_units',
 						AREA_ROWS: 'field_options.area_size.rows',
 						AREA_COLS: 'field_options.area_size.cols',
-						dict: {
-								ALL_CHANGES_SAVED: Formbuilder.lang('All changes saved'),
-								SAVE_FORM: Formbuilder.lang('Save form'),
-								UNSAVED_CHANGES: Formbuilder.lang('You have unsaved changes. If you leave this page, you will lose those changes!')
-						}
+						MULTIPLE: 'field_options.list.multiple',
+				}
+
+				Formbuilder.dict = {
+						ALL_CHANGES_SAVED: Formbuilder.lang('All changes saved'),
+						SAVE_FORM: Formbuilder.lang('Save form'),
+						UNSAVED_CHANGES: Formbuilder.lang('You have unsaved changes. If you leave this page, you will lose those changes!'),
+						LABEL: Formbuilder.lang('Untitled'),
+						GROUP_NAME: Formbuilder.lang('default')
 				}
 
 				Formbuilder.fields = {}
 
 				Formbuilder.inputFields = {}
-
-				//Formbuilder.nonInputFields = {}
 
 				Formbuilder.registerField = function (name, opts) {
 						var x, _i, _len, _ref5;
@@ -803,26 +807,17 @@
 				 * Get remote field types
 				 */
 				function getFieldTypes(opts, callBack) {
-
 						$.ajax({
 								url: opts.uri,
 								dataType: "json"
 						}).success(function (response) {
-
 								if (response.status == 'success') {
-
 										_.each(response.types, function (f) {
-
 												Formbuilder.registerField(f.name, f.formBuilder);
-
 										});
-
 								}
-
 								callBack(opts);
-
 						});
-
 				}
 
 				return Formbuilder;
@@ -879,7 +874,7 @@
 				with (fied_settings) {
 
 						__p += '<div class="fb-save-wrapper">  <button class="js-save-form btn-success ' +
-								((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.BUTTON_CLASS )) == null ? '' : __t) +
 								'">'+Formbuilder.lang('Save')+'</button></div>';
 
 				}
@@ -909,7 +904,7 @@
 								__p += '<a data-field-type="' +
 										((__t = ( f.field_type )) == null ? '' : __t) +
 										'" style="text-align: left;" class="btn-default btn-block ' +
-										((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+										((__t = ( Formbuilder.names.BUTTON_CLASS )) == null ? '' : __t) +
 										'">          ' +
 										((__t = ( _.template(f.addButton)() )) == null ? '' : __t) +
 										'</a>';
@@ -921,7 +916,7 @@
 								__p += '<a data-field-type="' +
 										((__t = ( f.field_type )) == null ? '' : __t) +
 										'" class="' +
-										((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+										((__t = ( Formbuilder.names.BUTTON_CLASS )) == null ? '' : __t) +
 										'">          ' +
 										((__t = ( f.addButton )) == null ? '' : __t) +
 										'</a>';
@@ -984,7 +979,7 @@
 						__p += '<div class="subtemplate-wrapper">  <div class="cover"></div>  ' +
 								((__t = ( Formbuilder.templates['view/label']({rf: rf}) )) == null ? '' : __t) +
 								((__t = ( Formbuilder.fields[
-												rf.get(Formbuilder.options.FIELD_TYPE)
+												rf.get(Formbuilder.names.FIELD_TYPE)
 										].view({rf: rf}) )) == null ? '' : __t) +
 								((__t = ( Formbuilder.templates['view/description']({rf: rf}) )) == null ? '' : __t) +
 								((__t = ( Formbuilder.templates['view/duplicate_remove']({rf: rf}) )) == null ? '' : __t) +
@@ -1001,7 +996,7 @@
 				with (fied_settings) {
 
 						__p += '<span class="help-block">  ' +
-								((__t = ( rf.get(Formbuilder.options.DESCRIPTION) )) == null ? '' : __t) +
+								((__t = ( rf.get(Formbuilder.names.DESCRIPTION) )) == null ? '' : __t) +
 								'</span>';
 
 				}
@@ -1015,11 +1010,11 @@
 				with (fied_settings) {
 
 						__p += '<div class="actions-wrapper">  <a class="js-duplicate ' +
-								((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.BUTTON_CLASS )) == null ? '' : __t) +
 								' btn-xs btn-success" title="' + Formbuilder.lang('Duplicate Field') + '"><i class="fa fa-plus-circle"></i></a>';
 
 						__p += ' <a class="js-clear ' +
-								((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.BUTTON_CLASS )) == null ? '' : __t) +
 								' btn-xs btn-danger" title="' + Formbuilder.lang('Remove Field') + '"><i class="fa fa-minus-circle"></i></a>';
 
 						__p += '</div>';
@@ -1035,9 +1030,9 @@
 				with (fied_settings) {
 
 						__p += '<label>  <span>' +
-								((__t = ( rf.get(Formbuilder.options.LABEL) )) == null ? '' : __t);
+								((__t = ( rf.get(Formbuilder.names.LABEL) )) == null ? '' : __t);
 
-						if (rf.get(Formbuilder.options.REQUIRED)) {
+						if (rf.get(Formbuilder.names.REQUIRED)) {
 								__p += '    <abbr title="required">*</abbr>  ';
 						}
 
@@ -1059,7 +1054,7 @@
 						__p +=
 								((__t = ( Formbuilder.templates['edit/common']({rf: rf}) )) == null ? '' : __t) +
 								((__t = ( Formbuilder.fields[
-									rf.get(Formbuilder.options.FIELD_TYPE)
+									rf.get(Formbuilder.names.FIELD_TYPE)
 								].edit({rf: rf}) )) == null ? '' : __t);
 
 				}
@@ -1072,7 +1067,7 @@
 				with (fied_settings) {
 
 						__p += '<div class="fb-edit-section-header"> ' + Formbuilder.lang('Field type:') + ' ' +
-								((__t = ( rf.get(Formbuilder.options.FIELD_TYPE) )) == null ? '' : Formbuilder.lang(__t)) +
+								((__t = ( rf.get(Formbuilder.names.FIELD_TYPE) )) == null ? '' : Formbuilder.lang(__t)) +
 								', Attribure id: ' + rf.cid + '</div><div class="fb-common-wrapper"><div class="fb-label-description">' +
 								((__t = ( Formbuilder.templates['edit/label_description']() )) == null ? '' : __t) +
 								'</div><div class="fb-common-checkboxes">';
@@ -1087,15 +1082,15 @@
 
 						__p +=
 								'<input type="text" data-rv-input="model.' +
-								((__t = ( Formbuilder.options.GROUP_NAME )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.GROUP_NAME )) == null ? '' : __t) +
 								'" placeholder="' + Formbuilder.lang('Group name') + '" />' +
 
 								'<input type="text" data-rv-input="model.' +
-								((__t = ( Formbuilder.options.LABEL )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.LABEL )) == null ? '' : __t) +
 								'" placeholder="' + Formbuilder.lang('Field label') + '" />' +
 
 								'<textarea class="form-control" data-rv-input="model.' +
-								((__t = ( Formbuilder.options.DESCRIPTION )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.DESCRIPTION )) == null ? '' : __t) +
 								'"  placeholder="' + Formbuilder.lang('Add a longer description to this field') + '"></textarea>';
 				}
 				return __p
@@ -1111,10 +1106,10 @@
 								__p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Attributes') + '</div>' + Formbuilder.lang('Rows') +
 								'<input type="text" data-rv-input="model.' +
 
-								((__t = ( Formbuilder.options.AREA_ROWS )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.AREA_ROWS )) == null ? '' : __t) +
 								'" style="width: 60px" />&nbsp;&nbsp;' + Formbuilder.lang('Cols') + '<input type="text" data-rv-input="model.' +
 
-								((__t = ( Formbuilder.options.AREA_COLS )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.AREA_COLS )) == null ? '' : __t) +
 								'" style="width: 60px" />';
 
 						}
@@ -1137,12 +1132,12 @@
 
 						if (typeof includeBlank !== 'undefined') {
 								__p += '  <label><input type="checkbox" data-rv-checked="model.' +
-										((__t = ( Formbuilder.options.INCLUDE_BLANK )) == null ? '' : __t) +
+										((__t = ( Formbuilder.names.INCLUDE_BLANK )) == null ? '' : __t) +
 										'" />    ' + Formbuilder.lang('Include blank') + '</label>';
 						}
 
 						__p += '<div class="option" data-rv-each-option="model.' +
-								((__t = ( Formbuilder.options.OPTIONS )) == null ? '' : __t) + '">  ';
+								((__t = ( Formbuilder.names.OPTIONS )) == null ? '' : __t) + '">  ';
 
 						if(typeof showCheckBox !== 'undefined'){
 								__p += '<input type="checkbox" \
@@ -1156,27 +1151,32 @@
 
 						__p += '<input type="text" data-rv-input="option:label" class="option-label-input" /> ' +
 
-								'<a class="js-sort-up-option btn-xs btn-success ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+								'<a class="js-sort-up-option btn-xs btn-success ' + ((__t = ( Formbuilder.names.BUTTON_CLASS )) == null ? '' : __t) +
 								'" title="' + Formbuilder.lang('Sort up') + '"><i class="fa fa-arrow-up"></i></a> ' +
 
-								'<a class="js-sort-down-option btn-xs btn-success ' + Formbuilder.options.BUTTON_CLASS +
+								'<a class="js-sort-down-option btn-xs btn-success ' + Formbuilder.names.BUTTON_CLASS +
 								'" title="' + Formbuilder.lang('Sort down') + '"><i class="fa fa-arrow-down"></i></a> ' +
 
-								'<a class="js-remove-option btn-xs btn-danger ' + ((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+								'<a class="js-remove-option btn-xs btn-danger ' + ((__t = ( Formbuilder.names.BUTTON_CLASS )) == null ? '' : __t) +
 								'" title="' + Formbuilder.lang('Remove Option') + '"><i class="fa fa-minus-circle"></i></a>';
 
 						__p += '</div>';
 
 						if (typeof includeOther !== 'undefined') {
 								__p += '  <label>    <input type="checkbox" data-rv-checked="model.' +
-										((__t = ( Formbuilder.options.INCLUDE_OTHER )) == null ? '' : __t) +
+										((__t = ( Formbuilder.names.INCLUDE_OTHER )) == null ? '' : __t) +
 										'" />    ' + Formbuilder.lang('Include "other"') + '  </label>';
 						}
 
 						__p += '<div class="fb-bottom-add">  <a class="js-add-option ' +
-								((__t = ( Formbuilder.options.BUTTON_CLASS )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.BUTTON_CLASS )) == null ? '' : __t) +
 								'">' + Formbuilder.lang('Add option') + '</a></div>';
 
+						/*if (typeof useMultiple !== 'undefined') {
+							__p += '  <label><input type="checkbox" data-rv-checked="model.' +
+									((__t = ( Formbuilder.names.MULTIPLE )) == null ? '' : __t) +
+									'" />    ' + Formbuilder.lang('Allow Multiple Selections') + '</label>';
+						}*/
 				}
 				return __p
 		}
@@ -1187,7 +1187,7 @@
 				with (fied_settings) {
 
 						__p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Size') + '</div>' +
-								'<select data-rv-value="model.' + ((__t = ( Formbuilder.options.SIZE )) == null ? '' : __t)+ '">' +
+								'<select data-rv-value="model.' + ((__t = ( Formbuilder.names.SIZE )) == null ? '' : __t)+ '">' +
 								'<option value="small">' + Formbuilder.lang('Small') + '</option>' +
 								'<option value="medium">' + Formbuilder.lang('Medium') + '</option>' +
 								'<option value="large">' + Formbuilder.lang('Large') + '</option>' +
@@ -1202,15 +1202,15 @@
 				with (fied_settings) {
 
 						__p += '<label>  <input type="checkbox" data-rv-checked="model.' +
-								((__t = ( Formbuilder.options.REQUIRED )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.REQUIRED )) == null ? '' : __t) +
 								'" />  ' + Formbuilder.lang('Required') + '</label><br>';
 
 						__p += '<label>  <input type="checkbox" data-rv-checked="model.' +
-								((__t = ( Formbuilder.options.LOCKED )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.LOCKED )) == null ? '' : __t) +
 								'" />  ' + Formbuilder.lang('Read only') + '</label><br>';
 
 						__p += '<label>  <input type="checkbox" data-rv-checked="model.' +
-								((__t = ( Formbuilder.options.VISIBLE )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.VISIBLE )) == null ? '' : __t) +
 								'" />  ' + Formbuilder.lang('Visible') + '</label>';
 
 				}
@@ -1225,10 +1225,10 @@
 						__p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Minimum / Maximum') + '</div>' + Formbuilder.lang('Above') +
 								'<input type="text" data-rv-input="model.' +
 
-								((__t = ( Formbuilder.options.MIN )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.MIN )) == null ? '' : __t) +
 								'" style="width: 60px" />&nbsp;&nbsp;' + Formbuilder.lang('Below') + '<input type="text" data-rv-input="model.' +
 
-								((__t = ( Formbuilder.options.MAX )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.MAX )) == null ? '' : __t) +
 								'" style="width: 60px" />';
 
 				}
@@ -1243,13 +1243,13 @@
 						__p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Length Limit') + '</div>' + Formbuilder.lang('Min') + '&nbsp;' +
 								'<input type="text" data-rv-input="model.' +
 
-								((__t = ( Formbuilder.options.MINLENGTH )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.MINLENGTH )) == null ? '' : __t) +
 								'" style="width: 60px" />' + Formbuilder.lang('Max') + '&nbsp;<input type="text" data-rv-input="model.' +
 
-								((__t = ( Formbuilder.options.MAXLENGTH )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.MAXLENGTH )) == null ? '' : __t) +
 								'" style="width: 60px" />&nbsp;&nbsp;<select data-rv-value="model.' +
 
-								((__t = ( Formbuilder.options.LENGTH_UNITS )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.LENGTH_UNITS )) == null ? '' : __t) +
 								'" style="width: auto;">  <option value="characters">' + Formbuilder.lang('characters') + '</option>  ' +
 								'<option value="words">' + Formbuilder.lang('words') + '</option></select>';
 				}
@@ -1264,7 +1264,7 @@
 						__p += '<div class="fb-edit-section-header">' + Formbuilder.lang('Integer only') + '</div><label>  ' +
 								'<input type="checkbox" data-rv-checked="model.' +
 
-								((__t = ( Formbuilder.options.INTEGER_ONLY )) == null ? '' : __t) +
+								((__t = ( Formbuilder.names.INTEGER_ONLY )) == null ? '' : __t) +
 								'" />  ' + Formbuilder.lang('Only accept integers') + '</label>';
 
 				}

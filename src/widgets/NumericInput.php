@@ -14,8 +14,8 @@ class NumericInput extends AttributeHandler
 
 		static $fieldView = <<<TEMPLATE
 		<input type='text'
-			class='form-control input-sm rf-size-<%= rf.get(Formbuilder.options.SIZE) %>'
-			<% if ( rf.get(Formbuilder.options.LOCKED) ) { %>disabled readonly<% } %>
+			class='form-control input-sm rf-size-<%= rf.get(Formbuilder.names.SIZE) %>'
+			<% if ( rf.get(Formbuilder.names.LOCKED) ) { %>disabled readonly<% } %>
 		/>
 TEMPLATE;
 

@@ -16,19 +16,19 @@ class CheckBoxList extends AttributeHandler
 		static $order = 10;
 
 		static $fieldView = <<<TEMPLATE
-		<% for (i in (rf.get(Formbuilder.options.OPTIONS) || [])) { %>
+		<% for (i in (rf.get(Formbuilder.names.OPTIONS) || [])) { %>
 		<div>
 		<label class='fb-option'>
 		<input type='checkbox'
-			<%= rf.get(Formbuilder.options.OPTIONS)[i].checked? 'checked': '' %>
-			<% if ( rf.get(Formbuilder.options.LOCKED) ) { %><%= Formbuilder.lang('disabled readonly') %><% } %>
+			<%= rf.get(Formbuilder.names.OPTIONS)[i].checked && 'checked' %>
+			<% if ( rf.get(Formbuilder.names.LOCKED) ) { %><%= Formbuilder.lang('disabled readonly') %><% } %>
 				onclick="javascript: return false;"
 		/>
-		<%= rf.get(Formbuilder.options.OPTIONS)[i].label %>
+		<%= rf.get(Formbuilder.names.OPTIONS)[i].label %>
 		</label>
 		</div>
 		<% } %>
-		<% if (rf.get(Formbuilder.options.INCLUDE_OTHER)) { %>
+		<% if (rf.get(Formbuilder.names.INCLUDE_OTHER)) { %>
 		<div class='other-option'>
 		<label class='fb-option'><input type='checkbox' /> <%= Formbuilder.lang('Other') %></label>
 		<input type='text' />

@@ -18,16 +18,16 @@ class DropDownList extends AttributeHandler
 		static $fieldView = <<<TEMPLATE
 		<select>
 
-			<% if (rf.get(Formbuilder.options.INCLUDE_BLANK)) { %>
+			<% if (rf.get(Formbuilder.names.INCLUDE_BLANK)) { %>
 					<option value=''></option>
 			<% } %>
 
-			<% for (i in (rf.get(Formbuilder.options.OPTIONS) || [])) { %>
+			<% for (i in (rf.get(Formbuilder.names.OPTIONS) || [])) { %>
 				<option
-					<% if ( rf.get(Formbuilder.options.LOCKED) ) { %><%= Formbuilder.lang('disabled readonly') %><% } %>
-					<%= rf.get(Formbuilder.options.OPTIONS)[i].checked && 'selected' %>
+					<% if ( rf.get(Formbuilder.names.LOCKED) ) { %><%= Formbuilder.lang('disabled readonly') %><% } %>
+					<%= rf.get(Formbuilder.names.OPTIONS)[i].checked && 'selected' %>
 				/>
-				<%= rf.get(Formbuilder.options.OPTIONS)[i].label %>
+				<%= rf.get(Formbuilder.names.OPTIONS)[i].label %>
 				</option>
 			<% } %>
 
@@ -38,6 +38,7 @@ TEMPLATE;
 		<%= Formbuilder.templates['edit/field_options']() %>
 		<%= Formbuilder.templates['edit/options']({
 				includeBlank: true,
+				useMultiple: true,
 				rf: rf
 		}) %>
 TEMPLATE;

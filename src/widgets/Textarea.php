@@ -15,9 +15,9 @@ class Textarea extends AttributeHandler
 		static $fieldView = <<<TEMPLATE
 		<textarea
 			class='form-control input-sm' type='text'
-			rows=<%= rf.get(Formbuilder.options.AREA_ROWS) %>
-			cols=<%= rf.get(Formbuilder.options.AREA_COLS) %>
-			<% if ( rf.get(Formbuilder.options.LOCKED) ) { %>disabled readonly<% } %>
+			rows=<%= rf.get(Formbuilder.names.AREA_ROWS) %>
+			cols=<%= rf.get(Formbuilder.names.AREA_COLS) %>
+			<% if ( rf.get(Formbuilder.names.LOCKED) ) { %>disabled readonly<% } %>
 		/>
 		</textarea>
 TEMPLATE;

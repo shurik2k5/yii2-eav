@@ -16,15 +16,15 @@ class RadioList extends AttributeHandler
 		static $order = 15;
 
 		static $fieldView = <<<TEMPLATE
-		<% for (i in (rf.get(Formbuilder.options.OPTIONS) || [])) { %>
+		<% for (i in (rf.get(Formbuilder.names.OPTIONS) || [])) { %>
 		<div>
 		<label class='fb-option'>
 		<input type='radio'
-		 <%= rf.get(Formbuilder.options.OPTIONS)[i].checked? 'checked': '' %>
-		 <% if ( rf.get(Formbuilder.options.LOCKED) ) { %>disabled readonly<% } %>
+		 <%= rf.get(Formbuilder.names.OPTIONS)[i].checked && 'checked' %>
+		 <% if ( rf.get(Formbuilder.names.LOCKED) ) { %>disabled readonly<% } %>
 			onclick="javascript: return false;"
 		/>
-		<%= rf.get(Formbuilder.options.OPTIONS)[i].label %>
+		<%= rf.get(Formbuilder.names.OPTIONS)[i].label %>
 		</label>
 		</div>
 		<% } %>
