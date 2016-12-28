@@ -176,6 +176,7 @@ class Product extends \yii\db\ActiveRecord
 		}
 
 }
+```
 
 ### View
 
@@ -280,9 +281,9 @@ $modules = [
 
 ``` php
 <?= \mirocow\eav\admin\widgets\Fields::widget([
-											'model' => $model,
-											'categoryId' => $model->id,
-											'entityName' => 'Продукт',
-											'entityModel' => 'app\models\Product',
-									])?>
+		'model' => $model,
+		'categoryId' => $model->id,
+		'entityName' => 'Продукт',
+		'entityModel' => 'app\models\Product',
+])?>
 ```
