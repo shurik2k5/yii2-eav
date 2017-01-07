@@ -14,7 +14,7 @@ class TextInput extends AttributeHandler
 
 		static $fieldView = <<<TEMPLATE
 		<input type='text'
-			class='form-control input-sm rf-size-<%= rf.get(Formbuilder.namrs.SIZE) %>'
+			class='form-control input-sm rf-size-<%= rf.get(Formbuilder.names.SIZE) %>'
 			<% if ( rf.get(Formbuilder.names.LOCKED) ) { %>disabled readonly<% } %>
 		/>
 TEMPLATE;
