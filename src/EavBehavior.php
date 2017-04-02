@@ -55,9 +55,8 @@ class EavBehavior extends Behavior
 
         public function __set($attribute, $value)
         {
-                $this->createModel($attribute);
-
-                $this->EavModel->load(['EavModel' => [$attribute => $value] ], 'EavModel');
+                $model = $this->createModel($attribute);
+                $model->load(['EavModel' => [$attribute => $value] ], 'EavModel');
         }
 
         /**
