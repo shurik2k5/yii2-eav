@@ -105,16 +105,6 @@ class EavModel extends BaseEavModel
 
 				}
 
-				//
-				// Set POST data
-				//
-
-				if (Yii::$app->request->isPost && Yii::$app->request->getIsConsoleRequest() == false) {
-						$modelName = self::getModelShortName($model->entityModel);
-						$post = Yii::$app->request->post($modelName);
-						$model->load($post, 'EavModel');
-				}
-
 				return $model;
 		}
 
@@ -191,7 +181,7 @@ class EavModel extends BaseEavModel
 				return self::getModelShortName($this->entityModel) . '[EavModel]';
 		}
 
-		protected static function getModelShortName($model)
+		public static function getModelShortName($model)
 		{
 				$reflector = new \ReflectionClass($model::className());
 				return $reflector->getShortName();

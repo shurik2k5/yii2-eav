@@ -6,6 +6,7 @@
 namespace mirocow\eav;
 
 use mirocow\eav\models\EavAttribute;
+use Yii;
 use yii\base\Behavior;
 use yii\base\Exception;
 use yii\db\ActiveRecord;
@@ -37,6 +38,8 @@ class EavBehavior extends Behavior
 
 		protected $EavModel;
 
+		protected $models = [];
+
 		public function init()
 		{
 				assert(isset($this->valueClass));
@@ -45,15 +48,42 @@ class EavBehavior extends Behavior
 		/**
 		 * @return EavModel
 		 */
-		public function __get($name = '')
+		public function __get($attribute)
 		{
-				return $this->EavModel = EavModel::create([
-						'entityModel' => $this->owner,
-						'valueClass' => $this->valueClass,
-						'attribute' => $name,
-				]);
-
+                return $this->createModel($attribute);
 		}
+
+        public function __set($attribute, $value)
+        {
+                $this->createModel($attribute);
+
+                $this->EavModel->load(['EavModel' => [$attribute => $value] ], 'EavModel');
+        }
+
+        /**
+         * @param $attribute
+         */
+        protected function createModel($attribute)
+        {
+            if (empty($this->models[$attribute])) {
+                $this->EavModel = EavModel::create(
+                  [
+                    'entityModel' => $this->owner,
+                    'valueClass' => $this->valueClass,
+                    'attribute' => $attribute,
+                  ]
+                );
+
+                $this->models[$attribute] = $this->EavModel;
+            }
+
+            return $this->models[$attribute];
+        }
+
+        public function canSetProperty($name, $checkVars = true)
+        {
+                return $this->canGetProperty($name);
+        }
 
 		public function canGetProperty($name, $checkVars = true)
 		{
@@ -95,9 +125,23 @@ class EavBehavior extends Behavior
 		public function afterSave()
 		{
 				if (\Yii::$app instanceof \yii\web\Application){
-						if(\Yii::$app->request->isPost){
-								$this->eav->save(false);
-						}
+
+				        if(!$this->EavModel){
+                            $this->createModel('eav');
+                        }
+
+                        $post = [];
+
+                        if (Yii::$app->request->isPost) {
+                            $modelName = EavModel::getModelShortName($this->owner);
+                            $post      = Yii::$app->request->post($modelName);
+                        }
+
+				        foreach ($this->models as $model){
+                            $model->load($post, 'EavModel');
+				            $model->save(false);
+                        }
+
 				}
 
 		}
