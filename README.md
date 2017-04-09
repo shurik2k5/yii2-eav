@@ -251,13 +251,34 @@ String
 $attr = new mirocow\eav\models\EavAttribute();
 $attr->attributes = [
 				'entityId' => 1, // Category ID
-				'name' => 'AttrCategory1',  // service name field
-				'label' => 'Attr1',         // label text for form
-				'defaultValue' => 'attr1',  // default value
-				'entityModel' => SampleModel::className(), // work model
-				'required'=>false           // add rule "required field"
+				'typeId' => 1, // ID type from eav_attribute_type
+				'name' => 'packing',  // service name field
+				'label' => 'Packing',         // label text for form
+				'defaultValue' => '10 kg',  // default value
+				'entityModel' => Product::className(), // work model
+				'required' => false           // add rule "required field"
 		];
 $attr->save();
+
+$attr->attributes = [
+				'entityId' => 1, // Category ID
+				'typeId' => 1, // ID type from eav_attribute_type
+				'name' => 'color',  // service name field
+				'label' => 'Color',         // label text for form
+				'defaultValue' => 'white',  // default value
+				'entityModel' => Product::className(), // work model
+				'required' => false           // add rule "required field"
+		];
+$attr->save();
+```
+
+### Add/Update values
+
+```php
+$model = Product::find()->where(['id' => 1])->one();
+$model->color = "blue";
+$model->packing = "12 kg";
+$model->save();
 ```
 
 ## Administrate GUI
