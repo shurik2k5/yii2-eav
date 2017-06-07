@@ -36,7 +36,7 @@ class EavAttributeValue extends \yii\db\ActiveRecord
         return [
             [['entityId', 'attributeId'], 'required'],
             [['entityId', 'attributeId', 'optionId'], 'integer'],
-            [['value'], 'string', 'max' => 255],
+            [['value'], 'string', 'max' => 1023],
         ];
     }
 
