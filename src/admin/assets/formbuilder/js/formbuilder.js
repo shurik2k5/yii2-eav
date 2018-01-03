@@ -806,19 +806,20 @@
 				/**
 				 * Get remote field types
 				 */
-				function getFieldTypes(opts, callBack) {
-						$.ajax({
-								url: opts.uri,
-								dataType: "json"
-						}).success(function (response) {
-								if (response.status == 'success') {
-										_.each(response.types, function (f) {
-												Formbuilder.registerField(f.name, f.formBuilder);
-										});
-								}
-								callBack(opts);
-						});
-				}
+                function getFieldTypes(opts, callBack) {
+                    $.ajax({
+                        url: opts.uri,
+                        dataType: "json",
+                        success:function (response) {
+                            if (response.status == 'success') {
+                                _.each(response.types, function (f) {
+                                    Formbuilder.registerField(f.name, f.formBuilder);
+                                });
+                            }
+                            callBack(opts);
+                        }
+                    });
+                }
 
 				return Formbuilder;
 
