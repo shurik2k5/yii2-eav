@@ -55,8 +55,8 @@ php ./yii migrate/up -p=@mirocow/eav/migrations
 .........
 ```
 в эту же модель добавляем 
-```
-/**
+``` php
+		/**
 		 * @return \yii\db\ActiveQuery
 		 */
 		public function getEavAttributes()
@@ -73,7 +73,7 @@ C моделью закончили.
 
 ### Создание и редактирование атрибутов
 # Создание атрибутов без админки
-```
+``` php
 $attr = new mirocow\eav\models\EavAttribute();
 $attr->attributes = [
 				'entityId' => 1, // Category ID
