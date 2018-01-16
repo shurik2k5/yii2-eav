@@ -32,6 +32,16 @@ php ./yii migrate/up -p=@mirocow/eav/migrations
 				],
 		]
 ```
+добавляем в конфиг модуль
+``` php
+$modules = [
+		...,
+		'eav' => [
+				'class' => 'mirocow\eav\Module',
+		],
+];
+```
+
 ### Использование 
 Добавляем в модель поведение, которое расширяет ее возможности методами данного расширения
 
@@ -97,3 +107,53 @@ $attr->attributes = [
 		];
 $attr->save();
 ```
+### Создание атрибутов из админки
+Для использования админки достаточно будет добавить в представление следующий код
+``` php
+<?= \mirocow\eav\admin\widgets\Fields::widget([
+		'model' => $model,
+		'categoryId' => $model->id,
+		'entityName' => 'Продукт',
+		'entityModel' => 'app\models\Product', // ваша модель для которой подключено расширение
+])?>
+```
+При рендере представления должна отобразиться админка в которой можно добавлять атрибуты и редактировать их.
+Добавляем несколько атрибутов в админке, они уже будут присутствовать в вашей модели и нужно прописать правила валидации для них
+``` php
+		public function rules()
+		{
+				return [
+						[['name'], 'string', 'max' => 255], // Product field
+
+						[['c1'], 'required'], // Attribute field
+						[['c1'], 'string', 'max' => 255], // Attribute field
+						
+						[['c2'], 'required'], // Attribute field
+						[['c2'], 'string', 'max' => 255], // Attribute field
+				];
+		}
+```
+тут c1 и c2 - поля добавленные через EAV, данные поля можно изменять так 
+``` php
+$model = Product::find()->where(['id' => 1])->one();
+$model->c1 = "blue";
+$model->c2 = "red";
+$model->save();
+```
+для редактирования этих полей в расширении присутствует специальный виджет
+### Вывод всех EAV атрибутов
+``` php
+<?php
+foreach($model->getEavAttributes()->all() as $attr){
+	echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+	}
+?>
+```
+
+### Вывод отдельного EAV атрибута
+``` php
+<?php
+	<?=$form->field($model,'с1', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
+?>
+```
+Тут описаны основные шаги для начала работы с модулем, если что-то не получается велком в icq 124011, постараюсь помочь.
