@@ -71,8 +71,8 @@ php ./yii migrate/up -p=@mirocow/eav/migrations
 ```		
 C моделью закончили.
 
-### Создание и редактирование атрибутов
-# Создание атрибутов без админки
+## Создание и редактирование атрибутов
+### Создание атрибутов без админки
 ``` php
 $attr = new mirocow\eav\models\EavAttribute();
 $attr->attributes = [
