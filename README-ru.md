@@ -156,4 +156,81 @@ foreach($model->getEavAttributes()->all() as $attr){
 	<?=$form->field($model,'с1', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
 ?>
 ```
+Для вывода этих атрибутов на карточке (товара/модуля/вашей модели) можно использовать следующий код 
+``` php
+<table class="table">
+	<?php
+	foreach ($model->getEavAttributes()->all() as $attr) {
+		?>
+		<tr>
+			<td><?= $attr->type; ?></td>
+			<td>
+				<ul>
+					<?php
+					$attrValue = $model->renderEavAttr($attr, $model);
+					if ($attrValue[0]['value']) {
+						foreach ($attrValue as $attrValueItem) {
+							echo '<li>';
+							echo $attrValueItem['value'];
+							echo '</li>';
+						}
+					} else echo '---';
+					?>
+				</ul>
+			</td>
+		</tr>
+	<?php
+	}
+	?>
+</table>
+```
+Для использования этого кода, добавьте в вашу модель следующий метод, он возвращает массив с EAV атрибутами
+``` php
+/**
+	 * @param $attr
+	 * @param null $model
+	 * @return array
+	 *
+	 * Создает массив с EAV атрибутами
+	 */
+	function renderEavAttr($attr, $model = NULL)
+	{
+		$optionValues = $model[$attr->name]->value; // Список выбранных значений
+		$allOptionValues = $attr->getEavOptions()->asArray()->all(); // Список всех возможных значений
+
+		// Если массив - все возможные значения
+		unset($out);
+		if (is_array($allOptionValues)) {
+			$out = [];
+			foreach ($allOptionValues as $allOtionValuesItem) {
+				// Если список доступных значений - массив
+				if (is_array($optionValues)) {
+					foreach ($optionValues as $optionValuesItem) {
+						if ($optionValuesItem == $allOtionValuesItem["id"]) {
+							$out[] = $allOtionValuesItem;
+						}
+					}
+				} else {
+					if ($optionValues == $allOtionValuesItem["id"]) {
+						$out[] = $allOtionValuesItem;
+					}
+				}
+			}
+
+
+		}
+
+		if ($out) {
+			return $out;
+		} else return [0 => [
+			'id' => 0,
+			'attributeId' => 0,
+			'value' => $model[$attr->name]['value'],
+			'defaultOptionId' => 0,
+			'order' => 0,
+
+		]];
+	}
+```
+
 Тут описаны основные шаги для начала работы с модулем, если что-то не получается велком в icq 124011, постараюсь помочь.
