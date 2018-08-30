@@ -31,7 +31,6 @@ $js_form_builder = <<<JS
 					payload: payload, _csrf: yii.getCsrfToken()
 				},
 				dataType: 'json',
-			}).success(function(response) {
 			});
 		});
 	});
