@@ -32,7 +32,8 @@
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.5.0",
-		"yiisoft/yii2": ">=2.0.5"
+		"yiisoft/yii2": ">=2.0.5",
+		"ext-json": "*"
 	},
 	"autoload": {
 		"psr-4": {

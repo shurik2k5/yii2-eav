@@ -15,5 +15,4 @@ class m160807_162635_change_default_value_in_eav_attribute_value extends Migrati
 
         return false;
     }
-
 }

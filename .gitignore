@@ -8,3 +8,7 @@ nbproject
 .buildpath
 .project
 .settings
+.vscode
+
+vendor
+composer.lock

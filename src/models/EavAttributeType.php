@@ -32,7 +32,12 @@ class EavAttributeType extends \yii\db\ActiveRecord
         return [
             [['storeType'], 'integer'],
             [['name', 'handlerClass'], 'string', 'max' => 255],
-            ['name', 'match', 'pattern' => '/(^|.*\])([\w\.]+)(\[.*|$)/', 'message' => Yii::t('eav','Type name must contain latin word characters only.')],
+            [
+                'name',
+                'match',
+                'pattern' => '/(^|.*\])([\w\.]+)(\[.*|$)/',
+                'message' => Yii::t('eav', 'Type name must contain latin word characters only.')
+            ],
         ];
     }
 
@@ -68,7 +73,5 @@ class EavAttributeType extends \yii\db\ActiveRecord
             'addButton' => isset($class::$fieldButton) ? $class::$fieldButton : Yii::t('eav', 'Template field button'),
             'defaultAttributes' => isset($class::$defaultAttributes) ? $class::$defaultAttributes : Yii::t('eav', 'Template default attributes'),
         ];
-
     }
-
 }

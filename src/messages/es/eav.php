@@ -19,18 +19,16 @@ return [
     'Type' => 'Tipo',
     'Name' => 'Nombre',
     'Label' => 'Etiqueta',
-    'Default Value' => 'Valor por defecto', 
+    'Default Value' => 'Valor por defecto',
     'Default Option ID' => 'Id de Opción por defecto',
     'Required' => 'Requerido',
     'Order' => 'Orden',
-    'Description' => 'Descripcion',
-    
+
     'Sort order' => 'orden de clasificación',
     'Attribute ID' => 'Id de atributo',
     'Value' => 'Valor',
     'Default option Id' => 'Id de Opción por defecto',
     
-    'Attribute ID' => 'Id de Atributo',
     'Rules' => 'Reglas',
     'Locked' => 'Bloqueado',
     'Visible' => 'Visible',
@@ -40,7 +38,6 @@ return [
     'Store Type' => 'Tipo de Almacenado',
     
     'Entity ID' => 'Id de Entidad',
-    'Attribute ID' => 'Id de Atributo',
     'Option ID' => 'Id de Opción',
     
     'Entity Model' => 'Modelo Entidad',
@@ -70,7 +67,7 @@ return [
     
     'The name of entity' => 'El nombre de la Entidad',
     'This is the ActiveRecord class associated with the table that EavEntity will be built upon.
-                You should provide a fully qualified class name, e.g., <code>app\models\Post</code>.' => 
+     You should provide a fully qualified class name, e.g., <code>app\models\Post</code>.' =>
     'Esta es la clase ActiveRecord asociado a la tabla que EavEntity será creada.
                  Debe proporcionar un nombre de clase completo, por ejemplo, <code>app\models\Post</code>.',
     'This category id to bind to the directory. The default is not used and may be 0.' => 'Este identificador de categoría se una al directorio. El valor por defecto no se utiliza y puede ser 0.',
@@ -103,5 +100,4 @@ return [
     'Input textarea' => 'Ingreso de area de texto',
 
     'Attribute {name} not found' => 'No existe Atributo {name}',
-
 ];

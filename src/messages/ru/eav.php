@@ -19,18 +19,16 @@ return [
     'Type' => 'Тип',
     'Name' => 'Имя',
     'Label' => 'Метка',
-    'Default Value' => 'Значение по умолчанию', 
+    'Default Value' => 'Значение по умолчанию',
     'Default Option ID' => 'Идентификатор параметра по умолчанию',
     'Required' => 'Обязательный',
     'Order' => 'Порядок',
-    'Description' => 'Описание',
-    
+
     'Sort order' => 'Порядок сортировки',
     'Attribute ID' => 'Идентификатор атрибута',
     'Value' => 'Значение',
     'Default option Id' => 'Идентификатор параметра по умолчанию',
     
-    'Attribute ID' => 'Идентификатор атрибута',
     'Rules' => 'Правила',
     'Locked' => 'Заблокирован',
     'Visible' => 'Видимый',
@@ -40,7 +38,6 @@ return [
     'Store Type' => 'Тип хранилища',
     
     'Entity ID' => 'Идентификатор сущности',
-    'Attribute ID' => 'Идентификатор атрибута',
     'Option ID' => 'Идентификатор параметра',
     
     'Entity Model' => 'Модель сущности',
@@ -70,7 +67,7 @@ return [
     
     'The name of entity' => 'Имя сущности',
     'This is the ActiveRecord class associated with the table that EavEntity will be built upon.
-                You should provide a fully qualified class name, e.g., <code>app\models\Post</code>.' => 
+                You should provide a fully qualified class name, e.g., <code>app\models\Post</code>.' =>
     'Это класс ActiveRecord, связанный с таблицей, для которого создается сущность. Вы должны указать полное имя класса, например, <code>app\models\Post</code>.',
     'This category id to bind to the directory. The default is not used and may be 0.' => 'Это идентификатор категории для объединения сущностей. По умолчанию не используется и может быть равен 0.',
     

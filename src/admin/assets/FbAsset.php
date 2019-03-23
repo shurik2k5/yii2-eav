@@ -7,7 +7,6 @@
 
 namespace mirocow\eav\admin\assets;
 
-use Yii;
 use yii\web\AssetBundle;
 
 /**
@@ -37,5 +36,4 @@ class FbAsset extends AssetBundle
     public $depends = [
         'yii\web\JqueryAsset',
     ];
-
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace mirocow\eav;
+
 use Yii;
 
 class Module extends \yii\base\Module
@@ -25,16 +26,15 @@ class Module extends \yii\base\Module
         } else {
             return parent::createController($route);
         }
-
     }
-    
+
     public function registerTranslations()
-        {
-            Yii::$app->i18n->translations['eav'] = 
+    {
+        Yii::$app->i18n->translations['eav'] =
             [
                 'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => "@mirocow/eav/messages",
+                'basePath' => '@mirocow/eav/messages',
                 'forceTranslation' => true
             ];
-        }
+    }
 }

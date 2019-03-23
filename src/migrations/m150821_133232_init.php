@@ -1,4 +1,5 @@
 <?php
+
 use mirocow\eav\handlers\ValueHandler;
 use yii\db\Migration;
 
@@ -11,11 +12,11 @@ class m150821_133232_init extends Migration
     public function init()
     {
         $this->tables = [
-            'entity' => "{{%eav_entity}}",
-            'attribute' => "{{%eav_attribute}}",
-            'attribute_type' => "{{%eav_attribute_type}}",
-            'value' => "{{%eav_attribute_value}}",
-            'option' => "{{%eav_attribute_option}}",
+            'entity' => '{{%eav_entity}}',
+            'attribute' => '{{%eav_attribute}}',
+            'attribute_type' => '{{%eav_attribute_type}}',
+            'value' => '{{%eav_attribute_value}}',
+            'option' => '{{%eav_attribute_option}}',
         ];
 
         $this->attributeTypes = [
@@ -67,8 +68,8 @@ class m150821_133232_init extends Migration
 
         $this->createTable($this->tables['attribute'], [
             'id' => $this->primaryKey(11),
-            'entityId' => $this->integer(11)->defaultValue(NULL),
-            'typeId' => $this->integer(11)->defaultValue(NULL),
+            'entityId' => $this->integer(11)->defaultValue(null),
+            'typeId' => $this->integer(11)->defaultValue(null),
             'type' => $this->string(50)->defaultValue(''),
             'name' => $this->string(255)->defaultValue('NULL'),
             'label' => $this->string(255)->defaultValue('NULL'),
@@ -101,25 +102,66 @@ class m150821_133232_init extends Migration
             'defaultOptionId' => $this->smallInteger(1)->defaultValue(0),
         ], $options);
 
-        if ($this->db->driverName != "sqlite") {
+        if ($this->db->driverName != 'sqlite') {
+            $this->addForeignKey(
+                'FK_Attribute_typeId',
+                $this->tables['attribute'],
+                'typeId',
+                $this->tables['attribute_type'],
+                'id',
+                'CASCADE',
+                'NO ACTION'
+            );
 
-            $this->addForeignKey('FK_Attribute_typeId',
-                $this->tables['attribute'], 'typeId', $this->tables['attribute_type'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey(
+                'FK_EntityId',
+                $this->tables['attribute'],
+                'entityId',
+                $this->tables['entity'],
+                'id',
+                'CASCADE',
+                'NO ACTION'
+            );
 
-            $this->addForeignKey('FK_EntityId',
-                $this->tables['attribute'], 'entityId', $this->tables['entity'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey(
+                'FK_Value_entityId',
+                $this->tables['value'],
+                'entityId',
+                $this->tables['entity'],
+                'id',
+                'CASCADE',
+                'NO ACTION'
+            );
 
-            $this->addForeignKey('FK_Value_entityId',
-                $this->tables['value'], 'entityId', $this->tables['entity'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey(
+                'FK_Value_attributeId',
+                $this->tables['value'],
+                'attributeId',
+                $this->tables['attribute'],
+                'id',
+                'CASCADE',
+                'NO ACTION'
+            );
 
-            $this->addForeignKey('FK_Value_attributeId',
-                $this->tables['value'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey(
+                'FK_Value_optionId',
+                $this->tables['value'],
+                'optionId',
+                $this->tables['option'],
+                'id',
+                'CASCADE',
+                'NO ACTION'
+            );
 
-            $this->addForeignKey('FK_Value_optionId',
-                $this->tables['value'], 'optionId', $this->tables['option'], 'id', "CASCADE", "NO ACTION");
-
-            $this->addForeignKey('FK_Option_attributeId',
-                $this->tables['option'], 'attributeId', $this->tables['attribute'], 'id', "CASCADE", "NO ACTION");
+            $this->addForeignKey(
+                'FK_Option_attributeId',
+                $this->tables['option'],
+                'attributeId',
+                $this->tables['attribute'],
+                'id',
+                'CASCADE',
+                'NO ACTION'
+            );
         }
 
         foreach ($this->attributeTypes as $columns) {
@@ -129,7 +171,7 @@ class m150821_133232_init extends Migration
 
     public function safeDown()
     {
-        if ($this->db->driverName != "sqlite") {
+        if ($this->db->driverName != 'sqlite') {
             $this->dropForeignKey('FK_Attribute_typeId', $this->tables['attribute']);
             $this->dropForeignKey('FK_EntityId', $this->tables['attribute']);
             $this->dropForeignKey('FK_Value_entityId', $this->tables['value']);
@@ -144,5 +186,4 @@ class m150821_133232_init extends Migration
         $this->dropTable($this->tables['option']);
         $this->dropTable($this->tables['entity']);
     }
-
 }

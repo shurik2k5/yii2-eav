@@ -2,7 +2,6 @@
 
 namespace mirocow\eav\models;
 
-use mirocow\eav\models\Eav;
 use Yii;
 
 /**
@@ -15,7 +14,7 @@ use Yii;
  * @property integer $optionId
  *
  * @property EavAttribute $attribute
- * @property Eav $entity
+ * @property EavEntity $entity
  * @property EavAttributeOption $option
  */
 class EavAttributeValue extends \yii\db\ActiveRecord
@@ -67,7 +66,7 @@ class EavAttributeValue extends \yii\db\ActiveRecord
      */
     public function getEntity()
     {
-        return $this->hasOne(Eav::className(), ['id' => 'entityId']);
+        return $this->hasOne(EavEntity::className(), ['id' => 'entityId']);
     }
 
     /**

@@ -22,8 +22,15 @@ class m160501_124615_create_table_eav_attribute_rules extends Migration
             'rules' => $this->text()->defaultValue(''),
         ], $options);
 
-        $this->addForeignKey('FK_Rules_attributeId',
-            '{{%eav_attribute_rules}}', 'attributeId', '{{%eav_attribute}}', 'id', "CASCADE", "NO ACTION");
+        $this->addForeignKey(
+            'FK_Rules_attributeId',
+            '{{%eav_attribute_rules}}',
+            'attributeId',
+            '{{%eav_attribute}}',
+            'id',
+            'CASCADE',
+            'NO ACTION'
+        );
     }
 
     /**

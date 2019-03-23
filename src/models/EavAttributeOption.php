@@ -36,7 +36,13 @@ class EavAttributeOption extends \yii\db\ActiveRecord
         return [
             [['attributeId', 'order', 'defaultOptionId'], 'integer'],
             [['value'], 'string', 'max' => 255],
-            [['attributeId'], 'exist', 'skipOnError' => true, 'targetClass' => EavAttribute::className(), 'targetAttribute' => ['attributeId' => 'id']],
+            [
+                ['attributeId'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => EavAttribute::className(),
+                'targetAttribute' => ['attributeId' => 'id']
+            ],
         ];
     }
 

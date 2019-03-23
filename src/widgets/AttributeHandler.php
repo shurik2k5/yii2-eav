@@ -8,7 +8,7 @@ namespace mirocow\eav\widgets;
 use mirocow\eav\EavModel;
 use mirocow\eav\handlers\ValueHandler;
 use Yii;
-use yii\base\InvalidParamException;
+use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\db\ActiveRecord;
 
@@ -19,13 +19,13 @@ use yii\db\ActiveRecord;
 class AttributeHandler extends Widget
 {
     const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\RawValueHandler';
-    
+
     /** @var EavModel */
     public $owner;
-    
+
     /** @var ValueHandler */
     public $valueHandler;
-    
+
     /** @var ActiveRecord */
     public $attributeModel;
 
@@ -42,7 +42,7 @@ class AttributeHandler extends Widget
     public static function load($owner, $attributeModel)
     {
         if (!class_exists($class = $attributeModel->eavType->handlerClass)) {
-            throw new InvalidParamException('Unknown handler class: ' . $class);
+            throw new InvalidConfigException('Unknown handler class: ' . $class);
         }
 
         $handler = Yii::createObject([
@@ -74,11 +74,17 @@ class AttributeHandler extends Widget
         return (string)($this->attributeModel->{$this->nameField});
     }
 
+    /**
+     * @return string
+     */
     public function getAttributeLabel()
     {
         return (string)($this->attributeModel->{$this->labelField});
     }
 
+    /**
+     * @return array
+     */
     public function getOptions()
     {
         $result = [];

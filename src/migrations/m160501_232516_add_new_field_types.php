@@ -9,11 +9,10 @@ class m160501_232516_add_new_field_types extends Migration
     {
 
         $this->insert('{{%eav_attribute_type}}', [
-            'name' => 'numiric',
+            'name' => 'numeric',
             'storeType' => ValueHandler::STORE_TYPE_RAW,
             'handlerClass' => '\mirocow\eav\widgets\NumericInput',
         ]);
-
     }
 
     public function down()
