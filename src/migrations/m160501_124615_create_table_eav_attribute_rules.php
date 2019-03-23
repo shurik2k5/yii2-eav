@@ -1,5 +1,6 @@
 <?php
 
+use mirocow\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 /**
@@ -7,26 +8,35 @@ use yii\db\Migration;
  */
 class m160501_124615_create_table_eav_attribute_rules extends Migration
 {
+    use EavMigrationTrait;
+
+    public function init()
+    {
+        parent::init();
+        $this->initMigrationParams();
+        $this->_tableName = $this->tables['rules'];
+    }
     /**
      * @inheritdoc
      */
-    public function up()
+    public function safeUp()
     {
-        $options = $this->db->driverName == 'mysql'
-            ? 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB'
-            : null;
+        $options = null;
+        if ($this->db->driverName === 'mysql') {
+            $options = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+        }
 
-        $this->createTable('{{%eav_attribute_rules}}', [
+        $this->createTable($this->_tableName, [
             'id' => $this->primaryKey(),
             'attributeId' => $this->integer(11)->defaultValue(0),
             'rules' => $this->text()->defaultValue(''),
         ], $options);
 
         $this->addForeignKey(
-            'FK_Rules_attributeId',
-            '{{%eav_attribute_rules}}',
+            $this->getForeignKeyName('attributeId'),
+            $this->_tableName,
             'attributeId',
-            '{{%eav_attribute}}',
+            $this->tables['attribute'],
             'id',
             'CASCADE',
             'NO ACTION'
@@ -36,8 +46,8 @@ class m160501_124615_create_table_eav_attribute_rules extends Migration
     /**
      * @inheritdoc
      */
-    public function down()
+    public function safeDown()
     {
-        $this->dropTable('eav_attribute_rules');
+        $this->dropTable($this->_tableName);
     }
 }

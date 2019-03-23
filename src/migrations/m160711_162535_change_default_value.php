@@ -1,17 +1,26 @@
 <?php
 
+use mirocow\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160711_162535_change_default_value extends Migration
 {
-    public function up()
+    use EavMigrationTrait;
+
+    public function init()
     {
-        $this->alterColumn('{{%eav_attribute}}', 'description', $this->string(255) . " DEFAULT ''");
+        parent::init();
+        $this->initMigrationParams();
+        $this->_tableName = $this->tables['attribute'];
     }
 
-    public function down()
+    public function safeUp()
     {
-        $this->alterColumn('{{%eav_attribute}}', 'description', $this->string(255) . " DEFAULT 'NULL'");
-        return false;
+        $this->alterColumn($this->_tableName, 'description', $this->string(255));
+    }
+
+    public function safeDown()
+    {
+        $this->alterColumn($this->_tableName, 'description', $this->string(255));
     }
 }

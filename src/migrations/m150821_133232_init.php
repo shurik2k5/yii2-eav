@@ -1,23 +1,18 @@
 <?php
 
 use mirocow\eav\handlers\ValueHandler;
+use mirocow\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m150821_133232_init extends Migration
 {
+    use EavMigrationTrait;
 
-    public $tables;
     public $attributeTypes = [];
 
     public function init()
     {
-        $this->tables = [
-            'entity' => '{{%eav_entity}}',
-            'attribute' => '{{%eav_attribute}}',
-            'attribute_type' => '{{%eav_attribute_type}}',
-            'value' => '{{%eav_attribute_value}}',
-            'option' => '{{%eav_attribute_option}}',
-        ];
+        $this->initMigrationParams();
 
         $this->attributeTypes = [
             [
@@ -102,9 +97,45 @@ class m150821_133232_init extends Migration
             'defaultOptionId' => $this->smallInteger(1)->defaultValue(0),
         ], $options);
 
+        $this->createIndex(
+            $this->getIndexName('typeId', $this->tables['attribute']),
+            $this->tables['attribute'],
+            'typeId'
+        );
+
+        $this->createIndex(
+            $this->getIndexName('entityId', $this->tables['attribute']),
+            $this->tables['attribute'],
+            'entityId'
+        );
+
+        $this->createIndex(
+            $this->getIndexName('entityId', $this->tables['value']),
+            $this->tables['value'],
+            'entityId'
+        );
+
+        $this->createIndex(
+            $this->getIndexName('attributeId', $this->tables['value']),
+            $this->tables['value'],
+            'attributeId'
+        );
+
+        $this->createIndex(
+            $this->getIndexName('optionId', $this->tables['value']),
+            $this->tables['value'],
+            'optionId'
+        );
+
+        $this->createIndex(
+            $this->getIndexName('attributeId', $this->tables['option']),
+            $this->tables['option'],
+            'attributeId'
+        );
+
         if ($this->db->driverName != 'sqlite') {
             $this->addForeignKey(
-                'FK_Attribute_typeId',
+                $this->getForeignKeyName('typeID', $this->tables['attribute']),
                 $this->tables['attribute'],
                 'typeId',
                 $this->tables['attribute_type'],
@@ -114,7 +145,7 @@ class m150821_133232_init extends Migration
             );
 
             $this->addForeignKey(
-                'FK_EntityId',
+                $this->getForeignKeyName('entityId', $this->tables['attribute']),
                 $this->tables['attribute'],
                 'entityId',
                 $this->tables['entity'],
@@ -124,7 +155,7 @@ class m150821_133232_init extends Migration
             );
 
             $this->addForeignKey(
-                'FK_Value_entityId',
+                $this->getForeignKeyName('entityId', $this->tables['value']),
                 $this->tables['value'],
                 'entityId',
                 $this->tables['entity'],
@@ -134,7 +165,7 @@ class m150821_133232_init extends Migration
             );
 
             $this->addForeignKey(
-                'FK_Value_attributeId',
+                $this->getForeignKeyName('attributeId', $this->tables['value']),
                 $this->tables['value'],
                 'attributeId',
                 $this->tables['attribute'],
@@ -144,7 +175,7 @@ class m150821_133232_init extends Migration
             );
 
             $this->addForeignKey(
-                'FK_Value_optionId',
+                $this->getForeignKeyName('optionId', $this->tables['value']),
                 $this->tables['value'],
                 'optionId',
                 $this->tables['option'],
@@ -154,7 +185,7 @@ class m150821_133232_init extends Migration
             );
 
             $this->addForeignKey(
-                'FK_Option_attributeId',
+                $this->getForeignKeyName('attributeId', $this->tables['option']),
                 $this->tables['option'],
                 'attributeId',
                 $this->tables['attribute'],
@@ -172,12 +203,12 @@ class m150821_133232_init extends Migration
     public function safeDown()
     {
         if ($this->db->driverName != 'sqlite') {
-            $this->dropForeignKey('FK_Attribute_typeId', $this->tables['attribute']);
-            $this->dropForeignKey('FK_EntityId', $this->tables['attribute']);
-            $this->dropForeignKey('FK_Value_entityId', $this->tables['value']);
-            $this->dropForeignKey('FK_Value_attributeId', $this->tables['value']);
-            $this->dropForeignKey('FK_Value_optionId', $this->tables['value']);
-            $this->dropForeignKey('FK_Option_attributeId', $this->tables['option']);
+            $this->dropForeignKey($this->getForeignKeyName('typeID', $this->tables['attribute']), $this->tables['attribute']);
+            $this->dropForeignKey($this->getForeignKeyName('entityId', $this->tables['attribute']), $this->tables['attribute']);
+            $this->dropForeignKey($this->getForeignKeyName('entityId', $this->tables['value']), $this->tables['value']);
+            $this->dropForeignKey($this->getForeignKeyName('attributeId', $this->tables['value']), $this->tables['value']);
+            $this->dropForeignKey($this->getForeignKeyName('optionId', $this->tables['value']), $this->tables['value']);
+            $this->dropForeignKey($this->getForeignKeyName('attributeId', $this->tables['option']), $this->tables['option']);
         }
 
         $this->dropTable($this->tables['attribute']);

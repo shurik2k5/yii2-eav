@@ -1,53 +1,62 @@
 <?php
 
+use mirocow\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160711_132535_delete_foregin_key_from_values extends Migration
 {
-    public function up()
+    use EavMigrationTrait;
+
+    public function init()
+    {
+        parent::init();
+        $this->initMigrationParams();
+        $this->_tableName = $this->tables['value'];
+    }
+
+    public function safeUp()
     {
         $this->dropForeignKey(
-            'FK_Value_optionId',
-            '{{%eav_attribute_value}}'
+            $this->getForeignKeyName('optionId'),
+            $this->_tableName
         );
 
         $this->dropIndex(
-            'FK_Value_optionId',
-            '{{%eav_attribute_value}}'
+            $this->getIndexName('optionId'),
+            $this->_tableName
         );
         
         $this->dropForeignKey(
-            'FK_Value_entityId',
-            '{{%eav_attribute_value}}'
+            $this->getForeignKeyName('entityId'),
+            $this->_tableName
         );
 
         $this->dropIndex(
-            'FK_Value_entityId',
-            '{{%eav_attribute_value}}'
+            $this->getIndexName('entityId'),
+            $this->_tableName
         );
     }
 
-    public function down()
+    public function safeDown()
     {
         $this->addForeignKey(
-            'FK_Value_optionId',
-            '{{%eav_attribute_value}}',
+            $this->getForeignKeyName('optionId'),
+            $this->_tableName,
             'optionId',
-            '{{%eav_attribute_option}}',
+            $this->tables['option'],
             'id',
             'CASCADE',
             'NO ACTION'
         );
         
         $this->addForeignKey(
-            'FK_Value_entityId',
-            '{{%eav_attribute_value}}',
+            $this->getForeignKeyName('entityId'),
+            $this->_tableName,
             'entityId',
-            '{{%eav_entity}}',
+            $this->tables['entity'],
             'id',
             'CASCADE',
             'NO ACTION'
         );
-        return false;
     }
 }

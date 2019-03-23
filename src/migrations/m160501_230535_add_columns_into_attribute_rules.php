@@ -1,22 +1,30 @@
 <?php
 
+use mirocow\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160501_230535_add_columns_into_attribute_rules extends Migration
 {
-    public function up()
+    use EavMigrationTrait;
+
+    public function init()
     {
-        $this->addColumn('{{%eav_attribute_rules}}', 'required', $this->smallInteger(1)->defaultValue(0));
-        
-        $this->addColumn('{{%eav_attribute_rules}}', 'visible', $this->smallInteger(1)->defaultValue(0));
-        
-        $this->addColumn('{{%eav_attribute_rules}}', 'locked', $this->smallInteger(1)->defaultValue(0));
+        parent::init();
+        $this->initMigrationParams();
+        $this->_tableName = $this->tables['rules'];
     }
 
-    public function down()
+    public function safeUp()
     {
-        echo "m160501_230535_add_columns_into_attribute_rules cannot be reverted.\n";
+        $this->addColumn($this->_tableName, 'required', $this->smallInteger(1)->defaultValue(0));
+        $this->addColumn($this->_tableName, 'visible', $this->smallInteger(1)->defaultValue(0));
+        $this->addColumn($this->_tableName, 'locked', $this->smallInteger(1)->defaultValue(0));
+    }
 
-        return false;
+    public function safeDown()
+    {
+        $this->dropColumn($this->_tableName, 'locked');
+        $this->dropColumn($this->_tableName, 'visible');
+        $this->dropColumn($this->_tableName, 'required');
     }
 }

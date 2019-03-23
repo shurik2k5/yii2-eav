@@ -1,18 +1,26 @@
 <?php
 
+use mirocow\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160731_142546_alter_table_eav_attribute extends Migration
 {
-    public function up()
+    use EavMigrationTrait;
+
+    public function init()
     {
-        $this->addColumn('{{%eav_attribute}}', 'categoryId', $this->integer(11)->null());
+        parent::init();
+        $this->initMigrationParams();
+        $this->_tableName = $this->tables['attribute'];
     }
 
-    public function down()
+    public function safeUp()
     {
-        echo "m160731_142546_alter_table_eav_attribute cannot be reverted.\n";
+        $this->addColumn($this->_tableName, 'categoryId', $this->integer(11)->null());
+    }
 
-        return false;
+    public function safeDown()
+    {
+        $this->dropColumn($this->_tableName, 'categoryId');
     }
 }

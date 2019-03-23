@@ -1,19 +1,26 @@
 <?php
 
+use mirocow\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160818_102815_add_entityId_index_in_eav_attribute_value extends Migration
 {
-    public $tableName = '{{%eav_attribute_value}}';
+    use EavMigrationTrait;
 
-    public function up()
+    public function init()
     {
-        $this->createIndex('idx_eav_attribute_value_entityId', $this->tableName, 'entityId');
+        parent::init();
+        $this->initMigrationParams();
+        $this->_tableName = $this->tables['value'];
     }
 
-    public function down()
+    public function safeUp()
     {
-        $this->dropIndex('idx_eav_attribute_value_entityId', $this->tableName);
-        return false;
+        $this->createIndex($this->getIndexName('entityId'), $this->_tableName, 'entityId');
+    }
+
+    public function safeDown()
+    {
+        $this->dropIndex($this->getIndexName('entityId'), $this->_tableName);
     }
 }
