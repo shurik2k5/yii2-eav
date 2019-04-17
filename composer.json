@@ -1,5 +1,5 @@
 {
-	"name": "mirocow/yii2-eav",
+	"name": "shurik2k5/yii2-eav",
 	"description": "EAV for Yii2",
 	"license": "MIT",
 	"keywords": [
@@ -27,17 +27,22 @@
 			"email": "mr.mirocow@gmail.com",
 			"homepage": "http://mirocow.com",
 			"role": "Developer"
+		},
+		{
+			"name": "Alexandr Pogorelov",
+			"email": "shurik2k5@gmail.com",
+			"role": "Developer"
 		}
 	],
 	"minimum-stability": "dev",
 	"require": {
-		"php": ">=5.5.0",
+		"php": ">=5.6.0",
 		"yiisoft/yii2": ">=2.0.5",
 		"ext-json": "*"
 	},
 	"autoload": {
 		"psr-4": {
-			"mirocow\\eav\\": "./src"
+			"shurik2k5\\eav\\": "./src"
 		}
 	}
 }

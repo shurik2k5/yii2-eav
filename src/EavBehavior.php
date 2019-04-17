@@ -3,9 +3,9 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace shurik2k5\eav;
 
-use mirocow\eav\models\EavAttribute;
+use shurik2k5\eav\models\EavAttribute;
 use Yii;
 use yii\base\Behavior;
 use yii\base\Exception;
@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
 
 /**
  * Class EavBehavior
- * @package mirocow\eav
+ * @package shurik2k5\eav
  *
  * @mixin ActiveRecord
  * @property EavModel $eav;

@@ -1,6 +1,6 @@
 <?php
 
-use mirocow\eav\migrations\EavMigrationTrait;
+use shurik2k5\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160501_014209_add_column_order_into_option extends Migration

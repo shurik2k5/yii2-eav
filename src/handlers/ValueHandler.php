@@ -3,14 +3,14 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\handlers;
+namespace shurik2k5\eav\handlers;
 
-use mirocow\eav\widgets\AttributeHandler;
+use shurik2k5\eav\widgets\AttributeHandler;
 use yii\db\ActiveRecord;
 
 /**
  * Class ValueHandler
- * @package mirocow\eav
+ * @package shurik2k5\eav
  *
  * @property ActiveRecord $valueModel
  * @property string $textValue

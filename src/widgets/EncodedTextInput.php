@@ -3,11 +3,11 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\widgets;
+namespace shurik2k5\eav\widgets;
 
 class EncodedTextInput extends TextInput
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\ArrayValueHandler';
+    const VALUE_HANDLER_CLASS = '\shurik2k5\eav\handlers\ArrayValueHandler';
 
     public static $order = 3;
 

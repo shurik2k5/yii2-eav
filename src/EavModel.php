@@ -3,9 +3,9 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace shurik2k5\eav;
 
-use mirocow\eav\widgets\AttributeHandler;
+use shurik2k5\eav\widgets\AttributeHandler;
 use Yii;
 use yii\base\DynamicModel as BaseEavModel;
 use yii\db\ActiveRecord;
@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * Class EavModel
- * @package mirocow\eav
+ * @package shurik2k5\eav
  */
 class EavModel extends BaseEavModel
 {

@@ -1,6 +1,6 @@
 <?php
 
-use mirocow\eav\migrations\EavMigrationTrait;
+use shurik2k5\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160501_230535_add_columns_into_attribute_rules extends Migration

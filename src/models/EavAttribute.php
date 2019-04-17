@@ -1,6 +1,6 @@
 <?php
 
-namespace mirocow\eav\models;
+namespace shurik2k5\eav\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;

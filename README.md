@@ -23,32 +23,24 @@ EAV Dynamic Attributes for Yii2
 
 # Install
 
-## Add github repository
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-```json
-"repositories": [
-  {
-    "type": "git",
-    "url": "https://github.com/mirocow/yii2-eav.git"
-  }
-]
-```
-and then
+Either run
 
 ```
-php composer.phar require --prefer-dist "mirocow/yii2-eav" "*"
+php composer.phar require --prefer-dist "shurik2k5/yii2-eav" "*"
 ```
 
 ## Configure
 
 ``` sh
-php ./yii migrate/up -p=@mirocow/eav/migrations
+php ./yii migrate/up -p=@shurik2k5/eav/migrations
 ```
 
 or
 
 ``` sh
-php ./yii migrate/up -p=@vendor/mirocow/yii2-eav/src/migrations
+php ./yii migrate/up -p=@vendor/shurik2k5/yii2-eav/src/migrations
 ```
 
 and then add messages settings
@@ -67,7 +59,7 @@ and then add messages settings
             ],
             'eav' => [
                 'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => '@mirocow/eav/messages',
+                'basePath' => '@shurik2k5/eav/messages',
             ],
         ],
     ]
@@ -95,9 +87,9 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'eav' => [
-                'class' => \mirocow\eav\EavBehavior::className(),
+                'class' => \shurik2k5\eav\EavBehavior::className(),
                 // это модель для таблицы object_attribute_value
-                'valueClass' => \mirocow\eav\models\EavAttributeValue::className(),
+                'valueClass' => \shurik2k5\eav\models\EavAttributeValue::className(),
             ]
         ];
     }
@@ -107,7 +99,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getEavAttributes()
     {
-        return \mirocow\eav\models\EavAttribute::find()
+        return \shurik2k5\eav\models\EavAttribute::find()
             ->joinWith('entity')
             ->where([
                 'categoryId' => $this->categories[0]->id,
@@ -136,9 +128,9 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'eav' => [
-                'class' => \mirocow\eav\EavBehavior::className(),
+                'class' => \shurik2k5\eav\EavBehavior::className(),
                 // это модель для таблицы object_attribute_value
-                'valueClass' => \mirocow\eav\models\EavAttributeValue::className(),
+                'valueClass' => \shurik2k5\eav\models\EavAttributeValue::className(),
             ]
         ];
     }
@@ -148,7 +140,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getEavAttributes($attributes = [])
     {
-        return \mirocow\eav\models\EavAttribute::find()
+        return \shuri2kk5\eav\models\EavAttribute::find()
             ->joinWith('entity')
             ->where([
                 //'categoryId' => $this->categories[0]->id,
@@ -168,7 +160,7 @@ Insert this code for create widget or load all EAV inputs fields for model
 fo load selected field
 
 ``` php
-<?=$form->field($model,'test5', ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput(); ?>
+<?=$form->field($model,'test5', ['class' => '\shurik2k5\eav\widgets\ActiveField'])->eavInput(); ?>
 ```
 or for load all fields
 
@@ -177,7 +169,7 @@ or for load all fields
 ``` php
 <?php
 foreach($model->getEavAttributes()->all() as $attr) {
-    echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+    echo $form->field($model, $attr->name, ['class' => '\shurik2k5\eav\widgets\ActiveField'])->eavInput();
 }
 ?>
 ```
@@ -188,7 +180,7 @@ or add sorted
 ``` php
 <?php
 foreach($model->getEavAttributes()->orderBy(['order' => SORT_ASC])->all() as $attr) {
-    echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+    echo $form->field($model, $attr->name, ['class' => '\shurik2k5\eav\widgets\ActiveField'])->eavInput();
 }
 ?>
 ```
@@ -198,7 +190,7 @@ foreach($model->getEavAttributes()->orderBy(['order' => SORT_ASC])->all() as $at
 ``` php
 <?php
 foreach($model->getEavAttributes(['entityId' => 8, 'typeId' => 3])->all() as $attr) {
-    echo $form->field($model, $attr->name, ['class' => '\mirocow\eav\widgets\ActiveField'])->eavInput();
+    echo $form->field($model, $attr->name, ['class' => '\shurik2k5\eav\widgets\ActiveField'])->eavInput();
 }
 ?>
 ```
@@ -229,7 +221,7 @@ String
 ### Add attribute
 
 ```php
-$attr = new mirocow\eav\models\EavAttribute();
+$attr = new shurik2k5\eav\models\EavAttribute();
 $attr->attributes = [
     'entityId' => 1,                        // Category ID
     'typeId' => 1,                          // ID type from eav_attribute_type
@@ -270,7 +262,7 @@ In main config file:
 $modules = [
         ...,
         'eav' => [
-            'class' => 'mirocow\eav\Module',
+            'class' => 'shurik2k5\eav\Module',
         ],
 ];
 ```
@@ -282,7 +274,7 @@ $modules = [
 
 
 ``` php
-<?= \mirocow\eav\admin\widgets\Fields::widget([
+<?= \shurik2k5\eav\admin\widgets\Fields::widget([
     'model' => $model,
     'categoryId' => $model->id,
     'entityName' => 'Продукт',

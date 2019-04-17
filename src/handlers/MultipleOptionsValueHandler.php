@@ -3,14 +3,14 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\handlers;
+namespace shurik2k5\eav\handlers;
 
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
  * Class MultipleOptionsValueHandler
- * @package mirocow\eav
+ * @package shurik2k5\eav
  */
 class MultipleOptionsValueHandler extends ValueHandler
 {

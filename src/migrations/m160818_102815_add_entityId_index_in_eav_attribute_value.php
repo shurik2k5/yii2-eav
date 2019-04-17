@@ -1,6 +1,6 @@
 <?php
 
-use mirocow\eav\migrations\EavMigrationTrait;
+use shurik2k5\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160818_102815_add_entityId_index_in_eav_attribute_value extends Migration

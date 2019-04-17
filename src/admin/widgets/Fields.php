@@ -1,8 +1,8 @@
 <?php
 
-namespace mirocow\eav\admin\widgets;
+namespace shurik2k5\eav\admin\widgets;
 
-use mirocow\eav\models\EavAttribute;
+use shurik2k5\eav\models\EavAttribute;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;

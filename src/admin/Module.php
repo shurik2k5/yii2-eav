@@ -1,10 +1,10 @@
 <?php
 
-namespace mirocow\eav\admin;
+namespace shurik2k5\eav\admin;
 
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'mirocow\eav\admin\controllers';
+    public $controllerNamespace = 'shurik2k5\eav\admin\controllers';
 
     public function init()
     {

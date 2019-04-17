@@ -1,6 +1,6 @@
 <?php
 
-namespace mirocow\eav\migrations;
+namespace shurik2k5\eav\migrations;
 
 trait EavMigrationTrait
 {

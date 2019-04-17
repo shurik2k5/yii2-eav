@@ -1,6 +1,6 @@
 <?php
 
-use mirocow\eav\migrations\EavMigrationTrait;
+use shurik2k5\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160711_132535_delete_foregin_key_from_values extends Migration

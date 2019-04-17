@@ -1,7 +1,7 @@
 <?php
 
-use mirocow\eav\handlers\ValueHandler;
-use mirocow\eav\migrations\EavMigrationTrait;
+use shurik2k5\eav\handlers\ValueHandler;
+use shurik2k5\eav\migrations\EavMigrationTrait;
 use yii\db\Migration;
 
 class m160501_232516_add_new_field_types extends Migration
@@ -21,7 +21,7 @@ class m160501_232516_add_new_field_types extends Migration
         $this->insert($this->_tableName, [
             'name' => 'numeric',
             'storeType' => ValueHandler::STORE_TYPE_RAW,
-            'handlerClass' => '\mirocow\eav\widgets\NumericInput',
+            'handlerClass' => '\shurik2k5\eav\widgets\NumericInput',
         ]);
     }
 

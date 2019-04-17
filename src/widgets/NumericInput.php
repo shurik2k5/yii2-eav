@@ -3,7 +3,7 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\widgets;
+namespace shurik2k5\eav\widgets;
 
 class NumericInput extends AttributeHandler
 {

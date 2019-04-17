@@ -3,13 +3,13 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\widgets;
+namespace shurik2k5\eav\widgets;
 
 use yii\helpers\ArrayHelper;
 
 class CheckBoxList extends AttributeHandler
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\MultipleOptionsValueHandler';
+    const VALUE_HANDLER_CLASS = '\shurik2k5\eav\handlers\MultipleOptionsValueHandler';
 
     public static $order = 10;
 

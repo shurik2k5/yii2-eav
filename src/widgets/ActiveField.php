@@ -1,9 +1,9 @@
 <?php
 
-namespace mirocow\eav\widgets;
+namespace shurik2k5\eav\widgets;
 
-use mirocow\eav\models\EavAttribute;
-use mirocow\eav\EavModel;
+use shurik2k5\eav\models\EavAttribute;
+use shurik2k5\eav\EavModel;
 
 class ActiveField extends \yii\widgets\ActiveField
 {
@@ -21,7 +21,7 @@ class ActiveField extends \yii\widgets\ActiveField
         $eavModel = EavModel::create([
             'entityModel' => $model,
             'attribute' => $attribute,
-            'valueClass' => \mirocow\eav\models\EavAttributeValue::className()
+            'valueClass' => \shurik2k5\eav\models\EavAttributeValue::className()
         ]);
         $handler = $eavModel->handlers[$attribute];
         $handler->owner->activeForm = $options['form'];

@@ -1,12 +1,12 @@
 <?php
 
-namespace mirocow\eav;
+namespace shurik2k5\eav;
 
 use Yii;
 
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'mirocow\eav\controllers';
+    public $controllerNamespace = 'shurik2k5\eav\controllers';
 
     public $defaultRoute = 'default';
 
@@ -14,7 +14,7 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
-        $this->setModule('admin', 'mirocow\eav\admin\Module');
+        $this->setModule('admin', 'shurik2k5\eav\admin\Module');
         $this->registerTranslations();
     }
 
@@ -33,7 +33,7 @@ class Module extends \yii\base\Module
         Yii::$app->i18n->translations['eav'] =
             [
                 'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => '@mirocow/eav/messages',
+                'basePath' => '@shurik2k5/eav/messages',
                 'forceTranslation' => true
             ];
     }

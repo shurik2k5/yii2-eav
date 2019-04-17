@@ -3,13 +3,13 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\widgets;
+namespace shurik2k5\eav\widgets;
 
 use yii\helpers\ArrayHelper;
 
 class RadioList extends AttributeHandler
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\OptionValueHandler';
+    const VALUE_HANDLER_CLASS = '\shurik2k5\eav\handlers\OptionValueHandler';
 
     public static $order = 15;
 

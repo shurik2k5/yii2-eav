@@ -3,10 +3,10 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\widgets;
+namespace shurik2k5\eav\widgets;
 
-use mirocow\eav\EavModel;
-use mirocow\eav\handlers\ValueHandler;
+use shurik2k5\eav\EavModel;
+use shurik2k5\eav\handlers\ValueHandler;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
@@ -14,11 +14,11 @@ use yii\db\ActiveRecord;
 
 /**
  * Class AttributeHandler
- * @package mirocow\eav
+ * @package shurik2k5\eav
  */
 class AttributeHandler extends Widget
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\RawValueHandler';
+    const VALUE_HANDLER_CLASS = '\shurik2k5\eav\handlers\RawValueHandler';
 
     /** @var EavModel */
     public $owner;
