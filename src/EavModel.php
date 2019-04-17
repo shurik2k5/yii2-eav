@@ -63,6 +63,9 @@ class EavModel extends BaseEavModel
             // Load data from owner model
             ->getEavAttributes()
             ->joinWith('entity')
+            ->with('entity')
+            ->with('attributeRule')
+
             ->andWhere($params)
             ->all();
 

@@ -41,6 +41,10 @@ class Fields extends Widget
         $attributes = $this->model->getEavAttributes()
             ->joinWith('entity')
             ->joinWith('attributeRule')
+            ->with('eavType')
+            ->with('entity')
+            ->with('attributeRule')
+            ->with('eavOptions')
             ->all();
 
         /** @var EavAttribute $attribute */
